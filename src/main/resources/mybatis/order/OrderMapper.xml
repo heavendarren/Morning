@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.dao.order.OrderMapper" >
+<!-- 定义查询订单关联用户的 resultMap,将整个的查询结果映射到com.morning.entity.order.Order -->
+  <resultMap id="BaseResultMap" type="com.morning.entity.order.Order" >
+   	<!-- 配置映射的订单信息 -->
+  	<!-- id:查询列中的唯一标识,订单信息中的唯一标识，如果多列组成唯一标识(如：一般数据库设计中的字典表 使用联合主键)，就需要配置多个id 
+		column:订单信息的唯一标识 列
+		property:订单信息的唯一标识列所映射到orders中的那个属性(假如：数据库中orders表中的主键为orders_id,而实体属性名称为ordersId,
+		则这个配置应为<id column="orders_id" property="ordersId"/>,类似hibernate实体映射文件配置).
+	-->
+    <id column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+    <result column="ORDER_NUMBER" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="ACCOUNT_ID" property="accountId" jdbcType="INTEGER" />
+    <result column="ORDER_DATE" property="orderDate" jdbcType="TIMESTAMP" />
+    <result column="TOTAL_MONEY" property="totalMoney" jdbcType="DOUBLE" />
+    <result column="ORDER_STATE" property="orderState" jdbcType="INTEGER" />
+    <result column="ADDRESS_ID" property="addressId" jdbcType="INTEGER" />
+    <result column="PAY_TYPE" property="payType" jdbcType="INTEGER" />
+    <result column="SEND_TYPE" property="sendType" jdbcType="INTEGER" />
+    <result column="SEND_TIME" property="sendTime" jdbcType="INTEGER" />
+    <result column="INVOICEL_TYPE" property="invoicelType" jdbcType="INTEGER" />
+    <result column="INVOICEL_TITLE" property="invoicelTitle" jdbcType="VARCHAR" />
+    <result column="USER_MESSAGE" property="userMessage" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- 查询订单及收货地址的ResultMap -->
+  <resultMap type="com.morning.entity.order.Order" id="AddressResultMap" extends="BaseResultMap">
+  	<!-- 配置多对一关系关联 -->
+    <association property="userAddressMessage" javaType="com.morning.entity.user.UserAddress">
+	    <id column="ADDRESS_ID" property="addressId" jdbcType="INTEGER" />
+	    <result column="ACCOUNT_ID" property="accountId" jdbcType="INTEGER" />
+	    <result column="ORDER_USER_NAME" property="orderUserName" jdbcType="VARCHAR" />
+	    <result column="ORDER_USER_TELPHONE" property="orderUserTelphone" jdbcType="VARCHAR" />
+	    <result column="TAG_NAME" property="tagName" jdbcType="VARCHAR" />
+	    <result column="PROVINCE_ID" property="provinceId" jdbcType="INTEGER" />
+	    <result column="PROVINCE_NAME" property="provinceName" jdbcType="VARCHAR" />
+	    <result column="CITY_ID" property="cityId" jdbcType="INTEGER" />
+	    <result column="CITY_NAME" property="cityName" jdbcType="VARCHAR" />
+	    <result column="DISTRICT_ID" property="districtId" jdbcType="INTEGER" />
+	    <result column="DISTRICT_NAME" property="districtName" jdbcType="VARCHAR" />
+	    <result column="AREA" property="area" jdbcType="INTEGER" />
+	    <result column="ORDER_USER_ADDRESS" property="orderUserAddress" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+  <!-- 查询订单及订单详情的ResultMap -->
+  <resultMap type="com.morning.entity.order.Order" id="OrderResultMap" extends="AddressResultMap">
+  	<!-- 订单详情  一个订单对应多个订单详情，使用collection映射 -->
+  	<collection property="orderMessageList" ofType="com.morning.entity.order.OrderMessage" column="ORDER_ID">
+	    <id column="ORDER_MESSAGE_ID" property="orderMessageId" jdbcType="INTEGER" />
+	    <result column="GOODS_ID" property="goodsId" jdbcType="INTEGER" />
+	    <result column="ORDER_NUM" property="orderNumber" jdbcType="INTEGER" />
+	    <result column="ORDER_MONEY" property="orderMoney" jdbcType="DOUBLE" />
+	    <result column="GOODS_COLOR" property="goodsColor" jdbcType="VARCHAR" />
+	    <result column="GOODS_STANDARD" property="goodsStandard" jdbcType="VARCHAR" />
+	    <result column="PUBLIC_TYPE" property="publicType" jdbcType="INTEGER" />
+	    <result column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+	        <!-- 配置多对一关系关联 -->
+		    <association property="goods" javaType="com.morning.entity.goods.Goods">
+			    <id column="GOODS_ID" property="goodsId" jdbcType="INTEGER" />
+			    <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR" />
+			    <result column="GOODS_PRICE" property="goodsPrice" jdbcType="DOUBLE" />
+			    <result column="GOODS_DESCRIPT" property="goodsDescript" jdbcType="VARCHAR" />
+			    <result column="GOODS_CONTEXT" property="goodsContext" jdbcType="LONGVARCHAR" />
+			    <result column="GOODS_IMAGENAME" property="goodsImagename" jdbcType="VARCHAR" />
+			    <result column="GOODS_DATE" property="goodsDate" jdbcType="TIMESTAMP" />
+			    <result column="GOODS_BUY_NUM" property="goodsBuyNum" jdbcType="INTEGER" />
+			    <result column="GOODS_VIEW_NUM" property="goodsViewNum" jdbcType="INTEGER" />
+			    <result column="GOODS_SAVE_INFO" property="goodsSaveInfo" jdbcType="INTEGER" />
+			    <result column="GOODS_QUERY" property="goodsQuery" jdbcType="INTEGER" />
+			    <result column="GOODS_REVIEWS" property="goodsReviews" jdbcType="INTEGER" />
+			    <result column="GOODS_FAVORITES" property="goodsFavorites" jdbcType="INTEGER" />
+			    <result column="CLASSIFY_ID" property="classifyId" jdbcType="INTEGER" />
+		    </association>
+  	</collection>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ORDER_ID, ORDER_NUMBER, ACCOUNT_ID, ORDER_DATE, TOTAL_MONEY, ORDER_STATE, ADDRESS_ID, 
+    PAY_TYPE, SEND_TYPE, SEND_TIME, INVOICEL_TYPE, INVOICEL_TITLE, USER_MESSAGE
+  </sql>
+  
+  <sql id="Base_Column_property">
+	#{orderId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{accountId,jdbcType=INTEGER}, 
+	#{orderDate,jdbcType=TIMESTAMP}, #{totalMoney,jdbcType=DOUBLE}, #{orderState,jdbcType=INTEGER}, 
+	#{addressId,jdbcType=INTEGER}, #{payType,jdbcType=INTEGER}, #{sendType,jdbcType=INTEGER}, 
+	#{sendTime,jdbcType=INTEGER}, #{invoicelType,jdbcType=INTEGER}, #{invoicelTitle,jdbcType=VARCHAR}, #{userMessage,jdbcType=VARCHAR}
+   </sql>
+  
+  <!-- 创建新订单-->
+  <insert id="createOrder" parameterType="com.morning.entity.order.Order" useGeneratedKeys="true" keyProperty="orderId">
+    insert into tb_order (ORDER_NUMBER, ACCOUNT_ID, TOTAL_MONEY, ADDRESS_ID, 
+    PAY_TYPE, SEND_TYPE, SEND_TIME, INVOICEL_TYPE, INVOICEL_TITLE, USER_MESSAGE)
+    values (#{orderNumber,jdbcType=VARCHAR}, #{accountId,jdbcType=INTEGER}, 
+    #{totalMoney,jdbcType=DOUBLE}, #{addressId,jdbcType=INTEGER}, 
+	#{payType,jdbcType=INTEGER}, #{sendType,jdbcType=INTEGER}, #{sendTime,jdbcType=INTEGER}, 
+	#{invoicelType,jdbcType=INTEGER}, #{invoicelTitle,jdbcType=VARCHAR}, #{userMessage,jdbcType=VARCHAR})
+  </insert>
+  
+  
+  <!-- 查询订单数量 -->
+  <select id="queryOrderCount" resultType="int" parameterType="java.util.Map">
+    select count(*)
+	from tb_order a left join tb_order_message b on a.ORDER_ID=b.ORDER_ID 
+	left join tb_account_address c on a.ADDRESS_ID=c.ADDRESS_ID
+	left join tb_goods d on d.GOODS_ID=b.GOODS_ID
+    <where>
+      <if test="queryOrder.orderSearch != null and queryOrder.orderSearch !=''" >
+        and d.GOODS_NAME LIKE '%' #{queryOrder.orderSearch} '%' or a.ORDER_NUMBER LIKE '%' #{queryOrder.orderSearch} '%' or d.GOODS_DESCRIPT LIKE '%' #{queryOrder.orderSearch} '%'
+      </if>
+      <if test="queryOrder.orderState != null and queryOrder.orderState !=''" >
+        and a.ORDER_STATE = #{queryOrder.orderState,jdbcType=INTEGER}
+      </if>   
+      <if test="queryOrder.accountId != null and queryOrder.accountId !=''" >
+        and a.ACCOUNT_ID  = #{queryOrder.accountId,jdbcType=INTEGER}
+      </if>  
+ 	</where> 
+  </select>
+  
+  <!-- 后台管理员查询订单数量 -->
+  <select id="queryOrderCountBySystem" resultType="int" parameterType="java.lang.Integer">
+  	select IfNULL(count(1),0)
+  	from tb_order 
+  	where ORDER_STATE = #{orderState,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 后台管理员查询最新订单的时间 -->
+  <select id="queryOrderTime" resultType="java.sql.Timestamp" parameterType="java.lang.Integer">
+  	select ORDER_DATE from tb_order 
+  	where ORDER_STATE = #{orderState,jdbcType=INTEGER}
+  	order by ORDER_DATE DESC limit 1
+  </select>
+
+  <!-- 查询订单，通过订单状态 -->
+  <select id="queryOrderByState" resultMap="OrderResultMap" parameterType="java.util.Map">
+  	select 
+    a.ORDER_NUMBER, a.ACCOUNT_ID, a.ORDER_DATE, a.TOTAL_MONEY, a.ORDER_STATE, a.PAY_TYPE, 
+   	b.ORDER_NUMBER ORDER_NUM, b.ORDER_MONEY, b.GOODS_COLOR, b.GOODS_STANDARD, 
+    b.PUBLIC_TYPE, b.ORDER_ID,
+    c.ORDER_USER_NAME,
+    d.GOODS_ID, d.GOODS_NAME, d.GOODS_PRICE, d.GOODS_DESCRIPT, d.GOODS_IMAGENAME
+	from tb_order a left join tb_order_message b on a.ORDER_ID=b.ORDER_ID 
+	left join tb_account_address c on a.ADDRESS_ID=c.ADDRESS_ID
+	left join tb_goods d on d.GOODS_ID=b.GOODS_ID
+    <where>
+      <if test="queryOrder.orderState != null and queryOrder.orderState !=''" >
+        and a.ORDER_STATE = #{queryOrder.orderState,jdbcType=INTEGER}
+      </if>
+      <if test="queryOrder.orderSearch != null and queryOrder.orderSearch !=''" >
+        and d.GOODS_NAME LIKE '%' #{queryOrder.orderSearch} '%' or a.ORDER_NUMBER LIKE '%' #{queryOrder.orderSearch} '%' or d.GOODS_DESCRIPT LIKE '%' #{queryOrder.orderSearch} '%'
+      </if>
+      <if test="queryOrder.accountId != null and queryOrder.accountId !=''" >
+        and a.ACCOUNT_ID  = #{queryOrder.accountId,jdbcType=INTEGER}
+      </if>
+ 	</where> 
+ 	limit #{pageInfo.dbIndex},#{pageInfo.dbNumber}
+  </select>
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.dao.goods.GoodsClassifyMapper" >
+  <resultMap id="BaseResultMap" type="com.morning.entity.goods.GoodsClassify" >
+    <id column="CLASSIFY_ID" property="classifyId" jdbcType="INTEGER" />
+    <result column="CLASSIFY_NAME" property="classifyName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- 查询类目及商品信息的ResultMap -->
+  <resultMap type="com.morning.entity.goods.GoodsClassify" id="ClassifyResultMap" extends="BaseResultMap">
+  	<!-- 地址信息  一个用户对应多个收货地址，使用collection映射 -->
+  	<collection property="goodsList" ofType="com.morning.entity.goods.Goods" column="CLASSIFY_ID">
+	    <id column="GOODS_ID" property="goodsId" jdbcType="INTEGER" />
+	    <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR" />
+	    <result column="GOODS_PRICE" property="goodsPrice" jdbcType="DOUBLE" />
+	    <result column="GOODS_DESCRIPT" property="goodsDescript" jdbcType="VARCHAR" />
+	    <result column="GOODS_CONTEXT" property="goodsContext" jdbcType="LONGVARCHAR" />
+	    <result column="GOODS_IMAGENAME" property="goodsImagename" jdbcType="VARCHAR" />
+	    <result column="GOODS_DATE" property="goodsDate" jdbcType="TIMESTAMP" />
+	    <result column="GOODS_BUY_NUM" property="goodsBuyNum" jdbcType="INTEGER" />
+	    <result column="GOODS_VIEW_NUM" property="goodsViewNum" jdbcType="INTEGER" />
+	    <result column="GOODS_SAVE_INFO" property="goodsSaveInfo" jdbcType="INTEGER" />
+	    <result column="GOODS_QUERY" property="goodsQuery" jdbcType="INTEGER" />
+	    <result column="GOODS_REVIEWS" property="goodsReviews" jdbcType="INTEGER" />
+	    <result column="GOODS_FAVORITES" property="goodsFavorites" jdbcType="INTEGER" />
+	    <result column="CLASSIFY_ID" property="classifyId" jdbcType="INTEGER" />
+  	</collection>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    CLASSIFY_ID, CLASSIFY_NAME
+  </sql>
+  
+  <!-- 查询类目名称，通过ID -->
+  <select id="queryClassifyById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_goods_classify
+    where CLASSIFY_ID = #{classifyId,jdbcType=DECIMAL}
+  </select>
+  
+  <!-- 通过ID查询该类目商品 -->
+  <select id="queryGoodsByClassify" resultMap="ClassifyResultMap" parameterType="java.lang.Integer">
+    select 
+    a.GOODS_ID, a.GOODS_NAME, a.GOODS_PRICE, a.GOODS_DESCRIPT, a.GOODS_IMAGENAME, a.GOODS_DATE, a.GOODS_BUY_NUM, 
+    a.GOODS_VIEW_NUM, a.GOODS_SAVE_INFO, a.GOODS_QUERY, a.GOODS_REVIEWS, a.GOODS_FAVORITES, a.CLASSIFY_ID, a.GOODS_CONTEXT,
+    b.CLASSIFY_ID, b.CLASSIFY_NAME
+    from tb_goods a left join tb_goods_classify b
+    on a.CLASSIFY_ID=b.CLASSIFY_ID 
+    where b.CLASSIFY_ID = #{classifyId,jdbcType=DECIMAL}
+  </select>
+  
+  <!-- 查询所有商品，根据类目分类 -->
+  <select id="queryAllGoods" resultMap="ClassifyResultMap">
+    select 
+    a.GOODS_ID, a.GOODS_NAME, a.GOODS_IMAGENAME, a.CLASSIFY_ID, 
+    b.CLASSIFY_ID, b.CLASSIFY_NAME
+    from tb_goods a left join tb_goods_classify b
+    on a.CLASSIFY_ID=b.CLASSIFY_ID 
+  </select>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.dao.order.OrderMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.morning.entity.order.OrderMessage" >
+    <id column="ORDER_MESSAGE_ID" property="orderMessageId" jdbcType="INTEGER" />
+    <result column="GOODS_ID" property="goodsId" jdbcType="INTEGER" />
+    <result column="ORDER_NUMBER" property="orderNumber" jdbcType="INTEGER" />
+    <result column="ORDER_MONEY" property="orderMoney" jdbcType="DOUBLE" />
+    <result column="GOODS_COLOR" property="goodsColor" jdbcType="VARCHAR" />
+    <result column="GOODS_STANDARD" property="goodsStandard" jdbcType="VARCHAR" />
+    <result column="PUBLIC_TYPE" property="publicType" jdbcType="INTEGER" />
+    <result column="ORDER_ID" property="orderId" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ORDER_MESSAGE_ID, GOODS_ID, ORDER_NUMBER, ORDER_MONEY, GOODS_COLOR, GOODS_STANDARD, 
+    PUBLIC_TYPE, ORDER_ID
+  </sql>
+  
+  <sql id="Base_Column_property">
+	#{orderMessageId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{orderNumber,jdbcType=INTEGER}, 
+    #{orderMoney,jdbcType=DOUBLE}, #{goodsColor,jdbcType=VARCHAR}, #{goodsStandard,jdbcType=VARCHAR}, 
+    #{publicType,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}
+  </sql>
+  
+  <!-- 批量插入订单详情 -->
+  <insert id="createOrderMessage" useGeneratedKeys="true" parameterType="java.util.List">  
+    insert into tb_order_message (GOODS_ID, ORDER_NUMBER, ORDER_MONEY, GOODS_COLOR, GOODS_STANDARD, 
+    PUBLIC_TYPE, ORDER_ID)
+    values
+    <foreach collection="list" item="orderMessageList"  index= "index" separator=",">
+     (#{orderMessageList.goodsId,jdbcType=INTEGER}, #{orderMessageList.orderNumber,jdbcType=INTEGER}, 
+      #{orderMessageList.orderMoney,jdbcType=DOUBLE}, #{orderMessageList.goodsColor,jdbcType=VARCHAR}, #{orderMessageList.goodsStandard,jdbcType=VARCHAR}, 
+      #{orderMessageList.publicType,jdbcType=INTEGER}, #{orderMessageList.orderId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  
+</mapper>

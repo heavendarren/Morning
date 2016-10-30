@@ -1,0 +1,92 @@
+
+<html >
+<style>
+    body { line-height: 1.5; }blockquote { margin-top: 0px; margin-bottom: 0px; margin-left: 0.5em; }p { margin-top: 0px; margin-bottom: 0px; }
+</style>
+<body>
+<div>
+    <br>
+</div>
+<div>
+    <includetail>
+        <div>
+            <blockquote style="margin-top: 0px; margin-bottom:0px; margin-left: 0.5em;">
+                <div class="FoxDiv20160613171622061102">
+                    <div style="background:#ececec;padding:35px;">
+                        <table cellpadding="0" align="center" width="600" style="background:#fff;width:600px;margin:0 auto;text-align:left;position:relative;border-radius:5px;font-size:14px; font-family:'lucida Grande',Verdana;line-height:1.5;box-shadow:0 05px #999999;border-collapse:collapse;">
+                            <tbody>
+                                <tr>
+                                    <th valign="middle" style="height:25px;color:#fff; font-size:14px;line-height:25px; font-weight:bold;text-align:left;padding:15px 35px; border-bottom:1px solid #467ec3;background:#518bcb;border-radius:5px 5px 0 0;">
+                                                                                    <h2 style="font-weight: normal; font-size: 16px; margin: 5px 0; font-family: 'lucida Grande', Verdana, 'Microsoft YaHei';">
+                                                【但行好事·莫问前程】很高兴遇见您！
+                                            </h2>
+                                  </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="padding:35px 35px 40px;">
+                                            <h2 style="font-weight: bold; font-size: 14px; margin: 5px 0; font-family: 'lucida Grande', Verdana, 'Microsoft YaHei';">
+                                                亲爱的用户：
+                                            </h2>
+                                            <p style="line-height: 28px; margin: 0px; text-indent: 2em; font-family: 'lucida Grande', Verdana, 'Microsoft YaHei'; font-size: 12px;">
+                                                <font color="#313131">
+                                                    嗨！亲爱的！你好，您申请了密码重置。
+                                                </font>
+                                            </p>
+                                            <p style="line-height: 28px; margin: 0px; text-indent: 2em;font-family: 'lucida Grande', Verdana, 'Microsoft YaHei'; font-size: 12px;">
+                                                <font color="#ff0000">
+                                                    请使用此代码为 猫宁帐户 ${email} 重置密码。你的代码如下: ${emailCaptchaPsw}
+                                                </font>
+                                            </p>
+                                            <p style="line-height: 28px; margin: 0px; text-indent: 2em;font-family: 'lucida Grande', Verdana, 'Microsoft YaHei'; font-size: 12px;">
+                                                <font color="#313131">
+                                                    请注意：该验证码将在3分钟后过期，请尽快验证！
+                                                </font>
+                                            </p>
+                                            <p style="margin-top: 0px; margin-bottom: 0px; font-size: 9px;">
+                                                <br>
+                                            </p>
+                                            <p style="margin-top: 0px; margin-bottom: 0px; font-size: 9px;">
+                                                <br>
+                                            </p>
+                                   <p style="margin-top: 0px; margin-bottom: 0px; font-size: 14px;">
+                                                <span style="color: rgb(51, 51, 51); font-family: 'lucida Grande', Verdana, 'Microsoft YaHei'; line-height: 22.4px; widows: 1; font-size: 13px;">
+                                                    此致
+                                                </span>
+                                            </p>
+                                            <p style="margin-top: 0px; margin-bottom: 0px; font-size: 9px;">
+                                                <br>
+                                            </p>
+                                            <p style="margin-top: 0px; margin-bottom: 0px;">
+                                                <span style="color: rgb(51, 51, 51); font-family: 'lucida Grande', Verdana, 'Microsoft YaHei'; line-height: 25px; widows: 1; font-size: 13px;">
+                                                    猫宁客服团队敬上<br>
+                                                    ${registerTimePsw}
+                                                    
+                                                </span>
+                                            </p>
+                                            <h2 style="font-size: 14px; margin: 5px 0px;">
+                                                <br>
+                                            </h2>
+
+											<div style="color:#c5c5c5; font-size:12px; border-top:1px solid #e6e6e6; padding:7px 0; line-height:20px;">
+                                				本邮件是用户注册猫宁后系统自动发出，如果你并未注册猫宁网，可能是因为其他用户误输入了你的邮箱地址而使你收到了这封邮件，由此给您带来的不便请谅解！
+                            				</div>
+                                            <div style="font-size:12px; color:#999;line-height:20px;border-top:1px solid #e6e6e6;padding:10px 0;">
+                                                如有任何问题，可以与我们联系，我们将尽快为你解答。
+                                                <br>
+                                                Email：chenxingxing1994@foxmail.com ，电话：188-5710-5127，QQ:810170512
+                                            </div>
+                                        </div>                             
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </blockquote>
+        </div>
+    </includetail>
+</div>
+</body>
+</html>
+

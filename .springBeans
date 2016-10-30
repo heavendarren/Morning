@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.6.2.me201505141600]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[false]]></enableImports>
+	<configs>
+		<config>src/main/resources/spring/spring-context.xml</config>
+		<config>src/main/resources/spring/spring-context-quartz.xml</config>
+		<config>src/main/resources/spring/spring-context-mybatis.xml</config>
+		<config>src/main/resources/spring/spring-context-kaptcha.xml</config>
+		<config>src/main/resources/spring/spring-context-shiro.xml</config>
+	</configs>
+	<autoconfigs>
+		<config>src/main/resources/springmvc/spring-mvc.xml</config>
+	</autoconfigs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

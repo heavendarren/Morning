@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.dao.goods.GoodsMapper" >
+
+  <resultMap id="BaseResultMap" type="com.morning.entity.goods.Goods" >
+    <id column="GOODS_ID" property="goodsId" jdbcType="INTEGER" />
+    <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR" />
+    <result column="GOODS_PRICE" property="goodsPrice" jdbcType="DOUBLE" />
+    <result column="GOODS_DESCRIPT" property="goodsDescript" jdbcType="VARCHAR" />
+    <result column="GOODS_CONTEXT" property="goodsContext" jdbcType="LONGVARCHAR" />
+    <result column="GOODS_IMAGENAME" property="goodsImagename" jdbcType="VARCHAR" />
+    <result column="GOODS_DATE" property="goodsDate" jdbcType="TIMESTAMP" />
+    <result column="GOODS_BUY_NUM" property="goodsBuyNum" jdbcType="INTEGER" />
+    <result column="GOODS_VIEW_NUM" property="goodsViewNum" jdbcType="INTEGER" />
+    <result column="GOODS_SAVE_INFO" property="goodsSaveInfo" jdbcType="INTEGER" />
+    <result column="GOODS_QUERY" property="goodsQuery" jdbcType="INTEGER" />
+    <result column="GOODS_REVIEWS" property="goodsReviews" jdbcType="INTEGER" />
+    <result column="GOODS_FAVORITES" property="goodsFavorites" jdbcType="INTEGER" />
+    <result column="CLASSIFY_ID" property="classifyId" jdbcType="INTEGER" />
+    <!-- 配置多对一关系关联 -->
+    <association property="goodsClassify" javaType="com.morning.entity.goods.GoodsClassify">
+        <id column="CLASSIFY_ID" property="classifyId" jdbcType="INTEGER" />
+    	<result column="CLASSIFY_NAME" property="classifyName" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    GOODS_ID, GOODS_NAME, GOODS_PRICE, GOODS_DESCRIPT, GOODS_IMAGENAME, GOODS_DATE, GOODS_BUY_NUM, 
+    GOODS_VIEW_NUM, GOODS_SAVE_INFO, GOODS_QUERY, GOODS_REVIEWS, GOODS_FAVORITES, CLASSIFY_ID, GOODS_CONTEXT
+  </sql>
+  
+  <sql id="Base_Column_property">
+  	#{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DOUBLE}, 
+      #{goodsDescript,jdbcType=VARCHAR}, #{goodsImagename,jdbcType=VARCHAR}, #{goodsDate,jdbcType=TIMESTAMP}, 
+      #{goodsBuyNum,jdbcType=INTEGER}, #{goodsViewNum,jdbcType=INTEGER}, #{goodsSaveInfo,jdbcType=INTEGER}, 
+      #{goodsQuery,jdbcType=INTEGER}, #{goodsReviews,jdbcType=INTEGER}, #{goodsFavorites,jdbcType=INTEGER},
+      #{classifyId,jdbcType=INTEGER}, #{goodsContext,jdbcType=LONGVARCHAR}
+   </sql>
+  
+  <!-- 创建新商品 -->
+  <insert id="createGoods" parameterType="com.morning.entity.goods.Goods">
+    insert into tb_goods (<include refid="Base_Column_List"/>)
+    values (<include refid="Base_Column_property"/>)
+  </insert>
+  
+  <!-- 更新商品 -->
+  <update id="updateGoods" parameterType="com.morning.entity.goods.Goods">
+    update tb_goods
+    set GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      GOODS_PRICE = #{goodsPrice,jdbcType=DOUBLE},
+      GOODS_DESCRIPT = #{goodsDescript,jdbcType=VARCHAR},
+      GOODS_IMAGENAME = #{goodsImagename,jdbcType=VARCHAR},
+      GOODS_DATE = #{goodsDate,jdbcType=TIMESTAMP},
+      GOODS_BUY_NUM = #{goodsBuyNum,jdbcType=INTEGER},
+      GOODS_VIEW_NUM = #{goodsViewNum,jdbcType=INTEGER},
+      GOODS_SAVE_INFO = #{goodsSaveInfo,jdbcType=INTEGER},
+      GOODS_QUERY = #{goodsQuery,jdbcType=INTEGER},
+      GOODS_REVIEWS = #{goodsReviews,jdbcType=INTEGER},
+      GOODS_FAVORITES = #{goodsFavorites,jdbcType=INTEGER},
+      CLASSIFY_ID = #{classifyId,jdbcType=INTEGER},
+      GOODS_CONTEXT = #{goodsContext,jdbcType=LONGVARCHAR}
+    where GOODS_ID = #{goodsId,jdbcType=INTEGER}
+  </update>
+
+  <!-- 查询商品，通过ID -->
+  <select id="queryGoodsById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select 
+    a.GOODS_ID, a.GOODS_NAME, a.GOODS_PRICE, a.GOODS_DESCRIPT, a.GOODS_IMAGENAME, a.GOODS_DATE, a.GOODS_BUY_NUM, 
+    a.GOODS_VIEW_NUM, a.GOODS_SAVE_INFO, a.GOODS_QUERY, a.GOODS_REVIEWS, a.GOODS_FAVORITES, a.CLASSIFY_ID, a.GOODS_CONTEXT,
+    b.CLASSIFY_ID, b.CLASSIFY_NAME
+    from tb_goods a left join tb_goods_classify b
+    on a.CLASSIFY_ID=b.CLASSIFY_ID 
+    where GOODS_ID = #{goodsId,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 查询商品，返回top  -->
+  <select id="queryGoods" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select <include refid="Base_Column_List"/>
+    from tb_goods
+    <if test="queryGoods.condition == 'goodsPrice'">
+	order by GOODS_PRICE DESC
+	</if>
+	<if test="queryGoods.condition == 'goodsDate'">
+	order by GOODS_DATE DESC
+	</if>
+	<if test="queryGoods.condition == 'goodsBuyNum'">
+	order by GOODS_BUY_NUM DESC
+	</if>
+	<if test="queryGoods.condition == 'goodsViewNum'">
+	order by GOODS_REVIEWS DESC
+	</if>
+	<if test="queryGoods.condition == 'goodsQuery'">
+	order by GOODS_QUERY DESC
+	</if>
+	<if test="queryGoods.condition == 'goodsReviews'">
+	order by GOODS_REVIEWS DESC
+	</if>
+	<if test="queryGoods.condition == 'goodsFavorites'">
+	order by GOODS_FAVORITES DESC
+	</if>
+	<if test="queryGoods.condition == 'classifyId'">
+	order by CLASSIFY_ID DESC
+	</if>
+	<if test="queryGoods.condition == null or queryGoods.condition ==''">
+	order by BY RAND()
+	</if>
+	<if test="queryGoods.count != null">
+	limit #{queryGoods.count}
+	</if>
+  </select>
+  
+  <!-- 前台查询商品列表-->
+  <select id="queryWebGoodsListPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select 
+    a.GOODS_ID, a.GOODS_NAME, a.GOODS_PRICE, a.GOODS_DESCRIPT, a.GOODS_IMAGENAME, a.GOODS_DATE, a.GOODS_BUY_NUM, 
+    a.GOODS_VIEW_NUM, a.GOODS_SAVE_INFO, a.GOODS_QUERY, a.GOODS_REVIEWS, a.GOODS_FAVORITES, a.CLASSIFY_ID, a.GOODS_CONTEXT,
+    b.CLASSIFY_ID, b.CLASSIFY_NAME
+    from tb_goods a left join tb_goods_classify b
+    on a.CLASSIFY_ID=b.CLASSIFY_ID 
+    <where>
+      <if test="queryGoods.search != null and queryGoods.search !=''" >
+        and a.GOODS_NAME LIKE '%' #{queryGoods.search} '%' or a.GOODS_DESCRIPT LIKE '%' #{queryGoods.search} '%' or b.CLASSIFY_NAME LIKE '%' #{queryGoods.search} '%' 
+      </if>
+      <if test="queryGoods.classifyId != null" >
+        and a.CLASSIFY_ID = #{queryGoods.classifyId,jdbcType=INTEGER}
+      </if>      
+ 	</where>
+ 	<if test="queryGoods.condition == 'goodsPrice'">
+	order by GOODS_PRICE DESC
+	</if>
+	<if test="queryGoods.condition == 'goodsDate'">
+	order by GOODS_DATE DESC
+	</if>
+	<if test="queryGoods.condition == 'goodsBuyNum'">
+	order by GOODS_BUY_NUM DESC
+	</if>
+	<if test="queryGoods.condition == 'goodsViewNum'">
+	order by GOODS_REVIEWS DESC
+	</if>
+	<if test="queryGoods.condition == 'goodsQuery'">
+	order by GOODS_QUERY DESC
+	</if>
+	<if test="queryGoods.condition == 'goodsReviews'">
+	order by GOODS_REVIEWS DESC
+	</if>
+	<if test="queryGoods.condition == 'goodsFavorites'">
+	order by GOODS_FAVORITES DESC
+	</if>
+	limit #{pageInfo.dbIndex},#{pageInfo.dbNumber}
+  </select>
+  
+  <!-- 查询商品数量 -->
+  <select id="queryGoodsCount" resultType="int" parameterType="java.util.Map">
+    select count(*)
+    from tb_goods a left join tb_goods_classify b
+    on a.CLASSIFY_ID=b.CLASSIFY_ID 
+    <where>
+      <if test="queryGoods.search != null and queryGoods.search !=''" >
+        and a.GOODS_NAME LIKE '%' #{queryGoods.search} '%' or a.GOODS_DESCRIPT LIKE '%' #{queryGoods.search} '%' or b.CLASSIFY_NAME LIKE '%' #{queryGoods.search} '%' 
+      </if>
+      <if test="queryGoods.classifyId != null" >
+        and a.CLASSIFY_ID = #{queryGoods.classifyId,jdbcType=INTEGER}
+      </if>      
+ 	</where> 
+  </select>
+
+  <!-- 更新商品的数据数量 -->
+  <update id="updateGoodsCount" parameterType="java.util.Map">
+	update tb_goods
+	<if test="type=='pageViewcount'">set GOODS_VIEW_NUM = GOODS_VIEW_NUM + 1 </if>
+	where GOODS_ID = #{goodsId,jdbcType=INTEGER}
+  </update>
+	
+  <!-- 完成订单，更新库存和销量 -->
+  <update id="updateGoodsCountList" useGeneratedKeys="true" parameterType="com.morning.entity.order.OrderMessage">
+    update tb_goods
+    <set >
+        GOODS_BUY_NUM = GOODS_BUY_NUM + #{orderNumber,jdbcType=INTEGER},
+        GOODS_SAVE_INFO = GOODS_SAVE_INFO - #{orderNumber,jdbcType=INTEGER}
+    </set>
+    where GOODS_ID = #{goodsId,jdbcType=INTEGER}
+  </update>
+</mapper>

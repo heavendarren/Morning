@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.dao.statistics.StatisticsDayMapper" >
+  <resultMap id="BaseResultMap" type="com.morning.entity.statistics.StatisticsDay" >
+    <id column="STATISTICS_ID" property="statisticsId" jdbcType="INTEGER" />
+    <result column="STATISTICS_TIME" property="statisticsTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="DAILY_LOGIN_NUMBER" property="dailyLoginNumber" jdbcType="INTEGER" />
+    <result column="DAILY_USER_NUMBER" property="dailyUserNumber" jdbcType="INTEGER" />
+    <result column="DAILY_VISIT_NUMBER" property="dailyVisitNumber" jdbcType="INTEGER" />
+    <result column="DAILY_ORDER_NUMBER" property="dailyOrderNumber" jdbcType="INTEGER" />
+    <result column="DAILY_PAY_ORDER_NUMBER" property="dailyPayOrderNumber" jdbcType="INTEGER" />
+    <result column="DAILY_UNPAY_ORDER_NUMBER" property="dailyUnpayOrderNumber" jdbcType="INTEGER" />
+    <result column="DAILY_PAY_NUMBER" property="dailyPayNumber" jdbcType="DOUBLE" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    STATISTICS_ID, STATISTICS_TIME, CREATE_TIME, DAILY_LOGIN_NUMBER, DAILY_USER_NUMBER, 
+    DAILY_VISIT_NUMBER, DAILY_ORDER_NUMBER, DAILY_PAY_ORDER_NUMBER, DAILY_UNPAY_ORDER_NUMBER, 
+    DAILY_PAY_NUMBER
+  </sql>
+  
+  <!-- 活跃人数 -->
+  <sql id="system_statistics_dailyLoginNumber">
+	select IfNULL(count(DISTINCT ul.USER_ID),0) from tb_account_login_log as ul WHERE DATE_FORMAT(ul.LOGIN_TIME,'%Y-%m-%d')=DATE_FORMAT(#{value},'%Y-%m-%d')
+  </sql>
+  
+  <!-- 订单数 -->
+  <sql id="system_statistics_dailyOrderNumber">
+	select IfNULL(count(1),0) from tb_order as om WHERE DATE_FORMAT(om.ORDER_DATE,'%Y-%m-%d')=DATE_FORMAT(#{value},'%Y-%m-%d')
+  </sql>
+  
+  <!-- 订单金额数 -->
+  <sql id="system_statistics_dailyPayNumber">
+	select IfNULL(sum(om.TOTAL_MONEY),0) from tb_order as om WHERE DATE_FORMAT(om.ORDER_DATE,'%Y-%m-%d')=DATE_FORMAT(#{value},'%Y-%m-%d')
+  </sql>
+  
+  <!-- 查询某天的登录人数-->
+  <select id="getLoginNumber" parameterType="date" resultType="int">
+	<include refid="system_statistics_dailyLoginNumber"></include>
+  </select>
+  
+  <!-- 查询某天的订单数，根据订单状态-->
+  <select id="getOrderNumber" parameterType="java.util.Map" resultType="int">
+	<include refid="system_statistics_dailyOrderNumber"></include>
+		<if test="orderState == 6">
+			and ORDER_STATE >= 2
+		</if>
+		<if test="orderState != null and orderState != 6">
+			and ORDER_STATE = #{orderState,jdbcType=INTEGER}
+		</if>
+  </select>
+  
+  <!-- 查询某天的订单金额 ，根据订单状态-->
+  <select id="getPayNumber" parameterType="java.util.Map" resultType="double">
+	<include refid="system_statistics_dailyPayNumber"></include>
+		<if test="orderState == 6">
+			and ORDER_STATE >= 2
+		</if>
+		<if test="orderState != null and orderState != 6">
+			and ORDER_STATE = #{orderState,jdbcType=INTEGER}
+		</if>
+  </select>
+  
+  <!-- 添加网站统计web（天） -->
+  <insert id="addStatisticsDayAuto" parameterType="Date"  >
+    insert into tb_system_statistics_day (STATISTICS_ID, STATISTICS_TIME, CREATE_TIME, 
+      DAILY_LOGIN_NUMBER, DAILY_USER_NUMBER, DAILY_VISIT_NUMBER, DAILY_ORDER_NUMBER,
+      DAILY_PAY_ORDER_NUMBER, DAILY_UNPAY_ORDER_NUMBER,  DAILY_PAY_NUMBER) 
+    values (0,DATE_FORMAT(#{value},'%Y-%m-%d'),now(),(<include refid="system_statistics_dailyLoginNumber"/>),
+	  (<include refid="system_statistics_dailyLoginNumber"/>),(<include refid="system_statistics_dailyLoginNumber"/>),
+	  (<include refid="system_statistics_dailyOrderNumber"/> ),
+	  (select IfNULL(count(1),0) from tb_order WHERE DATE_FORMAT(tb_order.ORDER_DATE,'%Y-%m-%d')=DATE_FORMAT(#{value},'%Y-%m-%d') and tb_order.ORDER_STATE &lt;= 1),
+	  (select IfNULL(count(1),0) from tb_order WHERE DATE_FORMAT(tb_order.ORDER_DATE,'%Y-%m-%d')=DATE_FORMAT(#{value},'%Y-%m-%d') and tb_order.ORDER_STATE >= 2),
+	  (select IfNULL(sum(tb_order.TOTAL_MONEY),0) from tb_order WHERE DATE_FORMAT(tb_order.ORDER_DATE,'%Y-%m-%d')=DATE_FORMAT(#{value},'%Y-%m-%d') and tb_order.ORDER_STATE >= 2))
+  </insert>
+  
+  <!-- 删除指定天统计 -->
+  <delete id="delStatisticsDay" parameterType="Date">
+    delete from tb_system_statistics_day
+    where DATE_FORMAT(tb_system_statistics_day.STATISTICS_TIME,'%Y-%m-%d')=DATE_FORMAT(#{value},'%Y-%m-%d')
+  </delete>
+  
+  <!-- 动态查询最近网站的统计信息 -->
+  <select id="getStatisticThirty" resultMap="BaseResultMap" parameterType="int">
+	select 
+	<include refid="Base_Column_List" />
+    from tb_system_statistics_day
+	order by STATISTICS_TIME DESC
+	limit 0,#{value}
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_system_statistics_day
+    where STATISTICS_ID = #{statisticsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_system_statistics_day
+    where STATISTICS_ID = #{statisticsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.morning.entity.statistics.StatisticsDay" >
+    insert into tb_system_statistics_day (STATISTICS_ID, STATISTICS_TIME, CREATE_TIME, 
+      DAILY_LOGIN_NUMBER, DAILY_USER_NUMBER, DAILY_VISIT_NUMBER, 
+      DAILY_ORDER_NUMBER, DAILY_PAY_NUMBER)
+    values (#{statisticsId,jdbcType=INTEGER}, #{statisticsTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{dailyLoginNumber,jdbcType=INTEGER}, #{dailyUserNumber,jdbcType=INTEGER}, #{dailyVisitNumber,jdbcType=INTEGER}, 
+      #{dailyOrderNumber,jdbcType=INTEGER}, #{dailyPayNumber,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.morning.entity.statistics.StatisticsDay" >
+    insert into tb_system_statistics_day
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="statisticsId != null" >
+        STATISTICS_ID,
+      </if>
+      <if test="statisticsTime != null" >
+        STATISTICS_TIME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="dailyLoginNumber != null" >
+        DAILY_LOGIN_NUMBER,
+      </if>
+      <if test="dailyUserNumber != null" >
+        DAILY_USER_NUMBER,
+      </if>
+      <if test="dailyVisitNumber != null" >
+        DAILY_VISIT_NUMBER,
+      </if>
+      <if test="dailyOrderNumber != null" >
+        DAILY_ORDER_NUMBER,
+      </if>
+      <if test="dailyPayNumber != null" >
+        DAILY_PAY_NUMBER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="statisticsId != null" >
+        #{statisticsId,jdbcType=INTEGER},
+      </if>
+      <if test="statisticsTime != null" >
+        #{statisticsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dailyLoginNumber != null" >
+        #{dailyLoginNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dailyUserNumber != null" >
+        #{dailyUserNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dailyVisitNumber != null" >
+        #{dailyVisitNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dailyOrderNumber != null" >
+        #{dailyOrderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dailyPayNumber != null" >
+        #{dailyPayNumber,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.morning.entity.statistics.StatisticsDay" >
+    update tb_system_statistics_day
+    <set >
+      <if test="statisticsTime != null" >
+        STATISTICS_TIME = #{statisticsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dailyLoginNumber != null" >
+        DAILY_LOGIN_NUMBER = #{dailyLoginNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dailyUserNumber != null" >
+        DAILY_USER_NUMBER = #{dailyUserNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dailyVisitNumber != null" >
+        DAILY_VISIT_NUMBER = #{dailyVisitNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dailyOrderNumber != null" >
+        DAILY_ORDER_NUMBER = #{dailyOrderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dailyPayNumber != null" >
+        DAILY_PAY_NUMBER = #{dailyPayNumber,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where STATISTICS_ID = #{statisticsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.morning.entity.statistics.StatisticsDay" >
+    update tb_system_statistics_day
+    set STATISTICS_TIME = #{statisticsTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      DAILY_LOGIN_NUMBER = #{dailyLoginNumber,jdbcType=INTEGER},
+      DAILY_USER_NUMBER = #{dailyUserNumber,jdbcType=INTEGER},
+      DAILY_VISIT_NUMBER = #{dailyVisitNumber,jdbcType=INTEGER},
+      DAILY_ORDER_NUMBER = #{dailyOrderNumber,jdbcType=INTEGER},
+      DAILY_PAY_NUMBER = #{dailyPayNumber,jdbcType=DOUBLE}
+    where STATISTICS_ID = #{statisticsId,jdbcType=INTEGER}
+  </update>
+</mapper>

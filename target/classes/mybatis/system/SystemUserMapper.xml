@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.dao.system.SystemUserMapper" >
+  <resultMap id="BaseResultMap" type="com.morning.entity.system.SystemUser" >
+    <id column="ACCOUNT_ID" property="accountId" jdbcType="INTEGER" />
+    <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
+    <result column="LOGIN_PASSWORD" property="loginPassword" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="REAL_NAME" property="realName" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="INTEGER" />
+    <result column="AGE" property="age" jdbcType="INTEGER" />
+    <result column="PIC_IMG" property="picImg" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_LOGIN_IP" property="lastLoginIp" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ACCOUNT_ID, LOGIN_NAME, LOGIN_PASSWORD, USER_NAME, REAL_NAME, SEX, AGE, PIC_IMG, 
+    STATUS, LAST_LOGIN_TIME, LAST_LOGIN_IP, EMAIL, TELEPHONE, CREATE_TIME, CREATE_BY, 
+    UPDATE_TIME, UPDATE_BY
+  </sql>
+
+  <!-- 查询登录用户 -->
+  <select id="queryLoginUser" parameterType="com.morning.entity.system.SystemUser" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from tb_system_user
+    where LOGIN_NAME = #{loginName,jdbcType=VARCHAR} AND LOGIN_PASSWORD = #{loginPassword,jdbcType=VARCHAR}
+  </select>
+  
+   <!-- 查询用户名是否存在 -->
+  <select id="checkLoginName" parameterType="java.lang.String" resultType="int">
+  	select COUNT(1) from tb_system_user  where LOGIN_NAME  = #{loginName,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 更新用户最后登录的时间和IP -->
+  <update id="updateUserLoginLog" parameterType="java.util.Map">
+  	update tb_system_user
+    set LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+      LAST_LOGIN_IP = #{lastLoginIp,jdbcType=VARCHAR}
+    where ACCOUNT_ID = #{accountId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 修改管理员密码 -->
+  <update id="updateUserPws" parameterType="com.morning.entity.system.SystemUser">
+	update tb_system_user
+	set LOGIN_PASSWORD =#{loginPassword,jdbcType=VARCHAR}
+	where ACCOUNT_ID =#{accountId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 更新用户信息 -->
+  <update id="updateUserInfo" parameterType="com.morning.entity.system.SystemUser">
+  	update tb_system_user
+    <set >
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        REAL_NAME = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex ,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        AGE = #{age ,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ACCOUNT_ID = #{accountId,jdbcType=INTEGER}
+  </update>
+
+  <!-- 根据ID，查询用户信息 -->
+  <select id="querySysUserByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    ACCOUNT_ID, LOGIN_NAME, USER_NAME, REAL_NAME, SEX, AGE, PIC_IMG, 
+    STATUS, LAST_LOGIN_TIME, LAST_LOGIN_IP, EMAIL, TELEPHONE, CREATE_TIME, CREATE_BY, 
+    UPDATE_TIME, UPDATE_BY
+    from tb_system_user
+    where ACCOUNT_ID = #{accountId,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 根据ID，查询用户信息 -->
+  <select id="querySysUserByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_system_user
+    where LOGIN_NAME = #{loginName,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 根据角色，查询用户列表 -->
+  <select id="querySysUsersByRole" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    a.ACCOUNT_ID, USER_NAME, REAL_NAME, SEX, AGE, PIC_IMG, 
+    STATUS, LAST_LOGIN_TIME, LAST_LOGIN_IP, EMAIL, TELEPHONE, a.CREATE_TIME, a.CREATE_BY, 
+    UPDATE_TIME, UPDATE_BY
+    from tb_system_user a left join tb_system_user_role b on a.ACCOUNT_ID=b.ACCOUNT_ID
+    where b.ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 查询管理员数量 -->
+  <select id="querySysUserNumber" resultType="int">
+  	select IfNULL(count(1),0) from tb_system_user
+  </select>
+  
+  <!-- 查询管理员列表 -->
+  <select id="querySysUserList" resultMap="BaseResultMap" parameterType="com.morning.entity.user.QueryUser" >
+	select
+    ACCOUNT_ID, USER_NAME, REAL_NAME, SEX, AGE, PIC_IMG, 
+    STATUS, LAST_LOGIN_TIME, LAST_LOGIN_IP, EMAIL, TELEPHONE, CREATE_TIME, CREATE_BY, 
+    UPDATE_TIME, UPDATE_BY
+	from tb_system_user
+	<where>
+	<if test="searchContent != null and searchContent !=''">
+		AND (USER_NAME LIKE '%' #{searchContent} '%' OR REAL_NAME LIKE '%' #{searchContent} '%' 
+		OR AGE LIKE '%' #{searchContent} '%' OR LAST_LOGIN_IP LIKE '%' #{searchContent} '%' 
+		OR EMAIL LIKE '%' #{searchContent} '%' OR TELEPHONE LIKE '%' #{searchContent} '%')
+	</if>
+	  <if test="beginCreateTime != null and beginCreateTime !=''">
+		AND CREATE_TIME >= #{beginCreateTime}
+	  </if>
+	<if test="endCreateTime != null and endCreateTime !=''">
+		AND <![CDATA[CREATE_TIME  <= #{endCreateTime}]]>
+	</if>
+    </where>
+  </select>
+  
+  <!-- 冻结或解冻用户 -->
+  <update id="updateSysUserStates" parameterType="com.morning.entity.system.SystemUser">
+	update tb_system_user
+	set STATUS = #{status,jdbcType=INTEGER} 
+	where ACCOUNT_ID = #{accountId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 删除用户，通过账户ID -->
+  <delete id="deleteSysUser" parameterType="java.lang.Integer" >
+    delete from tb_system_user
+	where ACCOUNT_ID = #{accountId,jdbcType=INTEGER}
+  </delete>
+  
+  <!-- 删除角色表中用户记录，通过账户ID -->
+  <delete id="deleteSysUserRole" parameterType="java.lang.Integer" >
+    delete from tb_system_user_role
+	where ACCOUNT_ID = #{accountId,jdbcType=INTEGER}
+  </delete>
+  
+  <!-- 创建用户 -->
+  <insert id="createsystemUser" parameterType="com.morning.entity.system.SystemUser"  useGeneratedKeys="true" keyProperty="accountId">
+    insert into tb_system_user (LOGIN_NAME, LOGIN_PASSWORD, USER_NAME, REAL_NAME, SEX, STATUS, EMAIL, 
+    TELEPHONE, CREATE_TIME, CREATE_BY)
+    values (#{loginName,jdbcType=VARCHAR}, #{loginPassword,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+     #{realName,jdbcType=VARCHAR},#{sex,jdbcType=INTEGER},#{status,jdbcType=INTEGER},#{email,jdbcType=VARCHAR}, 
+     #{telephone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR})
+  </insert>
+
+  <!-- 批量插入用户角色记录 -->
+  <insert id="createUserRole" parameterType="java.util.List">
+    insert into tb_system_user_role (ROLE_ID, ACCOUNT_ID, CREATE_TIME, CREATE_BY)
+    values
+    <foreach collection="list" item="systemUserRoles" separator=",">
+     (#{systemUserRoles.roleId,jdbcType=INTEGER}, #{systemUserRoles.accountId,jdbcType=INTEGER},
+      #{systemUserRoles.createTime,jdbcType=TIMESTAMP}, #{systemUserRoles.createBy,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
+</mapper>

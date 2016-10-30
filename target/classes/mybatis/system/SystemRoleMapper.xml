@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.dao.system.SystemRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.morning.entity.system.SystemRole" >
+    <id column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="ROLE_OFFICE" property="roleOffice" jdbcType="VARCHAR" />
+    <result column="IS_SYSTEM" property="isSystem" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ROLE_ID, ROLE_NAME, ROLE_OFFICE, IS_SYSTEM, STATUS, CREATE_TIME, CREATE_BY, UPDATE_TIME, 
+    UPDATE_BY, REMARKS
+  </sql>
+  
+  <!-- 通过管理员ID，查询角色信息 -->
+  <select id="queryRoleByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	select
+    a.ROLE_ID, a.ROLE_NAME, a.ROLE_OFFICE, a.IS_SYSTEM, a.STATUS, a.CREATE_TIME, a.CREATE_BY, a.UPDATE_TIME, 
+    a.UPDATE_BY, a.REMARKS
+  	from tb_system_role a left join tb_system_user_role b on a.ROLE_ID=b.ROLE_ID
+  	where b.ACCOUNT_ID  = #{accountId,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 查询管理员列表 -->
+  <select id="queryRoleList" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from  tb_system_role
+  </select>
+  
+  <!-- 查询用户角色表，查询角色人数 -->
+  <select id="queryRoleNumber" resultType="int" parameterType="java.lang.Integer">
+  	select IfNULL(count(1),0)
+  	from tb_system_user_role
+  	where ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_system_role
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_system_role
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.morning.entity.system.SystemRole" >
+    insert into tb_system_role (ROLE_ID, ROLE_NAME, ROLE_OFFICE, 
+      IS_SYSTEM, STATUS, CREATE_TIME, 
+      CREATE_BY, UPDATE_TIME, UPDATE_BY, 
+      REMARKS)
+    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleOffice,jdbcType=VARCHAR}, 
+      #{isSystem,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.morning.entity.system.SystemRole" >
+    insert into tb_system_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="roleName != null" >
+        ROLE_NAME,
+      </if>
+      <if test="roleOffice != null" >
+        ROLE_OFFICE,
+      </if>
+      <if test="isSystem != null" >
+        IS_SYSTEM,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleOffice != null" >
+        #{roleOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="isSystem != null" >
+        #{isSystem,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.morning.entity.system.SystemRole" >
+    update tb_system_role
+    <set >
+      <if test="roleName != null" >
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleOffice != null" >
+        ROLE_OFFICE = #{roleOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="isSystem != null" >
+        IS_SYSTEM = #{isSystem,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.morning.entity.system.SystemRole" >
+    update tb_system_role
+    set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      ROLE_OFFICE = #{roleOffice,jdbcType=VARCHAR},
+      IS_SYSTEM = #{isSystem,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR}
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </update>
+</mapper>
