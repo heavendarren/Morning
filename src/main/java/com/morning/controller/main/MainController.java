@@ -24,9 +24,18 @@ import com.morning.service.statistics.StatisticsDayService;
 import com.morning.service.system.SystemMenuService;
 
 /**
- * 后台主页Controller
- * @author 陈星星
- *
+ * 
+*    
+* 项目名称：morning Maven Webapp   
+* 类名称：MainController   
+* 类描述：后台主页面表示层   
+* 创建人：陈星星   
+* 创建时间：2016年11月6日 下午10:26:58   
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:26:58   
+* 修改备注：   
+* @version    
+*
  */
 @Controller
 @RequestMapping("/system/main")

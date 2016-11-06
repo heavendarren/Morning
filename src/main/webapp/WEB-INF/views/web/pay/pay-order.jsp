@@ -265,7 +265,7 @@
                     </div>
                     <!-- 商品清单 END -->
                     <div class="checkout-confirm">
-                         <a href="#" class="btn btn-buy btn-lineDakeLight btn-back-cart">返回购物车</a>
+                         <a href="${ctx }/cart" class="btn btn-buy btn-lineDakeLight btn-back-cart">返回购物车</a>
                          <input type="submit" class="btn  btn-buy btn-primary" value="立即下单" id="checkoutToPay" />
                     </div>
             	</div>

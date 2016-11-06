@@ -6,15 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.transaction.Transactional;
-
-import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.morning.common.util.MD5Utils;
 import com.morning.dao.system.SystemUserMapper;
@@ -25,15 +27,20 @@ import com.morning.service.system.SystemUserService;
 
 /**
  * 
- * @description：后台管理员业务层实现
- * @author CXX
- * @version 创建时间：2016年9月14日  下午3:07:53
+* 项目名称：morning Maven Webapp   
+* 类名称：SystemUserServiceImpl   
+* 类描述：后台管理员业务逻辑层实现   
+* 创建人：陈星星   
+* 创建时间：2016年9月14日  下午3:07:53
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午11:01:39   
+* @version
  */
 @Service("systemUserService")
 @Transactional
 public class SystemUserServiceImpl implements SystemUserService {
 	
-	private static final Logger logger = Logger.getLogger(SystemUserServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(SystemUserServiceImpl.class);
 	
 	@Autowired
 	private SystemUserMapper systemUserMapper;
@@ -63,16 +70,19 @@ public class SystemUserServiceImpl implements SystemUserService {
 	}
 	
 	@Override
+	@CacheEvict(value="userCache",key="'sysUserInfo'+#systemUser.loginName")
 	public void updateUserPws(SystemUser systemUser) {
 		systemUserMapper.updateUserPws(systemUser);
 	}
 	
 	@Override
+	@CacheEvict(value="userCache",key="'sysUserInfo'+#systemUser.accountId")
 	public void updateUserInfo(SystemUser systemUser) {
 		systemUserMapper.updateUserInfo(systemUser);
 	}
 	
 	@Override
+	@Cacheable(value="userCache",key="'sysUserInfo'+#accountId")
 	public SystemUser querySysUserByUserId(Integer accountId) {
 		return systemUserMapper.querySysUserByUserId(accountId);
 	}
@@ -83,6 +93,7 @@ public class SystemUserServiceImpl implements SystemUserService {
 	}
 
 	@Override
+	@Cacheable(value="userCache",key="'sysUserInfo'+#loginName")
 	public SystemUser querySysUserByUserName(String loginName) {
 		return systemUserMapper.querySysUserByUserName(loginName);
 	}

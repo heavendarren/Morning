@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +18,19 @@ import com.morning.service.goods.GoodsService;
 
 /**
  * 
- * @description：商品业务层实现
- * @author CXX
- * @version 创建时间：2016年8月26日  下午2:13:31
+* 项目名称：morning Maven Webapp   
+* 类名称：GoodsServiceImpl   
+* 类描述： 商品信息业务逻辑层实现  
+* 创建人：陈星星   
+* 创建时间：2016年8月26日  下午2:13:31
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:59:39   
+* @version
  */
 @Service("goodsService")
 public class GoodsServiceImpl implements GoodsService{
 	
-	private static Logger logger = Logger.getLogger(GoodsServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(GoodsServiceImpl.class);
 	
 	@Autowired
 	private GoodsMapper goodsMapper;
@@ -84,13 +90,6 @@ public class GoodsServiceImpl implements GoodsService{
 		parameter.put("pageInfo", pageInfo);
 		return goodsMapper.queryWebGoodsListPage(parameter);
 	}
+
 	
-    public void clearActivityByDate() {
-        logger.debug("----5秒钟到----");
-     }
-    
-    public void printSomething(){
-        //内容就是打印一句话
-        System.out.println("this is andy schedule");
-    }
 }

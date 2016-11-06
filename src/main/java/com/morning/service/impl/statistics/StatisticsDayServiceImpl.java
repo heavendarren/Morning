@@ -15,7 +15,6 @@ import com.morning.service.statistics.StatisticsDayService;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：StatisticsDayServiceImpl   
 * 类描述：   网站统计业务逻辑层实现

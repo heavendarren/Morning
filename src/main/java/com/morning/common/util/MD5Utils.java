@@ -3,8 +3,9 @@ package com.morning.common.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.apache.log4j.Logger;
 import org.bouncycastle.util.encoders.Hex;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -22,7 +23,7 @@ import org.bouncycastle.util.encoders.Hex;
  */
 public class MD5Utils {
 	
-	private static final Logger logger = Logger.getLogger(MD5Utils.class);
+	private static final Logger logger = LoggerFactory.getLogger(MD5Utils.class);
 	
 	public static String getMD5(String src){
 		try {

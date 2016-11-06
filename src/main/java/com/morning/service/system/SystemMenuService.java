@@ -6,17 +6,15 @@ import com.morning.entity.system.SystemMenu;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：SystemMenuService   
-* 类描述：系统权限业务层接口   
+* 类描述：系统权限业务逻辑层接口   
 * 创建人：陈星星   
 * 创建时间：2016年10月23日 下午9:51:26   
 * 修改人：陈星星   
 * 修改时间：2016年10月23日 下午9:51:26   
 * 修改备注：   
 * @version    
-*
  */
 public interface SystemMenuService {
 	

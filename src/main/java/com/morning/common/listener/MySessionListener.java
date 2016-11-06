@@ -1,5 +1,6 @@
 package com.morning.common.listener;
 
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 /**
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpSessionListener;
  * @author CXX
  * @version 创建时间：2016年8月1日  上午10:32:59
  */
+@WebListener
 public class MySessionListener implements HttpSessionListener {
 	
 	//全站在线人数

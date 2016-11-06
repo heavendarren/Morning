@@ -6,9 +6,14 @@ import com.morning.entity.user.UserLoginLog;
 
 /**
  * 
- * @description：用户登录日志持久层接口
- * @author CXX
- * @version 创建时间：2016年8月12日  下午11:45:15
+* 项目名称：morning Maven Webapp   
+* 类名称：UserLoginLogMapper   
+* 类描述：前台用户登录日志数据访问层接口   
+* 创建人：陈星星   
+* 创建时间：2016年8月12日  下午11:45:15 
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:39:10   
+* @version
  */
 public interface UserLoginLogMapper {
 	

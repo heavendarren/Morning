@@ -11,11 +11,19 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * 
- * @description：基础控制器Controller
- * @author CXX
- * @version 创建时间：2016年8月15日  上午9:54:54
+*    
+* 项目名称：morning Maven Webapp   
+* 类名称：BaseController   
+* 类描述： 公共表示层：控制器支持类  
+* 创建人：陈星星   
+* 创建时间：2016年8月15日  上午9:54:54   
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:21:29   
+* 修改备注：   
+* @version    
+*
  */
-public class BaseController {
+public abstract class BaseController {
 	
 	
 	/** ============================     ajax    =================================================  */

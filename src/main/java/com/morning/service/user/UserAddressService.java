@@ -6,9 +6,14 @@ import com.morning.entity.user.UserAddress;
 
 /**
  * 
- * @description：前台用户收货地址业务层接口
- * @author CXX
- * @version 创建时间：2016年8月22日  上午11:23:03
+* 项目名称：morning Maven Webapp   
+* 类名称：UserAddressService   
+* 类描述：前台用户收货地址业务逻辑层接口   
+* 创建人：陈星星   
+* 创建时间：2016年8月22日  上午11:23:03
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午11:05:57   
+* @version
  */
 public interface UserAddressService {
 	

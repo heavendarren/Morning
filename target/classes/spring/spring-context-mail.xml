@@ -7,9 +7,6 @@
             http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
-	<!-- 加载mail.properties配置文件 -->
-    <context:property-placeholder location="classpath:properties/mail.properties" 
-        file-encoding="utf-8" ignore-unresolvable="true"/>
 	
 	<!-- 配置velocity引擎 -->  
 	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
@@ -34,7 +31,7 @@
 	       <property name="host" value="${mail.smtp.host}"/>   
 	       <property name="username" value="${mail.smtp.username}"/>   
 	       <property name="password" value="${mail.smtp.password}"/>   
-	       <property name="defaultEncoding" value="UTF-8"></property>   
+	       <property name="defaultEncoding" value="${mail.smtp.encoding}"></property>   
 	       <property name="javaMailProperties">   
 	             <props>   
 	             	<!-- 服务器需要smtp认证 -->
@@ -48,12 +45,5 @@
 	            </props>   
 	        </property>   
 	 </bean>   
-
-	<!-- 异步线程 -->
-	<bean id="taskExecutor"
-		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-		<property name="corePoolSize" value="10" />
-		<property name="maxPoolSize" value="30" />
-	</bean>
-
+	
 </beans>

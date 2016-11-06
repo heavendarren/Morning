@@ -9,9 +9,14 @@ import com.morning.entity.order.OrderMessage;
 
 /**
  * 
- * @description：商品业务层接口
- * @author CXX
- * @version 创建时间：2016年8月23日  上午12:16:56
+* 项目名称：morning Maven Webapp   
+* 类名称：GoodsService   
+* 类描述：商品信息业务逻辑层接口   
+* 创建人：陈星星   
+* 创建时间：2016年8月23日  上午12:16:56
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:55:41   
+* @version
  */
 public interface GoodsService {
 	
@@ -70,9 +75,5 @@ public interface GoodsService {
      * @return
      */
 	public void updateGoodsCountList(OrderMessage orderMessage);
-	
-	public void clearActivityByDate();
-	
-	public void printSomething();
 	
 }

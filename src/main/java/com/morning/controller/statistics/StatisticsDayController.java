@@ -8,7 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ import com.morning.service.statistics.StatisticsDayService;
 *    
 * 项目名称：morning Maven Webapp   
 * 类名称：StatisticsDayController   
-* 类描述：   StatisticsDay 网站统计控制层
+* 类描述： 网站统计表示层
 * 创建人：陈星星   
 * 创建时间：2016年10月5日 下午10:43:45   
 * 修改人：陈星星   
@@ -38,7 +39,7 @@ import com.morning.service.statistics.StatisticsDayService;
 @RequestMapping("/system")
 public class StatisticsDayController extends BaseController{
 	
-	private static final Logger logger = Logger.getLogger(StatisticsDayController.class);
+	private static final Logger logger = LoggerFactory.getLogger(StatisticsDayController.class);
 	
 	@Autowired
 	private StatisticsDayService statisticsDayService;

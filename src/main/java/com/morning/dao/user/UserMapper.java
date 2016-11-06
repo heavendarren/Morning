@@ -7,15 +7,15 @@ import com.morning.entity.user.QueryUser;
 import com.morning.entity.user.User;
 
 /**
- * dao接口好处
- * 1.可以在尚未实现具体DAO的时候编写上层代码,如Service里对DAO的调用
- * 2.可以为DAO进行多实现,例如有JDBCDAO实现,MyBatisDAO实现,而不需要更改上层代码,只需要简单的在Spring的IoC配置里修改一下注入的DAO实现
- */
-/**
  * 
- * @description：用户信息持久层接口
- * @author CXX
- * @version 创建时间：2016年8月12日  下午5:20:19
+* 项目名称：morning Maven Webapp   
+* 类名称：UserMapper   
+* 类描述：前台用户数据访问层接口   
+* 创建人：陈星星   
+* 创建时间：2016年8月12日  下午5:20:19
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:39:37   
+* @version
  */
 public interface UserMapper {
 	

@@ -94,7 +94,7 @@
                     
                     <h2>数量：</h2>
                     <div class="tb-amount-widget">
-                    	<input type="text"  name="orderNumber" value="1" class="input-count"/>
+                    	<input type="text" data-save="${goods.goodsSaveInfo}" name="orderNumber" value="1" class="input-count"/>
                         <div class="tb-amount-btn">
                             <a href="javascript:;" class="add_btn"></a>
                             <a href="javascript:;" class="min_btn"></a>

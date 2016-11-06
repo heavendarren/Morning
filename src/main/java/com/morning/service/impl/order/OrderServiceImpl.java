@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.transaction.Transactional;
-
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.morning.dao.goods.GoodsMapper;
 import com.morning.dao.order.OrderMapper;
@@ -32,15 +32,20 @@ import com.morning.service.order.OrderService;
  */
 /**
  * 
- * @description：订单业务层实现
- * @author CXX
- * @version 创建时间：2016年8月29日  下午4:28:36
+* 项目名称：morning Maven Webapp   
+* 类名称：OrderServiceImpl   
+* 类描述：订单业务逻辑层实现   
+* 创建人：陈星星   
+* 创建时间：2016年8月29日  下午4:28:36
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午11:00:06   
+* @version
  */
 @Service("orderService")
 @Transactional
 public class OrderServiceImpl implements OrderService {
 	
-	private static final Logger logger=Logger.getLogger(OrderServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);	
 	
 	@Autowired
 	private OrderMapper orderMapper;

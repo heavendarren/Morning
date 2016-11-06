@@ -7,17 +7,20 @@ import com.morning.entity.user.QueryUser;
 import com.morning.entity.user.User;
 
 /**
- * 
- * 用户管理
  * service接口好处
  * 1.可以在尚未实现具体Service情况下编写上层改代码,如Controller对Service的调用
  * 2.Spring无论是AOP还是事务管理的实现都是基于动态代理的,而动态代理的实现依赖于接口,所以必须有接口的定义才能使用这些功能
  */
 /**
  * 
- * @description：前台用户业务逻辑层接口
- * @author CXX
- * @version 创建时间：2016年8月12日  下午10:53:48
+* 项目名称：morning Maven Webapp   
+* 类名称：UserService   
+* 类描述：前台用户业务逻辑层接口   
+* 创建人：陈星星   
+* 创建时间：2016年8月12日  下午10:53:48
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午11:06:53   
+* @version
  */
 public interface UserService {
 	/**

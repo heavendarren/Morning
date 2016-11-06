@@ -11,9 +11,14 @@ import com.morning.service.goods.GoodsClassifyService;
 
 /**
  * 
- * @description：商品类别业务层实现
- * @author CXX
- * @version 创建时间：2016年8月26日  下午2:13:57
+* 项目名称：morning Maven Webapp   
+* 类名称：GoodsClassifyServiceImpl   
+* 类描述：商品类别业务逻辑层实现   
+* 创建人：陈星星   
+* 创建时间：2016年8月26日  下午2:13:57 
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:58:56   
+* @version
  */
 @Service("goodsClassifyService")
 public class GoodsClassifyServiceImpl implements GoodsClassifyService {

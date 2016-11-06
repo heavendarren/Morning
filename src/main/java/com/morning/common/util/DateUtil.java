@@ -37,7 +37,7 @@ public class DateUtil extends DateUtils {
 	/** 标准日期（不含时间）格式化器 */
 	private final static SimpleDateFormat NORM_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	/** 标准日期时间格式化器 */
-	private final static SimpleDateFormat NORM_DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private final static SimpleDateFormat NORM_DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
 	/** HTTP日期时间格式化器 */
 	private final static SimpleDateFormat HTTP_DATETIME_FORMAT = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z",
 			Locale.US);

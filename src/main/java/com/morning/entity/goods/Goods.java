@@ -8,9 +8,14 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 
- * @description：商品实体类
- * @author CXX
- * @version 创建时间：2016年8月26日  下午1:56:55
+* 项目名称：morning Maven Webapp   
+* 类名称：Goods   
+* 类描述：商品实体类   
+* 创建人：陈星星   
+* 创建时间：2016年8月26日  下午1:56:55
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:42:02   
+* @version
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

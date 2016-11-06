@@ -6,7 +6,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,7 +23,7 @@ import com.morning.service.statistics.StatisticsDayService;
 @ContextConfiguration(locations = { "classpath:spring/spring-context.xml", "classpath:spring/spring-context-mybatis.xml" }) 
 public class StatisticsDayTest {
 	
-	private static final Logger logger = Logger.getLogger(StatisticsDayTest.class);
+	private static Logger logger = LogManager.getLogger(StatisticsDayTest.class.getName()); 
 	
 	@Resource
 	private StatisticsDayService statisticsDayService;

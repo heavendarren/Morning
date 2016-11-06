@@ -36,4 +36,6 @@ public class OrderMessage implements Serializable{
     private Integer orderId;
     /**商品实体类*/
     private Goods goods;
+    /**购物车临时编号*/
+    private Integer cartId;
 }

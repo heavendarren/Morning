@@ -6,17 +6,15 @@ import com.morning.entity.system.SystemRole;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：SystemRoleService   
-* 类描述： 系统角色业务层接口  
+* 类描述： 系统角色业务逻辑层接口  
 * 创建人：陈星星   
 * 创建时间：2016年10月25日 上午3:29:00   
 * 修改人：陈星星   
 * 修改时间：2016年10月25日 上午3:29:00   
 * 修改备注：   
 * @version    
-*
  */
 public interface SystemRoleService {
 	

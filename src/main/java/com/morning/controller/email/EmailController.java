@@ -18,13 +18,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.morning.common.util.DateUtil;
 import com.morning.controller.BaseController;
 import com.morning.entity.email.UserEmailMsg;
-import com.morning.service.email.MailService;
+import com.morning.service.email.UserEmailMsgService;
 
 /**
  * 
- * @description：邮箱发送控制器
- * @author CXX
- * @version 创建时间：2016年9月4日  上午1:10:56
+*    
+* 项目名称：morning Maven Webapp   
+* 类名称：EmailController   
+* 类描述：邮件发送表示层   
+* 创建人：陈星星   
+* 创建时间：2016年11月6日 下午10:25:47   
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:25:47   
+* 修改备注：   
+* @version    
+*
  */
 @Controller
 public class EmailController extends BaseController{
@@ -32,7 +40,7 @@ public class EmailController extends BaseController{
 	private static Logger logger = LoggerFactory.getLogger(EmailController.class);
 	
 	@Autowired
-	private MailService mailService;
+	private UserEmailMsgService userEmailMsgService;
 	
 	/**
 	 * 发送验证邮箱验证码
@@ -50,10 +58,13 @@ public class EmailController extends BaseController{
     		String emailCaptcha = this.getRandomNum(6);
 	    	UserEmailMsg userEmailMsg=new UserEmailMsg();
 	    	// 验证邮箱
-			Map<String, Object> returnMap = mailService.checkEmail(email);
+			Map<String, Object> returnMap = userEmailMsgService.checkEmail(email);
+			if (Boolean.parseBoolean(returnMap.get("flag").toString()) == false) {
+				json = this.setJson(false, returnMap.get("errorMessage").toString());
+				return json;
+			} 
 	    	userEmailMsg.setToEmails(returnMap.get("returnList").toString());
-
-	        //内容
+	    	//内容
 	        Map<String, Object> model = new HashMap<String, Object>();
     		if(type.equals("0")){ //验证邮箱
         		//将验证码和验证时间存放在Session
@@ -64,6 +75,7 @@ public class EmailController extends BaseController{
         		userEmailMsg.setVelocityTemplate("EmailCaptcha.vm");
     	        //主题
     	    	userEmailMsg.setSubject("【但行好事·莫问前程】很高兴遇见您！");
+    	    	userEmailMsg.setFromName("猫宁客服团队 ");
     	        model.put("emailCaptcha", emailCaptcha);
     	        model.put("registerTime", registerTime);
     		}
@@ -85,8 +97,8 @@ public class EmailController extends BaseController{
     		}
 	        
 	        userEmailMsg.setModel(model);
-	        mailService.sendMail(userEmailMsg);
-    		json =this.setJson(true, "邮箱发送成功!", null);
+	        userEmailMsgService.batchSendEmail(userEmailMsg, 3);
+    		json =this.setJson(true);
     	}catch(Exception e){
     		logger.error("EmailController.sendEmail", e);
     	}
@@ -117,17 +129,17 @@ public class EmailController extends BaseController{
     		//验证验证码
     		String emailCaptcha = request.getParameter("emailCaptcha")==null?"":request.getParameter("emailCaptcha");
     		if(sessionCaptcha==null || !emailCaptcha.equalsIgnoreCase(sessionCaptcha.toString())){
-				json = this.setJson(false, "请输入正确的验证码", null);
+				json = this.setJson(false, "请输入正确的验证码");
 				return json;
 			}
     		//验证验证码时间
     		Date currentTime = new Date();//获取当前时间    
     		Date lastActivateTime = DateUtil.getOffsiteDate(registerTimeDate, Calendar.MINUTE, 3);//验证时间向后偏移3分钟
     		if(currentTime.after(lastActivateTime)) {  //验证验证时间是否过期
-				json = this.setJson(false, "验证码已过期,请重新输入验证码", null);
+				json = this.setJson(false, "验证码已过期,请重新输入验证码");
 				return json;
     		}
-    		json = this.setJson(true, "通过验证!", null);
+    		json = this.setJson(true);
     	}catch(Exception e){
     		logger.error("EmailController.verifyCaptcha", e);
     	}

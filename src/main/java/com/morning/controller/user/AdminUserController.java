@@ -31,10 +31,9 @@ import com.morning.service.user.UserService;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：AdminUserController   
-* 类描述：   后台会员控制层Controller
+* 类描述：后台管理员表示层
 * 创建人：陈星星   
 * 创建时间：2016年10月11日 下午10:11:00   
 * 修改人：陈星星   
@@ -43,7 +42,6 @@ import com.morning.service.user.UserService;
 * @version    
 *
  */
-
 @Controller
 @RequestMapping("/system/user")
 public class AdminUserController extends BaseController{

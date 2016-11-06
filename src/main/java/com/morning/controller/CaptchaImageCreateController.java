@@ -17,9 +17,17 @@ import com.google.code.kaptcha.Producer;
 
 /**
  * 
- * @description：随机验证码控制层 
- * @author CXX
- * @version 创建时间：2016年9月3日  下午1:14:52
+*    
+* 项目名称：morning Maven Webapp   
+* 类名称：CaptchaImageCreateController   
+* 类描述：验证码表示层   
+* 创建人：陈星星   
+* 创建时间：2016年9月3日  下午1:14:52  
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:24:15   
+* 修改备注：   
+* @version    
+*
  */
 @Controller
 public class CaptchaImageCreateController {

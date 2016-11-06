@@ -8,10 +8,9 @@ import com.morning.entity.statistics.StatisticsDay;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：StatisticsDayMapper   
-* 类描述：   网站统计持久层接口
+* 类描述：网站统计数据访问层接口
 * 创建人：陈星星   
 * 创建时间：2016年10月2日 上午3:28:57   
 * 修改人：陈星星   

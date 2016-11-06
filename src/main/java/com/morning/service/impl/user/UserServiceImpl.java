@@ -15,9 +15,14 @@ import com.morning.service.user.UserService;
 
 /**
  * 
- * @description：前台用户业务逻辑层
- * @author CXX
- * @version 创建时间：2016年8月12日  下午11:02:37
+* 项目名称：morning Maven Webapp   
+* 类名称：UserServiceImpl   
+* 类描述：前台用户业务逻辑层实现   
+* 创建人：陈星星   
+* 创建时间：2016年11月6日 下午11:02:52   
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午11:02:52   
+* @version
  */
 @Service("userService")
 public class UserServiceImpl implements UserService{
@@ -28,9 +33,6 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserMapper userMapper;
 	
-	/**
-	 * @Override是伪代码,表示重写(当然不写也可以)
-	 */
 	@Override    
 	public int createUser(User user) {
 		return userMapper.createUser(user);

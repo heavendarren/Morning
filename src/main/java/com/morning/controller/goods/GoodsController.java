@@ -4,7 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -31,14 +32,23 @@ import com.morning.service.order.OrderService;
 
 /**
  * 
- * @description：前台商品controller
- * @author CXX
- * @version 创建时间：2016年7月31日  下午2:19:06
+*    
+* 项目名称：morning Maven Webapp   
+* 类名称：GoodsController   
+* 类描述：前台商品信息表示层   
+* 创建人：陈星星   
+* 创建时间：2016年11月6日 下午10:26:08   
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:26:08   
+* 修改备注：   
+* @version    
+*
  */
 @Controller
 public class GoodsController extends BaseController {
 	
-	private static final Logger logger=Logger.getLogger(GoodsController.class);
+	private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
+
 	//商品列表
 	private static final String commoditylist = getViewPath("/web/commodity/commodity-list");
 	//商品详情
@@ -55,7 +65,7 @@ public class GoodsController extends BaseController {
 	@Autowired
 	private OrderMessageService orderMessageService;
 	@Autowired
-	private OrderService orderSerivce;
+	private OrderService orderService;
 
 	
     // 绑定变量名字和属性，参数封装进类
@@ -153,6 +163,7 @@ public class GoodsController extends BaseController {
 			Goods goods = goodsService.queryGoodsById(orderMessage.getGoodsId());
 			orderMessage.setGoods(goods);
 			orderMessage.setOrderMoney(goods.getGoodsPrice());
+
 			
 			//获取购物车信息
 			ShoppingCart shoppingCart = SingletonLoginUtils.getShoppingCart(request);
@@ -160,7 +171,7 @@ public class GoodsController extends BaseController {
 			//更新购物车列表信息
 			orderMessageService.updateShoppingCartList(cartMessageList, orderMessage);
 			//更新购物车信息
-			orderSerivce.updateShoppingCart(shoppingCart,cartMessageList);
+			orderService.updateShoppingCart(shoppingCart,cartMessageList);
 			
 			modelAndView.addObject("orderMessage", orderMessage);	
 			

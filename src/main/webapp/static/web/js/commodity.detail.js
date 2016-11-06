@@ -1,6 +1,5 @@
 $(function(){
 	topNavigation();  //菜单栏的显示
-	$(".clearfix li:nth-child(1)").click();//第一张图片
 })
 
 /**
@@ -15,37 +14,28 @@ $(function(){
 			src:largePath
 		})
 	});
+	$(".clearfix li:first").click();//第一张图片
 })
 
 /*商品选择样式默认选择开始*/
 $(function(){
     $("#style-simg-color li:first").addClass("active");
-});
-$(function(){
-    $("#style-simg-color input:first").prop("checked",true);
-});
-$(function(){
-    $("#style-simg-size input:first").prop("checked",true);
-});
-$(function(){
     $("#style-simg-size li:first").addClass("active");
+    $("#style-simg-color input:first").prop("checked",true);
+    $("#style-simg-size input:first").prop("checked",true);
 });
 /*商品选择样式默认选择结束*/
 
 /*商品选择样式选择动画开始*/	
 $(function(){
 	$("#style-simg-color").on('click', 'li' , function(){
-	   $("#style-simg-color li").css("border","1px #c3c3c3 solid");
 	   $("#style-simg-color li").removeClass("active");
-	   $(this).css("border-color","#ff6700");
 	   $(this).addClass("active");
 	});
 })
 $(function(){
 	$("#style-simg-size").on('click', 'li' , function(){
-	   $("#style-simg-size li").css("border","1px #c3c3c3 solid");
 	   $("#style-simg-size li").removeClass("active");
-	   $(this).css("border-color","#ff6700");
 	   $(this).addClass("active");
 	});
 })
@@ -55,8 +45,11 @@ $(function(){
 $(function(){
 	//加
 	$('.add_btn').click(function(){
+			var save=Number($('.input-count').attr("data-save"));
 			var onum=Number($('.input-count').val())+1;
-			$('.input-count').attr('value',onum);
+			if(onum<=save){
+				$('.input-count').attr('value',onum);
+			}
 	})
 	//减
 	$('.min_btn').click(function(){
@@ -68,12 +61,11 @@ $(function(){
 })
 
 /**
- * 商品数量
+ * 售后服务
  * @param {} thisObj
  * @param {} Num
  */
 function nTabs(thisObj,Num){
-
 	if(thisObj.className == "active")return;
 	var tabObj = thisObj.parentNode.id;
 	var tabList = document.getElementById(tabObj).getElementsByTagName("li");

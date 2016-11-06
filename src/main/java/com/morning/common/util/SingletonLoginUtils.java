@@ -2,7 +2,8 @@ package com.morning.common.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.morning.entity.ShoppingCart;
 import com.morning.entity.system.SystemUser;
@@ -16,7 +17,8 @@ import com.morning.entity.user.User;
  */
 public class SingletonLoginUtils {
 	
-	private static final Logger logger = Logger.getLogger(SingletonLoginUtils.class);
+	private static final Logger logger = LoggerFactory.getLogger(SingletonLoginUtils.class);
+
 	
 	/**
 	 * 创建储存购物车信息的模型

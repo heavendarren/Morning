@@ -44,6 +44,7 @@ public class OrderMessageServiceImpl implements OrderMessageService {
 			}
 		}
 		if(flag){
+			orderMessage.setCartId(cartMessageList.size()+1);
 			cartMessageList.add(orderMessage);
 		}
 	}

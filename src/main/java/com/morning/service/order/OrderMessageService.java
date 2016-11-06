@@ -6,9 +6,14 @@ import com.morning.entity.order.OrderMessage;
 
 /**
  * 
- * @description：订单详情业务层接口
- * @author CXX
- * @version 创建时间：2016年8月30日  上午12:12:58
+* 项目名称：morning Maven Webapp   
+* 类名称：OrderMessageService   
+* 类描述：订单详情业务逻辑层接口   
+* 创建人：陈星星   
+* 创建时间：2016年11月6日 下午11:03:28   
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午11:03:28   
+* @version
  */
 public interface OrderMessageService {
 	

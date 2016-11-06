@@ -25,21 +25,17 @@
                       </tr>
                     </thead>
                     <tbody>
-                    <c:set var="index" value="-1" />
                     <c:forEach items="${shoppingCart.cartMessageList}" var="cartMessageList">
-                    <c:set var="index" value="${index+1}" />
                       <tr>
                         <td class="checkbox"><input class="check-one check" type="checkbox"/></td>
                         <td class="goods"><img src="commodity/${cartMessageList.goods.goodsImagename}.jpg" alt=""/><span>${cartMessageList.goods.goodsName}</span></td>
                         <td class="price">${cartMessageList.goods.goodsPrice}</td>
                         <td class="count"><span class="reduce">-</span>
-                          <input class="count-input" type="text" value="${cartMessageList.orderNumber}"/>
+                          <input class="count-input" data-cartId="${cartMessageList.cartId}" type="text" value="${cartMessageList.orderNumber}"/>
                           <span class="add">+</span></td>
                         <td class="subtotal">${cartMessageList.goods.goodsPrice*cartMessageList.orderNumber}</td>
                         <td class="operation"><span class="delete">x</span></td>
-                        <input type="hidden" id="hidden" value="${index}" />
                       </tr>
-                      <input type="hidden"  name="goodsId" value="${cartMessageList.goodsId}" />
                     </c:forEach>
                     </tbody>
                 </table>

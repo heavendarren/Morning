@@ -68,6 +68,9 @@
 		    <mvc:exclude-mapping path="/static/**/*"/>
 		    <mvc:exclude-mapping path="/*/ajax/**"/>
 		    <mvc:exclude-mapping path="/ajax/**"/>
+		    <mvc:exclude-mapping path="/system"/>
+		    <mvc:exclude-mapping path="/system/*"/>
+   		    <mvc:exclude-mapping path="/system/**/*"/>
 		    <bean class="com.morning.common.intercepter.LimitIntercepterForWebsite">
 		    </bean>
 		</mvc:interceptor> 

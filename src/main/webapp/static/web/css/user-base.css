@@ -222,11 +222,6 @@
 	overflow: hidden;
 	font-size: 15px;
 }
-
-.u-account-li li * {
-	vertical-align: middle;
-}
-
 .u-a-title {
 	display: inline-block;
 	width: 100px;

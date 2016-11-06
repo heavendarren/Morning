@@ -9,6 +9,20 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.morning.common.util.SingletonLoginUtils;
 import com.morning.entity.system.SystemUser;
 
+/**
+ * 
+*    
+* 项目名称：morning Maven Webapp   
+* 类名称：IntercepterAdmin   
+* 类描述：  后台拦截器 
+* 创建人：陈星星   
+* 创建时间：2016年11月2日 下午1:00:51   
+* 修改人：陈星星   
+* 修改时间：2016年11月2日 下午1:00:51   
+* 修改备注： 已被shiro代替  
+* @version    
+*
+ */
 public class IntercepterAdmin extends HandlerInterceptorAdapter{
 
 	@Override

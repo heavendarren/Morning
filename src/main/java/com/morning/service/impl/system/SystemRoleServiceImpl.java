@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.morning.dao.system.SystemRoleMapper;
@@ -12,10 +13,9 @@ import com.morning.service.system.SystemRoleService;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：SystemRoleServiceImpl   
-* 类描述： 系统角色业务层实现  
+* 类描述： 系统角色业务逻辑层实现  
 * 创建人：陈星星   
 * 创建时间：2016年10月25日 上午3:29:26   
 * 修改人：陈星星   
@@ -31,6 +31,7 @@ public class SystemRoleServiceImpl implements SystemRoleService {
 	private SystemRoleMapper systemRoleMapper;
 	
 	@Override
+	@Cacheable(value="userCache",key="'sysUserRole'+#accountId")
 	public List<SystemRole> queryRoleByUserId(Integer accountId) {
 		return systemRoleMapper.queryRoleByUserId(accountId);
 	}
@@ -51,7 +52,6 @@ public class SystemRoleServiceImpl implements SystemRoleService {
 		List<SystemRole> systemRoles =  new ArrayList<SystemRole>();
 		for(SystemRole role : systemRoleList){
 			role.setNumber(queryRoleNumber(role.getRoleId()));
-			
 			systemRoles.add(role);
 		}
 		return systemRoles;

@@ -43,7 +43,9 @@ function exit(){
 		dataType:'json',
 		async:true,
 		success:function(result){
-			window.location.href=baselocation;
+			if(result.success==true){
+				window.location.href = baselocation + '/index';
+			}
 		}
 	});
 }

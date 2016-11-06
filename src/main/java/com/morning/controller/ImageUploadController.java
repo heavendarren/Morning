@@ -17,9 +17,17 @@ import com.morning.common.util.UploadFileUtils;
 
 /**
  * 
- * @description：头像上传 Controller
- * @author CXX
- * @version 创建时间：2016年8月22日  上午9:39:45
+*    
+* 项目名称：morning Maven Webapp   
+* 类名称：ImageUploadController   
+* 类描述：头像上传表示层   
+* 创建人：陈星星   
+* 创建时间：2016年8月22日  上午9:39:45
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:25:13   
+* 修改备注：   
+* @version    
+*
  */
 @Controller
 public class ImageUploadController extends BaseController {

@@ -7,9 +7,20 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 
- * @description：商品查询条件
+ * @description：
  * @author CXX
- * @version 创建时间：2016年8月22日  下午10:46:06
+ * @version 创建时间：
+ */
+/**
+ * 
+* 项目名称：morning Maven Webapp   
+* 类名称：QueryGoods   
+* 类描述：商品查询条件实体类
+* 创建人：陈星星   
+* 创建时间：2016年8月22日  下午10:46:06
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:42:59   
+* @version
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

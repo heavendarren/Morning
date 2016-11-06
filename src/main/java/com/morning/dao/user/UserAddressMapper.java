@@ -4,6 +4,17 @@ import java.util.List;
 
 import com.morning.entity.user.UserAddress;
 
+/**
+ * 
+* 项目名称：morning Maven Webapp   
+* 类名称：UserAddressMapper   
+* 类描述：用户收获地址数据访问层接口   
+* 创建人：陈星星   
+* 创建时间：2016年11月6日 下午10:38:52   
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:38:52   
+* @version
+ */
 public interface UserAddressMapper {
 	
 	/**

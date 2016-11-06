@@ -6,9 +6,14 @@ import com.morning.entity.goods.GoodsPicture;
 
 /**
  * 
- * @description：商品图片业务层接口
- * @author CXX
- * @version 创建时间：2016年8月26日  下午2:11:33
+* 项目名称：morning Maven Webapp   
+* 类名称：GoodsPictureService   
+* 类描述：商品图片业务逻辑层接口   
+* 创建人：陈星星   
+* 创建时间：2016年8月26日  下午2:11:33
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:55:21   
+* @version
  */
 public interface GoodsPictureService {
 	

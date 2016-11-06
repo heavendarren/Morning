@@ -6,9 +6,14 @@ import com.morning.entity.user.UserLoginLog;
 
 /**
  * 
- * @description：前台用户登录日志业务层接口
- * @author CXX
- * @version 创建时间：2016年8月13日  上午12:11:00
+* 项目名称：morning Maven Webapp   
+* 类名称：UserLoginLogService   
+* 类描述：前台用户登录日志业务逻辑层接口   
+* 创建人：陈星星   
+* 创建时间：2016年8月13日  上午12:11:00
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午11:06:19   
+* @version
  */
 public interface UserLoginLogService {
 	

@@ -14,10 +14,9 @@ import com.morning.service.system.SystemMenuService;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：SystemMenuServiceImpl   
-* 类描述：系统权限业务层实现   
+* 类描述：系统权限业务逻辑层实现   
 * 创建人：陈星星   
 * 创建时间：2016年10月23日 下午9:56:26   
 * 修改人：陈星星   

@@ -37,11 +37,11 @@ import com.morning.service.system.SystemUserService;
 *    
 * 项目名称：morning Maven Webapp   
 * 类名称：SystemUserController   
-* 类描述：系统管理员控制层   
+* 类描述：系统管理员表示层   
 * 创建人：陈星星   
 * 创建时间：2016年10月18日 下午5:00:03   
 * 修改人：陈星星   
-* 修改时间：2016年10月29日 17:24:17  
+* 修改时间：2016年10月31日 00:37:19
 * 修改备注：Resful规范设计   
 * @version    
 *
@@ -49,7 +49,6 @@ import com.morning.service.system.SystemUserService;
 @Controller
 @RequestMapping("/system/sysuser")
 public class SystemUserController extends BaseController {
-	
 
 	/** 系统管理员列表 */
 	private static final String SYSTEM_USER_LIST = getViewPath("admin/system/system_user_list");
@@ -64,8 +63,6 @@ public class SystemUserController extends BaseController {
 	/** 系统管理员信息界面 */
 	private static final String SYSTEM_USER_INFO = getViewPath("admin/system/system_user_info");
 
-
-	
 	@Autowired
 	private SystemUserService systemUserService;
 	@Autowired
@@ -99,7 +96,7 @@ public class SystemUserController extends BaseController {
 		List<SystemUser> systemUsers = systemUserService.querySysUserList(queryUser);
 		modelAndView.addObject("systemUsers", systemUsers);// 用户列表
 		List<SystemRole> systemRoles = systemRoleService.queryRoles();
-		modelAndView.addObject("systemRoles", systemRoles);
+		modelAndView.addObject("systemRoles", systemRoles);//权限列表
 		return modelAndView;
 	}
 	

@@ -74,11 +74,11 @@ function member_start(obj,id){
 }
 
 /*用户-查看*/
-function member_show(title,url,id,w,h){
+function member_show(title,url,id,ope,w,h){
 	if(id == null){
 		layer_show(title,url,w,h);
 	}else{
-		layer_show(title,url+'/'+id,w,h);
+		layer_show(title,url+'/'+id+'/'+ope,w,h);
 	}
 }
     

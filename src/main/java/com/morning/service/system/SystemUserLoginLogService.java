@@ -7,9 +7,14 @@ import com.morning.entity.system.SystemUserLoginLog;
 
 /**
  * 
- * @description：后台管理员登录业务层接口
- * @author CXX
- * @version 创建时间：2016年9月14日  下午3:16:44
+* 项目名称：morning Maven Webapp   
+* 类名称：SystemUserLoginLogService   
+* 类描述： 后台管理员登录日志业务逻辑层接口  
+* 创建人：陈星星   
+* 创建时间：2016年11月6日 下午11:05:06   
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午11:05:06   
+* @version
  */
 public interface SystemUserLoginLogService {
 	
@@ -18,7 +23,7 @@ public interface SystemUserLoginLogService {
 	 * @param systemUserLoginLog
 	 * @return
 	 */
-	public int createLoginLog(SystemUserLoginLog systemUserLoginLog);
+	public void createLoginLog(SystemUserLoginLog systemUserLoginLog);
 	
 	/**
 	 * 查询管理员登录日志，通过ID 

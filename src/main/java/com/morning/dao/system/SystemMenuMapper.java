@@ -7,10 +7,9 @@ import com.morning.entity.system.SystemMenu;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：SystemMenuMapper   
-* 类描述：系统权限实体类   
+* 类描述：系统权限数据访问层接口
 * 创建人：陈星星   
 * 创建时间：2016年10月23日 下午9:17:37   
 * 修改人：陈星星   

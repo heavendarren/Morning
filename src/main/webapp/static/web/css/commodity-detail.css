@@ -395,11 +395,12 @@ label{display:inline;max-width:100%;margin-bottom:5px;font-weight:700}
 #content-info #content-info-right .tb-amount-widget input{
 	float:left;
 	width:45px;
-	height:32px;
 	display:block;
 	line-height:32px;
 	text-align:center;
 	border:solid 1px #a7a6ab;
+	background-color: #ffffff;
+	
 }
 #content-info #content-info-right .tb-amount-btn{
 	float:left;

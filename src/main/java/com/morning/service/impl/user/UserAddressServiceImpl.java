@@ -11,9 +11,14 @@ import com.morning.service.user.UserAddressService;
 
 /**
  * 
- * @description：前台用户收货地址业务逻辑层
- * @author CXX
- * @version 创建时间：2016年8月28日  下午11:57:51
+* 项目名称：morning Maven Webapp   
+* 类名称：UserAddressServiceImpl   
+* 类描述：前台用户收货地址业务逻辑层实现   
+* 创建人：陈星星   
+* 创建时间：2016年8月28日  下午11:57:51
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午11:02:00   
+* @version
  */
 @Service("userAddressService")
 public class UserAddressServiceImpl implements UserAddressService {
@@ -45,8 +50,4 @@ public class UserAddressServiceImpl implements UserAddressService {
 	public void updateAddress(UserAddress userAddress) {
 		userAddressMapper.updateAddress(userAddress);
 	}
-
-
-	
-
 }

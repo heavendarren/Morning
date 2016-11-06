@@ -8,7 +8,8 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSON;
 import com.morning.common.util.SingletonLoginUtils;
 import com.morning.controller.BaseController;
 import com.morning.entity.PageInfo;
@@ -33,14 +33,22 @@ import com.morning.service.user.UserAddressService;
 
 /**
  * 
- * @description：前台用户订单Controller
- * @author CXX
- * @version 创建时间：2016年8月19日  下午11:39:57
+*    
+* 项目名称：morning Maven Webapp   
+* 类名称：OrderController   
+* 类描述：前台订单表示层   
+* 创建人：陈星星   
+* 创建时间：2016年8月19日  下午11:39:57  
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:27:24   
+* 修改备注：   
+* @version    
+*
  */
 @Controller
 public class OrderController extends BaseController {
 	
-	private static final Logger logger=Logger.getLogger(OrderController.class);
+	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 	
 	@Autowired
 	private UserAddressService userAddressService;
@@ -82,7 +90,7 @@ public class OrderController extends BaseController {
 		} catch (Exception e) {
 			logger.error("OrderController.shoppingCart", e);
 		}
-		return modelAndView;//页面
+		return modelAndView;
 	}
     
     
@@ -91,39 +99,53 @@ public class OrderController extends BaseController {
 	 * @return
 	 */
     @RequestMapping(value="/cart")
-    public ModelAndView getCartPage(){
-    	ModelAndView modelAndView = new ModelAndView(cartpage);
-    	return modelAndView;
+    public String getCartPage(){
+    	return cartpage;
     }
     
-//    /**
-//     * 操作：修改购物车
-//     * @param order
-//     * @param count
-//     * @param session
-//     */
-//	@SuppressWarnings("unchecked")
-//	@RequestMapping(value="/cart/update")
-//	public void cartUpdate(Integer order,Integer count,HttpSession session){
-//		Login login =(Login) session.getAttribute("login");
-//		LinkedList<Object> car=login.getCar();
-//		OrderMessageForm orderMessageForm=(OrderMessageForm) car.get(Integer.valueOf(order));
-//		orderMessageForm.setOrderNumber(Integer.valueOf(count));
-//	}
+	@RequestMapping(value="/cart/update")
+	@ResponseBody
+	public Map<String, Object> cartUpdate(Integer cartId, Integer count, HttpServletRequest request) {
+		//获取购物车信息
+		Map<String, Object> json = new HashMap<String, Object>();
+		ShoppingCart shoppingCart = SingletonLoginUtils.getShoppingCart(request);
+		List<OrderMessage> cartMessageList =shoppingCart.getCartMessageList();
+		for(int i=0;i<cartMessageList.size();i++){
+			if(cartId.equals(cartMessageList.get(i).getCartId())){
+				if(count>cartMessageList.get(i).getGoods().getGoodsSaveInfo()){
+					json = this.setJson(false,"对不起,商品库存不足,请您修改数量!");
+				}else{
+					cartMessageList.get(i).setOrderNumber(count);
+					//更新购物车信息
+					orderService.updateShoppingCart(shoppingCart,cartMessageList);
+				}
+			}else{
+				json = this.setJson(false, "该商品不存在,请刷新后重试!");
+			}
+		}
+		return json;
+	}
 	
-//	/**
-//	 * 操作：删除购物车商品
-//	 * @param order
-//	 * @param session
-//	 */
-//    @SuppressWarnings("unchecked")
-//	@RequestMapping(value = "/cart/delete")
-//	public void cartDelate(Integer order,HttpSession session){
-//    	Login login =(Login) session.getAttribute("login");
-//		LinkedList<Object> car=login.getCar();
-//		int i=Integer.valueOf(order);
-//		car.remove(i);
-//	}
+	/**
+	 * 操作：删除购物车商品
+	 * @param order
+	 * @param session
+	 */
+	@RequestMapping(value = "/cart/delete")
+	public Map<String, Object> cartDelate(Integer cartId, HttpServletRequest request){
+		//获取购物车信息
+		Map<String, Object> json = new HashMap<String, Object>();
+		ShoppingCart shoppingCart = SingletonLoginUtils.getShoppingCart(request);
+		List<OrderMessage> cartMessageList =shoppingCart.getCartMessageList();
+		for(int i=0;i<cartMessageList.size();i++){
+			if(cartId.equals(cartMessageList.get(i).getCartId())){
+				cartMessageList.remove(i);
+			}else{
+				json = this.setJson(false, "该商品不存在,请刷新后重试!");
+			}
+		}
+		return json;
+	}
     
     /**
      * 跳转填写订单信息页面
@@ -148,7 +170,6 @@ public class OrderController extends BaseController {
     public Map<String, Object> creatOrder(HttpServletRequest request, @ModelAttribute("order") Order order){
     	Map<String, Object> json = new HashMap<String, Object>();
     	try{
-    		logger.info(JSON.toJSON(order));
     		//获取购物车信息
     		ShoppingCart shoppingCart = SingletonLoginUtils.getShoppingCart(request);
     		List<OrderMessage> orderMessageList =shoppingCart.getCartMessageList();

@@ -4,6 +4,20 @@ import java.util.List;
 
 import com.morning.entity.goods.GoodsClassify;
 
+/**
+ * 
+*    
+* 项目名称：morning Maven Webapp   
+* 类名称：GoodsClassifyMapper   
+* 类描述：商品类目数据访问层接口   
+* 创建人：陈星星   
+* 创建时间：2016年11月6日 下午10:31:06   
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:31:06   
+* 修改备注：   
+* @version    
+*
+ */
 public interface GoodsClassifyMapper {
 	
 	/**

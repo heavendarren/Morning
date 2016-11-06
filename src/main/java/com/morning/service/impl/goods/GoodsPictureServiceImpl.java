@@ -11,9 +11,14 @@ import com.morning.service.goods.GoodsPictureService;
 
 /**
  * 
- * @description：商品图片业务层实现
- * @author CXX
- * @version 创建时间：2016年8月26日  下午2:13:23
+* 项目名称：morning Maven Webapp   
+* 类名称：GoodsPictureServiceImpl   
+* 类描述：商品图片业务逻辑层实现   
+* 创建人：陈星星   
+* 创建时间：2016年8月26日  下午2:13:23
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:59:17   
+* @version
  */
 @Service("goodsPictureService")
 public class GoodsPictureServiceImpl implements GoodsPictureService {

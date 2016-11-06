@@ -37,6 +37,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	private SystemMenuService systemMenuService;
 	@Autowired
 	private SystemUserLoginLogService systemUserLoginLogService;
+
 	
 	/**
 	 * 认证回调函数, 登录时调用
@@ -48,13 +49,16 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			AuthenticationToken authenticationToken) throws AuthenticationException {
 		//获取基于用户名和密码的令牌：实际上这个authcToken是从LoginController里面currentUser.login(token)传过来的  
 		UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-		
 		SystemUser systemUser = systemUserService.querySysUserByUserName(token.getUsername());
 		if (systemUser != null) {
 			// 校验用户状态
 			if (GlobalConstants.NO.equals(systemUser.getStatus().toString())){
 				throw new DisabledAccountException();
 			}
+			//修改用户登录记录
+			systemUserService.updateUserLoginLog(systemUser.getAccountId(), new Date(), ServletUtils.getIpAddr(ServletUtils.getRequest()));
+			// 记录登录日志
+			systemUserLoginLogService.saveLoginLog(systemUser);
 			// 认证缓存信息
 			SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(systemUser, systemUser.getLoginPassword(), getName());
 			return simpleAuthenticationInfo;
@@ -71,7 +75,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-
 		SystemUser systemUser = (SystemUser) principalCollection.getPrimaryPrincipal();
 		
 		if(systemUser != null){
@@ -98,13 +101,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 					simpleAuthorizationInfo.addStringPermission(systemMenu.getPermission());
 				}
 			}
-			
-    		//修改用户登录记录
-    		systemUserService.updateUserLoginLog(systemUser.getAccountId(), new Date(), ServletUtils.getIpAddr(ServletUtils.getRequest()));
-    		
-    		// 记录登录日志
-    		systemUserLoginLogService.saveLoginLog(systemUser);
-	        return simpleAuthorizationInfo;  
+    		return simpleAuthorizationInfo;  
 		}
 		return null;
 	}

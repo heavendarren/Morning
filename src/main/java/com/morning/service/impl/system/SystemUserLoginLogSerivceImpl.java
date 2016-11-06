@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.morning.common.util.ServletUtils;
@@ -18,9 +20,14 @@ import eu.bitwalker.useragentutils.UserAgent;
 
 /**
  * 
- * @description：后台管理员登陆日志业务层实现
- * @author CXX
- * @version 创建时间：2016年9月14日  下午3:20:26
+* 项目名称：morning Maven Webapp   
+* 类名称：SystemUserLoginLogSerivceImpl   
+* 类描述：后台管理员登陆日志业务逻辑层实现   
+* 创建人：陈星星   
+* 创建时间：2016年9月14日  下午3:20:26
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午11:01:20   
+* @version
  */
 @Service("systemUserLoginLogSerivce")
 public class SystemUserLoginLogSerivceImpl implements SystemUserLoginLogService {
@@ -29,16 +36,18 @@ public class SystemUserLoginLogSerivceImpl implements SystemUserLoginLogService 
 	private SystemUserLoginLogMapper systemUserLoginLogMapper;
 	
 	@Override
-	public int createLoginLog(SystemUserLoginLog systemUserLoginLog) {
-		return systemUserLoginLogMapper.createLoginLog(systemUserLoginLog);
+	public void createLoginLog(SystemUserLoginLog systemUserLoginLog) {
+		systemUserLoginLogMapper.createLoginLog(systemUserLoginLog);
 	}
 
 	@Override
+	@Cacheable(value="userCache",key="'sysUserLog'+#accountId")
 	public List<SystemUserLoginLog> querySysUserLoginLog(Integer accountId) {
 		return systemUserLoginLogMapper.querySysUserLoginLog(accountId);
 	}
 	
 	@Override
+	@CacheEvict(value="userCache",key="'sysUserLog'+#systemUser.accountId")
 	public void saveLoginLog(SystemUser systemUser){
 		//添加登录记录
 		UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));

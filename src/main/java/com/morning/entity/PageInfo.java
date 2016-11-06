@@ -1,11 +1,15 @@
 package com.morning.entity;
 
-
 /**
  * 
- * @description：分页对应实体类
- * @author CXX
- * @version 创建时间：2016年6月4日  上午1:11:45
+* 项目名称：morning Maven Webapp   
+* 类名称：PageInfo   
+* 类描述：分页对应实体类   
+* 创建人：陈星星   
+* 创建时间：2016年6月4日  上午1:11:45
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:40:41   
+* @version
  */
 public class PageInfo {
 	

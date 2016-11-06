@@ -1,7 +1,5 @@
 package com.morning.service.email;
 
-import java.util.Map;
-
 import javax.mail.MessagingException;
 import javax.xml.rpc.ServiceException;
 
@@ -11,9 +9,14 @@ import com.morning.entity.email.UserEmailMsg;
 
 /**
  * 
- * @description：邮箱发送业务层接口
- * @author CXX
- * @version 创建时间：2016年9月4日  上午1:47:28
+* 项目名称：morning Maven Webapp   
+* 类名称：MailService   
+* 类描述：邮箱发送业务逻辑层接口   
+* 创建人：陈星星   
+* 创建时间：2016年9月4日  上午1:47:28 
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:54:01   
+* @version
  */
 public interface MailService {
 	
@@ -22,25 +25,7 @@ public interface MailService {
 	 * @param email
 	 * 
 	 */
-	public abstract void sendMail(UserEmailMsg userEmailMsg) throws Exception;
-
-	/**
-	 * 异步发送
-	 */
-	public abstract void sendMailByAsynchronousMode(final UserEmailMsg userEmailMsg) throws Exception;
-
-	/**
-	 * 同步发送
-	 */
-	public abstract void sendMailBySynchronizationMode(UserEmailMsg userEmailMsg) throws Exception;
-	
-	/**
-	 * 接受人地址
-	 * @param userEmailMsg
-	 * @param helper
-	 * @throws Exception
-	 */
-	public abstract void setToEmails(UserEmailMsg userEmailMsg,MimeMessageHelper helper) throws Exception;
+	public void sendMail(UserEmailMsg userEmailMsg);
 	
 	/**
 	 * 加入图片文件
@@ -59,14 +44,7 @@ public interface MailService {
 	 * @throws Exception
 	 */
 	public void setAddAttachment(UserEmailMsg userEmailMsg,MimeMessageHelper helper) throws MessagingException, Exception;
-	
-	/**
-	 * 验证邮箱格式 去重
-	 * @param emailStr
-	 * @return
-	 */
-	public Map<String, Object> checkEmail(String emailStr);
-	
+
 	/**
 	 * 以velocity为模板发送邮件
 	 * @param userEmailMsg

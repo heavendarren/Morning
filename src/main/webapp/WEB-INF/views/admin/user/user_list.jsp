@@ -78,7 +78,7 @@
                         <div class="example-wrap">
                             <div class="example">
                                 <div id="toolbar" class="btn-group m-t-sm">
-                                    <button type="button" class="btn btn-default" onclick="member_show('创建用户','${ctx}/system/user//list/add',null,null,'900',null)">
+                                    <button type="button" class="btn btn-default" onclick="member_show('创建用户','${ctx}/system/user//list/add',null,'900',null)">
                                         <i class="glyphicon glyphicon-plus"></i>
                                     </button>
                                     <button type="button" class="btn btn-default">

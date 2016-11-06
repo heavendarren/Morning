@@ -10,9 +10,14 @@ import com.morning.entity.order.OrderMessage;
 
 /**
  * 
- * @description：购物车实体类
- * @author CXX
- * @version 创建时间：2016年8月29日  下午2:42:24
+* 项目名称：morning Maven Webapp   
+* 类名称：ShoppingCart   
+* 类描述：购物车实体类   
+* 创建人：陈星星   
+* 创建时间：2016年11月6日 下午10:41:15   
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:41:15   
+* @version
  */
 @Data
 public class ShoppingCart implements Serializable {

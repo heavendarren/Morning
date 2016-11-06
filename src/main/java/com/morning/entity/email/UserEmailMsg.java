@@ -9,9 +9,14 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 
- * @description：用户邮件信息
- * @author CXX
- * @version 创建时间：2016年8月4日  上午11:04:06
+* 项目名称：morning Maven Webapp   
+* 类名称：UserEmailMsg   
+* 类描述：用户邮件信息实体类   
+* 创建人：陈星星   
+* 创建时间：2016年8月4日  上午11:04:06 
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:41:32   
+* @version
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
@@ -43,25 +48,6 @@ public class UserEmailMsg implements Serializable {
     private Date sendTime;//发送时间
     private int status;//1 已发送 2 未发送
     private int type;//1 正常 2 定时
-    
-    private String[] attachFileNames;//附件
-    private String toAddresses;//接收人地址,可以为很多个，每个地址之间用";"分隔，比方说450065208@qq.com;lpf@sina.com
-    private String fromAddress;//发送人地址1个
-    
-    /**
-     * 解析邮件地址
-     * @return
-     */
-	public String[] getAddressArray() {
-		if (this.toEmails == null || this.toEmails.trim().length()==0) {
-			return null;
-		}
-		toEmails = toEmails.trim();
-		toEmails = toEmails.replaceAll("；", ";");
-		toEmails = toEmails.replaceAll(",", ";");
-		toEmails = toEmails.replaceAll("，", ";");
-		toEmails = toEmails.replaceAll("\r\n", "");// 去除空格回车
-		toEmails = toEmails.replaceAll(" ", "");// 去除空格回车
-		return toEmails.split(";");
-	}
+    private String fromName;//发件人昵称
+
 }

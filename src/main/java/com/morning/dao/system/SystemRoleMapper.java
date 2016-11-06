@@ -9,7 +9,7 @@ import com.morning.entity.system.SystemRole;
 *    
 * 项目名称：morning Maven Webapp   
 * 类名称：SystemRoleMapper   
-* 类描述：系统角色持久层接口   
+* 类描述：系统角色数据访问层接口
 * 创建人：陈星星   
 * 创建时间：2016年10月23日 下午9:00:27   
 * 修改人：陈星星   

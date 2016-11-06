@@ -26,14 +26,21 @@ import com.morning.common.util.MD5Utils;
 import com.morning.common.util.RSAUtils;
 import com.morning.controller.BaseController;
 import com.morning.entity.system.SystemUser;
-import com.morning.service.system.SystemUserLoginLogService;
 import com.morning.service.system.SystemUserService;
 
 /**
  * 
- * @description：后台管理员登录Controller
- * @author CXX
- * @version 创建时间：2016年9月14日  上午12:16:42
+*    
+* 项目名称：morning Maven Webapp   
+* 类名称：LoginController   
+* 类描述：后台管理员登录表示层   
+* 创建人：陈星星   
+* 创建时间：2016年9月14日  上午12:16:42  
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:26:35   
+* 修改备注：   
+* @version    
+*
  */
 @Controller
 @RequestMapping("/system")
@@ -44,8 +51,7 @@ public class LoginController extends BaseController{
 	
 	@Autowired
 	private SystemUserService systemUserService;
-	@Autowired
-	private SystemUserLoginLogService systemUserLoginLogSerivce;
+
 	
 	@InitBinder({ "systemUser" })
 	public void initBinderSystemUser(WebDataBinder binder) {

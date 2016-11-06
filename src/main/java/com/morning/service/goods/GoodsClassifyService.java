@@ -6,9 +6,14 @@ import com.morning.entity.goods.GoodsClassify;
 
 /**
  * 
- * @description：商品类目业务层接口
- * @author CXX
- * @version 创建时间：2016年8月26日  下午2:11:58
+* 项目名称：morning Maven Webapp   
+* 类名称：GoodsClassifyService   
+* 类描述：商品类目业务逻辑层接口   
+* 创建人：陈星星   
+* 创建时间：2016年8月26日  下午2:11:58
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:55:02   
+* @version
  */
 public interface GoodsClassifyService {
 	

@@ -7,9 +7,14 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 
- * @description：商品图片实体类
- * @author CXX
- * @version 创建时间：2016年8月26日  下午1:56:43
+* 项目名称：morning Maven Webapp   
+* 类名称：GoodsPicture   
+* 类描述：商品图片实体类  
+* 创建人：陈星星   
+* 创建时间：2016年8月26日  下午1:56:43
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:42:43   
+* @version
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

@@ -7,17 +7,15 @@ import com.morning.entity.statistics.StatisticsDay;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：StatisticsDayService   
-* 类描述：    网站统计业务逻辑层接口
+* 类描述：网站统计业务逻辑层接口
 * 创建人：陈星星   
 * 创建时间：2016年10月2日 上午3:55:03   
 * 修改人：陈星星   
 * 修改时间：2016年10月2日 上午3:55:03   
 * 修改备注：   
 * @version    
-*
  */
 public interface StatisticsDayService {
 	

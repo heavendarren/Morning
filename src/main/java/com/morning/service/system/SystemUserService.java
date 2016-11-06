@@ -8,9 +8,14 @@ import com.morning.entity.user.QueryUser;
 
 /**
  * 
- * @description：后台管理员业务层接口
- * @author CXX
- * @version 创建时间：2016年9月14日  下午3:04:34
+* 项目名称：morning Maven Webapp   
+* 类名称：SystemUserService   
+* 类描述：后台管理员业务逻辑层接口   
+* 创建人：陈星星   
+* 创建时间：2016年9月14日  下午3:04:34
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午11:05:37   
+* @version
  */
 public interface SystemUserService {
 	

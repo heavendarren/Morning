@@ -8,7 +8,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -41,19 +44,24 @@ import eu.bitwalker.useragentutils.UserAgent;
 
 /**
  * 
- * @description：前台学员  Controller
- * @author CXX
- * @version 创建时间：2016年7月16日  下午4:14:20
+*    
+* 项目名称：morning Maven Webapp   
+* 类名称：UserController   
+* 类描述：前台用户表示层   
+* 创建人：陈星星   
+* 创建时间：2016年11月6日 下午10:30:03   
+* 修改人：陈星星   
+* 修改时间：2016年11月6日 下午10:30:03   
+* 修改备注：   
+* @version    
+*
  */
-//让控制器成为一个bean，声明controller，这个控制器是接受页面传过来的参数去操作数据库
 @Controller
-//根URL下 user都会被controller（类级别的RequestMapping）
 @RequestMapping("/user")
 public class UserController extends BaseController {
 	
-	private static final Logger logger = Logger.getLogger(UserController.class);
+	private static Logger logger = LogManager.getLogger(UserController.class.getName()); 
 	
-	//@Resource默认按照ByName自动注入，由J2EE提供，需要导入包javax.annotation.Resource。
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -323,11 +331,12 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "/userExit")
 	@ResponseBody
-	public Map<String,Object> userExit(HttpServletRequest request){
+	public Map<String,Object> userExit(){
 		Map<String,Object> json = new HashMap<String,Object>();
 		try{
-			request.getSession().invalidate();
-			json = this.setJson(true, null, null);
+			Subject subject = SecurityUtils.getSubject();
+			subject.logout();
+			json = this.setJson(true);
 		}catch(Exception e){
 			logger.error("UserController.userExit", e );
 		}

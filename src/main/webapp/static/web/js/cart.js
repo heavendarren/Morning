@@ -103,8 +103,8 @@ window.onload = function () {
             var el = e.target || e.srcElement; //通过事件对象的target属性获取触发元素
             var cls = el.className; //触发元素的class
             var countInout = this.getElementsByTagName('input')[1]; // 数目input
-            var hidden=this.getElementsByTagName('input')[2]; 
             var value = parseInt(countInout.value); //数目
+            var cartId = $(this).find(".count-input").attr("data-cartId"); //数目
             //通过判断触发元素的class确定用户点击了哪个元素
             switch (cls) {
                 case 'add': //点击了加号
@@ -112,8 +112,8 @@ window.onload = function () {
                     getSubtotal(this);
                     $.ajax({ 
 							type:'post', 
-							url:'cart/update', 
-							data:{"order":hidden.value,"count":countInout.value}
+							url:baselocation+'/cart/update', 
+							data:{"cartId":cartId,"count":countInout.value}
 					}); 
                     break;
                 case 'reduce': //点击了减号
@@ -122,8 +122,8 @@ window.onload = function () {
                         getSubtotal(this);
                         $.ajax({ 
 							type:'post', 
-							url:'cart/update', 
-							data:{"order":hidden.value,"count":countInout.value}
+							url:baselocation+'/cart/update', 
+							data:{"cartId":cartId,"count":countInout.value}
 						}); 
                     }
                     break;
@@ -139,8 +139,8 @@ window.onload = function () {
 					}, function(){ 
 					    $.ajax({ 
 							type:'post', 
-							url:'cart/delete', 
-							data:{"order":hidden.value}
+							url:baselocation+'/cart/delete', 
+							data:{"cartId":cartId}
 						}); 
 						swal({
 							title: "删除成功!",
