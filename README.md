@@ -62,13 +62,37 @@ Morning系統目前包括以下四大模块，系统管理模块、电子商城�
 * 数据图表：echarts
 * 表单美化插件：iCheck
 
-4、平台
+3、开发环境
 
 * 服务器中间件：在Java EE 5规范（Servlet 2.5、JSP 2.1）下开发，支持应用服务器中间件
 有Tomcat 6+、Jboss 7+、WebLogic 10+、WebSphere 8+。
 * 数据库支持：目前仅提供MySql和Oracle数据库的支持，但不限于数据库，平台留有其它数据库支持接口，
 你可以很方便的更改为其它数据库，如：SqlServer 2008、MySql 5.5、H2等
 * 开发环境：Java、Eclipse Java EE 4.3、Maven 3.1、Git
+> 运行项目配置说明
+
+```
+1、根据 /SpringWind/src/main/resources/properties/jdbc.properties 配置数据库
+
+2、导入数据库 /SpringWind/src/test/resources/springwind.sql
+
+3、导入Quartz 相关表 /SpringWind/src/test/resources/quartz_mysql_innodb.sql
+
+4、操作系统 host 添加一行设置 127.0.0.1 demo.baomidou.com
+    hosts文件存放目录：C:\Windows\System32\drivers\etc
+    修改前请查看hosts文件属性是否为只读，如果只读右键单击文件，单击属性菜单，弹出属性对话框，修改去掉只读属性。
+
+5、配置 无项目名称的 访问：http://demo.baomidou.com:8080 登录账户默认：  admin 管理员，密码 123 ，普通会员 test 密码  123
+
+6、必须配置 hosts 重启浏览器，**未配置无项目名称**访问 404 ！！
+
+ /SpringWind/src/main/resources/properties/sso.properties 配置修改为：
+
+sso.login.url=http://demo.baomidou.com:8080/SpringWind/account/login.html 
+
+访问：http://demo.baomidou.com:8080/SpringWind/account/login.html
+
+```
 
 ## 安全考虑
 
