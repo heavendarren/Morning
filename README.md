@@ -7,7 +7,7 @@
 系统分为前台和后台,前台主要功能包括注册和登录、商品浏览、个人信息管理、购物车、我的订单、网上支付、评价、提问、公益活动、公益论坛、商城论坛等系统，后台主要功能包括管理成员信息管理、用户信息管理、商品管理、公益活动管理、商品分类管理、订单管理、公告资讯管理、论坛平台管理、商品提上管理、商品评价管理等。 
 
 Morning是在Spring Framework基础上搭建的一个Java基础开发平台，以Spring MVC为模型视图控制器，MyBatis为数据访问层，
-Apache Shiro为权限授权层，Ehcahe对常用数据进行缓存，
+Apache Shiro为权限授权层，Ehcahe对常用数据进行缓存，SLF4J 1+Log4j2为日志管理。
 
 JeeSite目前包括以下四大模块，系统管理（SYS）模块、
 内容管理（CMS）模块、在线办公（OA）模块、代码生成（GEN）模块。 **系统管理模块** ，包括企业组织架构（用户管理、机构管理、区域管理）、
@@ -50,10 +50,10 @@ JeeSite目前包括以下四大模块，系统管理（SYS）模块、
 * 任务调度：Spring + Quartz 2.2.3
 * 持久层框架：MyBatis 3.4.1
 * 数据库连接池：Alibaba Druid 1.0
-* 缓存框架：Ehcache 2.6、Redis
-* 日志管理：SLF4J 1.7、Log4j2
+* 缓存框架：Ehcache 2.6
+* 日志管理：SLF4J 1.7、Log4j2 2.7
+* 布局框架：SiteMesh 3.0.1 
 * 工具类：Apache Commons、Jackson 2.2、Xstream 1.4、Dozer 5.3、POI 3.9
-
 
 
 2、前端
