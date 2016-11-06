@@ -62,38 +62,6 @@ Morning系統目前包括以下四大模块，系统管理模块、电子商城�
 * 数据图表：echarts
 * 表单美化插件：iCheck
 
-3、开发环境
-
-* 服务器中间件：在Java EE 5规范（Servlet 2.5、JSP 2.1）下开发，支持应用服务器中间件
-有Tomcat 6+、Jboss 7+、WebLogic 10+、WebSphere 8+。
-* 数据库支持：目前仅提供MySql和Oracle数据库的支持，但不限于数据库，平台留有其它数据库支持接口，
-你可以很方便的更改为其它数据库，如：SqlServer 2008、MySql 5.5、H2等
-* 开发环境：Java、Eclipse Java EE 4.3、Maven 3.1、Git
-> 运行项目配置说明
-
-```
-1、根据 /SpringWind/src/main/resources/properties/jdbc.properties 配置数据库
-
-2、导入数据库 /SpringWind/src/test/resources/springwind.sql
-
-3、导入Quartz 相关表 /SpringWind/src/test/resources/quartz_mysql_innodb.sql
-
-4、操作系统 host 添加一行设置 127.0.0.1 demo.baomidou.com
-    hosts文件存放目录：C:\Windows\System32\drivers\etc
-    修改前请查看hosts文件属性是否为只读，如果只读右键单击文件，单击属性菜单，弹出属性对话框，修改去掉只读属性。
-
-5、配置 无项目名称的 访问：http://demo.baomidou.com:8080 登录账户默认：  admin 管理员，密码 123 ，普通会员 test 密码  123
-
-6、必须配置 hosts 重启浏览器，**未配置无项目名称**访问 404 ！！
-
- /SpringWind/src/main/resources/properties/sso.properties 配置修改为：
-
-sso.login.url=http://demo.baomidou.com:8080/SpringWind/account/login.html 
-
-访问：http://demo.baomidou.com:8080/SpringWind/account/login.html
-
-```
-
 ## 安全考虑
 
 1. 开发语言：系统采用Java 语言开发，具有卓越的通用性、高效性、平台移植性和安全性。
@@ -109,12 +77,19 @@ sso.login.url=http://demo.baomidou.com:8080/SpringWind/account/login.html
 
 ## 快速体验
 
-1. 具备运行环境：JDK1.6+、Maven3.0+、MySql5+或Oracle10g+。
-2. 修改src\main\resources\jeesite.properties文件中的数据库设置参数。
-3. 根据修改参数创建对应MySql或Oracle数据库用户和参数。
-4. 运行bin\init-db.bat脚本，即可导入表结构及演示数据(linux操作系统：在控制台中切换至项目根目录，运行命令：mvn antrun:run -Pinit-db)
-5. 运行bin\run-tomcat7.bat或bin\run-jetty.bat，启动Web服务器（第一次运行，需要下载依赖jar包，请耐心等待）。
-6. 最高管理员账号，用户名：thinkgem 密码：admin
+```
+1、具备运行环境：JDK1.6+、Maven3.0+、MySql5+
+
+2、根据 src\main\resources\properties\jdbc.properties 配置数据库
+
+3、导入数据库 doc\database\db_morning.sql
+
+4、根据 doc\lombok\lombok安装.txt 提示安装lombok插件
+
+5、前台用户账号，账号：morning  密码：morning    测试地址：http://localhost:8080/morning/index
+   后台管理元账号，账号：admdin 密码：admin      测试地址：http://localhost:8080/morning/system
+
+```
 
 ## 常见问题
 
