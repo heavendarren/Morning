@@ -57,18 +57,13 @@ JeeSite目前包括以下四大模块，系统管理（SYS）模块、
 
 2、前端
 
-* JS框架：jQuery 1.9。
-* CSS框架：Twitter Bootstrap 2.3.1（稳定是后台，UI方面根据需求自己升级改造吧）。
-* 客户端验证：JQuery Validation Plugin 1.11。
-* 富文本在线编辑：CKEditor
-* 在线文件管理：CKFinder
-* 动态页签：Jerichotab
-* 手机端框架：Jingle
-* 数据表格：jqGrid
-* 对话框：jQuery jBox
-* 下拉选择框：jQuery Select2
-* 树结构控件：jQuery zTree
-* 日期控件： My97DatePicker
+* JS框架：jquery-2.2.3
+* 表格插件：Bootstrap Table
+* 表单验证插件：bootstrapValidator
+* 日期选择插件：Datepicker for Bootstrap
+* 弹层组件：layer2.4
+* 数据图表：echarts
+* 表单美化插件：iCheck
 
 4、平台
 
