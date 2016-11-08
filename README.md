@@ -92,13 +92,19 @@ Morning系統目前包括以下四大模块，系统管理模块、电子商城�
 
 2.QQ：810170512  Email：<chenxingxing1994@foxmail.com>  欢迎各位大佬的指导。
 
+3.虚心接受指导，杜绝肆意谩骂。
+
+
 
 ## 特别鸣谢
 
-1.因酷 / inxedu[输入链接说明](https://git.oschina.net/inxeduopen/inxedu)
+1.[因酷 / inxedu](https://git.oschina.net/inxeduopen/inxedu)   因酷在线教育平台
 
-2.QQ：810170512  Email：<chenxingxing1994@foxmail.com>  欢迎各位大佬的指导。
+2.[ThinkGem 王震/JeeSite](https://git.oschina.net/thinkgem/jeesite)   JeeSite 企业信息化快速开发平台
 
+3.[青苗 / SpringWind](https://git.oschina.net/juapk/SpringWind)   spring-wind
+
+4.[轩少 / spring-shiro-training](https://git.oschina.net/wangzhixuan/spring-shiro-training)   spring-shiro-training
 
 ## 演示界面
 
