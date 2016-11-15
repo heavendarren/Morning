@@ -11,21 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.morning.common.util.DateUtil;
 import com.morning.common.util.NumberUtil;
+import com.morning.common.util.toolbox.DateUtil;
 import com.morning.controller.BaseController;
 import com.morning.entity.system.SystemMenu;
 import com.morning.service.order.OrderService;
 import com.morning.service.statistics.StatisticsDayService;
-import com.morning.service.system.SystemMenuService;
+import com.morning.service.system.ISystemMenuService;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：MainController   
 * 类描述：后台主页面表示层   
@@ -41,16 +41,18 @@ import com.morning.service.system.SystemMenuService;
 @RequestMapping("/system/main")
 public class MainController extends BaseController {
 
-	// 后台管理主界面
+	/** 后台管理主界面 */
 	private static final String MAIN = getViewPath("admin/main/main");
-	// 后台管理主界面初始化首页
+	/** 后台管理主界面初始化首页 */
 	private static final String MAIN_INDEX = getViewPath("admin/main/index");
+	
 	@Autowired
 	private OrderService orderService;
 	@Autowired
 	private StatisticsDayService statisticsDayService;
 	@Autowired
-	private SystemMenuService systemMenuService;
+	private ISystemMenuService systemMenuService;
+	
 	
 	/**
 	 * 进入操作中心
@@ -59,8 +61,7 @@ public class MainController extends BaseController {
 	 */
 	@RequiresPermissions("system:view")
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView main(HttpServletRequest request) {
-		ModelAndView modelAndView = new ModelAndView(MAIN);
+	public String main(Model model) {
 		Map<String, Object> mainCountMap = new HashMap<String, Object>();
 		// 未处理订单数
 		int undisposedOrder = orderService.queryOrderCountBySystem(2);
@@ -71,11 +72,10 @@ public class MainController extends BaseController {
 			mainCountMap.put("undisposedOrderTime", undisposedOrderTime);
 		}
 		// 系统目录
-		List<SystemMenu> systemMenuList = systemMenuService.querySysMenu(1, "menu");
-		List<SystemMenu> systemMenus = systemMenuService.handleMenu(systemMenuList);
-		modelAndView.addObject("systemMenus", systemMenus);
-		modelAndView.addObject("mainCountMap", mainCountMap);
-		return modelAndView;
+		List<SystemMenu> systemMenus = systemMenuService.selectSystemMenu();
+		model.addAttribute("systemMenus", systemMenus);
+		model.addAttribute("mainCountMap", mainCountMap);
+		return MAIN;
 	}
 	
 	/**

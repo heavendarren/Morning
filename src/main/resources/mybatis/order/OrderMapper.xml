@@ -17,6 +17,8 @@
     <result column="ORDER_STATE" property="orderState" jdbcType="INTEGER" />
     <result column="ADDRESS_ID" property="addressId" jdbcType="INTEGER" />
     <result column="PAY_TYPE" property="payType" jdbcType="INTEGER" />
+    <result column="PAY_STATUS" property="payStatus" jdbcType="INTEGER" />
+    <result column="PAYMENT" property="payment" jdbcType="VARCHAR" />
     <result column="SEND_TYPE" property="sendType" jdbcType="INTEGER" />
     <result column="SEND_TIME" property="sendTime" jdbcType="INTEGER" />
     <result column="INVOICEL_TYPE" property="invoicelType" jdbcType="INTEGER" />
@@ -27,7 +29,7 @@
   <!-- 查询订单及收货地址的ResultMap -->
   <resultMap type="com.morning.entity.order.Order" id="AddressResultMap" extends="BaseResultMap">
   	<!-- 配置多对一关系关联 -->
-    <association property="userAddressMessage" javaType="com.morning.entity.user.UserAddress">
+    <association property="userAddress" javaType="com.morning.entity.user.UserAddress">
 	    <id column="ADDRESS_ID" property="addressId" jdbcType="INTEGER" />
 	    <result column="ACCOUNT_ID" property="accountId" jdbcType="INTEGER" />
 	    <result column="ORDER_USER_NAME" property="orderUserName" jdbcType="VARCHAR" />
@@ -78,27 +80,56 @@
   
   <sql id="Base_Column_List" >
     ORDER_ID, ORDER_NUMBER, ACCOUNT_ID, ORDER_DATE, TOTAL_MONEY, ORDER_STATE, ADDRESS_ID, 
-    PAY_TYPE, SEND_TYPE, SEND_TIME, INVOICEL_TYPE, INVOICEL_TITLE, USER_MESSAGE
+    PAY_TYPE, PAY_STATUS, PAYMENT, SEND_TYPE, SEND_TIME, INVOICEL_TYPE, INVOICEL_TITLE, USER_MESSAGE
   </sql>
-  
-  <sql id="Base_Column_property">
-	#{orderId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{accountId,jdbcType=INTEGER}, 
-	#{orderDate,jdbcType=TIMESTAMP}, #{totalMoney,jdbcType=DOUBLE}, #{orderState,jdbcType=INTEGER}, 
-	#{addressId,jdbcType=INTEGER}, #{payType,jdbcType=INTEGER}, #{sendType,jdbcType=INTEGER}, 
-	#{sendTime,jdbcType=INTEGER}, #{invoicelType,jdbcType=INTEGER}, #{invoicelTitle,jdbcType=VARCHAR}, #{userMessage,jdbcType=VARCHAR}
-   </sql>
   
   <!-- 创建新订单-->
   <insert id="createOrder" parameterType="com.morning.entity.order.Order" useGeneratedKeys="true" keyProperty="orderId">
     insert into tb_order (ORDER_NUMBER, ACCOUNT_ID, TOTAL_MONEY, ADDRESS_ID, 
-    PAY_TYPE, SEND_TYPE, SEND_TIME, INVOICEL_TYPE, INVOICEL_TITLE, USER_MESSAGE)
+    PAY_TYPE, SEND_TYPE, SEND_TIME, INVOICEL_TYPE, INVOICEL_TITLE, USER_MESSAGE,ORDER_DATE)
     values (#{orderNumber,jdbcType=VARCHAR}, #{accountId,jdbcType=INTEGER}, 
     #{totalMoney,jdbcType=DOUBLE}, #{addressId,jdbcType=INTEGER}, 
 	#{payType,jdbcType=INTEGER}, #{sendType,jdbcType=INTEGER}, #{sendTime,jdbcType=INTEGER}, 
-	#{invoicelType,jdbcType=INTEGER}, #{invoicelTitle,jdbcType=VARCHAR}, #{userMessage,jdbcType=VARCHAR})
+	#{invoicelType,jdbcType=INTEGER}, #{invoicelTitle,jdbcType=VARCHAR}, #{userMessage,jdbcType=VARCHAR},#{orderDate,jdbcType=TIMESTAMP})
   </insert>
   
+  <!-- 支付，更新订单 -->
+  <update id="updateOrder" parameterType="com.morning.entity.order.Order">
+  	update tb_order
+    <set >
+      <if test="payStatus != null" >
+        PAY_STATUS = #{payStatus,jdbcType=INTEGER}, 
+      </if>
+      <if test="payment != null" >
+        PAYMENT = #{payment,jdbcType=VARCHAR}, 
+      </if>
+      <if test="orderState != null" >
+        ORDER_STATE = #{orderState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ORDER_ID = #{orderId,jdbcType=INTEGER}
+  </update>
   
+  <!-- 通过订单编号，查询订单 -->
+  <select id="queryOrderByNumber" resultMap="AddressResultMap" parameterType="java.util.Map">
+	select
+	a.ORDER_ID, a.ORDER_NUMBER, a.ACCOUNT_ID , a.TOTAL_MONEY, a.PAY_TYPE,  a.SEND_TIME, a.INVOICEL_TYPE,
+	b.ORDER_USER_NAME, b.ORDER_USER_TELPHONE, b.PROVINCE_NAME, b.CITY_NAME,
+	b.DISTRICT_NAME, b.ORDER_USER_ADDRESS
+	from tb_order a left join tb_account_address b on a.ADDRESS_ID=b.ADDRESS_ID
+	<where>
+      <if test="orderNumber != null and orderNumber !=''" >
+        and a.ORDER_NUMBER = #{orderNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="accountId != null and accountId !=''" >
+        and a.ACCOUNT_ID = #{accountId,jdbcType=INTEGER}
+      </if>   
+      <if test="orderState != null and orderState !=''" >
+        and a.ORDER_STATE = #{orderState,jdbcType=INTEGER}
+      </if>  
+ 	</where> 
+  </select>
+
   <!-- 查询订单数量 -->
   <select id="queryOrderCount" resultType="int" parameterType="java.util.Map">
     select count(*)
@@ -154,6 +185,7 @@
         and a.ACCOUNT_ID  = #{queryOrder.accountId,jdbcType=INTEGER}
       </if>
  	</where> 
+ 	order by ORDER_DATE DESC
  	limit #{pageInfo.dbIndex},#{pageInfo.dbNumber}
   </select>
 </mapper>

@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.morning.common.util.DateUtil;
 import com.morning.common.util.MD5Utils;
-import com.morning.common.util.WebUtil;
+import com.morning.common.util.toolbox.DateUtil;
+import com.morning.common.util.toolbox.WebUtil;
 import com.morning.controller.BaseController;
 import com.morning.entity.user.QueryUser;
 import com.morning.entity.user.User;

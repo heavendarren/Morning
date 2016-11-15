@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.morning.common.dto.AjaxResult;
+
+
 /**
  * 
 *    
@@ -27,6 +30,44 @@ public abstract class BaseController {
 	
 	
 	/** ============================     ajax    =================================================  */
+	
+	/**
+	 * 成功,返回状态
+	 * @param success 状态true/false
+	 * @return
+	 */
+	public AjaxResult success(Boolean success) {
+		return new AjaxResult(success);
+	}
+	
+	/**
+	 * 成功,返回状态
+	 * @param success 状态true/false
+	 * @return
+	 */
+	public AjaxResult success(Boolean success, String message) {
+		return new AjaxResult(success, message);
+	}
+	
+	/**
+	 * 返回json数据
+	 * @param success 状态true/false
+	 * @param data 实体
+	 * @return
+	 */
+	public AjaxResult json(Boolean success, Object data) {
+		return new AjaxResult(success, data);
+	}
+
+	/**
+	 * 失败,返回状态及原因
+	 * @param success 状态true/false
+	 * @param message 消息
+	 * @return
+	 */
+	public AjaxResult fail(Boolean success, String message) {
+		return new AjaxResult(success, message);
+	}
 	
 	/**
 	 * 转换为ajax需要的 JSON

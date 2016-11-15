@@ -15,7 +15,7 @@
         <logger name="org.springframework" level="INFO"/>
         
         <!-- 业务debug日志 -->
-        <logger name="com.smallchill" level="INFO"/>
+        <logger name="com.morning" level="DEBUG"/>
         
         <Root level="debug">
             <AppenderRef ref="Console" />

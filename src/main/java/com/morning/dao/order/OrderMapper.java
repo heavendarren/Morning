@@ -28,6 +28,19 @@ public interface OrderMapper {
 	public int createOrder(Order order);
 	
 	/**
+	 * 支付，更新订单
+	 * @param order
+	 */
+	public void updateOrder(Order order);
+	
+	/**
+	 * 通过订单编号，查询订单
+	 * @param orderNumber
+	 * @return
+	 */
+	public Order queryOrderByNumber(Map<String,Object> parameter);
+	
+	/**
 	 * 查询商品数量
 	 * @param parameter QueryGoods查询条件
 	 * @return

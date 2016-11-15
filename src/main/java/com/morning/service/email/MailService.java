@@ -1,7 +1,6 @@
 package com.morning.service.email;
 
 import javax.mail.MessagingException;
-import javax.xml.rpc.ServiceException;
 
 import org.springframework.mail.javamail.MimeMessageHelper;
 
@@ -34,7 +33,7 @@ public interface MailService {
 	 * @throws ServiceException
 	 * @throws MessagingException
 	 */
-	public void setAddInline(UserEmailMsg userEmailMsg,MimeMessageHelper helper) throws ServiceException, MessagingException;
+	public void setAddInline(UserEmailMsg userEmailMsg,MimeMessageHelper helper);
 	
 	/**
 	 * 加入附件文件
@@ -43,7 +42,7 @@ public interface MailService {
 	 * @throws MessagingException
 	 * @throws Exception
 	 */
-	public void setAddAttachment(UserEmailMsg userEmailMsg,MimeMessageHelper helper) throws MessagingException, Exception;
+	public void setAddAttachment(UserEmailMsg userEmailMsg,MimeMessageHelper helper);
 
 	/**
 	 * 以velocity为模板发送邮件

@@ -14,8 +14,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.fastjson.JSON;
-import com.morning.common.util.DateUtil;
 import com.morning.common.util.NumberUtil;
+import com.morning.common.util.toolbox.DateUtil;
 import com.morning.entity.statistics.StatisticsDay;
 import com.morning.service.statistics.StatisticsDayService;
 

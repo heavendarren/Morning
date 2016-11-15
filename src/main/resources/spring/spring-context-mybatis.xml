@@ -2,7 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+    
+    <description>mybatis Configuration</description>
                             
     <!-- 数据源配置, 使用 BoneCP 数据库连接池 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
@@ -41,17 +47,44 @@
 	    <property name="filters" value="stat" /> 
 	</bean>
       
-      <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件（mybatis-spring项目提供整合类） -->
-      <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-          <property name="dataSource" ref="dataSource" />
-          <!-- 通配符指定Mapper.xml:自动扫描mapping.xml文件 -->
-		  <property name="mapperLocations" value="classpath:/mybatis/**/*Mapper.xml" />
-      </bean>
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件（mybatis-spring项目提供整合类）
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" /> -->
+        <!-- 通配符指定Mapper.xml:自动扫描mapping.xml文件 
+  	<property name="mapperLocations" value="classpath:/mybatis/**/*Mapper.xml" />
+    </bean>-->
+      
+	<!-- MyBatis SqlSessionFactoryBean 配置 -->
+	<!-- 注意：这里使用的是MP的MybatisSqlSessionFactoryBean，而不是Mybatis的，因为MP需要进行相应代理 -->
+	<bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+	    <!-- 配置数据源 -->
+	    <property name="dataSource" ref="dataSource" />
+	    <!-- 配置Mybatis配置文件 -->
+	    <property name="configLocation" value="classpath:mybatis-config.xml" />
+	    <!-- 配置别名包路径 -->
+	    <property name="typeAliasesPackage" value="com.morning.entity" />
+	    <!-- 配置Mapper扫描路径（IDEA系列编辑器需要特别注意，因为IDEA的设置问题，src中的xml文件是不会被编译的，如果放在src中可能会报错，解决办法详见 常用问题-Invalid bound statement (not found) 错误如何解决?） -->
+	    <property name="mapperLocations" value="classpath:/mybatis/**/*Mapper.xml" />
+	    <!-- 插件配置项  -->
+	    <property name="plugins">
+	        <array>
+	            <!-- 分页插件配置 -->
+	            <bean id="paginationInterceptor" class="com.baomidou.mybatisplus.plugins.PaginationInterceptor">
+	                <property name="dialectType" value="mysql" />
+	            </bean>
+	        </array>
+	    </property>
+	    <!-- Oracle需要添加该项 -->
+	    <!-- <property name="dbType" value="oracle" /> -->
+	    <!-- 全局表为下划线命名设置 true -->
+	    <!-- <property name="dbColumnUnderline" value="true" /> -->
+	</bean>
 
-      <!-- MyBatis 动态实现；DAO接口所在包名，Spring会自动查找其下的类 -->
-      <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-      	<!-- 对Dao 接口动态实现-->
-          <property name="basePackage" value="com.morning.dao" />
-          <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
-      </bean>
+
+    <!-- MyBatis 动态实现:DAO接口所在包名，Spring会自动查找其下的类  -->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 对Dao 接口动态实现，需要知道接口在哪  -->
+         <property name="basePackage" value="com.morning.dao" />
+    </bean>
+
 </beans>

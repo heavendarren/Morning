@@ -26,6 +26,7 @@
     <mapping>
       <path>/user/*</path>
       <path>/user/**/*</path>
+      <path>/order/**/view</path>
       <decorator>/WEB-INF/layouts/web/user/default_uc.jsp</decorator>
     </mapping>
     

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.dao.order.OrderLogMapper">
+  <resultMap id="BaseResultMap" type="com.morning.entity.order.OrderLog">
+    <result column="LOG_ID" jdbcType="INTEGER" property="logId" />
+    <result column="ORDER_NUMBER" jdbcType="VARCHAR" property="orderNumber" />
+    <result column="ORDER_ID" jdbcType="INTEGER" property="orderId" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="CREATE_TYPE" jdbcType="VARCHAR" property="createType" />
+  </resultMap>
+  
+  <!-- 创建订单日志 -->
+  <insert id="createOrderLog" parameterType="com.morning.entity.order.OrderLog">
+    insert into tb_order_log (LOG_ID, ORDER_NUMBER, ORDER_ID, CREATE_BY, CREATE_TIME, CONTENT, CREATE_TYPE)
+    values (#{logId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, 
+      #{createType,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.morning.entity.order.OrderLog">
+    insert into tb_order_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        LOG_ID,
+      </if>
+      <if test="orderNumber != null">
+        ORDER_NUMBER,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="createType != null">
+        CREATE_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createType != null">
+        #{createType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

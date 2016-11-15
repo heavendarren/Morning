@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.morning.common.util.DateUtil;
+import com.morning.common.util.toolbox.DateUtil;
 import com.morning.controller.BaseController;
 import com.morning.entity.email.UserEmailMsg;
 import com.morning.service.email.UserEmailMsgService;

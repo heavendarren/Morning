@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.morning.common.util.DateUtil;
+import com.morning.common.util.toolbox.DateUtil;
 import com.morning.controller.BaseController;
 import com.morning.entity.statistics.StatisticsDay;
 import com.morning.service.statistics.StatisticsDayService;

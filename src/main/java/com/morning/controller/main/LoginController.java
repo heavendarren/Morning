@@ -1,6 +1,5 @@
 package com.morning.controller.main;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,12 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.code.kaptcha.Constants;
+import com.morning.common.dto.AjaxResult;
 import com.morning.common.util.MD5Utils;
 import com.morning.common.util.RSAUtils;
+import com.morning.common.util.ServletUtils;
+import com.morning.common.util.SingletonLoginUtils;
 import com.morning.controller.BaseController;
 import com.morning.entity.system.SystemUser;
-import com.morning.service.system.SystemUserService;
+import com.morning.service.system.ISystemUserService;
 
 /**
  * 
@@ -37,8 +38,8 @@ import com.morning.service.system.SystemUserService;
 * 创建人：陈星星   
 * 创建时间：2016年9月14日  上午12:16:42  
 * 修改人：陈星星   
-* 修改时间：2016年11月6日 下午10:26:35   
-* 修改备注：   
+* 修改时间：2016年11月14日 00:35:17   
+* 修改备注：mybatis-plus整合完毕   
 * @version    
 *
  */
@@ -46,13 +47,12 @@ import com.morning.service.system.SystemUserService;
 @RequestMapping("/system")
 public class LoginController extends BaseController{
 	
-	// 后台管理登录页面
+	/** 后台管理登录页面 */
 	private static final String ADMIN_LOGIN = getViewPath("admin/login/admin_login");
-	
-	@Autowired
-	private SystemUserService systemUserService;
 
-	
+	@Autowired
+	private ISystemUserService systemUserService;
+
 	@InitBinder({ "systemUser" })
 	public void initBinderSystemUser(WebDataBinder binder) {
 		binder.setFieldDefaultPrefix("systemUser.");
@@ -74,20 +74,14 @@ public class LoginController extends BaseController{
 	
 	/**
 	 * POST 登录
-	 * @param request
 	 * @param systemUser
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> login(HttpServletRequest request, @ModelAttribute("systemUser") SystemUser systemUser) {
-		Map<String, Object> json = new HashMap<String, Object>();
-		// 获取Session中验证码
-		Object captcha = this.getAttribute(Constants.KAPTCHA_SESSION_KEY);
-		String registerCode = request.getParameter("registerCode") == null ? "" : request.getParameter("registerCode");
-		if (captcha == null || !registerCode.equalsIgnoreCase(captcha.toString())) {
-			json = this.setJson(false, "验证码错误");
-			return json;
+	public AjaxResult login(@ModelAttribute("systemUser") SystemUser systemUser) {
+		if (!SingletonLoginUtils.validate()) {
+			return fail(false, "验证码错误");
 		}
 		// 服务器端，使用RSAUtils工具类对密文进行解密
 		String passWord = RSAUtils.decryptStringByJs(systemUser.getLoginPassword());
@@ -98,21 +92,18 @@ public class LoginController extends BaseController{
 		token.setRememberMe(true);
 		try{
 			currentUser.login(token);
+			SystemUser user = systemUserService.selectByLoginName(systemUser.getLoginName());
+			systemUserService.updateLogByLoginName(user.getAccountId(), ServletUtils.getIpAddr(), ServletUtils.getUserBrowser(), ServletUtils.getUserOperatingSystem());
 		} catch (UnknownAccountException e) {
-			json = this.setJson(false, "该账号不存在!");
-			return json;
+			return fail(false, "该账号不存在!");
 		} catch (DisabledAccountException e) {
-			json = this.setJson(false, "该账号已被冻结!");
-			return json;
+			return fail(false, "该账号已被冻结!");
 		} catch (IncorrectCredentialsException e) {
-			json = this.setJson(false, "密码错误");
-			return json;
+			return fail(false, "密码错误");
 		} catch (RuntimeException e) {
-			json = this.setJson(false, "未知错误,请联系管理员!");
-			return json;
+			return fail(false, "未知错误,请联系管理员!");
 		}
-		json = this.setJson(true);
-		return json;
+		return success(true);
 	}
 	
 	/**

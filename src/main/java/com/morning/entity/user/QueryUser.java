@@ -11,7 +11,7 @@ import lombok.Data;
 *    
 * 项目名称：morning Maven Webapp   
 * 类名称：QueryUser   
-* 类描述：查询用户   
+* 类描述：查询用户实体类   
 * 创建人：陈星星   
 * 创建时间：2016年10月17日 下午6:45:21   
 * 修改人：陈星星   

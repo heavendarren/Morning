@@ -57,11 +57,11 @@ public interface UserService {
 	public List<User> queryUserList(QueryUser queryUser);
 	
 	/**
-	 * 通过用户信息，查询用户
+	 * 通过用户信息，查询用户是否存在
 	 * @param user
 	 * @return User
 	 */
-	public User selectByUser(User user);
+	public boolean selectByUser(User user);
 	
 	/**
 	 * 检测手机是否存在 

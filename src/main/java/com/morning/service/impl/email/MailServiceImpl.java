@@ -9,7 +9,6 @@ import javax.mail.Address;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.xml.rpc.ServiceException;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
@@ -21,7 +20,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
-import com.morning.common.util.DateUtil;
+import com.morning.common.util.toolbox.DateUtil;
 import com.morning.entity.email.UserEmailMsg;
 import com.morning.service.email.MailService;
 

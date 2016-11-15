@@ -1,58 +1,49 @@
 package com.morning.service.impl.system;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.baomidou.framework.service.impl.SuperServiceImpl;
 import com.morning.dao.system.SystemRoleMapper;
+import com.morning.dao.system.SystemUserRoleMapper;
 import com.morning.entity.system.SystemRole;
-import com.morning.service.system.SystemRoleService;
+import com.morning.entity.system.SystemUserRole;
+import com.morning.service.system.ISystemRoleService;
 
 /**
  * 
 * 项目名称：morning Maven Webapp   
 * 类名称：SystemRoleServiceImpl   
-* 类描述： 系统角色业务逻辑层实现  
+* 类描述：SystemRole 表业务逻辑层接口实现类   
 * 创建人：陈星星   
-* 创建时间：2016年10月25日 上午3:29:26   
+* 创建时间：2016年11月13日 下午9:53:15   
 * 修改人：陈星星   
-* 修改时间：2016年10月25日 上午3:29:26   
-* 修改备注：   
-* @version    
-*
+* 修改时间：2016年11月13日 下午9:53:15   
+* @version
  */
-@Service("systemRoleService")
-public class SystemRoleServiceImpl implements SystemRoleService {
-	
+@Service
+public class SystemRoleServiceImpl extends SuperServiceImpl<SystemRoleMapper, SystemRole> implements ISystemRoleService {
+
 	@Autowired
 	private SystemRoleMapper systemRoleMapper;
+	@Autowired
+	private SystemUserRoleMapper systemUserRoleMapper;
 	
 	@Override
-	@Cacheable(value="userCache",key="'sysUserRole'+#accountId")
-	public List<SystemRole> queryRoleByUserId(Integer accountId) {
-		return systemRoleMapper.queryRoleByUserId(accountId);
+	public List<SystemRole> selectRoleList() {
+		return systemRoleMapper.selectAllRole();
 	}
-
+	
 	@Override
-	public List<SystemRole> queryRoleList() {
-		return systemRoleMapper.queryRoleList();
-	}
-
-	@Override
-	public int queryRoleNumber(Integer roleId) {
-		return systemRoleMapper.queryRoleNumber(roleId);
-	}
-
-	@Override
-	public List<SystemRole> queryRoles() {
-		List<SystemRole> systemRoleList =  queryRoleList();
-		List<SystemRole> systemRoles =  new ArrayList<SystemRole>();
-		for(SystemRole role : systemRoleList){
-			role.setNumber(queryRoleNumber(role.getRoleId()));
-			systemRoles.add(role);
+	public List<SystemRole> selectRoleAndNumber() {
+		List<SystemRole> systemRoles = systemRoleMapper.selectAllRole();
+		SystemUserRole systemUserRole = new SystemUserRole();
+		for(int i = 0;i<systemRoles.size();i++){
+			systemUserRole.setRoleId(systemRoles.get(i).getRoleId());
+			int number = systemUserRoleMapper.selectCount(systemUserRole);
+			systemRoles.get(i).setNumber(number);
 		}
 		return systemRoles;
 	}

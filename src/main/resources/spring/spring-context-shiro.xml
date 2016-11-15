@@ -19,7 +19,7 @@
 		<!-- <property name="sessionManager" ref="sessionManager" /> -->
 	</bean>
 
-	<!-- 项目自定义的Realm：继承自AuthorizingRealm的自定义Realm,即指定Shiro验证用户登录的类为自定义的ShiroDbRealm.java -->
+	<!-- 项目自定义的Realm：继承自AuthorizingRealm的自定义Realm,即指定Shiro验证用户登录的类为自定义的SystemAuthorizingRealm.java -->
 	<bean id="shiroDbRealm" class="com.morning.common.security.SystemAuthorizingRealm" />
 
     <!-- 记住密码Cookie -->

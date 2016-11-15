@@ -3,13 +3,12 @@
   http://maven.apache.org/maven-v4_0_0.xsd 
   http://stackoverflow.com/questions/14333709/spring-mvc-3-2-and-json-objectmapper-issue">
   
-  
   <!--父项目的坐标。如果项目中没有规定某个元素的值，那么父项目中的对应值即为项目的默认值。 坐标包括group ID，artifact ID和 version。-->  
   <modelVersion>4.0.0</modelVersion>   <!--声明项目描述符遵循哪一个POM模型版本。模型本身的版本很少改变，虽然如此，但它仍然是必不可少的，这是为了当Maven引入了新的特性或者其他模型变更的时候，确保稳定性。-->      
   <groupId>com.morning</groupId>       <!--项目的全球唯一标识符，通常使用全限定的包名区分该项目和其他项目。并且构建时生成的路径也是由此生成， 如com.mycompany.app生成的相对路径为：/com/mycompany/app-->    
   <artifactId>morning</artifactId>     <!--被继承的父项目的构件标识符-->  
   <packaging>war</packaging>           <!--项目产生的构件类型，例如jar、war、ear、pom。插件可以创建他们自己的构件类型，所以前面列的不是全部构件类型-->    
-  <version>0.0.1-SNAPSHOT</version>    <!--项目当前版本，格式为:主版本.次版本.增量版本-限定版本号-->    
+  <version>1.0.0-SNAPSHOT</version>    <!--项目当前版本，格式为:主版本.次版本.增量版本-限定版本号-->    
   <name>morning Maven Webapp</name>    <!--项目的名称, Maven产生的文档用-->    
   <url>http://maven.apache.org</url>   <!--项目主页的URL, Maven产生的文档用-->
 
@@ -18,13 +17,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><!-- 定义资源文件的编码格式 -->
 		
 		<!-- main version setting -->
+		<junit.version>4.12</junit.version>		
 		<spring.version>4.2.5.RELEASE</spring.version>
-		<sitemesh.version>3.0.1</sitemesh.version>
-		<mybatis.version>3.2.6</mybatis.version>
-		<mybatis-spring.version>1.3.0</mybatis-spring.version>
+		<mybatis.version>3.4.1</mybatis.version>
 		<mysql.driver.version>6.0.5</mysql.driver.version>
 		<druid.version>1.0.26</druid.version>
 		<shiro.version>1.3.2</shiro.version>
+		<sitemesh.version>3.0.1</sitemesh.version>
 		<ehcache.version>3.1.3</ehcache.version>
 		
 		<!-- tools version setting -->
@@ -35,16 +34,55 @@
      	<slf4j.version>1.7.21</slf4j.version>
      	<commons-io.version>2.4</commons-io.version>
 		<commons-fileupload.version>1.3.1</commons-fileupload.version>
+		<mybatis-spring.version>1.3.0</mybatis-spring.version>
+        <mybaitsplus.version>1.4.7</mybaitsplus.version>
 		
-		<junit.version>4.12</junit.version>
-		<jdk.version>1.7</jdk.version>
+		<!-- environment setting -->
+		<jdk.version>1.8</jdk.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 	</properties>
+	
+	<!-- 设定主仓库，按设定顺序进行查找。 -->
+	<repositories>
+		<repository>
+		    <id>nexus-aliyun</id>
+		    <name>Nexus aliyun</name>
+		    <layout>default</layout>
+		    <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+		    <snapshots>
+		        <enabled>false</enabled>
+		    </snapshots>
+		    <releases>
+		        <enabled>true</enabled>
+		    </releases>
+		</repository>
+	</repositories>
+	
+	<!-- 设定插件仓库 -->
+	<pluginRepositories> 
+		<pluginRepository>
+			<id>nexus-aliyun</id>
+			<name>Nexus aliyun</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+		</pluginRepository>
+	</pluginRepositories> 
+	
 
 	<!--该元素描述了项目相关的所有依赖。 这些依赖组成了项目构建过程中的一个个环节。它们自动从项目定义的仓库中下载。 -->
 	<dependencies>
-	
-		<!-- spring核心包  begin-->
+
+		<!-- 1.TEST:单元测试框架 begin -->
+		<dependency>
+			<groupId>junit</groupId>         <!--依赖的group ID -->
+			<artifactId>junit</artifactId>   <!--依赖的artifact ID -->
+			<version>${junit.version}</version> 	<!--依赖的版本号。 在Maven 2里, 也可以配置成版本号的范围。 -->
+			<scope>test</scope>			   <!-- 依赖项的适用范围：test，只在测试时使用，用于编译和运行测试代码。不会随项目发布。 -->
+		</dependency>
+		<!-- TEST end -->
+		
+		<!-- 2.SPRING相关依赖  begin-->
+		<!-- ①.spring核心依赖 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId><!-- 包含Spring框架基本的核心工具类 -->
@@ -60,17 +98,39 @@
 	        <artifactId>spring-context</artifactId><!-- spring 提供在基础 IoC 功能上的扩展服务 -->
 	        <version>${spring.version}</version>
 	    </dependency>
+	    
+	    <!-- ②.spring 持久层依赖 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId><!-- 封装了spring对于事物的控制  -->
 			<version>${spring.version}</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId><!-- 包含对Spring对JDBC数据访问进行封装的所有类  -->
 			<version>${spring.version}</version>
 		</dependency>
+		
+		<!-- ③.spring web相关依赖 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId><!-- 包含Web应用开发时，用到Spring框架时所需的核心类，包括自动载入 WebApplicationContext 特性的类、Struts与JSF集成类、文件上传的支持类、Filter类和大量工具辅助类 -->
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId><!-- Spring Web MVC是一种基于Java的实现了Web MVC设计模式的请求驱动类型的轻量级Web框架 -->
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- ④.spring test依赖-->		
+		<dependency>
+			<groupId>org.springframework</groupId><!-- 与Junit单元测试、集成测试 -->
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- ⑤.spring 其它依赖 -->
 		<dependency>
 			<groupId>org.springframework</groupId><!-- spring面向切面编程，提供AOP（面向切面编程） -->
 			<artifactId>spring-aop</artifactId>
@@ -83,32 +143,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<!-- spring核心包  end-->
-		
-		<!-- WEB begin -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId><!-- 包含Web应用开发时，用到Spring框架时所需的核心类，包括自动载入 WebApplicationContext 特性的类、Struts与JSF集成类、文件上传的支持类、Filter类和大量工具辅助类 -->
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId><!-- Spring Web MVC是一种基于Java的实现了Web MVC设计模式的请求驱动类型的轻量级Web框架 -->
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
 			<artifactId>spring-oxm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>	
-		<dependency>
-		    <groupId>org.sitemesh</groupId>
-		    <artifactId>sitemesh</artifactId><!-- 网页布局和修饰的框架包 -->	
-		    <version>${sitemesh.version}</version>
-		</dependency>
+		<!-- SPRING相关依赖  end-->
+		
+		<!-- 3.SERVLET WEB begin -->
 		<dependency>
 		    <groupId>javax.servlet</groupId>
 		    <artifactId>javax.servlet-api</artifactId><!-- j2ee web spec -->
@@ -119,35 +159,66 @@
 			<artifactId>jstl</artifactId><!-- JSTL标签类 -->
 			<version>1.2</version>
 		</dependency>
-		<!-- WEB end -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId><!-- jackson json:高性能的JSON处理-->
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId><!-- 格式化对象，方便输出日志 -->
+			<version>${fastjson.version}</version>
+		</dependency>
+		<!-- SERVLET WEB end -->
 
-		<!-- mybatis核心包  -->
+		<!-- 4.MYBATIS 持久层框架 begin --> 
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>${mybatis.version}</version>
 		</dependency>
-		
-		<!-- mybatis/spring包 -->
 		<dependency>
-			<groupId>org.mybatis</groupId>
+			<groupId>org.mybatis</groupId> 
 			<artifactId>mybatis-spring</artifactId>
 			<version>${mybatis-spring.version}</version>
 		</dependency>
+		<!-- MYBATIS 持久层框架 end  -->
 		
-		<!-- 导入Mysql数据库链接jar包 -->
+		<!-- 5.MYSQL 数据库相关依赖 begin -->
 		<dependency>
 			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<artifactId>mysql-connector-java</artifactId><!-- 导入Mysql数据库驱动包 -->
 			<version>${mysql.driver.version}</version>
 		</dependency>
-		
-		<!-- connection pool:数据库连接池,用来在spingMVC-mybatis.xml中配置数据库  -->
 		<dependency>
 		     <groupId>com.alibaba</groupId>
-		     <artifactId>druid</artifactId>
+		     <artifactId>druid</artifactId><!-- connection pool:数据库连接池,用来在spingMVC-mybatis.xml中配置数据库  -->
 		     <version>${druid.version}</version>
 		</dependency>
+		<!-- MYSQL 数据库相关依赖 end -->
+		
+		<!-- 6.LOG 日志相关依赖 begin -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId><!--核心log4j2jar包-->  
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId><!--用于与slf4j保持桥接--> 
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId><!-- slf4j -->
+			<version>${slf4j.version}</version>
+		</dependency>
+		<!-- LOG 日志相关依赖 end -->
 		
 		<!-- 安全框架SECURITY:shiro begin -->
 		<dependency>
@@ -205,36 +276,6 @@
 		    <version>2.3.2</version>
 		</dependency>
 		
-		<!-- jackson json:高性能的JSON处理  begin -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.module</groupId>
-			<artifactId>jackson-module-jaxb-annotations</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<!-- jackson json end -->
-		
-		<!-- 格式化对象，方便输出日志 -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>${fastjson.version}</version>
-		</dependency>
-		
 		<!-- 获取User Agent用户代理:解析客户端操作系统、浏览器等 -->
 		<dependency>
 		    <groupId>eu.bitwalker</groupId>
@@ -248,39 +289,7 @@
 		    <artifactId>lombok</artifactId>
 		    <version>1.16.10</version>
 		</dependency>
-		
-        <!-- log4j2 begin -->
-         <!--核心log4j2jar包-->  
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <!--用于与slf4j保持桥接--> 
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <!--  -->
-        <dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<!-- common-logging 实际调用slf4j -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-        <!-- log4j2 end -->
-        
+
         <!-- 上传组件包 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -292,15 +301,6 @@
 			<artifactId>commons-io</artifactId>
 			<version>${commons-io.version}</version>
 		</dependency>
-		
-		<!-- TEST begin -->
-		<dependency>
-			<groupId>junit</groupId>         <!--依赖的group ID -->
-			<artifactId>junit</artifactId>   <!--依赖的artifact ID -->
-			<version>${junit.version}</version> 	<!--依赖的版本号。 在Maven 2里, 也可以配置成版本号的范围。 -->
-			<scope>test</scope>			   <!-- 依赖项的适用范围：test，只在测试时使用，用于编译和运行测试代码。不会随项目发布。 -->
-		</dependency>
-		<!-- TEST end -->
 
 		<!-- 加密工具 -->
 		<dependency>
@@ -325,62 +325,65 @@
 		    <artifactId>activation</artifactId>
 		    <version>1.1.1</version>
 		</dependency>
+		
 		<!-- 使用Velocity 模板引擎快速生成代码 -->
 		<dependency>
 		    <groupId>org.apache.velocity</groupId>
 		    <artifactId>velocity</artifactId>
 		    <version>1.7</version>
 		</dependency>
-	
-	   	<!-- 读取资源文件(例properties)  -->
-	    <dependency>
-	        <groupId>commons-configuration</groupId>
-	        <artifactId>commons-configuration</artifactId>
-	        <version>1.9</version>
-	    </dependency>
-	    <!-- commons-configuration 自动加载的是2.1的版本，编译时会报错，所以再加上这个 -->  
-	    <dependency>  
-		    <groupId>commons-lang</groupId>  
-		    <artifactId>commons-lang</artifactId>  
-		    <version>2.6</version>  
+		
+		<!-- 网页布局和修饰的框架包 -->	
+		<dependency>
+		    <groupId>org.sitemesh</groupId>
+		    <artifactId>sitemesh</artifactId>
+		    <version>${sitemesh.version}</version>
+		</dependency>
+		
+		<!-- mybatis 代码自动生成器 -->
+		<dependency>
+		    <groupId>org.mybatis.generator</groupId>
+		    <artifactId>mybatis-generator-core</artifactId>
+		    <version>1.3.5</version>
 		</dependency> 
-	
-	    <!-- 导入java ee jar 包*（不导入index.jsp报错） -->  
-	    <dependency>  
-	       <groupId>javax</groupId>  
-	       <artifactId>javaee-api</artifactId>  
-	       <version>7.0</version>  
-	    </dependency>
+		
+		<!-- mybatis-plus Mybatis增强辅助工具-->
+		<dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>${mybaitsplus.version}</version>
+        </dependency>
 
-	
   </dependencies>
  
   <!--构建项目需要的信息-->  
   <build>
     <finalName>morning</finalName>    <!--产生的构件的文件名，默认值是${artifactId}-${version}。-->
         <plugins>  
-        	<!-- maven-compiler-plugin: 编译插件 -->
+        	<!-- maven-compiler-plugin: 编译插件(maven-compiler-plugin用来编译Java代码) -->
             <plugin>  
                 <groupId>org.apache.maven.plugins</groupId>  
                 <artifactId>maven-compiler-plugin</artifactId>  
-                <version>3.1</version>
+                <version>3.6.0</version>
                 <configuration>  
-                    <source>1.8</source>  <!-- 源代码使用的开发版本 -->
-                    <target>1.8</target>  <!-- 需要生成的目标class文件的编译版本 -->
+                    <source>${jdk.version}</source>  <!-- 源代码使用的开发版本 -->
+                    <target>${jdk.version}</target>  <!-- 需要生成的目标class文件的编译版本 -->
                     <!-- 一般而言，target与source是保持一致的，但是，有时候为了让程序能在其他版本的jdk中运行(对于低版本目标jdk，源代码中需要没有使用低版本jdk中不支持的语法)，会存在target不同于source的情况 -->
-                    <encoding>UTF-8</encoding> 
+                    <encoding>${project.build.sourceEncoding}</encoding> 
                 </configuration>  
             </plugin> 
             
-            <!-- maven-assembly-plugin -->
+            <!-- maven-assembly-plugin：处理资源
+            (maven-resources-plugin则用来处理资源文件。默认的主资源文件目录是src/main/resources，很多用户会需要添加额外的资源文件目录，这个时候就可以通过配置maven-resources-plugin来实现。) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.6</version>
+                <version>3.0.1</version>
                 <configuration>
-                    <encoding>UTF-8</encoding>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin> 
-        </plugins>    
+            
+        </plugins> 
   </build>
 </project>

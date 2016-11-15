@@ -48,6 +48,7 @@
         </article>
         <!-- 右侧，结束 -->
         <myfooter>  
+        <script src="${ctxsta}/common/layer/layer.js"></script>
 		<script>$(function() {$(".clickAvailable").click();});</script>
 		</myfooter>  
   </body>

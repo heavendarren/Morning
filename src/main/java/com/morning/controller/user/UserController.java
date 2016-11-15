@@ -29,7 +29,7 @@ import com.morning.common.util.MD5Utils;
 import com.morning.common.util.RSAUtils;
 import com.morning.common.util.ServletUtils;
 import com.morning.common.util.SingletonLoginUtils;
-import com.morning.common.util.WebUtil;
+import com.morning.common.util.toolbox.WebUtil;
 import com.morning.controller.BaseController;
 import com.morning.entity.user.User;
 import com.morning.entity.user.UserAddress;
@@ -138,7 +138,7 @@ public class UserController extends BaseController {
 			SingletonLoginUtils.updateLoginUser(request, findUser);
 			
     		//修改用户登录记录
-    		userService.updateUserLoginLog(findUser.getAccountId(), new Date(), ServletUtils.getIpAddr(request));
+    		userService.updateUserLoginLog(findUser.getAccountId(), new Date(), ServletUtils.getIpAddr());
 			//添加用户登录日志
 			UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
 			Browser browser = userAgent.getBrowser(); 
@@ -147,7 +147,7 @@ public class UserController extends BaseController {
 			UserLoginLog loginLog =new UserLoginLog();
 			loginLog.setBrowser(browser.toString());
 			loginLog.setOperatingSystem(operatingSystem.toString());
-			loginLog.setUserIp(ServletUtils.getIpAddr(request));
+			loginLog.setUserIp(ServletUtils.getIpAddr());
 			loginLog.setLoginTime(new Date());
 			loginLog.setUserId(findUser.getAccountId());
 			userLoginLogService.createLoginLog(loginLog);

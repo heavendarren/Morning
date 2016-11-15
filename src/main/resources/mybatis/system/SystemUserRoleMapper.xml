@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.dao.system.SystemUserRoleMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		USER_ROLE_ID AS userRoleId, ROLE_ID AS roleId, ACCOUNT_ID AS accountId, CREATE_TIME AS createTime, CREATE_BY AS createBy
+	</sql>
+	
+	<!-- 通过账号ID查找角色列表 -->
+	<select id="selectRoleListByAccountId" resultType="SystemUserRole" >
+        SELECT
+            u.USER_ROLE_ID AS userRoleId, 
+            u.ROLE_ID AS roleId, 
+            u.ACCOUNT_ID AS accountId, 
+            u.CREATE_TIME AS createTime, 
+            u.CREATE_BY AS createBy,
+            r.ROLE_NAME AS roleName
+        FROM
+            tb_system_user_role u
+        LEFT JOIN 
+        	tb_system_role r ON u.ROLE_ID = r.ROLE_ID
+        WHERE
+            u.ACCOUNT_ID = #{accountId}
+    </select>
+    
+    <!-- 插入用户角色记录 -->
+  	<insert id="insertUserRoles" parameterType="java.util.List">
+	    INSERT INTO 
+	    	tb_system_user_role (
+	    		ROLE_ID, 
+	    		ACCOUNT_ID, 
+	    		CREATE_TIME, 
+	    		CREATE_BY
+	    	)VALUES
+		    <foreach collection="systemUserRoles" item="systemUserRole" separator=",">
+		    (
+		     	#{systemUserRole.roleId},
+		     	#{systemUserRole.accountId},
+		        #{systemUserRole.createTime}, 
+		        #{systemUserRole.createBy}
+		    )
+		    </foreach>
+  	</insert>
+    
+</mapper>

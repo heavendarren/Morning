@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.dao.system.SystemRoleMenuMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		ROLE_MENU_ID AS roleMenuId, ROLE_ID AS roleId, MENU_ID AS menuId
+	</sql>
+	
+	<!-- 通过角色ID查找权限列表 -->
+	<select id="selectMenuListByRoleId" resultType="SystemRoleMenu" >
+        SELECT
+        	r.ROLE_MENU_ID AS roleMenuId, 
+        	r.ROLE_ID AS roleId, 
+        	r.MENU_ID AS menuId,
+        	m.PERMISSION
+        FROM
+            tb_system_role_menu r
+        LEFT JOIN tb_system_menu m ON r.MENU_ID = m.MENU_ID
+        WHERE
+            r.ROLE_ID in
+	        <foreach collection="roleIdList" item="roleId" open="(" close=")" separator=",">
+	    		#{roleId}
+	    	</foreach>
+    </select>
+
+</mapper>

@@ -1,7 +1,6 @@
 package com.morning.common.security;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -18,26 +17,32 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.morning.common.constants.GlobalConstants;
-import com.morning.common.util.ServletUtils;
-import com.morning.entity.system.SystemMenu;
-import com.morning.entity.system.SystemRole;
+import com.morning.entity.system.SystemRoleMenu;
 import com.morning.entity.system.SystemUser;
-import com.morning.service.system.SystemMenuService;
-import com.morning.service.system.SystemRoleService;
-import com.morning.service.system.SystemUserLoginLogService;
-import com.morning.service.system.SystemUserService;
+import com.morning.entity.system.SystemUserRole;
+import com.morning.service.system.ISystemRoleMenuService;
+import com.morning.service.system.ISystemUserRoleService;
+import com.morning.service.system.ISystemUserService;
 
+/**
+ * 
+* 项目名称：morning Maven Webapp   
+* 类名称：SystemAuthorizingRealm   
+* 类描述：Shiro验证用户登录的类   
+* 创建人：陈星星   
+* 创建时间：2016年11月14日 上午1:43:58   
+* 修改人：陈星星   
+* 修改时间：2016年11月14日 上午1:43:58   
+* @version
+ */
 public class SystemAuthorizingRealm extends AuthorizingRealm {
 	
 	@Autowired
-	private SystemUserService systemUserService;
+	private ISystemUserService systemUserService;
 	@Autowired
-	private SystemRoleService systemRoleService;
+	private ISystemUserRoleService systemUserRoleService;
 	@Autowired
-	private SystemMenuService systemMenuService;
-	@Autowired
-	private SystemUserLoginLogService systemUserLoginLogService;
-
+	private ISystemRoleMenuService systemRoleMenuService;
 	
 	/**
 	 * 认证回调函数, 登录时调用
@@ -45,22 +50,22 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	 * 该方法的调用时机为LoginController.login()方法中执行Subject.login()时 
 	 */
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(
-			AuthenticationToken authenticationToken) throws AuthenticationException {
-		//获取基于用户名和密码的令牌：实际上这个authcToken是从LoginController里面currentUser.login(token)传过来的  
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
+			throws AuthenticationException {
+		// 获取基于用户名和密码的令牌：实际上这个authcToken是从LoginController里面currentUser.login(token)传过来的
 		UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-		SystemUser systemUser = systemUserService.querySysUserByUserName(token.getUsername());
+		SystemUser systemUser = systemUserService.selectByLoginName(token.getUsername());
 		if (systemUser != null) {
 			// 校验用户状态
-			if (GlobalConstants.NO.equals(systemUser.getStatus().toString())){
+			if (GlobalConstants.NO.equals(systemUser.getStatus().toString())) {
 				throw new DisabledAccountException();
 			}
-			//修改用户登录记录
-			systemUserService.updateUserLoginLog(systemUser.getAccountId(), new Date(), ServletUtils.getIpAddr(ServletUtils.getRequest()));
-			// 记录登录日志
-			systemUserLoginLogService.saveLoginLog(systemUser);
+			SystemAuthorizingUser authorizingUser = new SystemAuthorizingUser(
+					systemUser.getAccountId(), systemUser.getLoginName(),
+					systemUser.getUserName(), systemUser.getRealName());
 			// 认证缓存信息
-			SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(systemUser, systemUser.getLoginPassword(), getName());
+			SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
+					authorizingUser, systemUser.getLoginPassword(), getName());
 			return simpleAuthenticationInfo;
 		} else {
 			return null;
@@ -75,30 +80,26 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-		SystemUser systemUser = (SystemUser) principalCollection.getPrimaryPrincipal();
+		SystemAuthorizingUser authorizingUser = (SystemAuthorizingUser) principalCollection.getPrimaryPrincipal();
 		
-		if(systemUser != null){
+		if(authorizingUser != null){
 			//权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）  
 			SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 			
 			//获得用户角色列表
-			List<SystemRole> systemRoles = systemRoleService.queryRoleByUserId(systemUser.getAccountId());
-			List<Integer> roleList = new ArrayList<Integer>();
-			for (SystemRole systemRole : systemRoles) {  // 添加用户角色信息
+			List<SystemUserRole> systemUserRoles = systemUserRoleService.selectRoleListByAccountId(authorizingUser.getAccountId());
+			List<Integer> roleIdList = new ArrayList<Integer>();
+			for (SystemUserRole systemRole : systemUserRoles) {  // 添加用户角色信息
 				simpleAuthorizationInfo.addRole(systemRole.getRoleName());
-				roleList.add(systemRole.getRoleId());
+				roleIdList.add(systemRole.getRoleId());
 			}
 			
 			//获得权限列表
-			List<SystemMenu> systemMenus = new ArrayList<SystemMenu>();
-			for(Integer roleId : roleList){
-				List<SystemMenu> systemMenuList = systemMenuService.querySysMenuByRoleId(roleId);
-				systemMenus.addAll(systemMenuList);
-			}
-			for(SystemMenu systemMenu : systemMenus){
-				if(StringUtils.isNotBlank(systemMenu.getPermission())){
+			List<SystemRoleMenu> systemRoleMenus = systemRoleMenuService.selectMenuListByRoleId(roleIdList);
+			for(SystemRoleMenu systemRoleMenu : systemRoleMenus){
+				if(StringUtils.isNotBlank(systemRoleMenu.getPermission())){
 					// 添加基于Permission的权限信息
-					simpleAuthorizationInfo.addStringPermission(systemMenu.getPermission());
+					simpleAuthorizationInfo.addStringPermission(systemRoleMenu.getPermission());
 				}
 			}
     		return simpleAuthorizationInfo;  

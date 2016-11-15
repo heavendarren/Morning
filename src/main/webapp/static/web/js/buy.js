@@ -301,7 +301,7 @@ function chooseInvoice() {
 }
 
 /**
-*
+* 创建订单
 */
 function toPay() {
 	$("#checkoutToPay").on("click", function() {
@@ -316,20 +316,13 @@ function toPay() {
 			params+=$(this).serialize()+"&";
 	    });
 		$.ajax({
-			url:baselocation+'/oder/creatOrder',
+			url:baselocation+'/order/creatOrder',
 			type:'post',
 			dataType:'json',
 			data:params,
 			success:function(result){
 				if(result.success==true){
-					swal({
-						title: "提示信息",
-						text: result.message,
-						type: "success",   
-						confirmButtonText: "确定"},
-					function(){
-						window.location.reload();
-					});
+					window.location.href = baselocation+"/order/"+result.message+"/payment"; 
 				}else{
 					dialog('提示信息',result.message,1);
 				}

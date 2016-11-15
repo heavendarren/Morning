@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 
 import com.alibaba.fastjson.JSON;
-import com.morning.common.util.DateUtil;
+import com.morning.common.util.toolbox.DateUtil;
 import com.morning.entity.email.UserEmailMsg;
 import com.morning.service.email.MailService;
 import com.morning.test.email.EmailTest;

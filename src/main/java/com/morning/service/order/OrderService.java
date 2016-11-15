@@ -29,6 +29,24 @@ public interface OrderService {
 	 * @return
 	 */
 	public int createOrder(Order order);
+	
+	/**
+	 * 支付，更新订单状态
+	 * @param order  订单
+	 * @param payment 支付平台
+	 * @param payStatus 支付状态
+	 * @param orderState 订单状态
+	 */
+	public void updateOrder(Order order, String payment, Integer payStatus, Integer orderState);
+	
+	/**
+	 * 通过订单编号，查询订单
+	 * @param orderNumber 订单编号
+	 * @param accountId  账号ID
+	 * @param orderState 订单状态
+	 * @return
+	 */
+	public Order queryOrderByNumber(String orderNumber, Integer accountId, Integer orderState);
 
 	/**
 	 * 查询订单数量
@@ -61,11 +79,12 @@ public interface OrderService {
 	
 	/**
 	 * 创建新订单和订单详情
-	 * @param order
+	 * @param shoppingCart 购物车信息
+	 * @param order 订单信息
 	 * @param orderMessageList
 	 * @return
 	 */
-	public Map<String, Object> createOrderAndMessage(Order order, List<OrderMessage> orderMessageList);
+	public Map<String, Object> createOrderAndMessage(ShoppingCart shoppingCart, Order order, List<OrderMessage> orderMessageList);
 	
 	/**
 	 * 更新购物车商品数量和价钱

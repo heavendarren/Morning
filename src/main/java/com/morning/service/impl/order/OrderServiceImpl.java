@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.morning.dao.goods.GoodsMapper;
+import com.morning.common.util.ServletUtils;
+import com.morning.common.util.SingletonLoginUtils;
 import com.morning.dao.order.OrderMapper;
 import com.morning.dao.order.OrderMessageMapper;
 import com.morning.entity.PageInfo;
@@ -19,6 +21,8 @@ import com.morning.entity.ShoppingCart;
 import com.morning.entity.order.Order;
 import com.morning.entity.order.OrderMessage;
 import com.morning.entity.order.QueryOrder;
+import com.morning.service.goods.GoodsService;
+import com.morning.service.order.OrderLogService;
 import com.morning.service.order.OrderService;
 
 
@@ -52,11 +56,32 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderMessageMapper orderMessageMapper;
 	@Autowired
-	private GoodsMapper goodsMapper;
+	private GoodsService goodsService;
+	@Autowired
+	private OrderLogService orderLogService;
 	
 	@Override
 	public int createOrder(Order order) {
 		return orderMapper.createOrder(order);
+	}
+	
+	@Override
+	public void updateOrder(Order order, String payment, Integer payStatus, Integer orderState) {
+		order.setPayment(payment);
+		order.setPayStatus(payStatus);
+		order.setOrderState(orderState);
+		orderMapper.updateOrder(order);
+		//创建订单日志
+		orderLogService.createOrderLog(String.valueOf(orderState), String.valueOf(order.getAccountId()), "w" , order.getOrderId(), order.getOrderNumber());
+	}
+	
+	@Override
+	public Order queryOrderByNumber(String orderNumber, Integer accountId, Integer orderState) {
+		Map<String,Object> parameter = new HashMap<String, Object>();
+		parameter.put("orderNumber", orderNumber);
+		parameter.put("accountId", accountId);
+		parameter.put("orderState", orderState);
+		return orderMapper.queryOrderByNumber(parameter);
 	}
 	
 	@Override
@@ -91,12 +116,22 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Map<String, Object> createOrderAndMessage(Order order,List<OrderMessage> orderMessageList) {
+	public Map<String, Object> createOrderAndMessage(ShoppingCart shoppingCart, Order order, List<OrderMessage> orderMessageList) {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		boolean flag = false;
 		try{
+    		int accountId = SingletonLoginUtils.getLoginUserId(ServletUtils.getRequest());
+    		order.setAccountId(accountId);//用户ID
+    		String orderNumber = Long.toString(new Date().getTime()+(new Random().nextInt(9999-1000+1)+1000));
+    		order.setOrderNumber(orderNumber);//订单编号
+    		order.setTotalMoney(shoppingCart.getTotalMoney());//订单金额
+    		order.setOrderDate(new Date());
 			// 插入订单，返回订单ID
 			this.createOrder(order);
+			
+			//创建订单日志
+			orderLogService.createOrderLog("1", String.valueOf(order.getAccountId()), "w" , order.getOrderId(), order.getOrderNumber());
+			
 			//插入订单详情
 			for(int i = 0; i<orderMessageList.size();i++){
 				OrderMessage orderMessage =  orderMessageList.get(i);
@@ -107,9 +142,11 @@ public class OrderServiceImpl implements OrderService {
 			//更新库存和销量
 			for(int i = 0; i<orderMessageList.size();i++){
 				OrderMessage orderMessage =  orderMessageList.get(i);
-				goodsMapper.updateGoodsCountList(orderMessage);
+				goodsService.updateGoodsCountList(orderMessage);
 			}
 			flag = true;
+			returnMap.put("flag", flag);
+			returnMap.put("orderNumber", order.getOrderNumber());
 		}catch(Exception e){
 			logger.error("OrderServiceImpl.createOrderAndMessage", e);
 		}

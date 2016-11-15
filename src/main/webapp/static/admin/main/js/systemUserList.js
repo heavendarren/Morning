@@ -32,7 +32,7 @@ function member_stop(obj,id){
 	layer.confirm('确认要冻结吗？',{btn: ['确定','取消'] //按钮
 	}, function(){
 		$.ajax({
-			data:{'systemUser.accountId':id,'systemUser.status':0},
+			data:{'accountId':id,'status':0},
 			dataType:'json',
 			type:'post',
 			url:baselocation+'/system/sysuser/list/audit',
@@ -55,7 +55,7 @@ function member_start(obj,id){
 	layer.confirm('确认要启用吗？',{btn: ['确定','取消'] //按钮
 	}, function(){
 		$.ajax({
-			data:{'systemUser.accountId':id,'systemUser.status':1},
+			data:{'accountId':id,'status':1},
 			dataType:'json',
 			type:'post',
 			url:baselocation+'/system/sysuser/list/audit',

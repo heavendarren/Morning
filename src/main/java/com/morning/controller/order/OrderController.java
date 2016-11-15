@@ -1,10 +1,8 @@
 package com.morning.controller.order;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,11 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.morning.common.util.MD5Utils;
+import com.morning.common.util.ServletUtils;
 import com.morning.common.util.SingletonLoginUtils;
 import com.morning.controller.BaseController;
 import com.morning.entity.PageInfo;
@@ -27,9 +28,11 @@ import com.morning.entity.ShoppingCart;
 import com.morning.entity.order.Order;
 import com.morning.entity.order.OrderMessage;
 import com.morning.entity.order.QueryOrder;
+import com.morning.entity.user.User;
 import com.morning.entity.user.UserAddress;
 import com.morning.service.order.OrderService;
 import com.morning.service.user.UserAddressService;
+import com.morning.service.user.UserService;
 
 /**
  * 
@@ -52,6 +55,8 @@ public class OrderController extends BaseController {
 	
 	@Autowired
 	private UserAddressService userAddressService;
+	@Autowired
+	private UserService userService;
 	@Autowired 
 	private OrderService orderService;
 	
@@ -63,6 +68,10 @@ public class OrderController extends BaseController {
 	private static final String cartpage = getViewPath("/web/pay/pay-cart");
 	//订单
 	private static final String ordermessage = getViewPath("/web/pay/pay-order");
+	/**订单支付页面*/
+	private static final String PAY_CONFIRM = getViewPath("/web/pay/pay_confirm");
+	/**订单详情*/
+	private static final String USER_ORDER_VIEW = getViewPath("/web/usercentre/user_order_view");
 	//顶部导航栏购物车
 	private static final String shoppingCart = getViewPath("/web/common/ajax-cart");
 	
@@ -80,19 +89,6 @@ public class OrderController extends BaseController {
         binder.setFieldDefaultPrefix("queryOrder.");
     }
 	
-	// 购物车信息
-	@RequestMapping(value="/ajax/shoppingCart", method = RequestMethod.POST)
-    @ResponseBody
-	public ModelAndView shoppingCart(HttpServletRequest request) {
-		ModelAndView modelAndView = new ModelAndView(shoppingCart);
-		try {
-			
-		} catch (Exception e) {
-			logger.error("OrderController.shoppingCart", e);
-		}
-		return modelAndView;
-	}
-    
     
 	/**
 	 * 跳转购物车页面
@@ -165,7 +161,7 @@ public class OrderController extends BaseController {
 		return modelAndView;
  	}
     
-    @RequestMapping(value="/oder/creatOrder", method = RequestMethod.POST)
+    @RequestMapping(value="/order/creatOrder", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> creatOrder(HttpServletRequest request, @ModelAttribute("order") Order order){
     	Map<String, Object> json = new HashMap<String, Object>();
@@ -174,26 +170,96 @@ public class OrderController extends BaseController {
     		ShoppingCart shoppingCart = SingletonLoginUtils.getShoppingCart(request);
     		List<OrderMessage> orderMessageList =shoppingCart.getCartMessageList();
     		
-    		int accountId = SingletonLoginUtils.getLoginUserId(request);
-    		order.setAccountId(accountId);//用户ID
-    		String orderNumber = Long.toString(new Date().getTime()+(new Random().nextInt(9999-1000+1)+1000));
-    		order.setOrderNumber(orderNumber);//订单编号
-    		order.setTotalMoney(shoppingCart.getTotalMoney());//订单金额
-    		
     		//插入订单和详情
-    		Map<String, Object> returnMap = orderService.createOrderAndMessage(order, orderMessageList);
+    		Map<String, Object> returnMap = orderService.createOrderAndMessage(shoppingCart, order, orderMessageList);
     		if (Boolean.parseBoolean(returnMap.get("flag").toString()) == true) {
     			orderMessageList.clear(); // 清空购物车
     			shoppingCart.setTotalMoney(null);
     			shoppingCart.setTotalNumber(null);
     		}
-    		
+    		json = this.setJson(true, String.valueOf(returnMap.get("orderNumber")));
     	}catch(Exception e){
     		logger.error("OrderController.creatOrder", e);
     	}
     	return json;
     	
     }
+    
+	@RequestMapping(value = "/order/{orderNumber}/payment", method = RequestMethod.GET)
+	public ModelAndView orderConfirm(HttpServletRequest request, @PathVariable String orderNumber) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName(PAY_CONFIRM);
+		int accountId = SingletonLoginUtils.getLoginUserId(request);
+		Order order = orderService.queryOrderByNumber(orderNumber, accountId, 1);
+		modelAndView.addObject("order", order);
+		return modelAndView;
+	}
+    
+	@RequestMapping(value = "/order/{orderNumber}/confirmation", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> confirmation(HttpServletRequest request,
+			@PathVariable String orderNumber) {
+		Map<String, Object> json = new HashMap<String, Object>();
+		int accountId = SingletonLoginUtils.getLoginUserId(request);
+		Order order = orderService
+				.queryOrderByNumber(orderNumber, accountId, 1);
+		if (order != null) {
+			String payment = getParameter("order.payment");
+			orderService.updateOrder(order, payment, 1, 2);
+			json = this.setJson(true);
+		} else {
+			json = this.setJson(false, "抱歉,该订单不存在!");
+		}
+		return json;
+	}
+	
+	@RequestMapping(value = "/order/{orderNumber}/delete", method = RequestMethod.DELETE)
+	@ResponseBody
+	public Map<String, Object> orderDelete(HttpServletRequest request,
+			@PathVariable String orderNumber) {
+		Map<String, Object> json = new HashMap<String, Object>();
+		int accountId = SingletonLoginUtils.getLoginUserId(request);
+		Order order = orderService
+				.queryOrderByNumber(orderNumber, accountId, 1);
+		if (order != null) {
+			orderService.updateOrder(order, null, null, 0);
+			json = this.setJson(true);
+		} else {
+			json = this.setJson(false, "抱歉,该订单不存在!");
+		}
+		return json;
+	}
+	
+	@RequestMapping(value = "/order/{orderNumber}/receiving", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> orderReceiving(@PathVariable String orderNumber) {
+		Map<String, Object> json = new HashMap<String, Object>();
+		String loginPassword = getParameter("loginPassword");
+		int accountId = SingletonLoginUtils.getLoginUserId(ServletUtils.getRequest());
+		User user = new User();
+		user.setLoginPassword(MD5Utils.getMD5(loginPassword));
+		user.setAccountId(accountId);
+		if(userService.selectByUser(user)){
+			Order order = orderService.queryOrderByNumber(orderNumber, accountId, 3);
+			if(order !=null){
+				orderService.updateOrder(order, null, null , 5 );
+				json = this.setJson(true);
+			}else{
+				json = this.setJson(false, "抱歉,该订单不存在!");
+			}
+		}else{
+			json = this.setJson(false, "密码不正确,请重新输入!");
+		}
+		return json;
+	}
+	
+	@RequestMapping(value="/order/{orderNumber}/view",method = RequestMethod.GET)
+	public ModelAndView orderView(@PathVariable String orderNumber){
+		ModelAndView modelAndView  = new ModelAndView();
+		modelAndView.setViewName(USER_ORDER_VIEW);
+		return modelAndView;
+	}
+	
 	
 	/**
 	 * 跳转我的订单页面

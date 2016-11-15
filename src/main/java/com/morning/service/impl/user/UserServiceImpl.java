@@ -64,8 +64,8 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public User selectByUser(User user) {
-		return userMapper.selectByUser(user);
+	public boolean selectByUser(User user) {
+		return userMapper.selectByUser(user) != null;
 	}
 
 	@Override

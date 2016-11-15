@@ -2,11 +2,17 @@ package com.morning.common.util;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.UnavailableSecurityManagerException;
+import org.apache.shiro.session.InvalidSessionException;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.code.kaptcha.Constants;
+import com.morning.common.security.SystemAuthorizingUser;
+import com.morning.common.util.toolbox.StringUtil;
 import com.morning.entity.ShoppingCart;
-import com.morning.entity.system.SystemUser;
 import com.morning.entity.user.User;
 
 /**
@@ -19,7 +25,6 @@ public class SingletonLoginUtils {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SingletonLoginUtils.class);
 
-	
 	/**
 	 * 创建储存购物车信息的模型
 	 */
@@ -104,49 +109,55 @@ public class SingletonLoginUtils {
 		return -1;
 	}
 	
+	
 	/**
-	 * 更新后台管理员信息,Session
-	 * @param request
-	 * @param systemUser
+	 * 验证验证码
+	 * @param userInputCaptcha
+	 * @return
 	 */
-	public static void updateAdminUser(HttpServletRequest request,SystemUser systemUser){
-		try{
-			//隐藏用户密码，将用户信息存放session中
-			systemUser.setLoginPassword("");
-			request.getSession().setAttribute("systemUser", systemUser);
-		}catch(Exception e){
-			logger.error("SingletonLoginUtils.updateAdminUser" , e);
+	public static boolean validate() {
+		// 获取Session中验证码
+		Object captcha = ServletUtils.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+		String registerCode = ServletUtils.getParameter("registerCode");
+		if (StringUtil.isBlank(registerCode)) {
+			return false;
 		}
+		boolean result = registerCode.equalsIgnoreCase(captcha.toString());
+		return result;
 	}
 	
 	/**
 	 * 获取后台登录用户
-	 * @param request
-	 * @return
+	 * @return SystemAuthorizingUser
 	 */
-	public static SystemUser getSystemUser(HttpServletRequest request){
-		SystemUser systemUser = null;
-		try{
-			systemUser = (SystemUser) request.getSession().getAttribute("systemUser");
-			if(systemUser != null){
+	public static SystemAuthorizingUser getSystemUser() {
+		try {
+			Subject subject = SecurityUtils.getSubject();
+			SystemAuthorizingUser systemUser = (SystemAuthorizingUser) subject.getPrincipal();
+			if (systemUser != null) {
 				return systemUser;
 			}
-		}catch(Exception e){
-			logger.error("SingletonLoginUtils.getSystemUser", e);
+		} catch (UnavailableSecurityManagerException e) {
+			logger.error("SystemUserServiceImpl.getSystemUser", e);
+		} catch (InvalidSessionException e) {
+			logger.error("SystemUserServiceImpl.getSystemUser", e);
 		}
 		return null;
 	}
 	
 	/**
 	 * 获取后台登录用户ID
-	 * @param requset
 	 * @return
 	 */
-	public static int getSystemUserId(HttpServletRequest requset){
-		SystemUser systemUser = getSystemUser(requset);
-		if(systemUser != null){
-			return systemUser.getAccountId();
-		}
-		return -1;
+	public static Integer getSystemUserId(){
+		return getSystemUser().getAccountId();
+	}
+	
+	/**
+	 * 获取后台登录用户昵称
+	 * @return
+	 */
+	public static String getSystemUserName(){
+		return getSystemUser().getUserName();
 	}
 }

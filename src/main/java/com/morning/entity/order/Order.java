@@ -30,12 +30,16 @@ public class Order implements Serializable{
     private Date orderDate;
 	/**订单总金额*/
     private Double totalMoney;
-	/**订单状态:1.订单提交2.支付完成3.商品出库4.等待收获5.收货完成*/
+	/**订单状态:0.订单关闭1.订单提交2.支付完成3.商品出库4.等待收获5.收货完成*/
     private Integer orderState;
 	/**地址编号*/
     private Integer addressId;
 	/**支付方式*/
     private Integer payType;
+    /**支付状态*/
+    private Integer payStatus;
+    /**支付平台*/
+    private String payment;
 	/**配送方式*/
     private Integer sendType;
 	/**送货时间*/
@@ -49,6 +53,6 @@ public class Order implements Serializable{
     /**订单详情列表*/
     private List<OrderMessage> orderMessageList;
     /**收货地址信息*/
-    private UserAddress userAddressMessage;
+    private UserAddress userAddress;
 
 }

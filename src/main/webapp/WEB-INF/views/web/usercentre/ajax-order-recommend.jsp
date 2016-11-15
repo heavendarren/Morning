@@ -27,7 +27,7 @@
           											<th class="col-main">
             											<p class="caption-info">
                                                              <fmt:formatDate value="${orderList.orderDate }" pattern="yyyy年MM月dd日 HH:mm分" /><span class="sep">|</span>
-								                             ${orderList.userAddressMessage.orderUserName }<span class="sep">|</span>
+								                             ${orderList.userAddress.orderUserName }<span class="sep">|</span>
 								                                                          订单号：<a href="">${orderList.orderNumber }</a><span class="sep">|</span>
 								                             <c:choose>
 						                                        <c:when test="${orderList.payType == '1'}">在线支付</c:when>
@@ -50,7 +50,7 @@
                                                         	<li>
                 												<div class="figure figure-thumb">
                                                                 	<a href="${ctx}/front/detail/${orderMessageList.goods.goodsId}" target="_blank">
-                                                                    	<img src="${orderMessageList.goods.goodsImagename}" width="80" height="80" alt="" />
+                                                                    	<img src="${ctx}/commodity/${orderMessageList.goods.goodsImagename}.jpg" width="80" height="80" alt="" />
                                                                     </a>
                 												</div>
                                                                 <p class="name">
@@ -67,8 +67,8 @@
                                                 	</td>
                                                     <td class="order-actions">
                                                     <c:choose>
-				                                        <c:when test="${orderList.orderState == '1'}"><a class="btn btn-small btn-ocean" href="${ctx}/buy/${orderList.orderNumber }">立即支付</a></c:when>
-				                                        <c:when test="${orderList.orderState == '3'}"><a class="btn btn-small btn-primary" href="#">确认收货</a></c:when>
+				                                        <c:when test="${orderList.orderState == '1'}"><a class="btn btn-small btn-ocean" href="${ctx}/order/${orderList.orderNumber }/payment">立即支付</a></c:when>
+				                                        <c:when test="${orderList.orderState == '3'}"><a class="btn btn-small btn-primary" onclick="checkoutToReceiving(${orderList.orderNumber},this)">确认收货</a></c:when>
 				                                    </c:choose>	
                                                     	<a class="btn btn-small btn-line-gray" href="${ctx}/user/orderView/${orderList.orderNumber }">订单详情</a>
                                                     </td>

@@ -90,16 +90,19 @@
          and ACCOUNT_ID = #{accountId,jdbcType=DECIMAL}
       </if>
       <if test="loginName != null" >
-        LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+        and LOGIN_NAME = #{loginName,jdbcType=VARCHAR}
       </if>
       <if test="userName != null" >
-        USER_NAME = #{userName,jdbcType=VARCHAR},
+        and USER_NAME = #{userName,jdbcType=VARCHAR}
       </if>
       <if test="email != null" >
-        EMAIL = #{email,jdbcType=VARCHAR},
+        and EMAIL = #{email,jdbcType=VARCHAR}
       </if>
       <if test="telephone != null" >
-        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+        and TELEPHONE = #{telephone,jdbcType=VARCHAR}
+      </if>
+      <if test="loginPassword != null" >
+        and LOGIN_PASSWORD = #{loginPassword,jdbcType=VARCHAR}
       </if>
  	</where>
   </select>

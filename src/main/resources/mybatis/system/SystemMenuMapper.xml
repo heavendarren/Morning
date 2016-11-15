@@ -1,239 +1,33 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.morning.dao.system.SystemMenuMapper" >
-  <resultMap id="BaseResultMap" type="com.morning.entity.system.SystemMenu" >
-    <id column="MENU_ID" property="menuId" jdbcType="INTEGER" />
-    <result column="PARENT_ID" property="parentId" jdbcType="INTEGER" />
-    <result column="MENU_TYPE" property="menuType" jdbcType="INTEGER" />
-    <result column="MENU_CODE" property="menuCode" jdbcType="VARCHAR" />
-    <result column="MENU_NAME" property="menuName" jdbcType="VARCHAR" />
-    <result column="SORT" property="sort" jdbcType="INTEGER" />
-    <result column="HREF" property="href" jdbcType="VARCHAR" />
-    <result column="ICON" property="icon" jdbcType="VARCHAR" />
-    <result column="STATUS" property="status" jdbcType="INTEGER" />
-    <result column="PERMISSION" property="permission" jdbcType="VARCHAR" />
-    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
-    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
-    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
-  </resultMap>
-  
-  <sql id="Base_Column_List" >
-    MENU_ID, PARENT_ID, MENU_TYPE, MENU_CODE, MENU_NAME, SORT, HREF, ICON, STATUS, PERMISSION, 
-    CREATE_TIME, CREATE_BY, UPDATE_TIME, UPDATE_BY, REMARKS
-  </sql>
-  
-  <!-- 查询系统目录 -->
-  <select id="querySysMenu" resultMap="BaseResultMap" parameterType="java.util.Map">
-  	select
-  	<include refid="Base_Column_List" />
-    from tb_system_menu
-    <where>
-	<if test="status != null and status !=''">
-		and STATUS = #{status,jdbcType=INTEGER}
-	</if>
-	<if test="menuType != null and menuType !=''">
-		and MENU_TYPE != 0
-	</if>
-    </where>
-    ORDER BY SORT ASC
-  </select>
-  
-  <!-- 通过角色ID，查询权限目录 -->
-  <select id="querySysMenuByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-  	select
-  	a.MENU_ID, a.PARENT_ID, a.MENU_TYPE, a.MENU_CODE, a.MENU_NAME, a.SORT, a.HREF, a.ICON, a.STATUS, a.PERMISSION, a.
-    CREATE_TIME, a.CREATE_BY, a.UPDATE_TIME, a.UPDATE_BY, a.REMARKS
-    from tb_system_menu a left join tb_system_role_menu b on a.MENU_ID = b.MENU_ID
-    where b.ROLE_ID  = #{roleId,jdbcType=INTEGER}
-  </select>
-  
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_system_menu
-    where MENU_ID = #{menuId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tb_system_menu
-    where MENU_ID = #{menuId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.morning.entity.system.SystemMenu" >
-    insert into tb_system_menu (MENU_ID, PARENT_ID, MENU_TYPE, 
-      MENU_CODE, MENU_NAME, SORT, 
-      HREF, ICON, STATUS, 
-      PERMISSION, CREATE_TIME, CREATE_BY, 
-      UPDATE_TIME, UPDATE_BY, REMARKS
-      )
-    values (#{menuId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{menuType,jdbcType=INTEGER}, 
-      #{menuCode,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
-      #{href,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{permission,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.morning.entity.system.SystemMenu" >
-    insert into tb_system_menu
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="menuId != null" >
-        MENU_ID,
-      </if>
-      <if test="parentId != null" >
-        PARENT_ID,
-      </if>
-      <if test="menuType != null" >
-        MENU_TYPE,
-      </if>
-      <if test="menuCode != null" >
-        MENU_CODE,
-      </if>
-      <if test="menuName != null" >
-        MENU_NAME,
-      </if>
-      <if test="sort != null" >
-        SORT,
-      </if>
-      <if test="href != null" >
-        HREF,
-      </if>
-      <if test="icon != null" >
-        ICON,
-      </if>
-      <if test="status != null" >
-        STATUS,
-      </if>
-      <if test="permission != null" >
-        PERMISSION,
-      </if>
-      <if test="createTime != null" >
-        CREATE_TIME,
-      </if>
-      <if test="createBy != null" >
-        CREATE_BY,
-      </if>
-      <if test="updateTime != null" >
-        UPDATE_TIME,
-      </if>
-      <if test="updateBy != null" >
-        UPDATE_BY,
-      </if>
-      <if test="remarks != null" >
-        REMARKS,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="menuId != null" >
-        #{menuId,jdbcType=INTEGER},
-      </if>
-      <if test="parentId != null" >
-        #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="menuType != null" >
-        #{menuType,jdbcType=INTEGER},
-      </if>
-      <if test="menuCode != null" >
-        #{menuCode,jdbcType=VARCHAR},
-      </if>
-      <if test="menuName != null" >
-        #{menuName,jdbcType=VARCHAR},
-      </if>
-      <if test="sort != null" >
-        #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="href != null" >
-        #{href,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null" >
-        #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="permission != null" >
-        #{permission,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null" >
-        #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null" >
-        #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="remarks != null" >
-        #{remarks,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.morning.entity.system.SystemMenu" >
-    update tb_system_menu
-    <set >
-      <if test="parentId != null" >
-        PARENT_ID = #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="menuType != null" >
-        MENU_TYPE = #{menuType,jdbcType=INTEGER},
-      </if>
-      <if test="menuCode != null" >
-        MENU_CODE = #{menuCode,jdbcType=VARCHAR},
-      </if>
-      <if test="menuName != null" >
-        MENU_NAME = #{menuName,jdbcType=VARCHAR},
-      </if>
-      <if test="sort != null" >
-        SORT = #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="href != null" >
-        HREF = #{href,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null" >
-        ICON = #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        STATUS = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="permission != null" >
-        PERMISSION = #{permission,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null" >
-        CREATE_BY = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null" >
-        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="remarks != null" >
-        REMARKS = #{remarks,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where MENU_ID = #{menuId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.morning.entity.system.SystemMenu" >
-    update tb_system_menu
-    set PARENT_ID = #{parentId,jdbcType=INTEGER},
-      MENU_TYPE = #{menuType,jdbcType=INTEGER},
-      MENU_CODE = #{menuCode,jdbcType=VARCHAR},
-      MENU_NAME = #{menuName,jdbcType=VARCHAR},
-      SORT = #{sort,jdbcType=INTEGER},
-      HREF = #{href,jdbcType=VARCHAR},
-      ICON = #{icon,jdbcType=VARCHAR},
-      STATUS = #{status,jdbcType=INTEGER},
-      PERMISSION = #{permission,jdbcType=VARCHAR},
-      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      CREATE_BY = #{createBy,jdbcType=VARCHAR},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
-      REMARKS = #{remarks,jdbcType=VARCHAR}
-    where MENU_ID = #{menuId,jdbcType=INTEGER}
-  </update>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.dao.system.SystemMenuMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		MENU_ID AS menuId, PARENT_ID AS parentId, MENU_TYPE AS menuType, MENU_CODE AS menuCode, MENU_NAME AS menuName, SORT, HREF, ICON, STATUS, PERMISSION, CREATE_TIME AS createTime, CREATE_BY AS createBy, UPDATE_TIME AS updateTime, UPDATE_BY AS updateBy, REMARKS
+	</sql>
+	
+	<!-- 查询系统目录 -->
+	<select id="selectSystemMenu" resultType="SystemMenu" >
+        SELECT
+			MENU_ID AS menuId, 
+			PARENT_ID AS parentId, 
+			MENU_TYPE AS menuType,
+			MENU_NAME AS menuName, 
+			HREF, 
+			ICON
+        FROM
+            tb_system_menu
+	    <where>
+			<if test="status != null and status !=''">
+				and STATUS = #{status}
+			</if>
+			<if test="menuType != null and menuType !=''">
+				and MENU_TYPE = #{menuType}
+			</if>
+	    </where>
+	    ORDER 
+	    	BY SORT ASC
+    </select>
+    
 </mapper>
