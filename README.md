@@ -47,14 +47,13 @@ Morning系統目前包括以下四大模块，系统管理模块、电子商城�
 * 安全框架：Apache Shiro 1.2
 * 视图框架：Spring MVC 4.1
 * 布局框架：SiteMesh 2.4
-* 工作流引擎：Activiti 5.21
 * 任务调度：Spring + Quartz 2.2.3
 * 持久层框架：MyBatis 3.4.1
 * 数据库连接池：Alibaba Druid 1.0
 * 缓存框架：Ehcache 2.6
 * 日志管理：SLF4J 1.7、Log4j2 2.7
 * 布局框架：SiteMesh 3.0.1 
-* 工具类：Apache Commons、Jackson 2.2、Xstream 1.4、Dozer 5.3、POI 3.9
+* 工具类：Apache Commons、Jackson 2.2
 
 
 2、前端
