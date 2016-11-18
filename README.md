@@ -57,8 +57,7 @@ Morning系統目前包括以下四大模块，系统管理模块、电子商城�
 * 缓存框架：Ehcache 2.6
 * 日志管理：SLF4J 1.7、Log4j2 2.7
 * 布局框架：SiteMesh 3.0.1 
-* 工具类：Apache Commons、Jackson 2.2、Xstream 1.4、Dozer 5.3、POI 3.9
-
+* 工具类：Apache Commons、Jackson 2.2
 
 2、前端
 
@@ -84,8 +83,8 @@ Morning系統目前包括以下四大模块，系统管理模块、电子商城�
 
 4、根据 doc\lombok\lombok安装.txt 提示安装lombok插件
 
-5、前台用户账号，账号：morning  密码：morning    测试地址：http://localhost:8080/morning/index
-   后台管理元账号，账号：admdin 密码：admin      测试地址：http://localhost:8080/morning/system
+5、前台用户账号，账号：morning  密码：xh2013212542    测试地址：http://localhost:8080/morning/index
+   后台管理元账号，账号：admdin 密码：xh2013212542    测试地址：http://localhost:8080/morning/system
 
 ```
 
