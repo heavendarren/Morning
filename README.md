@@ -83,7 +83,7 @@ Morning系統目前包括以下四大模块，系统管理模块、电子商城�
 
 4、根据 doc\lombok\lombok安装.txt 提示安装lombok插件
 
-5、前台用户账号，账号：morning  密码：xh2013212542    测试地址：http://localhost:8080/morning/index
+5、前台用户账号，账号：810170512@qq.com  密码：xh2013212542    测试地址：http://localhost:8080/morning/index
    后台管理元账号，账号：admdin 密码：xh2013212542    测试地址：http://localhost:8080/morning/system
 
 ```
