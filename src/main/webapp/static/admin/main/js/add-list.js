@@ -1,9 +1,9 @@
  // 多选框插件
-$(document).ready(function(){
-  $('input').iCheck({
-    checkboxClass: 'icheckbox_flat-green',
-    radioClass: 'iradio_flat-green'
-  });
+$(document).ready(function() {
+	$('input').iCheck({
+		checkboxClass : 'icheckbox_flat-green',
+		radioClass : 'iradio_flat-green'
+	});
 });
 
 //表单验证-添加用户验证
@@ -132,24 +132,32 @@ $(function(){
 	})
 })
 
-
+var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 /*用户-编辑*/
-$(function(){	
-	$(".usersubmit").click(function(){
-		var params='';
-		$("#userform input").each(function(){
-			params+=$(this).serialize()+"&";
-	    });
+$(function() {
+	$(".usersubmit").click(function() {
+		var params = '';
+		$("#userform input").each(function() {
+			params += $(this).serialize() + "&";
+		});
 		$.ajax({
-			data:params,
-			dataType:'json',
-			type:'post',
-			url:baselocation+'/system/user/list/save',
-			success:function(result){
-				if(result.success==true){
-					layer.msg(result.message,{icon: 6,time:1000});
-				}else{
-					layer.msg(result.message,{icon: 2,time:1000});
+			data : params,
+			dataType : 'json',
+			type : 'post',
+			url : baselocation + '/system/user/list/save',
+			success : function(result) {
+				if (result.success == true) {
+					parent.layer.msg(result.message, {
+						shade : 0.3,
+						time : 1500
+					}, function() {
+						window.parent.location.reload(); // 刷新父页面
+					});
+				} else {
+					layer.msg(result.message, {
+						icon : 2,
+						time : 1000
+					});
 				}
 			}
 		})
@@ -157,22 +165,30 @@ $(function(){
 })
 
 /*管理员-编辑*/
-$(function(){	
-	$(".sysusersubmit").click(function(){
-		var params='';
-		$("#systemuserform input").each(function(){
-			params+=$(this).serialize()+"&";
-	    });
+$(function() {
+	$(".sysusersubmit").click(function() {
+		var params = '';
+		$("#systemuserform input").each(function() {
+			params += $(this).serialize() + "&";
+		});
 		$.ajax({
-			data:params,
-			dataType:'json',
-			type:'post',
-			url:baselocation+'/system/sysuser/list/save',
-			success:function(result){
-				if(result.success==true){
-					layer.msg(result.message,{icon: 6,time:1000});
-				}else{
-					layer.msg(result.message,{icon: 2,time:1000});
+			data : params,
+			dataType : 'json',
+			type : 'post',
+			url : baselocation + '/system/sysuser/list/save',
+			success : function(result) {
+				if (result.success == true) {
+					parent.layer.msg(result.message, {
+						shade : 0.3,
+						time : 1500
+					}, function() {
+						window.parent.location.reload(); // 刷新父页面
+					});
+				} else {
+					layer.msg(result.message, {
+						icon : 2,
+						time : 1000
+					});
 				}
 			}
 		})

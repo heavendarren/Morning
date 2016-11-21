@@ -102,20 +102,22 @@ public class OrderController extends BaseController {
 	@RequestMapping(value="/cart/update")
 	@ResponseBody
 	public Map<String, Object> cartUpdate(Integer cartId, Integer count, HttpServletRequest request) {
-		//获取购物车信息
+		// 获取购物车信息
 		Map<String, Object> json = new HashMap<String, Object>();
 		ShoppingCart shoppingCart = SingletonLoginUtils.getShoppingCart(request);
-		List<OrderMessage> cartMessageList =shoppingCart.getCartMessageList();
-		for(int i=0;i<cartMessageList.size();i++){
-			if(cartId.equals(cartMessageList.get(i).getCartId())){
-				if(count>cartMessageList.get(i).getGoods().getGoodsSaveInfo()){
-					json = this.setJson(false,"对不起,商品库存不足,请您修改数量!");
-				}else{
+		List<OrderMessage> cartMessageList = shoppingCart.getCartMessageList();
+		for (int i = 0; i < cartMessageList.size(); i++) {
+			if (cartId.equals(cartMessageList.get(i).getCartId())) {
+				if (count > cartMessageList.get(i).getGoods()
+						.getGoodsSaveInfo()) {
+					json = this.setJson(false, "对不起,商品库存不足,请您修改数量!");
+				} else {
 					cartMessageList.get(i).setOrderNumber(count);
-					//更新购物车信息
-					orderService.updateShoppingCart(shoppingCart,cartMessageList);
+					// 更新购物车信息
+					orderService.updateShoppingCart(shoppingCart,
+							cartMessageList);
 				}
-			}else{
+			} else {
 				json = this.setJson(false, "该商品不存在,请刷新后重试!");
 			}
 		}

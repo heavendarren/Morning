@@ -14,7 +14,7 @@
     <div id="content">
     	<div id="content-nav">
         	<div id="content-nav-content">
-            	<a href="${ctx}">首页</a>   /   <a href="javascript: void(0)" onclick="submitForm(1,${classify.classifyId})">${classify.classifyName}</a>   / ${goods.goodsName}
+            	<a href="${ctx}">首页</a>   /   <a href="javascript: void(0)" onclick="submitForm(1,${goods.classifyId})">${goods.classifyName}</a>   / ${goods.goodsName}
             </div>
         </div>
         <div id="content-info">

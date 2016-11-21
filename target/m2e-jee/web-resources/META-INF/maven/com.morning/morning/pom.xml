@@ -35,10 +35,10 @@
      	<commons-io.version>2.4</commons-io.version>
 		<commons-fileupload.version>1.3.1</commons-fileupload.version>
 		<mybatis-spring.version>1.3.0</mybatis-spring.version>
-        <mybaitsplus.version>1.4.7</mybaitsplus.version>
+        <mybaitsplus.version>1.5</mybaitsplus.version>
 		
 		<!-- environment setting -->
-		<jdk.version>1.8</jdk.version>
+		<jdk.version>1.7</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 	</properties>
@@ -225,6 +225,12 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
 			<version>${shiro.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -233,24 +239,14 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-cas</artifactId>
+			<artifactId>shiro-ehcache</artifactId>
 			<version>${shiro.version}</version>
 			<exclusions>
 				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
 				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-web</artifactId>
-			<version>${shiro.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-ehcache</artifactId>
-			<version>${shiro.version}</version>
+			</exclusions>			
 		</dependency>
 		<!-- 安全框架SECURITY:shiro end -->
 		

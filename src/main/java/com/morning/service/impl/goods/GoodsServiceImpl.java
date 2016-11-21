@@ -1,95 +1,103 @@
 package com.morning.service.impl.goods;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.morning.common.util.SingletonLoginUtils;
 import com.morning.dao.goods.GoodsMapper;
 import com.morning.entity.PageInfo;
 import com.morning.entity.goods.Goods;
 import com.morning.entity.goods.QueryGoods;
 import com.morning.entity.order.OrderMessage;
-import com.morning.service.goods.GoodsService;
+import com.morning.service.goods.IGoodsService;
+import com.baomidou.framework.service.impl.SuperServiceImpl;
 
 /**
  * 
 * 项目名称：morning Maven Webapp   
 * 类名称：GoodsServiceImpl   
-* 类描述： 商品信息业务逻辑层实现  
+* 类描述：Goods 表业务逻辑层接口实现类   
 * 创建人：陈星星   
-* 创建时间：2016年8月26日  下午2:13:31
+* 创建时间：2016年8月23日  上午12:16:56   
 * 修改人：陈星星   
-* 修改时间：2016年11月6日 下午10:59:39   
+* 修改时间：2016年11月21日 上午12:09:33   
 * @version
  */
-@Service("goodsService")
-public class GoodsServiceImpl implements GoodsService{
-	
-	private static final Logger logger = LoggerFactory.getLogger(GoodsServiceImpl.class);
+@Service
+public class GoodsServiceImpl extends SuperServiceImpl<GoodsMapper, Goods> implements IGoodsService {
 	
 	@Autowired
 	private GoodsMapper goodsMapper;
-
+	
 	@Override
-	public int createGoods(Goods goods) {
-		return goodsMapper.createGoods(goods);
+	public List<Goods> selectGoodsList(Integer count, String condition, Integer status) {
+		QueryGoods queryGoods = new QueryGoods();
+		queryGoods.setCount(count);
+		queryGoods.setCondition(condition);
+		queryGoods.setStatus(status);
+		return goodsMapper.selectGoodsList(queryGoods);
 	}
 
 	@Override
-	public void updateGoods(Goods goods) {
-		goodsMapper.updateGoods(goods);
-	}
-
-	@Override
-	public Goods queryGoodsById(Integer goodsId) {
-		return goodsMapper.queryGoodsById(goodsId);
-	}
-
-	@Override
-	public List<Goods> queryGoods(QueryGoods queryGoods) {
-		Map<String,Object> parameter = new HashMap<String, Object>();
-		parameter.put("queryGoods", queryGoods);
-		return goodsMapper.queryGoods(parameter);
-	}
-
-	@Override
-	public int queryGoodsCount(QueryGoods queryGoods) {
-		Map<String,Object> parameter = new HashMap<String, Object>();
-		parameter.put("queryGoods", queryGoods);
-		return goodsMapper.queryGoodsCount(parameter);
-	}
-
-	@Override
-	public void updateGoodsCount(String type,int goodsId) {
-		Map<String,Object> parameter = new HashMap<String, Object>();
-		parameter.put("type", type);
-		parameter.put("goodsId", goodsId);
-		goodsMapper.updateGoodsCount(parameter);		
-	}
-
-	@Override
-	public void updateGoodsCountList(OrderMessage orderMessage) {
-		goodsMapper.updateGoodsCountList(orderMessage);
+	public List<Goods> selectGoodsListBySystem(QueryGoods queryGoods) {
+		return goodsMapper.selectGoodsList(queryGoods);
 	}
 	
 	@Override
-	public List<Goods> queryWebGoodsListPage(QueryGoods queryGoods,PageInfo pageInfo) {
+	public List<Goods> selectGoodsListByPage(QueryGoods queryGoods,
+			PageInfo pageInfo) {
+		int totalNumber = goodsMapper.selectGoodsCount(queryGoods);
+		queryGoods.setStatus(1);
+		pageInfo.setTotalNumber(totalNumber);//商品总数量
+		pageInfo.setpageNumber(12);//单页商品数量
 		Map<String,Object> parameter = new HashMap<String, Object>();
-		try{
-			int totalNumber = queryGoodsCount(queryGoods);
-			pageInfo.setTotalNumber(totalNumber);
-		}catch(Exception e){
-			logger.error("GoodsServiceImpl.queryWebGoodsListPage", e);
-		}
 		parameter.put("queryGoods", queryGoods);
 		parameter.put("pageInfo", pageInfo);
-		return goodsMapper.queryWebGoodsListPage(parameter);
+		return goodsMapper.selectGoodsListByPage(parameter);
 	}
 
+	@Override
+	public Goods selectGoodsByGoodsId(Integer goodsId) {
+		return goodsMapper.selectGoodsByGoodsId(goodsId);
+	}
 	
+	@Override
+	public Integer selectAllGoodsNumber(Integer status) {
+		QueryGoods queryGoods = new QueryGoods();
+		queryGoods.setStatus(status);
+		return goodsMapper.selectGoodsCount(queryGoods);
+	}
+
+	@Override
+	public void updateGoodsViewCount(Integer goodsId) {
+		goodsMapper.updateGoodsViewCount(goodsId);
+	}
+
+	@Override
+	public void updateGoodsPay(OrderMessage orderMessage) {
+		goodsMapper.updateGoodsPay(orderMessage);
+	}
+
+	@Override
+	public void updateGoodsStatus(Integer goodsId, Integer Status) {
+		Goods goods = new Goods();
+		goods.setGoodsId(goodsId);
+		goods.setStatus(Status);
+		goods.setUpdateTime(new Date());
+		goods.setUpdateBy(SingletonLoginUtils.getSystemUserName());
+		goodsMapper.updateSelectiveById(goods);
+	}
+
+	@Override
+	public void deleteGoods(Integer goodsId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

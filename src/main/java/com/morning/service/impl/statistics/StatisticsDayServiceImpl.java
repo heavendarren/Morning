@@ -57,16 +57,16 @@ public class StatisticsDayServiceImpl implements StatisticsDayService {
 	@Override
 	public int getOrderNumber(Date date, Integer orderState) {
 		Map<String,Object> parameter = new HashMap<String, Object>();
-		parameter.putIfAbsent("value", date);
-		parameter.putIfAbsent("orderState", orderState);
+		parameter.put("value", date);
+		parameter.put("orderState", orderState);
 		return statisticsDayMapper.getOrderNumber(parameter);
 	}
 
 	@Override
 	public double getPayNumber(Date date, Integer orderState) {
 		Map<String,Object> parameter = new HashMap<String, Object>();
-		parameter.putIfAbsent("value", date);
-		parameter.putIfAbsent("orderState", orderState);
+		parameter.put("value", date);
+		parameter.put("orderState", orderState);
 		return statisticsDayMapper.getPayNumber(parameter);
 	}
 

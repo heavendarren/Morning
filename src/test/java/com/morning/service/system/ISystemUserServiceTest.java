@@ -1,7 +1,5 @@
 package com.morning.service.system;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
 
 import org.junit.Test;

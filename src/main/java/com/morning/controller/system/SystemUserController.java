@@ -81,7 +81,7 @@ public class SystemUserController extends BaseController {
 	}
 
 	@InitBinder("queryUser")
-	private void initQueryUser(WebDataBinder dinder) {
+	public void initQueryUser(WebDataBinder dinder) {
 		dinder.setFieldDefaultPrefix("queryUser.");
 	}
 	

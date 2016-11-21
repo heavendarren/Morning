@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2016-11-06 23:51:12
+Date: 2016-11-22 02:48:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,7 @@ CREATE TABLE `tb_account` (
   `ACCOUNT_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
   `LOGIN_NAME` varchar(30) DEFAULT NULL COMMENT '昵称',
   `LOGIN_PASSWORD` varchar(64) DEFAULT NULL COMMENT '用户密码',
-  `CREATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
+  `CREATE_DATE` datetime DEFAULT NULL COMMENT '注册时间',
   `USER_NAME` varchar(20) DEFAULT NULL COMMENT '姓名',
   `USER_IDENTITY` varchar(18) DEFAULT NULL COMMENT '身份证',
   `PIC_IMG` varchar(255) DEFAULT NULL COMMENT '用户头像',
@@ -43,11 +43,9 @@ CREATE TABLE `tb_account` (
 -- ----------------------------
 -- Records of tb_account
 -- ----------------------------
-INSERT INTO `tb_account` VALUES ('1', '猫morning', 'a2f87176e717b96ed71e74dbd640f672', '2016-09-07 13:51:32', '陈星星', '332522199410131111', 'upload/icon/20161105/1478328675396.jpg', '5524551@qq.com', '18857107899', '2', null, '0', '0', '0', '1', '2016-11-05 11:06:58', '172.27.164.208');
+INSERT INTO `tb_account` VALUES ('1', '猫morning', 'a2f87176e717b96ed71e74dbd640f672', '2016-09-07 13:51:32', '陈星星', '332522199410131111', 'upload/icon/20161110/1478747550158.jpg', '5524551@qq.com', '18857107899', '0', null, '0', '0', '0', '1', '2016-11-10 03:11:06', '172.27.84.112');
 INSERT INTO `tb_account` VALUES ('136', '猫宁morning.', 'a2f87176e717b96ed71e74dbd640f672', '2016-05-15 00:54:33', '猫123', '332522199410130030', null, '81017051@qq.com', '18857105127', '1', '21', null, '0', '0', '1', '2016-10-17 00:07:13', '127.0.0.1');
-INSERT INTO `tb_account` VALUES ('137', '穿鞋子的猫', 'a2f87176e717b96ed71e74dbd640f672', '2016-10-12 00:37:11', '陈星星', '332522199410130030', 'upload/icon/20161026/1477472881280.jpg', '810170512@qq.com', '18857105137', '0', null, '0', '0', '0', '1', '2016-11-06 15:20:31', '172.18.56.48');
-INSERT INTO `tb_account` VALUES ('140', '持续性', null, '2016-10-27 23:53:11', '持续性', '332522199410130030', null, '81070@qq.com', '18857105178', '0', '0', '0', '0', '0', '1', null, null);
-INSERT INTO `tb_account` VALUES ('145', '白夜', '123456', '2016-10-28 00:59:16', '陈星星', '332522199410130030', null, '81062@qq.com', '18464968798', '0', '0', '0', '0', '0', '1', null, null);
+INSERT INTO `tb_account` VALUES ('137', '穿鞋子的猫', 'a2f87176e717b96ed71e74dbd640f672', '2016-10-12 00:37:11', '陈星星', '332522199410130030', 'upload/icon/20161109/1478698272739.jpg', '810170512@qq.com', '18857105137', '1', '0', '0', '0', '0', '1', '2016-11-21 17:52:29', '172.18.52.190');
 
 -- ----------------------------
 -- Table structure for tb_account_address
@@ -69,7 +67,7 @@ CREATE TABLE `tb_account_address` (
   `ORDER_USER_ADDRESS` varchar(255) DEFAULT NULL COMMENT '详细地址',
   PRIMARY KEY (`ADDRESS_ID`),
   KEY `ACCOUNT_ID` (`ACCOUNT_ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_account_address
@@ -80,7 +78,8 @@ INSERT INTO `tb_account_address` VALUES ('18', '132', '陈星星', '18857106123'
 INSERT INTO `tb_account_address` VALUES ('20', '132', '陈星星', '12345678909', '公司', '44', '上海市', '45', '上海市', '48', '徐汇区', '123456', '大森服饰发送发送粉');
 INSERT INTO `tb_account_address` VALUES ('21', '132', '陈彦晓', '18857105127', '公司', '1', '北京市', '2', '北京市', '9', '石景山区', '123456', '古典风格豆腐干地方个');
 INSERT INTO `tb_account_address` VALUES ('22', '135', '陈星星', '18857105127', '学校', '1371', '浙江省', '1372', '杭州市', '1379', '余杭区', '321100', '海曙路58号（杭州师范大学）');
-INSERT INTO `tb_account_address` VALUES ('23', '137', '沉香', '18857105127', '公司', '406', '山西省', '451', '阳泉市', '454', '郊区', '332101', '竹阳街66号');
+INSERT INTO `tb_account_address` VALUES ('23', '137', '沉香', '18857105127', '公司', '406', '山西省', '451', '阳泉市', '64', '崇明县', '332101', '竹阳街66号');
+INSERT INTO `tb_account_address` VALUES ('24', '1', '陈星星', '18857105127', '家', '108', '河北省', '176', '承德市', '179', '鹰手营子矿区', '326510', '垦丰大街33-2');
 
 -- ----------------------------
 -- Table structure for tb_account_login_log
@@ -94,7 +93,7 @@ CREATE TABLE `tb_account_login_log` (
   `OPERATING_SYSTEM` varchar(50) DEFAULT NULL COMMENT '操作系统',
   `BROWSER` varchar(50) DEFAULT NULL COMMENT '浏览器',
   PRIMARY KEY (`LOG_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=312 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=339 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_account_login_log
@@ -158,19 +157,46 @@ INSERT INTO `tb_account_login_log` VALUES ('308', '2016-11-05 11:45:59', '172.27
 INSERT INTO `tb_account_login_log` VALUES ('309', '2016-11-05 11:46:30', '172.27.164.208', '137', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `tb_account_login_log` VALUES ('310', '2016-11-05 11:46:46', '172.27.164.208', '137', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `tb_account_login_log` VALUES ('311', '2016-11-06 15:20:31', '172.18.56.48', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('312', '2016-11-07 12:41:25', '172.27.242.130', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('313', '2016-11-07 14:04:32', '192.168.16.148', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('314', '2016-11-07 15:00:17', '192.168.16.148', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('315', '2016-11-07 16:44:26', '172.18.54.35', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('316', '2016-11-09 08:35:26', '172.27.58.216', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('317', '2016-11-09 09:06:19', '172.27.58.216', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('318', '2016-11-09 11:05:09', '172.18.48.243', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('319', '2016-11-09 13:16:54', '172.18.48.243', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('320', '2016-11-09 13:30:31', '172.18.48.243', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('321', '2016-11-09 13:46:08', '172.18.48.243', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('322', '2016-11-09 15:12:59', '172.18.48.243', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('323', '2016-11-09 15:28:21', '172.18.48.243', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('324', '2016-11-09 16:16:57', '172.18.48.243', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('325', '2016-11-09 16:45:27', '172.18.48.243', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('326', '2016-11-09 17:14:13', '172.18.48.243', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('327', '2016-11-10 03:09:23', '172.27.84.112', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('328', '2016-11-10 03:11:06', '172.27.84.112', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('329', '2016-11-10 03:25:21', '172.27.84.112', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('330', '2016-11-10 03:32:36', '172.27.86.153', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('331', '2016-11-10 04:09:02', '172.27.86.153', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('332', '2016-11-10 04:29:55', '172.27.86.153', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('333', '2016-11-10 05:22:11', '172.27.86.153', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('334', '2016-11-10 05:58:30', '172.27.86.153', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('335', '2016-11-10 06:29:07', '172.27.86.153', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('336', '2016-11-14 17:12:41', '172.18.59.142', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('337', '2016-11-21 06:01:53', '172.27.200.76', '137', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_account_login_log` VALUES ('338', '2016-11-21 17:52:29', '172.18.52.190', '137', 'WINDOWS_10', 'CHROME45');
 
 -- ----------------------------
 -- Table structure for tb_goods
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_goods`;
 CREATE TABLE `tb_goods` (
-  `GOODS_ID` int(9) NOT NULL COMMENT '商品编号',
+  `GOODS_ID` int(9) NOT NULL COMMENT '商品ID',
+  `GOODS_NUMBER` varchar(20) DEFAULT NULL COMMENT '商品编号',
   `GOODS_NAME` varchar(300) DEFAULT NULL COMMENT '商品名称',
   `GOODS_PRICE` double(10,2) DEFAULT '0.00' COMMENT '商品价格',
   `GOODS_DESCRIPT` varchar(255) DEFAULT '' COMMENT '商品描述',
   `GOODS_CONTEXT` longtext COMMENT '商品详情',
   `GOODS_IMAGENAME` varchar(255) DEFAULT '' COMMENT '图片路径',
-  `GOODS_DATE` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   `GOODS_BUY_NUM` int(9) DEFAULT '0' COMMENT '销售数量',
   `GOODS_VIEW_NUM` int(9) DEFAULT '0' COMMENT '游览数量',
   `GOODS_SAVE_INFO` int(9) DEFAULT '0' COMMENT '库存信息',
@@ -178,81 +204,89 @@ CREATE TABLE `tb_goods` (
   `GOODS_REVIEWS` int(9) DEFAULT '0' COMMENT '评论数量',
   `GOODS_FAVORITES` int(9) DEFAULT '0' COMMENT '收藏数量',
   `CLASSIFY_ID` int(9) DEFAULT NULL COMMENT '商品类别',
-  PRIMARY KEY (`GOODS_ID`),
-  KEY `CLASSIFY_ID` (`CLASSIFY_ID`)
+  `STATUS` int(1) DEFAULT '0' COMMENT '状态：1.上架；0.下架',
+  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建者',
+  `UPDATE_TIME` datetime DEFAULT NULL COMMENT '更新时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
+  PRIMARY KEY (`GOODS_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_goods
 -- ----------------------------
-INSERT INTO `tb_goods` VALUES ('1', '随身WIFI 8GB U盘版', '49.90', '随身上网神器，内置8GB U盘', null, '1', '2016-05-18 15:04:47', '651', '440', '304', '54', '67', '0', '4');
-INSERT INTO `tb_goods` VALUES ('2', '智能摄像机', '266.00', '能看能听能说，手机远程观看', null, '2', '2016-05-18 15:04:54', '786', '62', '456', '0', '786', '0', '6');
-INSERT INTO `tb_goods` VALUES ('3', '猫宁体重称', '166.00', '高精度压力传感器 ｜ 手机管理全家健康', null, '3', '2016-05-18 15:04:54', '78', '10', '53', '7', '15', '0', '6');
-INSERT INTO `tb_goods` VALUES ('4', '运动机', '499.00', '边玩边录边拍，手机随时分享', null, '4', '2016-05-18 15:04:54', '159', '37', '450', '78', '453', '0', '6');
-INSERT INTO `tb_goods` VALUES ('5', '猫宁路由器 mini', '188.00', '主流双频AC智能路由器，性价比之王', null, '5', '2016-06-01 15:04:54', '785', '30', '66', '45', '45', '0', '3');
-INSERT INTO `tb_goods` VALUES ('6', '智能插座', '66.00', '手机远程遥控开关，带USB接口', null, '6', '2016-05-18 15:04:54', '54', '5', '78', '7', '81', '0', '6');
-INSERT INTO `tb_goods` VALUES ('7', '水质TDS检测笔', '59.00', '准确检测家中水质纯度', null, '7', '2016-05-04 15:04:54', '874', '3', '451', '78', '63', '0', '6');
-INSERT INTO `tb_goods` VALUES ('8', '猫宁电视', '3999.00', '猫宁电视，40/48/49/55英寸 现货购买', null, '8', '2016-05-12 15:04:54', '881', '12', '1565', '45', '15', '0', '2');
-INSERT INTO `tb_goods` VALUES ('9', '平板电脑', '1999.00', '全球首款 NVIDIA Tegra K1 平板', null, '9', '2016-05-18 15:04:54', '457', '2', '345', '3', '34', '0', '1');
-INSERT INTO `tb_goods` VALUES ('10', '电视机顶盒', '599.00', '首款4K超高清网络机顶盒', null, '10', '2016-05-27 15:04:54', '78', '5', '15', '86', '86', '0', '3');
-INSERT INTO `tb_goods` VALUES ('11', '全新猫宁路由器', '378.00', '顶配路由器，企业级性能', null, '11', '2016-05-18 15:04:54', '458', '15', '875', '67', '31', '0', '3');
-INSERT INTO `tb_goods` VALUES ('12', '头戴式耳机', '577.00', '媲美主流千元级头戴耳机', null, '12', '2016-05-18 15:04:54', '1000', '17', '451', '78', '78', '0', '7');
-INSERT INTO `tb_goods` VALUES ('13', '插线板', '159.00', '3重安全保护，插线板中的艺术品', null, '13', '2016-05-25 15:04:54', '546', '0', '451', '478', '68', '0', '6');
-INSERT INTO `tb_goods` VALUES ('14', '移动电源10000mAh', '99.00', '手机充电宝，高密度进口电芯，仅名片大小', null, '14', '2016-05-18 15:04:54', '787', '21', '451', '67', '786', '0', '8');
-INSERT INTO `tb_goods` VALUES ('15', '蓝牙耳机', '355.00', '手机蓝牙耳机，2015德国IF大奖，高清通话音质', null, '15', '2016-05-18 15:04:47', '768', '2', '451', '67', '78', '0', '7');
-INSERT INTO `tb_goods` VALUES ('16', '活塞耳机', '3999.00', '2015红点奖，独家音质优化专利', null, '16', '2016-05-18 15:04:47', '948', '2', '48', '78', '68', '0', '7');
-INSERT INTO `tb_goods` VALUES ('17', '智能电视', '3999.00', '43\" / 48\" / 55\" / 60\" / 70\" 高端旗舰', null, '17', '2016-05-25 15:04:47', '78', '4', '45', '6', '7', '0', '2');
-INSERT INTO `tb_goods` VALUES ('18', '空气净化器', '699.00', '10 分钟，房间空气焕然一新', null, '18', '2016-05-18 15:04:47', '94', '12', '876', '67', '86', '0', '6');
-INSERT INTO `tb_goods` VALUES ('19', '手环 光感版', '129.00', '心率、运动、睡眠全掌控', null, '19', '2016-05-18 15:04:47', '89', '46', '441', '7', '89', '0', '4');
-INSERT INTO `tb_goods` VALUES ('20', '平板电脑', '1399.00', '快、轻薄、美，青春五色可选', null, '20', '2016-05-18 15:04:47', '45', '8', '45', '67', '73', '0', '1');
-INSERT INTO `tb_goods` VALUES ('21', '猫宁手机', '3999.00', '工艺和手感超乎想象，很轻很快', null, '20', '2016-05-18 15:04:47', '1001', '4', '450', '0', '0', '0', '1');
-INSERT INTO `tb_goods` VALUES ('22', '平衡车', '1999.00', '年轻人的酷玩具，骑行遥控两种玩法', null, '22', '2016-05-18 15:04:47', '167', '0', '156', '187', '18', '0', '6');
-INSERT INTO `tb_goods` VALUES ('35', '猫宁平板', '5999.00', '全球首款 NVIDIA Tegra K1 平板', null, '35', '2016-06-05 18:37:02', '1006', '24', '445', '456', '456', '0', '1');
-INSERT INTO `tb_goods` VALUES ('36', '猫宁手机', '2666.00', '快、轻薄、美，青春五色可选', null, '36', '2016-06-08 02:59:16', '456', '8', '78', '157', '86', '0', '0');
-INSERT INTO `tb_goods` VALUES ('37', '电视 65英寸 曲面', '8999.00', '家庭影院，享受家的温暖', null, '37', '2016-06-08 03:02:20', '170', '10', '47', '16', '17', '0', '2');
-INSERT INTO `tb_goods` VALUES ('38', '尊享版手机', '4999.00', '4 轴防抖相机，3D陶瓷 / 玻璃机身', null, '38', '2016-06-08 03:03:45', '165', '9', '748', '41', '62', '0', '0');
-INSERT INTO `tb_goods` VALUES ('39', '苹果6s', '4999.00', '一小部的一大步', null, '40', '2016-06-08 03:06:45', '39', '21', '75', '87', '86', '0', '0');
-INSERT INTO `tb_goods` VALUES ('40', '测试商品1', '99.00', '描述描述描述描述', null, '40', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('41', '测试商品2', '99.00', '描述描述描述描述', null, '40', '2016-05-18 15:04:47', '0', '8', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('42', '测试商品3', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '1', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('43', '测试商品4', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '2', null, '0', '0', '0', '5');
-INSERT INTO `tb_goods` VALUES ('44', '测试商品5', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('45', '测试商品6', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('46', '测试商品7', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '2', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('47', '测试商品8', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('48', '测试商品9', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('49', '测试商品10', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('50', '测试商品11', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('51', '测试商品12', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('52', '测试商品13', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('53', '测试商品14', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('54', '测试商品15', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('55', '测试商品16', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('56', '测试商品17', '99.00', '描述描述描述描述', null, '1', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
-INSERT INTO `tb_goods` VALUES ('57', '测试商品18', '99.00', '描述描述描述描述', null, '11', '2016-05-18 15:04:47', '0', '0', null, '0', '0', '0', '6');
+INSERT INTO `tb_goods` VALUES ('1', '1472581220748', '随身WIFI 8GB U盘版', '49.90', '随身上网神器，内置8GB U盘', null, '1', '704', '591', '251', '54', '67', '0', '4', '0', '2016-06-30 02:20:15', '穿鞋子的猫', '2016-11-21 17:51:26', '猫宁');
+INSERT INTO `tb_goods` VALUES ('2', '1472581245880', '智能摄像机', '266.00', '能看能听能说，手机远程观看', null, '2', '786', '68', '456', '0', '786', '0', '6', '0', '2016-08-31 02:20:37', '穿鞋子的猫', '2016-11-21 17:51:29', '猫宁');
+INSERT INTO `tb_goods` VALUES ('3', '1472581300305', '猫宁体重称', '166.00', '高精度压力传感器 ｜ 手机管理全家健康', null, '3', '78', '10', '53', '7', '15', '0', '6', '1', '2016-08-31 02:21:31', '猫宁管理员', '2016-11-21 14:59:22', '猫宁');
+INSERT INTO `tb_goods` VALUES ('4', '1472583774201', '运动机', '499.00', '边玩边录边拍，手机随时分享', null, '4', '159', '39', '450', '78', '453', '0', '6', '1', '2016-08-31 03:02:47', '穿鞋子的猫', '2016-11-21 14:40:01', '猫宁');
+INSERT INTO `tb_goods` VALUES ('5', '1472583831117', '猫宁路由器 mini', '188.00', '主流双频AC智能路由器，性价比之王', null, '5', '785', '30', '66', '45', '45', '0', '3', '1', '2016-08-31 03:03:48', '穿鞋子的猫', '2016-11-21 14:40:03', '猫宁');
+INSERT INTO `tb_goods` VALUES ('6', '1472628630086', '智能插座', '66.00', '手机远程遥控开关，带USB接口', null, '6', '54', '7', '78', '7', '81', '0', '6', '1', '2016-08-31 15:30:22', '猫宁管理员', '2016-11-21 14:40:05', '猫宁');
+INSERT INTO `tb_goods` VALUES ('7', '1472736931796', '水质TDS检测笔', '59.00', '准确检测家中水质纯度', null, '7', '874', '3', '451', '78', '63', '0', '6', '1', '2016-09-01 21:35:27', '穿鞋子的猫', '2016-11-21 14:39:53', '猫宁');
+INSERT INTO `tb_goods` VALUES ('8', '1473318741286', '猫宁电视', '3999.00', '猫宁电视，40/48/49/55英寸 现货购买', null, '8', '881', '12', '1565', '45', '15', '0', '2', '1', '2016-09-08 15:12:14', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('9', '1473685327798', '平板电脑', '1999.00', '全球首款 NVIDIA Tegra K1 平板', null, '9', '457', '8', '345', '3', '34', '0', '1', '1', '2016-09-12 21:01:58', '猫宁管理员', '2016-11-21 14:39:58', '猫宁');
+INSERT INTO `tb_goods` VALUES ('10', '1474910562755', '电视机顶盒', '599.00', '首款4K超高清网络机顶盒', null, '10', '79', '11', '14', '86', '86', '0', '3', '1', '2016-10-02 01:22:39', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('11', '1475353900453', '全新猫宁路由器', '378.00', '顶配路由器，企业级性能', null, '11', '458', '15', '875', '67', '31', '0', '3', '1', '2016-10-02 04:31:38', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('12', '1475353918562', '头戴式耳机', '577.00', '媲美主流千元级头戴耳机', null, '12', '1000', '19', '451', '78', '78', '0', '7', '1', '2016-10-02 04:31:54', '猫宁管理员', null, null);
+INSERT INTO `tb_goods` VALUES ('13', '1475354006972', '插线板', '159.00', '3重安全保护，插线板中的艺术品', null, '13', '546', '0', '451', '478', '68', '0', '6', '1', '2016-10-02 04:33:21', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('14', '1475407186147', '移动电源10000mAh', '99.00', '手机充电宝，高密度进口电芯，仅名片大小', null, '14', '787', '25', '451', '67', '786', '0', '8', '1', '2016-10-08 19:19:39', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('15', '1475947762038', '蓝牙耳机', '355.00', '手机蓝牙耳机，2015德国IF大奖，高清通话音质', null, '15', '768', '2', '451', '67', '78', '0', '7', '1', '2016-10-11 01:29:12', '猫宁管理员', null, null);
+INSERT INTO `tb_goods` VALUES ('16', '1475996329018', '活塞耳机', '3999.00', '2015红点奖，独家音质优化专利', null, '16', '948', '6', '48', '78', '68', '0', '7', '1', '2016-10-12 14:58:42', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('17', '1477472951669', '智能电视', '3999.00', '43\" / 48\" / 55\" / 60\" / 70\" 高端旗舰', null, '17', '78', '6', '45', '6', '7', '0', '2', '1', '2016-10-26 17:09:03', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('18', '1478099883634', '空气净化器', '699.00', '10 分钟，房间空气焕然一新', null, '18', '94', '12', '876', '67', '86', '0', '6', '1', '2016-11-02 23:17:54', '猫宁管理员', null, null);
+INSERT INTO `tb_goods` VALUES ('19', '1478522533460', '手环 光感版', '129.00', '心率、运动、睡眠全掌控', null, '19', '89', '48', '441', '7', '89', '0', '4', '1', '2016-11-07 20:42:07', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('20', '1478527872182', '平板电脑', '1399.00', '快、轻薄、美，青春五色可选', null, '20', '45', '14', '45', '67', '73', '0', '1', '1', '2016-11-07 22:11:06', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('21', '1478680540669', '猫宁手机', '3999.00', '工艺和手感超乎想象，很轻很快', null, '20', '1002', '10', '449', '0', '0', '0', '1', '1', '2016-11-09 16:35:34', '猫宁管理员', null, null);
+INSERT INTO `tb_goods` VALUES ('22', '1478682438293', '平衡车', '1999.00', '年轻人的酷玩具，骑行遥控两种玩法', null, '22', '167', '0', '156', '187', '18', '0', '6', '1', '2016-11-09 17:07:09', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('35', '1478682709405', '猫宁平板', '5999.00', '全球首款 NVIDIA Tegra K1 平板', null, '35', '1007', '44', '444', '456', '456', '0', '1', '1', '2016-11-09 17:11:42', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('36', '1478682831935', '猫宁手机', '2666.00', '快、轻薄、美，青春五色可选', null, '36', '456', '8', '78', '157', '86', '0', '0', '1', '2016-11-09 17:13:46', '猫宁管理员', null, null);
+INSERT INTO `tb_goods` VALUES ('37', '1478682893916', '电视 65英寸 曲面', '8999.00', '家庭影院，享受家的温暖', null, '37', '171', '12', '46', '16', '17', '0', '2', '1', '2016-11-09 17:14:45', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('38', '1478683391099', '尊享版手机', '4999.00', '4 轴防抖相机，3D陶瓷 / 玻璃机身', null, '38', '165', '9', '748', '41', '62', '0', '0', '1', '2016-11-09 17:23:07', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('39', '1478683407372', '苹果6s', '4999.00', '一小部的一大步', null, '40', '41', '35', '73', '87', '86', '0', '0', '1', '2016-11-09 17:23:23', '猫宁管理员', null, null);
+INSERT INTO `tb_goods` VALUES ('40', '1478683468241', '测试商品1', '99.00', '描述描述描述描述', null, '40', '0', '0', null, '0', '0', '0', '6', '1', '2016-11-09 17:24:22', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('41', '1478683499119', '测试商品2', '99.00', '描述描述描述描述', null, '40', '0', '8', null, '0', '0', '0', '6', '1', '2016-11-09 17:24:56', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('42', '1478683525234', '测试商品3', '99.00', '描述描述描述描述', null, '1', '0', '1', null, '0', '0', '0', '6', '1', '2016-11-09 17:25:19', '猫宁管理员', null, null);
+INSERT INTO `tb_goods` VALUES ('43', '1478683527344', '测试商品4', '99.00', '描述描述描述描述', null, '1', '0', '2', null, '0', '0', '0', '5', '1', '2016-11-09 17:25:23', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('44', '1478683543890', '测试商品5', '99.00', '描述描述描述描述', null, '1', '0', '0', null, '0', '0', '0', '6', '1', '2016-11-09 17:25:39', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('45', '1478683650841', '测试商品6', '99.00', '描述描述描述描述', null, '1', '0', '0', null, '0', '0', '0', '6', '1', '2016-11-09 17:27:25', '猫宁管理员', null, null);
+INSERT INTO `tb_goods` VALUES ('46', '1478684224499', '测试商品7', '99.00', '描述描述描述描述', null, '1', '0', '2', null, '0', '0', '0', '6', '1', '2016-11-09 17:36:57', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('47', '1478689524540', '测试商品8', '99.00', '描述描述描述描述', null, '1', '0', '0', null, '0', '0', '0', '6', '1', '2016-11-09 19:05:17', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('48', '1478690354384', '测试商品9', '99.00', '描述描述描述描述', null, '1', '0', '0', null, '0', '0', '0', '6', '1', '2016-11-09 19:19:07', '猫宁管理员', null, null);
+INSERT INTO `tb_goods` VALUES ('49', '1478690963682', '测试商品10', '99.00', '描述描述描述描述', null, '1', '0', '0', null, '0', '0', '0', '6', '1', '2016-11-09 19:29:16', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('50', '1478697442869', '测试商品11', '99.00', '描述描述描述描述', null, '1', '0', '0', null, '0', '0', '0', '6', '1', '2016-11-09 21:17:13', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('51', '1478699184025', '测试商品12', '99.00', '描述描述描述描述', null, '1', '0', '0', null, '0', '0', '0', '6', '1', '2016-11-09 21:46:15', '猫宁管理员', null, null);
+INSERT INTO `tb_goods` VALUES ('52', '1478700430279', '测试商品13', '99.00', '描述描述描述描述', null, '1', '0', '0', null, '0', '0', '0', '6', '1', '2016-11-09 22:07:02', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('53', '1478700648563', '测试商品14', '99.00', '描述描述描述描述', null, '1', '0', '0', null, '0', '0', '0', '6', '1', '2016-11-09 22:10:44', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('54', '1478700669943', '测试商品15', '99.00', '描述描述描述描述', null, '1', '0', '0', null, '0', '0', '0', '6', '1', '2016-11-09 22:11:08', '猫宁管理员', null, null);
+INSERT INTO `tb_goods` VALUES ('55', '1478700852832', '测试商品16', '99.00', '描述描述描述描述', null, '1', '0', '0', null, '0', '0', '0', '6', '1', '2016-11-09 22:14:10', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('56', '1478701196056', '测试商品17', '99.00', '描述描述描述描述', null, '1', '0', '2', null, '0', '0', '0', '6', '1', '2016-11-09 22:19:53', '穿鞋子的猫', null, null);
+INSERT INTO `tb_goods` VALUES ('57', '1478701473277', '测试商品18', '99.00', '描述描述描述描述', null, '11', '0', '2', null, '0', '0', '0', '6', '1', '2016-11-09 22:24:28', '猫宁管理员', '2016-11-21 14:39:51', '猫宁');
 
 -- ----------------------------
 -- Table structure for tb_goods_classify
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_goods_classify`;
 CREATE TABLE `tb_goods_classify` (
-  `CLASSIFY_ID` int(9) NOT NULL,
-  `CLASSIFY_NAME` varchar(30) NOT NULL,
+  `CLASSIFY_ID` int(9) NOT NULL AUTO_INCREMENT COMMENT '类目ID',
+  `CLASSIFY_NAME` varchar(30) CHARACTER SET utf8 DEFAULT NULL COMMENT '类目名称',
+  `CLASSIFY_SORT` int(3) DEFAULT NULL COMMENT '类目排序',
+  `CLASSIFY_NAV_SORT` int(3) DEFAULT NULL COMMENT '导航栏类目排序',
+  `CLASSIFY_STATUS` int(1) DEFAULT '1' COMMENT '状态：1.显示；0.隐藏',
+  `CLASSIFY_NAV_STATUS` int(1) DEFAULT '1' COMMENT '导航状态：1.显示；0.隐藏',
   PRIMARY KEY (`CLASSIFY_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of tb_goods_classify
 -- ----------------------------
-INSERT INTO `tb_goods_classify` VALUES ('0', '猫宁手机');
-INSERT INTO `tb_goods_classify` VALUES ('1', '猫宁平板');
-INSERT INTO `tb_goods_classify` VALUES ('2', '电视');
-INSERT INTO `tb_goods_classify` VALUES ('3', '路由器');
-INSERT INTO `tb_goods_classify` VALUES ('4', '配件');
-INSERT INTO `tb_goods_classify` VALUES ('5', '笔记本');
-INSERT INTO `tb_goods_classify` VALUES ('6', '智能家具');
-INSERT INTO `tb_goods_classify` VALUES ('7', '耳机');
-INSERT INTO `tb_goods_classify` VALUES ('8', '移动电源');
+INSERT INTO `tb_goods_classify` VALUES ('1', '猫宁平板', '1', '1', '1', '1');
+INSERT INTO `tb_goods_classify` VALUES ('2', '猫宁手机', '2', '2', '1', '1');
+INSERT INTO `tb_goods_classify` VALUES ('3', '电视', '3', '3', '1', '1');
+INSERT INTO `tb_goods_classify` VALUES ('4', '路由器', '4', '4', '1', '1');
+INSERT INTO `tb_goods_classify` VALUES ('5', '配件', '5', '5', '1', '1');
+INSERT INTO `tb_goods_classify` VALUES ('6', '笔记本', '6', '6', '1', '1');
+INSERT INTO `tb_goods_classify` VALUES ('7', '智能家具', '7', '7', '1', '1');
+INSERT INTO `tb_goods_classify` VALUES ('8', '耳机', '8', '8', '1', '1');
+INSERT INTO `tb_goods_classify` VALUES ('9', '移动电源', '9', '9', '1', '1');
 
 -- ----------------------------
 -- Table structure for tb_goods_favorites
@@ -293,48 +327,230 @@ INSERT INTO `tb_goods_picture` VALUES ('4', '1', '0', 'upload/goods/20160822/147
 INSERT INTO `tb_goods_picture` VALUES ('5', '1', '1', 'upload/goods/20160822/1471798587971.jpg');
 
 -- ----------------------------
+-- Table structure for tb_goods_spec
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_goods_spec`;
+CREATE TABLE `tb_goods_spec` (
+  `SPEC_ID` int(9) NOT NULL AUTO_INCREMENT COMMENT '商品规则ID',
+  `GOODS_ID` int(9) DEFAULT NULL COMMENT '商品ID',
+  `SPEC_COLOR` varchar(20) DEFAULT NULL COMMENT '商品颜色',
+  `SPEC_SIZE` varchar(20) DEFAULT NULL COMMENT '商品尺寸',
+  `SPEC_PRICE` double(10,2) DEFAULT NULL,
+  `SPEC_SAVE_INFO` int(9) DEFAULT NULL COMMENT '库存信息',
+  `SPEC_STATUS` int(1) DEFAULT NULL COMMENT '状态：1.上架；0.下架',
+  PRIMARY KEY (`SPEC_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of tb_goods_spec
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for tb_order
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_order`;
 CREATE TABLE `tb_order` (
-  `ORDER_ID` int(9) NOT NULL AUTO_INCREMENT COMMENT '订单编号',
+  `ORDER_ID` int(9) NOT NULL AUTO_INCREMENT COMMENT '订单ID',
   `ORDER_NUMBER` varchar(20) DEFAULT NULL COMMENT '订单编号',
   `ACCOUNT_ID` int(9) DEFAULT NULL COMMENT '用户ID',
-  `ORDER_DATE` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '下单时间',
+  `ORDER_DATE` datetime DEFAULT NULL COMMENT '下单时间',
   `TOTAL_MONEY` double(9,2) DEFAULT NULL COMMENT '订单总金额',
   `ORDER_STATE` int(1) DEFAULT '1' COMMENT '订单状态',
   `ADDRESS_ID` int(9) DEFAULT NULL COMMENT '地址编号',
   `PAY_TYPE` int(1) DEFAULT '0' COMMENT '支付方式（1：在线支付）',
+  `PAY_STATUS` int(1) DEFAULT '0' COMMENT '支付状态：1.支付，0.未支付',
+  `PAYMENT` varchar(255) DEFAULT NULL COMMENT '支付平台',
   `SEND_TYPE` int(1) DEFAULT '0' COMMENT '配送方式（1：快递配送）',
   `SEND_TIME` int(1) DEFAULT '0' COMMENT '送货时间（1：不限送货时间 2：工作日发货 3： 双休日发货）',
   `INVOICEL_TYPE` int(1) DEFAULT '0' COMMENT '发票类型',
   `INVOICEL_TITLE` varchar(50) DEFAULT NULL COMMENT '发票内容',
   `USER_MESSAGE` varchar(255) DEFAULT NULL COMMENT '会员留言',
-  PRIMARY KEY (`ORDER_ID`),
-  KEY `ACCOUNT_ID` (`ACCOUNT_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`ORDER_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_order
 -- ----------------------------
-INSERT INTO `tb_order` VALUES ('41', '1472581220748', '136', '2016-06-30 02:20:15', '199.60', '1', '15', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('42', '1472581245880', '136', '2016-08-31 02:20:37', '6098.80', '2', '15', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('43', '1472581300305', '136', '2016-08-31 02:21:31', '894.50', '3', '15', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('44', '1472583774201', '136', '2016-08-31 03:02:47', '49.90', '4', '15', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('45', '1472583831117', '136', '2016-08-31 03:03:48', '499.00', '1', '18', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('46', '1472628630086', '132', '2016-08-31 15:30:22', '4999.00', '1', '15', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('47', '1472736931796', '132', '2016-09-01 21:35:27', '378.00', '1', '18', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('48', '1473318741286', '135', '2016-09-08 15:12:14', '188.00', '2', '22', '1', '1', '2', '1', '', '');
-INSERT INTO `tb_order` VALUES ('49', '1473685327798', '135', '2016-09-12 21:01:58', '4999.00', '1', '22', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('50', '1474910562755', '135', '2016-10-02 01:22:39', '9998.00', '1', '22', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('51', '1475353900453', '135', '2016-10-02 04:31:38', '49.90', '1', '22', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('52', '1475353918562', '135', '2016-10-02 04:31:54', '49.90', '1', '22', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('53', '1475354006972', '135', '2016-10-02 04:33:21', '129.00', '2', '22', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('54', '1475407186147', '135', '2016-10-08 19:19:39', '3999.00', '2', '22', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('55', '1475947762038', '135', '2016-10-11 01:29:12', '49.90', '2', '22', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('56', '1475996329018', '135', '2016-10-12 14:58:42', '88.90', '2', '22', '1', '1', '1', '4', '', '');
-INSERT INTO `tb_order` VALUES ('57', '1477472951669', '137', '2016-10-26 17:09:03', '49.90', '1', '23', '1', '1', '1', '4', '', '尽快送达！');
-INSERT INTO `tb_order` VALUES ('58', '1478099883634', '137', '2016-11-02 23:17:54', '129.00', '1', '23', '1', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('41', '1472581220748', '136', '2016-06-30 02:20:15', '199.60', '1', '15', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('42', '1472581245880', '136', '2016-08-31 02:20:37', '6098.80', '2', '15', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('43', '1472581300305', '136', '2016-08-31 02:21:31', '894.50', '3', '15', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('44', '1472583774201', '136', '2016-08-31 03:02:47', '49.90', '4', '15', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('45', '1472583831117', '136', '2016-08-31 03:03:48', '499.00', '1', '18', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('46', '1472628630086', '132', '2016-08-31 15:30:22', '4999.00', '1', '15', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('47', '1472736931796', '132', '2016-09-01 21:35:27', '378.00', '1', '18', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('48', '1473318741286', '135', '2016-09-08 15:12:14', '188.00', '2', '22', '1', '0', null, '1', '2', '1', '', '');
+INSERT INTO `tb_order` VALUES ('49', '1473685327798', '135', '2016-09-12 21:01:58', '4999.00', '1', '22', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('50', '1474910562755', '135', '2016-10-02 01:22:39', '9998.00', '1', '22', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('51', '1475353900453', '135', '2016-10-02 04:31:38', '49.90', '1', '22', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('52', '1475353918562', '135', '2016-10-02 04:31:54', '49.90', '1', '22', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('53', '1475354006972', '135', '2016-10-02 04:33:21', '129.00', '2', '22', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('54', '1475407186147', '135', '2016-10-08 19:19:39', '3999.00', '2', '22', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('55', '1475947762038', '135', '2016-10-11 01:29:12', '49.90', '2', '22', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('56', '1475996329018', '135', '2016-10-12 14:58:42', '88.90', '2', '22', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('57', '1477472951669', '137', '2016-10-26 17:09:03', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '尽快送达！');
+INSERT INTO `tb_order` VALUES ('58', '1478099883634', '137', '2016-11-02 23:17:54', '129.00', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('59', '1478522533460', '137', '2016-11-07 20:42:07', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('60', '1478527872182', '137', '2016-11-07 22:11:06', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('62', '1478680540669', '137', '2016-11-09 16:35:34', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('63', '1478682438293', '137', '2016-11-09 17:07:09', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('64', '1478682709405', '137', '2016-11-09 17:11:42', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('65', '1478682831935', '137', '2016-11-09 17:13:46', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('66', '1478682893916', '137', '2016-11-09 17:14:45', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('67', '1478683391099', '137', '2016-11-09 17:23:07', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('68', '1478683407372', '137', '2016-11-09 17:23:23', null, '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('69', '1478683468241', '137', '2016-11-09 17:24:22', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('70', '1478683499119', '137', '2016-11-09 17:24:56', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('71', '1478683525234', '137', '2016-11-09 17:25:19', null, '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('72', '1478683527344', '137', '2016-11-09 17:25:23', null, '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('73', '1478683543890', '137', '2016-11-09 17:25:39', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('74', '1478683650841', '137', '2016-11-09 17:27:25', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('75', '1478684224499', '137', '2016-11-09 17:36:57', '49.90', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('76', '1478689524540', '137', '2016-11-09 19:05:17', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('77', '1478690354384', '137', '2016-11-09 19:19:07', '49.90', '1', '23', '1', '0', null, '1', '1', '1', '', '');
+INSERT INTO `tb_order` VALUES ('78', '1478690963682', '137', '2016-11-09 19:29:16', '99.80', null, '23', '1', '1', 'CBC', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('79', '1478697442869', '137', '2016-11-09 21:17:13', '99.80', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('80', '1478699184025', '137', '2016-11-09 21:46:15', '99.80', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('81', '1478700430279', '137', '2016-11-09 22:07:02', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('82', '1478700648563', '137', '2016-11-09 22:10:44', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('83', '1478700669943', '137', '2016-11-09 22:11:08', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('84', '1478700852832', '137', '2016-11-09 22:14:10', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('85', '1478701196056', '137', '2016-11-09 22:19:53', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('86', '1478701473277', '137', '2016-11-09 22:24:28', '8999.00', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('87', '1478701681624', '137', '2016-11-09 22:28:00', '5048.90', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('88', '1478704395487', '137', '2016-11-09 23:13:05', '99.80', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('89', '1478704606175', '137', '2016-11-09 23:16:44', '49.90', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('90', '1478705327483', '137', '2016-11-09 23:28:44', '49.90', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('91', '1478705643826', '137', '2016-11-09 23:34:02', '49.90', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('92', '1478705790066', '137', '2016-11-09 23:36:28', '49.90', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('93', '1478706019021', '137', '2016-11-09 23:40:10', '49.90', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('94', '1478706037375', '137', '2016-11-09 23:40:28', '49.90', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('95', '1478706084516', '137', '2016-11-09 23:41:18', '49.90', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('96', '1478706142369', '137', '2016-11-09 23:42:17', '49.90', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('97', '1478706346207', '137', '2016-11-09 23:45:38', '49.90', '5', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('98', '1478706854203', '137', '2016-11-09 23:54:04', '49.90', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('99', '1478706891004', '137', '2016-11-09 23:54:41', '599.00', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('100', '1478708228238', '137', '2016-11-10 00:17:04', '99.80', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('101', '1478708288510', '137', '2016-11-10 00:18:01', '49.90', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('102', '1478708369390', '137', '2016-11-10 00:19:22', '49.90', '5', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('103', '1478711662034', '137', '2016-11-10 01:14:20', '99.80', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('104', '1478711970879', '137', '2016-11-10 01:19:28', '99.80', '0', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('105', '1478712045156', '137', '2016-11-10 01:20:36', '49.90', '1', '23', '1', '0', null, '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('106', '1478747529742', '1', null, '49.90', '2', '24', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('107', '1478748331460', '137', null, '99.80', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('108', '1478748767464', '137', '2016-11-10 03:32:45', '49.90', '3', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('109', '1478749123261', '137', '2016-11-10 03:38:35', '49.90', '3', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+INSERT INTO `tb_order` VALUES ('110', '1479750774332', '137', '2016-11-21 17:52:48', '14997.00', '2', '23', '1', '1', 'alipay', '1', '1', '4', '', '');
+
+-- ----------------------------
+-- Table structure for tb_order_log
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_order_log`;
+CREATE TABLE `tb_order_log` (
+  `LOG_ID` int(9) NOT NULL AUTO_INCREMENT COMMENT '日志编号',
+  `ORDER_NUMBER` varchar(20) DEFAULT NULL COMMENT '订单编号',
+  `ORDER_ID` int(9) DEFAULT NULL COMMENT '订单ID',
+  `CREATE_BY` varchar(64) DEFAULT NULL COMMENT '创建者',
+  `CREATE_TIME` datetime DEFAULT NULL COMMENT '创建时间',
+  `CONTENT` varchar(255) DEFAULT NULL COMMENT '订单记录内容',
+  `CREATE_TYPE` varchar(64) DEFAULT NULL COMMENT '操作人类型：w.会员；m.管理员',
+  PRIMARY KEY (`LOG_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of tb_order_log
+-- ----------------------------
+INSERT INTO `tb_order_log` VALUES ('1', '1478680540669', '62', '137', '2016-11-09 08:35:35', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('2', '1478682438293', '63', '137', '2016-11-09 09:07:10', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('3', '1478682709405', '64', '137', '2016-11-09 09:11:43', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('4', '1478682831935', '65', '137', '2016-11-09 09:13:47', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('5', '1478682893916', '66', '137', '2016-11-09 09:14:45', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('6', '1478683391099', '67', '137', '2016-11-09 09:23:07', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('7', '1478683407372', '68', '137', '2016-11-09 09:23:24', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('8', '1478683468241', '69', '137', '2016-11-09 09:24:23', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('9', '1478683499119', '70', '137', '2016-11-09 09:24:57', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('10', '1478683525234', '71', '137', '2016-11-09 09:25:19', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('11', '1478683527344', '72', '137', '2016-11-09 09:25:23', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('12', '1478683543890', '73', '137', '2016-11-09 09:25:40', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('13', '1478683650841', '74', '137', '2016-11-09 09:27:26', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('14', '1478684224499', '75', '137', '2016-11-09 09:36:57', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('15', '1478689524540', '76', '137', '2016-11-09 11:05:17', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('16', '1478690354384', '77', '137', '2016-11-09 11:19:08', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('17', '1478690963682', '78', '137', '2016-11-09 11:29:17', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('19', null, '78', 'null', '2016-11-09 12:25:09', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('20', '1478697442869', '79', '137', '2016-11-09 13:17:13', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('21', '1478699184025', '80', '137', '2016-11-09 13:46:16', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('22', '1478699184025', null, '137', '2016-11-09 13:49:22', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('23', '1478699184025', null, '137', '2016-11-09 13:49:34', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('24', '1478699184025', null, '137', '2016-11-09 13:51:14', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('25', '1478699184025', null, '137', '2016-11-09 13:52:53', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('26', '1478699184025', null, '137', '2016-11-09 13:53:08', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('27', '1478699184025', null, '137', '2016-11-09 13:55:25', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('28', '1478699184025', null, '137', '2016-11-09 14:04:52', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('29', '1478700430279', '81', '137', '2016-11-09 14:07:03', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('30', '1478700430279', null, '137', '2016-11-09 14:07:20', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('31', '1478700648563', '82', '137', '2016-11-09 14:10:45', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('32', '1478700669943', '83', '137', '2016-11-09 14:11:08', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('33', '1478700852832', '84', '137', '2016-11-09 14:14:10', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('34', '1478701196056', '85', '137', '2016-11-09 14:19:54', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('35', '1478701473277', '86', '137', '2016-11-09 14:24:28', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('36', '1478701681624', '87', '137', '2016-11-09 14:28:00', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('37', '1478701681624', '87', '137', '2016-11-09 14:31:11', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('38', '1478701681624', '87', '137', '2016-11-09 14:32:53', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('39', '1478701681624', '87', '137', '2016-11-09 14:33:37', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('40', '1478701681624', '87', '137', '2016-11-09 15:12:25', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('41', '1478704395487', '88', '137', '2016-11-09 15:13:06', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('42', '1478704395487', '88', '137', '2016-11-09 15:13:09', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('43', '1478704395487', '88', '137', '2016-11-09 15:13:53', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('44', '1478704395487', '88', '137', '2016-11-09 15:15:09', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('45', '1478704606175', '89', '137', '2016-11-09 15:16:45', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('46', '1478704606175', '89', '137', '2016-11-09 15:16:49', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('47', '1478704606175', '89', '137', '2016-11-09 15:17:19', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('48', '1478705327483', '90', '137', '2016-11-09 15:28:44', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('49', '1478705327483', '90', '137', '2016-11-09 15:28:47', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('50', '1478705327483', '90', '137', '2016-11-09 15:29:16', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('51', '1478705643826', '91', '137', '2016-11-09 15:34:02', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('52', '1478705643826', '91', '137', '2016-11-09 15:34:06', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('53', '1478705643826', '91', '137', '2016-11-09 15:34:21', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('54', '1478705790066', '92', '137', '2016-11-09 15:36:28', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('55', '1478705790066', '92', '137', '2016-11-09 15:36:31', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('56', '1478706019021', '93', '137', '2016-11-09 15:40:10', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('57', '1478706019021', '93', '137', '2016-11-09 15:40:13', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('58', '1478706037375', '94', '137', '2016-11-09 15:40:28', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('59', '1478706037375', '94', '137', '2016-11-09 15:40:31', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('60', '1478706084516', '95', '137', '2016-11-09 15:41:18', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('61', '1478706084516', '95', '137', '2016-11-09 15:41:22', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('62', '1478706142369', '96', '137', '2016-11-09 15:42:17', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('63', '1478706142369', '96', '137', '2016-11-09 15:43:41', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('64', '1478706346207', '97', '137', '2016-11-09 15:45:39', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('65', '1478706346207', '97', '137', '2016-11-09 15:45:42', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('66', '1478706854203', '98', '137', '2016-11-09 15:54:05', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('67', '1478706854203', '98', '137', '2016-11-09 15:54:25', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('68', '1478706891004', '99', '137', '2016-11-09 15:54:42', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('69', '1478706891004', '99', '137', '2016-11-09 15:54:46', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('70', '1478684224499', '75', '137', '2016-11-09 16:00:24', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('71', '1478099883634', '58', '137', '2016-11-09 16:00:48', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('72', '1478708228238', '100', '137', '2016-11-09 16:17:04', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('73', '1478708228238', '100', '137', '2016-11-09 16:17:11', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('74', '1478708228238', '100', '137', '2016-11-09 16:17:24', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('75', '1478708288510', '101', '137', '2016-11-09 16:18:02', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('76', '1478708288510', '101', '137', '2016-11-09 16:18:06', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('77', '1478708369390', '102', '137', '2016-11-09 16:19:23', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('78', '1478711662034', '103', '137', '2016-11-09 17:14:20', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('79', '1478711970879', '104', '137', '2016-11-09 17:19:29', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('80', '1478711970879', '104', '137', '2016-11-09 17:19:59', '0', 'w');
+INSERT INTO `tb_order_log` VALUES ('81', '1478712045156', '105', '137', '2016-11-09 17:20:36', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('82', '1478747529742', '106', '1', '2016-11-10 03:12:03', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('83', '1478747529742', '106', '1', '2016-11-10 03:12:09', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('84', '1478748331460', '107', '137', '2016-11-10 03:25:28', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('85', '1478748331460', '107', '137', '2016-11-10 03:25:32', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('86', '1478748767464', '108', '137', '2016-11-10 03:32:45', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('87', '1478748767464', '108', '137', '2016-11-10 03:32:50', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('88', '1478749123261', '109', '137', '2016-11-10 03:38:35', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('89', '1478749123261', '109', '137', '2016-11-10 03:38:38', '2', 'w');
+INSERT INTO `tb_order_log` VALUES ('90', '1478708369390', '102', '137', '2016-11-10 06:00:22', '5', 'w');
+INSERT INTO `tb_order_log` VALUES ('91', '1478706346207', '97', '137', '2016-11-10 06:50:45', '5', 'w');
+INSERT INTO `tb_order_log` VALUES ('92', '1479750774332', '110', '137', '2016-11-21 17:52:48', '1', 'w');
+INSERT INTO `tb_order_log` VALUES ('93', '1479750774332', '110', '137', '2016-11-21 17:52:52', '2', 'w');
 
 -- ----------------------------
 -- Table structure for tb_order_message
@@ -352,7 +568,7 @@ CREATE TABLE `tb_order_message` (
   PRIMARY KEY (`ORDER_MESSAGE_ID`),
   KEY `ORDER_ID` (`ORDER_ID`),
   KEY `GOODS_ID` (`GOODS_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_order_message
@@ -378,6 +594,57 @@ INSERT INTO `tb_order_message` VALUES ('134', '1', '1', '49.90', '1', '1', null,
 INSERT INTO `tb_order_message` VALUES ('135', '1', '1', '49.90', '1', '1', null, '56');
 INSERT INTO `tb_order_message` VALUES ('136', '1', '1', '49.90', '1', '1', null, '57');
 INSERT INTO `tb_order_message` VALUES ('137', '19', '1', '129.00', '1', '1', null, '58');
+INSERT INTO `tb_order_message` VALUES ('138', '1', '1', '49.90', '1', '1', null, '59');
+INSERT INTO `tb_order_message` VALUES ('139', '1', '1', '49.90', '1', '1', null, '60');
+INSERT INTO `tb_order_message` VALUES ('140', '1', '1', '49.90', '1', '1', null, '61');
+INSERT INTO `tb_order_message` VALUES ('141', '1', '1', '49.90', '1', '1', null, '62');
+INSERT INTO `tb_order_message` VALUES ('142', '1', '1', '49.90', '1', '1', null, '63');
+INSERT INTO `tb_order_message` VALUES ('143', '1', '1', '49.90', '1', '1', null, '64');
+INSERT INTO `tb_order_message` VALUES ('144', '1', '1', '49.90', '1', '1', null, '65');
+INSERT INTO `tb_order_message` VALUES ('145', '1', '1', '49.90', '1', '1', null, '66');
+INSERT INTO `tb_order_message` VALUES ('146', '1', '1', '49.90', '1', '1', null, '67');
+INSERT INTO `tb_order_message` VALUES ('147', '1', '1', '49.90', '1', '1', null, '69');
+INSERT INTO `tb_order_message` VALUES ('148', '1', '1', '49.90', '1', '1', null, '70');
+INSERT INTO `tb_order_message` VALUES ('149', '1', '1', '49.90', '1', '1', null, '73');
+INSERT INTO `tb_order_message` VALUES ('150', '1', '1', '49.90', '1', '1', null, '74');
+INSERT INTO `tb_order_message` VALUES ('151', '1', '1', '49.90', '1', '1', null, '75');
+INSERT INTO `tb_order_message` VALUES ('152', '1', '1', '49.90', '1', '1', null, '76');
+INSERT INTO `tb_order_message` VALUES ('153', '1', '1', '49.90', '1', '1', null, '77');
+INSERT INTO `tb_order_message` VALUES ('154', '1', '2', '49.90', '1', '1', null, '78');
+INSERT INTO `tb_order_message` VALUES ('155', '1', '2', '49.90', '1', '1', null, '79');
+INSERT INTO `tb_order_message` VALUES ('156', '1', '2', '49.90', '1', '1', null, '80');
+INSERT INTO `tb_order_message` VALUES ('157', '1', '1', '49.90', '1', '1', null, '81');
+INSERT INTO `tb_order_message` VALUES ('158', '1', '1', '49.90', '1', '1', null, '82');
+INSERT INTO `tb_order_message` VALUES ('159', '1', '1', '49.90', '1', '1', null, '83');
+INSERT INTO `tb_order_message` VALUES ('160', '1', '1', '49.90', '1', '1', null, '84');
+INSERT INTO `tb_order_message` VALUES ('161', '1', '1', '49.90', '1', '1', null, '85');
+INSERT INTO `tb_order_message` VALUES ('162', '37', '1', '8999.00', '1', '1', null, '86');
+INSERT INTO `tb_order_message` VALUES ('163', '39', '1', '4999.00', '1', '1', null, '87');
+INSERT INTO `tb_order_message` VALUES ('164', '1', '2', '49.90', '1', '1', null, '88');
+INSERT INTO `tb_order_message` VALUES ('165', '1', '1', '49.90', '1', '1', null, '89');
+INSERT INTO `tb_order_message` VALUES ('166', '1', '1', '49.90', '1', '1', null, '90');
+INSERT INTO `tb_order_message` VALUES ('167', '1', '1', '49.90', '1', '1', null, '91');
+INSERT INTO `tb_order_message` VALUES ('168', '1', '1', '49.90', '1', '1', null, '92');
+INSERT INTO `tb_order_message` VALUES ('169', '1', '1', '49.90', '1', '1', null, '93');
+INSERT INTO `tb_order_message` VALUES ('170', '1', '1', '49.90', '1', '1', null, '94');
+INSERT INTO `tb_order_message` VALUES ('171', '1', '1', '49.90', '1', '1', null, '95');
+INSERT INTO `tb_order_message` VALUES ('172', '1', '1', '49.90', '1', '1', null, '96');
+INSERT INTO `tb_order_message` VALUES ('173', '1', '1', '49.90', '1', '1', null, '97');
+INSERT INTO `tb_order_message` VALUES ('174', '1', '1', '49.90', '1', '1', null, '98');
+INSERT INTO `tb_order_message` VALUES ('175', '10', '1', '599.00', '1', '1', null, '99');
+INSERT INTO `tb_order_message` VALUES ('176', '1', '2', '49.90', '1', '1', null, '100');
+INSERT INTO `tb_order_message` VALUES ('177', '1', '1', '49.90', '1', '1', null, '101');
+INSERT INTO `tb_order_message` VALUES ('178', '1', '1', '49.90', '1', '1', null, '102');
+INSERT INTO `tb_order_message` VALUES ('179', '1', '2', '49.90', '1', '1', null, '103');
+INSERT INTO `tb_order_message` VALUES ('180', '1', '2', '49.90', '1', '1', null, '104');
+INSERT INTO `tb_order_message` VALUES ('181', '1', '1', '49.90', '1', '1', null, '105');
+INSERT INTO `tb_order_message` VALUES ('182', '1', '1', '49.90', '1', '1', null, '106');
+INSERT INTO `tb_order_message` VALUES ('183', '1', '2', '49.90', '1', '1', null, '107');
+INSERT INTO `tb_order_message` VALUES ('184', '1', '1', '49.90', '1', '1', null, '108');
+INSERT INTO `tb_order_message` VALUES ('185', '1', '1', '49.90', '1', '1', null, '109');
+INSERT INTO `tb_order_message` VALUES ('186', '35', '1', '5999.00', '1', '1', null, '110');
+INSERT INTO `tb_order_message` VALUES ('187', '39', '1', '4999.00', '1', '1', null, '110');
+INSERT INTO `tb_order_message` VALUES ('188', '21', '1', '3999.00', '1', '1', null, '110');
 
 -- ----------------------------
 -- Table structure for tb_order_state
@@ -489,10 +756,12 @@ INSERT INTO `tb_system_menu` VALUES ('61', '59', '2', '', '系统消息列表', 
 INSERT INTO `tb_system_menu` VALUES ('62', '59', '2', '', '发送消息', '30', '', '', '1', '', '2016-10-23 17:24:24', '系统管理员', '2016-10-23 17:24:29', '系统管理员', null);
 INSERT INTO `tb_system_menu` VALUES ('65', '0', '1', 'manage', '系统管理', '700', '', 'fa-universal-access', '1', null, '2016-10-23 20:22:55', '系统管理员', '2016-10-23 20:23:02', '系统管理员', null);
 INSERT INTO `tb_system_menu` VALUES ('66', '65', '2', '', '导航管理', '10', '', '', '1', '', '2016-10-23 17:24:24', '系统管理员', '2016-10-23 17:24:29', '系统管理员', null);
-INSERT INTO `tb_system_menu` VALUES ('67', '65', '2', null, '基本配置', '20', null, null, null, null, null, '', null, null, null);
-INSERT INTO `tb_system_menu` VALUES ('68', '65', '2', null, '项目管理', '30', null, null, null, null, null, '', null, null, null);
+INSERT INTO `tb_system_menu` VALUES ('67', '65', '2', null, '基本配置', '20', null, null, '1', null, null, '', null, null, null);
+INSERT INTO `tb_system_menu` VALUES ('68', '65', '2', null, '项目管理', '30', null, null, '1', null, null, '', null, null, null);
 INSERT INTO `tb_system_menu` VALUES ('69', '3', '0', 'list_audit', '审查', '5', '/system/sysuser/list/audit', null, null, 'sysuser:list:audit', '2016-10-25 17:25:29', '系统管理员', '2016-10-25 17:25:35', '系统管理员', null);
 INSERT INTO `tb_system_menu` VALUES ('70', '18', '0', 'list_audit', '审查', '5', '/system/user/list/audit', null, null, 'user:list:audit', '2016-10-25 17:25:29', '系统管理员', '2016-10-25 17:25:35', '系统管理员', null);
+INSERT INTO `tb_system_menu` VALUES ('71', '65', '2', null, '连接池监视', '40', '/druid', null, '1', null, '2016-11-07 01:16:13', '系统管理员', '2016-11-07 01:16:20', '系统管理员', null);
+INSERT INTO `tb_system_menu` VALUES ('72', '28', '0', 'list_audit', '审查', '5', '/system/goods/list/audit', null, null, 'goods:list:audit', '2016-10-25 17:25:29', '系统管理员', '2016-10-25 17:25:35', '系统管理员', null);
 
 -- ----------------------------
 -- Table structure for tb_system_role
@@ -553,6 +822,12 @@ INSERT INTO `tb_system_role_menu` VALUES ('17', '1', '26');
 INSERT INTO `tb_system_role_menu` VALUES ('18', '1', '1');
 INSERT INTO `tb_system_role_menu` VALUES ('19', '1', '69');
 INSERT INTO `tb_system_role_menu` VALUES ('20', '1', '70');
+INSERT INTO `tb_system_role_menu` VALUES ('21', '2', '5');
+INSERT INTO `tb_system_role_menu` VALUES ('22', '1', '29');
+INSERT INTO `tb_system_role_menu` VALUES ('23', '1', '30');
+INSERT INTO `tb_system_role_menu` VALUES ('24', '1', '31');
+INSERT INTO `tb_system_role_menu` VALUES ('25', '1', '32');
+INSERT INTO `tb_system_role_menu` VALUES ('26', '1', '72');
 
 -- ----------------------------
 -- Table structure for tb_system_statistics_day
@@ -570,7 +845,7 @@ CREATE TABLE `tb_system_statistics_day` (
   `DAILY_UNPAY_ORDER_NUMBER` int(11) DEFAULT '0' COMMENT '每日未支付订单数',
   `DAILY_PAY_NUMBER` double(11,2) DEFAULT '0.00' COMMENT '每日支付金额数',
   PRIMARY KEY (`STATISTICS_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of tb_system_statistics_day
@@ -618,6 +893,11 @@ INSERT INTO `tb_system_statistics_day` VALUES ('40', '2016-10-27 00:00:00', '201
 INSERT INTO `tb_system_statistics_day` VALUES ('41', '2016-10-28 00:00:00', '2016-10-29 00:55:30', '0', '0', '0', '0', '0', '0', '0.00');
 INSERT INTO `tb_system_statistics_day` VALUES ('42', '2016-10-31 00:00:00', '2016-11-02 00:55:30', '0', '0', '0', '0', '0', '0', '0.00');
 INSERT INTO `tb_system_statistics_day` VALUES ('43', '2016-11-01 00:00:00', '2016-11-03 00:55:30', '0', '0', '0', '0', '0', '0', '0.00');
+INSERT INTO `tb_system_statistics_day` VALUES ('44', '2016-11-05 00:00:00', '2016-11-07 00:55:30', '2', '2', '2', '0', '0', '0', '0.00');
+INSERT INTO `tb_system_statistics_day` VALUES ('45', '2016-11-06 00:00:00', '2016-11-08 00:55:30', '1', '1', '1', '0', '0', '0', '0.00');
+INSERT INTO `tb_system_statistics_day` VALUES ('46', '2016-11-08 00:00:00', '2016-11-10 00:55:30', '0', '0', '0', '0', '0', '0', '0.00');
+INSERT INTO `tb_system_statistics_day` VALUES ('47', '2016-11-10 00:00:00', '2016-11-12 01:09:43', '2', '2', '2', '8', '3', '5', '299.40');
+INSERT INTO `tb_system_statistics_day` VALUES ('48', '2016-11-14 00:00:00', '2016-11-16 00:55:30', '1', '1', '1', '0', '0', '0', '0.00');
 
 -- ----------------------------
 -- Table structure for tb_system_user
@@ -642,14 +922,14 @@ CREATE TABLE `tb_system_user` (
   `UPDATE_TIME` datetime DEFAULT NULL COMMENT '更新时间',
   `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`ACCOUNT_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_system_user
 -- ----------------------------
-INSERT INTO `tb_system_user` VALUES ('1', 'admin', 'a2f87176e717b96ed71e74dbd640f672', '猫宁管理员', '陈彦晓', '2', '21', '', '1', '2016-11-06 15:17:30', '172.18.56.48', '810170512@qq.com', '18857105178', '2016-09-14 18:15:37', '穿鞋子的猫', '2016-11-02 17:55:04', '猫宁管理员');
-INSERT INTO `tb_system_user` VALUES ('2', 'system', 'a2f87176e717b96ed71e74dbd640f672', '穿鞋子的猫', '陈晓旭', '0', '0', null, '1', '2016-11-02 15:54:44', '172.18.52.242', '810170512@qq.com', '18857105178', '2016-10-27 23:11:43', '穿鞋子的猫', '2016-10-28 23:43:40', '猫宁管理员');
-INSERT INTO `tb_system_user` VALUES ('9', 'morning', '21232f297a57a5a743894a0e4a801fc3', '爬梯子的过路人', '陈星星', '1', '0', null, '1', '2016-10-29 02:06:49', '172.27.172.223', '810170512@qq.com', '18857105127', '2016-10-29 00:01:04', '猫宁管理员', null, null);
+INSERT INTO `tb_system_user` VALUES ('1', 'admin', 'a2f87176e717b96ed71e74dbd640f672', '猫宁', '陈晓星', '0', '40', null, '1', '2016-11-21 14:26:45', '172.27.222.211', '810170512@qq.com', '18857105178', '2016-10-27 23:11:43', '穿鞋子的猫', '2016-11-21 14:26:53', '猫宁管理员');
+INSERT INTO `tb_system_user` VALUES ('2', 'system', 'a2f87176e717b96ed71e74dbd640f672', '穿鞋子的猫', '陈晓旭', '0', '0', null, '1', '2016-11-14 17:25:36', '172.18.59.142', '810170512@qq.com', '18857105178', '2016-10-27 23:11:43', '穿鞋子的猫', '2016-10-28 23:43:40', '猫宁管理员');
+INSERT INTO `tb_system_user` VALUES ('3', '穿鞋子的猫', 'a2f87176e717b96ed71e74dbd640f672', '猫宁管理员', '陈星星', '0', null, null, '1', null, null, '810170512@qq.com', '18857105127', '2016-11-21 09:07:31', '猫宁管理员', '2016-11-21 12:30:43', '猫宁管理员');
 
 -- ----------------------------
 -- Table structure for tb_system_user_login_log
@@ -663,12 +943,11 @@ CREATE TABLE `tb_system_user_login_log` (
   `OPERATING_SYSTEM` varchar(50) DEFAULT NULL COMMENT '操作系统',
   `BROWSER` varchar(50) DEFAULT NULL COMMENT '浏览器',
   PRIMARY KEY (`LOG_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=516 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=541 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_system_user_login_log
 -- ----------------------------
-INSERT INTO `tb_system_user_login_log` VALUES ('1', '2016-09-14 17:53:46', '127.0.0.1', null, 'WINDOWS_10', 'CHROME45');
 INSERT INTO `tb_system_user_login_log` VALUES ('2', '2016-09-14 18:14:18', '127.0.0.1', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `tb_system_user_login_log` VALUES ('3', '2016-09-14 18:14:31', '127.0.0.1', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `tb_system_user_login_log` VALUES ('4', '2016-09-14 18:15:38', '127.0.0.1', '1', 'WINDOWS_10', 'CHROME45');
@@ -1076,16 +1355,6 @@ INSERT INTO `tb_system_user_login_log` VALUES ('405', '2016-10-28 23:48:48', '17
 INSERT INTO `tb_system_user_login_log` VALUES ('406', '2016-10-28 23:51:53', '172.27.172.223', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `tb_system_user_login_log` VALUES ('407', '2016-10-28 23:57:02', '172.27.172.223', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `tb_system_user_login_log` VALUES ('408', '2016-10-29 00:00:21', '172.27.172.223', '1', 'WINDOWS_10', 'CHROME45');
-INSERT INTO `tb_system_user_login_log` VALUES ('409', '2016-10-29 00:01:33', '172.27.172.223', '9', 'WINDOWS_10', 'CHROME45');
-INSERT INTO `tb_system_user_login_log` VALUES ('410', '2016-10-29 00:08:20', '172.27.172.223', '9', 'WINDOWS_10', 'CHROME45');
-INSERT INTO `tb_system_user_login_log` VALUES ('411', '2016-10-29 00:16:20', '172.27.172.223', '9', 'WINDOWS_10', 'CHROME45');
-INSERT INTO `tb_system_user_login_log` VALUES ('412', '2016-10-29 00:19:43', '172.27.172.223', '9', 'WINDOWS_10', 'CHROME45');
-INSERT INTO `tb_system_user_login_log` VALUES ('413', '2016-10-29 01:12:59', '172.27.172.223', '9', 'WINDOWS_10', 'CHROME45');
-INSERT INTO `tb_system_user_login_log` VALUES ('414', '2016-10-29 01:15:55', '172.27.172.223', '9', 'WINDOWS_10', 'CHROME45');
-INSERT INTO `tb_system_user_login_log` VALUES ('415', '2016-10-29 01:18:40', '172.27.172.223', '9', 'WINDOWS_10', 'CHROME45');
-INSERT INTO `tb_system_user_login_log` VALUES ('416', '2016-10-29 01:21:31', '172.27.172.223', '9', 'WINDOWS_10', 'CHROME45');
-INSERT INTO `tb_system_user_login_log` VALUES ('417', '2016-10-29 01:53:13', '172.27.172.223', '9', 'WINDOWS_10', 'CHROME45');
-INSERT INTO `tb_system_user_login_log` VALUES ('418', '2016-10-29 02:06:49', '172.27.172.223', '9', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `tb_system_user_login_log` VALUES ('419', '2016-10-29 14:35:08', '172.27.189.53', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `tb_system_user_login_log` VALUES ('420', '2016-10-29 14:37:23', '172.27.189.53', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `tb_system_user_login_log` VALUES ('421', '2016-10-29 16:52:25', '172.27.189.53', '1', 'WINDOWS_10', 'CHROME45');
@@ -1183,6 +1452,31 @@ INSERT INTO `tb_system_user_login_log` VALUES ('512', '2016-11-03 12:33:59', '17
 INSERT INTO `tb_system_user_login_log` VALUES ('513', '2016-11-05 07:36:05', '172.27.164.208', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `tb_system_user_login_log` VALUES ('514', '2016-11-05 07:36:13', '172.27.164.208', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `tb_system_user_login_log` VALUES ('515', '2016-11-06 15:17:30', '172.18.56.48', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('516', '2016-11-06 16:28:44', '172.18.56.48', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('517', '2016-11-06 17:18:02', '172.18.56.48', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('518', '2016-11-06 17:20:06', '172.18.56.48', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('519', '2016-11-09 08:59:28', '172.27.58.216', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('520', '2016-11-10 03:10:21', '172.27.84.112', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('521', '2016-11-10 16:59:45', '172.18.48.243', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('522', '2016-11-10 16:59:45', '172.18.48.243', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('523', '2016-11-10 17:00:32', '172.18.48.243', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('524', '2016-11-10 17:02:24', '172.18.48.243', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('525', '2016-11-10 17:02:32', '172.18.48.243', '2', 'WINDOWS_10', 'IE11');
+INSERT INTO `tb_system_user_login_log` VALUES ('526', '2016-11-13 16:28:39', null, '1', 'windows', '360安全');
+INSERT INTO `tb_system_user_login_log` VALUES ('527', '2016-11-13 16:32:34', '136.445.157.1', '1', 'windows', '360安全');
+INSERT INTO `tb_system_user_login_log` VALUES ('528', '2016-11-13 16:53:12', '136.445.157.1', '1', 'windows', '360安全');
+INSERT INTO `tb_system_user_login_log` VALUES ('529', '2016-11-13 16:54:23', '136.445.157.1', '1', 'windows', '360安全');
+INSERT INTO `tb_system_user_login_log` VALUES ('530', '2016-11-13 16:54:44', '136.445.157.1', '1', 'windows', '360安全');
+INSERT INTO `tb_system_user_login_log` VALUES ('531', '2016-11-14 13:38:22', '136.445.157.1', '1', 'windows', '360安全');
+INSERT INTO `tb_system_user_login_log` VALUES ('532', '2016-11-14 17:19:12', '172.18.59.142', '2', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('533', '2016-11-14 17:25:36', '172.18.59.142', '2', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('534', '2016-11-14 17:33:33', '172.18.59.142', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('535', '2016-11-15 05:54:51', '192.168.16.148', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('536', '2016-11-15 06:31:50', '192.168.16.148', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('537', '2016-11-15 16:58:28', '172.18.62.102', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('538', '2016-11-21 06:19:38', '172.27.200.76', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('539', '2016-11-21 14:08:40', '172.27.222.211', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `tb_system_user_login_log` VALUES ('540', '2016-11-21 14:26:45', '172.27.222.211', '1', 'WINDOWS_10', 'CHROME45');
 
 -- ----------------------------
 -- Table structure for tb_system_user_role
@@ -1196,13 +1490,15 @@ CREATE TABLE `tb_system_user_role` (
   `CREATE_BY` varchar(64) DEFAULT NULL COMMENT '创建者',
   PRIMARY KEY (`USER_ROLE_ID`),
   KEY `ACCOUNT_ID` (`ACCOUNT_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of tb_system_user_role
 -- ----------------------------
-INSERT INTO `tb_system_user_role` VALUES ('80', '1', '9', '2016-10-29 00:01:04', '猫宁管理员');
-INSERT INTO `tb_system_user_role` VALUES ('81', '2', '9', '2016-10-29 00:01:04', '猫宁管理员');
-INSERT INTO `tb_system_user_role` VALUES ('89', '1', '1', '2016-10-29 21:43:03', '猫宁管理员');
-INSERT INTO `tb_system_user_role` VALUES ('90', '2', '1', '2016-10-29 21:43:03', '猫宁管理员');
-INSERT INTO `tb_system_user_role` VALUES ('91', '3', '1', '2016-10-29 21:43:03', '猫宁管理员');
+INSERT INTO `tb_system_user_role` VALUES ('90', '1', '2', '2016-10-29 21:43:03', '猫宁管理员');
+INSERT INTO `tb_system_user_role` VALUES ('180', '1', '1', '2016-11-21 09:04:51', '猫宁管理员');
+INSERT INTO `tb_system_user_role` VALUES ('181', '2', '1', '2016-11-21 09:04:51', '猫宁管理员');
+INSERT INTO `tb_system_user_role` VALUES ('182', '3', '1', '2016-11-21 09:04:51', '猫宁管理员');
+INSERT INTO `tb_system_user_role` VALUES ('186', '1', '3', '2016-11-21 12:30:43', '猫宁管理员');
+INSERT INTO `tb_system_user_role` VALUES ('187', '2', '3', '2016-11-21 12:30:43', '猫宁管理员');
+INSERT INTO `tb_system_user_role` VALUES ('188', '3', '3', '2016-11-21 12:30:43', '猫宁管理员');

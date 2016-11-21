@@ -15,8 +15,8 @@
           </div>
           <div id="header-content-nav">
             <ul>
-            <c:forEach items="${classifyList}" var="classifyList" begin="0" end="4"><li class="menu_li">
-            	<span>|</span><a href="javascript: void(0)" onclick="submitForm(1,${classifyList.classifyId})">${classifyList.classifyName}</a>
+            <c:forEach items="${goodsClassifies}" var="goodsClassifies"><li class="menu_li">
+            	<span>|</span><a href="javascript: void(0)" onclick="submitForm(1,${goodsClassifies.classifyId})">${goodsClassifies.classifyName}</a>
             </li></c:forEach>
             </ul>
           </div>

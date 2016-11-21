@@ -1,30 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.morning.dao.goods.GoodsPictureMapper" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.morning.dao.goods.GoodsPictureMapper">
 
-  <resultMap id="BaseResultMap" type="com.morning.entity.goods.GoodsPicture" >
-    <id column="GOODSPIC_ID" property="goodspicId" jdbcType="INTEGER" />
-    <result column="GOODS_ID" property="goodsId" jdbcType="INTEGER" />
-    <result column="GOODSPIC_TYPE" property="goodspicType" jdbcType="BIT" />
-    <result column="GOODSPIC_IMAGE" property="goodspicImage" jdbcType="VARCHAR" />
-  </resultMap>
-  
-  <sql id="Base_Column_List" >
-    GOODSPIC_ID, GOODS_ID, GOODSPIC_TYPE, GOODSPIC_IMAGE
-  </sql>
-  
-  <select id="queryPictureByGoods" resultMap="BaseResultMap" parameterType="com.morning.entity.goods.GoodsPicture" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_goods_picture
-    <where>
-      <if test="goodsId != null" >
-        and GOODS_ID = #{goodsId,jdbcType=INTEGER}
-      </if>
-      <if test="goodspicType != null" >
-        and GOODSPIC_TYPE = #{goodspicType,jdbcType=BIT}
-      </if>      
- 	</where>
-  </select>
- 
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		GOODSPIC_ID AS goodspicId, GOODS_ID AS goodsId, GOODSPIC_TYPE AS goodspicType, GOODSPIC_IMAGE AS goodspicImage
+	</sql>
+	
+	<!-- 根据商品ID查找商品详情图片 -->
+	<select id="selectGoodsPictures" resultType="GoodsPicture">
+		SELECT
+        	<include refid="Base_Column_List"/>
+        FROM
+        	tb_goods_picture
+        WHERE
+        	GOODS_ID = #{goodsId}
+	</select>
+
 </mapper>

@@ -1,4 +1,4 @@
-##  猫宁Morning公益商城系统
+﻿##  猫宁Morning公益商城系统
 
 ------------------------------------------------
 
@@ -79,7 +79,7 @@ Morning系統目前包括以下四大模块，系统管理模块、电子商城�
 
 2、根据 src\main\resources\properties\jdbc.properties 配置数据库
 
-3、导入数据库 doc\database\db_morning.sql
+3、导入数据库 doc\database\db_morning.sql，数据库已更新。
 
 4、根据 doc\lombok\lombok安装.txt 提示安装lombok插件
 
@@ -96,6 +96,9 @@ Morning系統目前包括以下四大模块，系统管理模块、电子商城�
 
 3.虚心接受指导，杜绝肆意谩骂。
 
+4.之前由于数据库文件、JDK版本问题而导致无法运行的情况，浪费了各位的时间，深感抱歉。
+
+5.目前只接触过Myeclipse，对于intellij idea没有测试过，问题：intellij idea启动起来后css没有正常加载。
 
 
 ## 特别鸣谢

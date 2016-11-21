@@ -21,7 +21,7 @@ import com.morning.entity.ShoppingCart;
 import com.morning.entity.order.Order;
 import com.morning.entity.order.OrderMessage;
 import com.morning.entity.order.QueryOrder;
-import com.morning.service.goods.GoodsService;
+import com.morning.service.goods.IGoodsService;
 import com.morning.service.order.OrderLogService;
 import com.morning.service.order.OrderService;
 
@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderMessageMapper orderMessageMapper;
 	@Autowired
-	private GoodsService goodsService;
+	private IGoodsService goodsService;
 	@Autowired
 	private OrderLogService orderLogService;
 	
@@ -142,7 +142,7 @@ public class OrderServiceImpl implements OrderService {
 			//更新库存和销量
 			for(int i = 0; i<orderMessageList.size();i++){
 				OrderMessage orderMessage =  orderMessageList.get(i);
-				goodsService.updateGoodsCountList(orderMessage);
+				goodsService.updateGoodsPay(orderMessage);
 			}
 			flag = true;
 			returnMap.put("flag", flag);
