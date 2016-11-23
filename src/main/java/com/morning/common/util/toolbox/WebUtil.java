@@ -9,11 +9,13 @@ import java.util.regex.Pattern;
  * @author CXX
  * @version 创建时间：2016年8月15日  上午7:58:42
  */
-public final class WebUtil {
+public class WebUtil {
+	
+	private WebUtil() {
+	}
 
 	/**
 	* 验证邮箱
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/

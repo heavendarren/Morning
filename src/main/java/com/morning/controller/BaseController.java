@@ -14,7 +14,6 @@ import com.morning.common.dto.AjaxResult;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：BaseController   
 * 类描述： 公共表示层：控制器支持类  
@@ -27,7 +26,6 @@ import com.morning.common.dto.AjaxResult;
 *
  */
 public abstract class BaseController {
-	
 	
 	/** ============================     ajax    =================================================  */
 	
@@ -77,7 +75,7 @@ public abstract class BaseController {
 	 * @return
 	 */
 	protected Map<String, Object> setJson(boolean success, String message, Object entity){
-		Map<String,Object> json = new HashMap<String,Object>();
+		Map<String,Object> json = new HashMap<>();
 		json.put("success", success);
 		json.put("message", message);
 		json.put("entity", entity);
@@ -90,7 +88,7 @@ public abstract class BaseController {
 	 * @return
 	 */
 	protected Map<String, Object> setJson(boolean success){
-		Map<String,Object> json = new HashMap<String,Object>();
+		Map<String,Object> json = new HashMap<>();
 		json.put("success", success);
 		return json;
 	}
@@ -102,7 +100,7 @@ public abstract class BaseController {
 	 * @return
 	 */
 	protected Map<String, Object> setJson(boolean success, String message){
-		Map<String,Object> json = new HashMap<String,Object>();
+		Map<String,Object> json = new HashMap<>();
 		json.put("message", message);
 		json.put("success", success);
 		return json;
@@ -117,11 +115,7 @@ public abstract class BaseController {
 	 * @return
 	 */
 	public static HttpServletRequest getRequest(){
-		try{
-			return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-		}catch(Exception e){
-			return null;
-		}
+		return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 	}
 	
 	/**
@@ -165,7 +159,7 @@ public abstract class BaseController {
 	 * @return
 	 */
 	protected String redirectTo( String url ) {
-		StringBuffer rto = new StringBuffer("redirect:");
+		StringBuilder rto = new StringBuilder("redirect:");
 		rto.append(url);
 		return rto.toString();
 	}
@@ -176,7 +170,7 @@ public abstract class BaseController {
 	 * @return
 	 */
 	protected static String getViewPath( String path ){
-		StringBuffer viewPath = new StringBuffer();
+		StringBuilder viewPath = new StringBuilder();
 		viewPath.append(path);
 		return viewPath.toString();
 	}
@@ -186,11 +180,11 @@ public abstract class BaseController {
 	 * @param count 生成个数
 	 * @return String
 	 */
-	protected String getRandomNum(int count){
+	protected String getRandomNum(int count) {
 		Random ra = new Random();
-		String random="";
-		for(int i=0;i<count;i++){
-			random+=ra.nextInt(9);
+		String random = "";
+		for (int i = 0; i < count; i++) {
+			random += ra.nextInt(9);
 		}
 		return random;
 	}

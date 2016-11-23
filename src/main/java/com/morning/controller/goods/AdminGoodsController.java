@@ -68,13 +68,8 @@ public class AdminGoodsController extends BaseController{
 		model.addAttribute("onGoodsNumber", onGoodsNumber);// 商品总数量		
 		Integer outGoodsNumber = goodsService.selectAllGoodsNumber(0);//下架商品
 		model.addAttribute("outGoodsNumber", outGoodsNumber);// 商品总数量	
-		try {
-			List<Goods> goodsList = goodsService.selectGoodsListBySystem(queryGoods);
-			model.addAttribute("goodsList", goodsList);// 商品列表
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		List<Goods> goodsList = goodsService.selectGoodsListBySystem(queryGoods);
+		model.addAttribute("goodsList", goodsList);// 商品列表
 //		List<SystemRole> systemRoles = systemRoleService.selectRoleAndNumber();
 //		model.addAttribute("systemRoles", systemRoles);// 权限列表
 		return SYSTEM_GOODS_LIST;

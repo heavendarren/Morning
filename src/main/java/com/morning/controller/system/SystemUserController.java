@@ -115,7 +115,7 @@ public class SystemUserController extends BaseController {
 		SystemUser user = systemUserService.selectById(Long.valueOf(accountId));
 		model.addAttribute("user", user);//用户信息
 		List<SystemUserRole> systemUserRoles = systemUserRoleService.selectRoleListByAccountId(accountId);
-		StringBuffer userRole = new StringBuffer();
+		StringBuilder userRole = new StringBuilder();
 		for(SystemUserRole systemUserRole : systemUserRoles){
 			userRole.append(systemUserRole.getRoleName());
 			userRole.append("&nbsp");
@@ -252,7 +252,7 @@ public class SystemUserController extends BaseController {
 
 			List<SystemUserRole> systemUserRoles = systemUserRoleService
 					.selectRoleListByAccountId(systemUser.getAccountId());
-			StringBuffer userRole = new StringBuffer();
+			StringBuilder userRole = new StringBuilder();
 			for (SystemUserRole systemUserRole : systemUserRoles) {
 				userRole.append(systemUserRole.getRoleName());
 				userRole.append("&nbsp");

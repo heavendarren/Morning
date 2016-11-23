@@ -6,17 +6,11 @@ import java.util.List;
 
 import com.morning.entity.user.UserAddress;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 /**
- * 
  * @description：订单实体类
  * @author CXX
  * @version 创建时间：2016年8月29日  下午4:04:08
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
 public class Order implements Serializable{
 	
 	private static final long serialVersionUID = 709516462127366974L;
@@ -54,5 +48,107 @@ public class Order implements Serializable{
     private List<OrderMessage> orderMessageList;
     /**收货地址信息*/
     private UserAddress userAddress;
+	public Integer getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	public Integer getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
+	}
+	public Date getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+	public Double getTotalMoney() {
+		return totalMoney;
+	}
+	public void setTotalMoney(Double totalMoney) {
+		this.totalMoney = totalMoney;
+	}
+	public Integer getOrderState() {
+		return orderState;
+	}
+	public void setOrderState(Integer orderState) {
+		this.orderState = orderState;
+	}
+	public Integer getAddressId() {
+		return addressId;
+	}
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
+	}
+	public Integer getPayType() {
+		return payType;
+	}
+	public void setPayType(Integer payType) {
+		this.payType = payType;
+	}
+	public Integer getPayStatus() {
+		return payStatus;
+	}
+	public void setPayStatus(Integer payStatus) {
+		this.payStatus = payStatus;
+	}
+	public String getPayment() {
+		return payment;
+	}
+	public void setPayment(String payment) {
+		this.payment = payment;
+	}
+	public Integer getSendType() {
+		return sendType;
+	}
+	public void setSendType(Integer sendType) {
+		this.sendType = sendType;
+	}
+	public Integer getSendTime() {
+		return sendTime;
+	}
+	public void setSendTime(Integer sendTime) {
+		this.sendTime = sendTime;
+	}
+	public Integer getInvoicelType() {
+		return invoicelType;
+	}
+	public void setInvoicelType(Integer invoicelType) {
+		this.invoicelType = invoicelType;
+	}
+	public String getInvoicelTitle() {
+		return invoicelTitle;
+	}
+	public void setInvoicelTitle(String invoicelTitle) {
+		this.invoicelTitle = invoicelTitle;
+	}
+	public String getUserMessage() {
+		return userMessage;
+	}
+	public void setUserMessage(String userMessage) {
+		this.userMessage = userMessage;
+	}
+	public List<OrderMessage> getOrderMessageList() {
+		return orderMessageList;
+	}
+	public void setOrderMessageList(List<OrderMessage> orderMessageList) {
+		this.orderMessageList = orderMessageList;
+	}
+	public UserAddress getUserAddress() {
+		return userAddress;
+	}
+	public void setUserAddress(UserAddress userAddress) {
+		this.userAddress = userAddress;
+	}
 
 }

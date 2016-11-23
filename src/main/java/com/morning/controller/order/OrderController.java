@@ -36,7 +36,6 @@ import com.morning.service.user.UserService;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：OrderController   
 * 类描述：前台订单表示层   
@@ -44,7 +43,6 @@ import com.morning.service.user.UserService;
 * 创建时间：2016年8月19日  下午11:39:57  
 * 修改人：陈星星   
 * 修改时间：2016年11月6日 下午10:27:24   
-* 修改备注：   
 * @version    
 *
  */
@@ -53,42 +51,43 @@ public class OrderController extends BaseController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 	
+	/** 我的订单列表 */
+	private static final String USER_ORDER = getViewPath("web/usercentre/user_order");
+	//ajax:全部订单、待付款、待收货订单
+	private static final String AJAXORDERRECOMMEND = getViewPath("web/usercentre/ajax-order-recommend");
+	/** 购物车 */
+	private static final String PAY_CART = getViewPath("web/pay/pay_cart");
+	/** 订单 */
+	private static final String PAY_ORDER = getViewPath("web/pay/pay_order");
+	/** 订单支付页面 */
+	private static final String PAY_CONFIRM = getViewPath("web/pay/pay_confirm");
+	/** 订单详情 */
+	private static final String USER_ORDER_VIEW = getViewPath("web/usercentre/user_order_view");
+	//顶部导航栏购物车
+	private static final String shoppingCart = getViewPath("web/common/ajax-cart");
+	
+    // 绑定变量名字和属性，参数封装进类
+	@InitBinder("order")
+	public void initBinderQueryGoods(WebDataBinder binder) {
+		binder.setFieldDefaultPrefix("order.");
+	}
+
+	@InitBinder("pageInfo")
+	public void initBinderQueryPageInfo(WebDataBinder binder) {
+		binder.setFieldDefaultPrefix("pageInfo.");
+	}
+
+	@InitBinder("queryOrder")
+	public void initBinderQueryOrder(WebDataBinder binder) {
+		binder.setFieldDefaultPrefix("queryOrder.");
+	}
+    
 	@Autowired
 	private UserAddressService userAddressService;
 	@Autowired
 	private UserService userService;
 	@Autowired 
 	private OrderService orderService;
-	
-	// 我的订单列表
-	private static final String myorderlist = getViewPath("/web/usercentre/user-order");
-	//ajax:全部订单、待付款、待收货订单
-	private static final String ajaxorderrecommend = getViewPath("/web/usercentre/ajax-order-recommend");
-	//购物车
-	private static final String cartpage = getViewPath("/web/pay/pay-cart");
-	//订单
-	private static final String ordermessage = getViewPath("/web/pay/pay-order");
-	/**订单支付页面*/
-	private static final String PAY_CONFIRM = getViewPath("/web/pay/pay_confirm");
-	/**订单详情*/
-	private static final String USER_ORDER_VIEW = getViewPath("/web/usercentre/user_order_view");
-	//顶部导航栏购物车
-	private static final String shoppingCart = getViewPath("/web/common/ajax-cart");
-	
-    // 绑定变量名字和属性，参数封装进类
-    @InitBinder("order")
-    public void initBinderQueryGoods(WebDataBinder binder) {
-        binder.setFieldDefaultPrefix("order.");
-    }
-    @InitBinder("pageInfo")
-    public void initBinderQueryPageInfo(WebDataBinder binder) {
-        binder.setFieldDefaultPrefix("pageInfo.");
-    }
-    @InitBinder("queryOrder")
-    public void initBinderQueryOrder(WebDataBinder binder) {
-        binder.setFieldDefaultPrefix("queryOrder.");
-    }
-	
     
 	/**
 	 * 跳转购物车页面
@@ -96,7 +95,7 @@ public class OrderController extends BaseController {
 	 */
     @RequestMapping(value="/cart")
     public String getCartPage(){
-    	return cartpage;
+    	return PAY_CART;
     }
     
 	@RequestMapping(value="/cart/update")
@@ -152,7 +151,7 @@ public class OrderController extends BaseController {
      */
     @RequestMapping(value="/buy")
  	public ModelAndView getBuyPage(HttpServletRequest request){
- 		ModelAndView modelAndView = new ModelAndView(ordermessage);
+ 		ModelAndView modelAndView = new ModelAndView(PAY_ORDER);
  		try{
  			int accountId = SingletonLoginUtils.getLoginUserId(request);
  			List<UserAddress> userAddressList = userAddressService.queryAddressByUser(accountId);
@@ -269,9 +268,8 @@ public class OrderController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/user/myorder/list")
-	public ModelAndView getMyorderList(HttpServletRequest request){
-		ModelAndView modelAndView = new ModelAndView(myorderlist);
-		return modelAndView;
+	public String getMyorderList() {
+		return USER_ORDER;
 	}
 	
 	/**
@@ -281,7 +279,7 @@ public class OrderController extends BaseController {
 	 */
 	@RequestMapping(value = "/user/ajax/myorder")
 	public ModelAndView getorderList(HttpServletRequest request, @ModelAttribute("pageInfo") PageInfo pageInfo, @ModelAttribute("queryOrder") QueryOrder queryOrder){
-		ModelAndView modelAndView = new ModelAndView(ajaxorderrecommend);
+		ModelAndView modelAndView = new ModelAndView(AJAXORDERRECOMMEND);
 		try{
 			int accountId = SingletonLoginUtils.getLoginUserId(request);
 			if(accountId >= 0){

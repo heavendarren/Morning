@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.morning.common.util.SingletonLoginUtils;
@@ -32,43 +31,19 @@ public class LimitIntercepterForWebsite extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		try {
-			// 获得banner图
+		// 获得banner图
 
-			// 获得网站配置
+		// 获得网站配置
 
-			// 创建存储购物车信息模型
-			SingletonLoginUtils.creatShoppingCart(request);
+		// 创建存储购物车信息模型
+		SingletonLoginUtils.creatShoppingCart(request);
 
-			// 获得网站商品导航
-			List<GoodsClassify> goodsClassifies = goodsClassifyService.selectNavClassify(5);
-			request.setAttribute("goodsClassifies", goodsClassifies);
-			List<GoodsClassify> classifyList = goodsClassifyService.selectGoodsClassify();
-			request.setAttribute("classifyList", classifyList);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// 获得网站商品导航
+		List<GoodsClassify> goodsClassifies = goodsClassifyService.selectNavClassify(5);
+		request.setAttribute("goodsClassifies", goodsClassifies);
+		List<GoodsClassify> classifyList = goodsClassifyService.selectGoodsClassify();
+		request.setAttribute("classifyList", classifyList);
 		return super.preHandle(request, response, handler);
 	}
 
-	@Override
-	public void postHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		super.postHandle(request, response, handler, modelAndView);
-	}
-
-	@Override
-	public void afterCompletion(HttpServletRequest request,
-			HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
-		super.afterCompletion(request, response, handler, ex);
-	}
-
-	@Override
-	public void afterConcurrentHandlingStarted(HttpServletRequest request,
-			HttpServletResponse response, Object handler) throws Exception {
-		super.afterConcurrentHandlingStarted(request, response, handler);
-	}
 }

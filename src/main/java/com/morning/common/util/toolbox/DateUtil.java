@@ -17,6 +17,9 @@ import org.slf4j.LoggerFactory;
  */
 public class DateUtil extends DateUtils {
 	
+	private DateUtil() {
+	}
+	
 	private static Logger logger = LoggerFactory.getLogger(DateUtil.class);
 	
 	/** 毫秒 */

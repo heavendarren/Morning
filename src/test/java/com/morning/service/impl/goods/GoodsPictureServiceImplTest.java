@@ -3,6 +3,8 @@ package com.morning.service.impl.goods;
 import java.util.List;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSON;
@@ -11,6 +13,8 @@ import com.morning.service.goods.IGoodsPictureService;
 import com.morning.test.base.BaseTest;
 
 public class GoodsPictureServiceImplTest extends BaseTest{
+	
+	private static Logger logger = LoggerFactory.getLogger(GoodsPictureServiceImplTest.class);
 
 	@Autowired
 	private IGoodsPictureService goodsPictureService;
@@ -18,7 +22,7 @@ public class GoodsPictureServiceImplTest extends BaseTest{
 	@Test
 	public void testSelectGoodsPictures() {
 		List<GoodsPicture> goodsPictures = goodsPictureService.selectGoodsPictures(1);
-		System.out.println(JSON.toJSON(goodsPictures));
+		logger.info("goodsPictures={}", JSON.toJSON(goodsPictures));
 	}
 
 }

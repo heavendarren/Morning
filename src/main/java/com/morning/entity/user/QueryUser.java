@@ -13,9 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 * 创建时间：2016年10月17日 下午6:45:21   
 * 修改人：陈星星   
 * 修改时间：2016年10月17日 下午6:45:21   
-* 修改备注：   
 * @version    
-*
  */
 public class QueryUser {
 	

@@ -77,7 +77,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Override
 	public Order queryOrderByNumber(String orderNumber, Integer accountId, Integer orderState) {
-		Map<String,Object> parameter = new HashMap<String, Object>();
+		Map<String,Object> parameter = new HashMap<>();
 		parameter.put("orderNumber", orderNumber);
 		parameter.put("accountId", accountId);
 		parameter.put("orderState", orderState);
@@ -86,7 +86,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Override
 	public int queryOrderCount(QueryOrder queryOrder) {
-		Map<String,Object> parameter = new HashMap<String, Object>();
+		Map<String,Object> parameter = new HashMap<>();
 		parameter.put("queryOrder",queryOrder);
 		return orderMapper.queryOrderCount(parameter);
 	}
@@ -103,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Override
 	public List<Order> queryOrder(QueryOrder queryOrder, PageInfo pageInfo) {
-		Map<String,Object> parameter = new HashMap<String, Object>();
+		Map<String,Object> parameter = new HashMap<>();
 		try{
 			int totalNumber = queryOrderCount(queryOrder);
 			pageInfo.setTotalNumber(totalNumber);
@@ -117,7 +117,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Map<String, Object> createOrderAndMessage(ShoppingCart shoppingCart, Order order, List<OrderMessage> orderMessageList) {
-		Map<String, Object> returnMap = new HashMap<String, Object>();
+		Map<String, Object> returnMap = new HashMap<>();
 		boolean flag = false;
 		try{
     		int accountId = SingletonLoginUtils.getLoginUserId(ServletUtils.getRequest());

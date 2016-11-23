@@ -30,7 +30,7 @@ public class SystemMenuServiceImpl extends SuperServiceImpl<SystemMenuMapper, Sy
 	
 	@Override
 	public List<SystemMenu> selectSystemMenu() {
-		List<SystemMenu> systemMenus = new ArrayList<SystemMenu>();
+		List<SystemMenu> systemMenus = new ArrayList<>();
 		// 查询一级目录
 		List<SystemMenu> parentMenuList = systemMenuMaper.selectSystemMenu(1, 1);
 		// 查询二级目录
@@ -50,7 +50,7 @@ public class SystemMenuServiceImpl extends SuperServiceImpl<SystemMenuMapper, Sy
 	 * @param parentMenu 当前一级目录
 	 */
 	private void recursionMenu(List<SystemMenu> systemMenus, List<SystemMenu> childMenuList, SystemMenu parentMenu){
-		List<SystemMenu> childMenus = new ArrayList<SystemMenu>();
+		List<SystemMenu> childMenus = new ArrayList<>();
 		for(SystemMenu menu : childMenuList){
 			if(parentMenu.getMenuId() == menu.getParentId()){
 				childMenus.add(menu);

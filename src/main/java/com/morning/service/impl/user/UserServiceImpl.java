@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void updateUserLoginLog(Integer accountId, Date lastLoginTime,
 			String lastLoginIp) {
-		Map<String,Object> parameter = new HashMap<String, Object>();
+		Map<String,Object> parameter = new HashMap<>();
 		parameter.put("accountId", accountId);
 		parameter.put("lastLoginTime", lastLoginTime);
 		parameter.put("lastLoginIp", lastLoginIp);
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User getLoginUser(String loginName, String loginPassword) {
-		Map<String,Object> map = new HashMap<String, Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("loginName", loginName);
 		map.put("loginPassword", loginPassword);
 		return userMapper.getLoginUser(map);

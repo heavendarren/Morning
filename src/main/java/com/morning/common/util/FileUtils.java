@@ -4,6 +4,9 @@ import java.io.File;
 
 public class FileUtils {
 	
+	private FileUtils() {
+	}
+	
 	/**
 	 * 删除单个文件
 	 * @param sPath 被删除文件的路径+文件名

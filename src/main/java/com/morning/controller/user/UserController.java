@@ -14,6 +14,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -44,7 +45,6 @@ import eu.bitwalker.useragentutils.UserAgent;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：UserController   
 * 类描述：前台用户表示层   
@@ -52,9 +52,7 @@ import eu.bitwalker.useragentutils.UserAgent;
 * 创建时间：2016年11月6日 下午10:30:03   
 * 修改人：陈星星   
 * 修改时间：2016年11月6日 下午10:30:03   
-* 修改备注：   
 * @version    
-*
  */
 @Controller
 @RequestMapping("/user")
@@ -69,46 +67,38 @@ public class UserController extends BaseController {
 	@Autowired
 	private UserAddressService userAddressService;
 	
-	// 账户管理
-	private static final String userinfo = getViewPath("/web/usercentre/user-info");
-	// 收货地址
-	private static final String useraddress = getViewPath("/web/usercentre/user-address");
-	// 用户注册
-	private static final String usersignin = getViewPath("/web/user/user-signin");
-	// 用户登录
-	private static final String userlogin = getViewPath("/web/user/user-login");
-	// 找回密码
-	private static final String usergetpsw = getViewPath("/web/user/user-getPsw");
+	/** 账户管理 */
+	private static final String USER_INFO = getViewPath("web/usercentre/user_info");
+	/** 收货地址 */
+	private static final String USER_ADDRESS = getViewPath("web/usercentre/user_address");
+	/** 前台用户注册 */
+	private static final String USER_SIGNIN = getViewPath("web/user/user_signin");
+	/** 前台用户登录 */
+	private static final String USER_LOGIN = getViewPath("web/user/user_login");
+	/** 找回密码 */
+	private static final String USER_GETPSW = getViewPath("web/user/user_getPsw");
 	
-    // 绑定变量名字和属性，参数封装进类
-    @InitBinder("userAddress")
-    public void initBinderUserAddress(WebDataBinder binder) {
-        binder.setFieldDefaultPrefix("userAddress.");
-    }
-    @InitBinder("user")
-    public void initBinderUser(WebDataBinder binder) {
-        binder.setFieldDefaultPrefix("user.");
-    }
+	@InitBinder("userAddress")
+	public void initBinderUserAddress(WebDataBinder binder) {
+		binder.setFieldDefaultPrefix("userAddress.");
+	}
+
+	@InitBinder("user")
+	public void initBinderUser(WebDataBinder binder) {
+		binder.setFieldDefaultPrefix("user.");
+	}
     
-    /**
-     * 登陆页面
-     * @param request
-     * @return
-     */
-    @RequestMapping(value="/userLogin", method = RequestMethod.GET)
-    public ModelAndView getUserLogin(HttpServletRequest request){
-    	ModelAndView modelAndView = new ModelAndView();
-		try {
-			modelAndView = new ModelAndView(userlogin);
-			//将公钥的 modulus 和 exponent 传给页面
-			Map<String, Object> publicKeyMap = RSAUtils.getPublicKeyMap();
-			modelAndView.addObject("publicKeyMap", publicKeyMap);
-			return modelAndView;
-		} catch (Exception e) {
-			logger.info("UserController.getUserLogin", e);
-		}
-    	return modelAndView;
-    }
+	/**
+	 * GET 登录 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/userLogin", method = RequestMethod.GET)
+	public String getUserLogin(Model model) {
+		Map<String, Object> publicKeyMap = RSAUtils.getPublicKeyMap();
+		model.addAttribute("publicKeyMap", publicKeyMap);// 将公钥的 modulus 和 exponent 传给页面
+		return USER_LOGIN;
+	}
     
     /**
      * 用户登录
@@ -159,15 +149,13 @@ public class UserController extends BaseController {
 	}
     
     /**
-     * 注册页面
-     * @param request
+     * GET 注册
      * @return
      */
-    @RequestMapping(value="/userSignin", method = RequestMethod.GET)
-    public ModelAndView getUserSignin(HttpServletRequest request){
-    	ModelAndView modelAndView = new ModelAndView(usersignin);
-    	return modelAndView;
-    }
+	@RequestMapping(value = "/userSignin", method = RequestMethod.GET)
+	public String getUserSignin() {
+		return USER_SIGNIN;
+	}
     
     /**
      * 验证用户信息
@@ -248,16 +236,14 @@ public class UserController extends BaseController {
     	return json;
     }
     
-    /**
-     * 找回密码页面
-     * @param request
-     * @return
-     */
-    @RequestMapping(value="/userGetPsw", method = RequestMethod.GET)
-    public ModelAndView userGetPsw(HttpServletRequest request){
-    	ModelAndView modelAndView = new ModelAndView(usergetpsw);
-    	return modelAndView;
-    }
+	/**
+	 * GET 找回密码
+	 * @return
+	 */
+	@RequestMapping(value = "/userGetPsw", method = RequestMethod.GET)
+	public String userGetPsw() {
+		return USER_GETPSW;
+	}
     
     /**
      * 验证邮箱信息
@@ -349,14 +335,9 @@ public class UserController extends BaseController {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value = "/initUpdateUser/{index}")
-	public ModelAndView initUpdateUser(@PathVariable("index") int index,HttpServletRequest request){
-		ModelAndView modelAndView = new ModelAndView(userinfo);
-		try{
-			modelAndView.addObject("index",index);
-		}catch(Exception e){
-			logger.error("UserController.initUpdateUser", e );
-		}
-		return modelAndView;
+	public String initUpdateUser(Model model, @PathVariable("index") int index) {
+		model.addAttribute("index", index);
+		return USER_INFO;
 	}
 	
 	/**
@@ -478,7 +459,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "/myaddress/list")
 	public ModelAndView getMyAddrssList(HttpServletRequest request){
-		ModelAndView modelAndView = new ModelAndView(useraddress);
+		ModelAndView modelAndView = new ModelAndView(USER_ADDRESS);
  		try{
  			int accountId = SingletonLoginUtils.getLoginUserId(request);
  			List<UserAddress> userAddressList = userAddressService.queryAddressByUser(accountId);

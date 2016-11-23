@@ -33,9 +33,7 @@ import com.morning.service.system.ISystemMenuService;
 * 创建时间：2016年11月6日 下午10:26:58   
 * 修改人：陈星星   
 * 修改时间：2016年11月6日 下午10:26:58   
-* 修改备注：   
 * @version    
-*
  */
 @Controller
 @RequestMapping("/system/main")
@@ -62,7 +60,7 @@ public class MainController extends BaseController {
 	@RequiresPermissions("system:view")
 	@RequestMapping(method = RequestMethod.GET)
 	public String main(Model model) {
-		Map<String, Object> mainCountMap = new HashMap<String, Object>();
+		Map<String, Object> mainCountMap = new HashMap<>();
 		// 未处理订单数
 		int undisposedOrder = orderService.queryOrderCountBySystem(2);
 		mainCountMap.put("undisposedOrder", undisposedOrder);
@@ -87,7 +85,7 @@ public class MainController extends BaseController {
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public ModelAndView mainIndex(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView(MAIN_INDEX);
-		Map<String, Object> webCountMap = new HashMap<String, Object>();
+		Map<String, Object> webCountMap = new HashMap<>();
 		// 今天未支付订单数
 		int unpayOrder = statisticsDayService.getOrderNumber(new Date(), 1);
 		webCountMap.put("unpayOrder", unpayOrder);

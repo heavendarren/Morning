@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import lombok.Getter;
-
 import com.alibaba.fastjson.JSON;
 import com.morning.common.util.toolbox.DateUtil;
 import com.morning.entity.email.UserEmailMsg;
@@ -25,17 +23,16 @@ import com.morning.service.email.MailService;
 public class EmailThread implements Runnable {
 	
 	private MailService mailService;
+	
 	private UserEmailMsg userEmailMsg;
-	@Getter
-	private int sumNum = 0;
-	@Getter
-	private List<String> list = new ArrayList<String>();
+	
+	private List<String> list = new ArrayList<>();
     
 	public EmailThread(List<String> list, UserEmailMsg userEmailMsg, MailService mailService) {
 		this.list.addAll(list);
 		this.userEmailMsg = userEmailMsg;
 		this.mailService = mailService;
-		sumNum += list.size();
+		list.size();
 	}
 
 	@Override
@@ -56,7 +53,6 @@ public class EmailThread implements Runnable {
                         }
                         Thread.sleep(1000);
                     }else{
-                        sumNum =0;
                         break;
                     }
                 }

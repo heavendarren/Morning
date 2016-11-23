@@ -3,6 +3,8 @@ package com.morning.service.system;
 import java.util.List;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSON;
@@ -13,6 +15,8 @@ import com.morning.test.base.BaseTest;
 
 public class ISystemUserServiceTest extends BaseTest{
 	
+	private static Logger logger = LoggerFactory.getLogger(ISystemUserServiceTest.class);
+	
 	@Autowired
 	private ISystemUserService iSystemUserService;
 	@Autowired
@@ -21,21 +25,21 @@ public class ISystemUserServiceTest extends BaseTest{
 	@Test
 	public void testSelectByLoginName() {
 		SystemUser user  =iSystemUserService.selectByLoginName("admin");
-		System.out.println(JSON.toJSON(user));
+		logger.info("user={}", JSON.toJSON(user));
 	}
 
 	@Test
 	public void testSelectAllSystemUserNumber() {
 		int number = iSystemUserService.selectAllSystemUserNumber();
-		System.out.println(number);
+		logger.info("number={}", number);
 	}
 
 	@Test
 	public void testSelectAllSystemUser() {
 		QueryUser queryUser = new QueryUser();
-		queryUser.setSearchContent("87879");
+		queryUser.setSearchContent("");
 		List<SystemUser> systemUsers = iSystemUserService.selectAllSystemUser(queryUser);
-		System.out.println(JSON.toJSON(systemUsers));
+		logger.info("systemUsers={}", JSON.toJSON(systemUsers));
 	}
 
 	@Test
@@ -43,18 +47,6 @@ public class ISystemUserServiceTest extends BaseTest{
 		iSystemUserService.updateLogByLoginName(1, "136.445.157.1", "360安全","windows");
 	}
 	
-	@Test
-	public void testupdateUserStatus(){
-		try {
-			SystemUser systemUser = new SystemUser();
-			systemUser.setAccountId(15);
-			systemUser.setUserName("你好");
-			iSystemUserService.updateUserInfo(systemUser);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	@Test
 	public void testdeleteSysUser(){
@@ -64,12 +56,12 @@ public class ISystemUserServiceTest extends BaseTest{
 	@Test
 	public void testSelectUserLoginLog(){
 		List<SystemUserLoginLog> loginLogs = systemUserLoginLogService.selectUserLoginLog(2);
-		System.out.println(JSON.toJSON(loginLogs));
+		logger.info("loginLogs={}", JSON.toJSON(loginLogs));
 	}
 	
 	@Test
 	public void testselectSysUserByRoleId(){
 		List<SystemUser> systemUsers = iSystemUserService.selectSysUserByRoleId(1);
-		System.out.println(JSON.toJSON(systemUsers));
+		logger.info("systemUsers={}", JSON.toJSON(systemUsers));
 	}
 }

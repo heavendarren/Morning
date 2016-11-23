@@ -18,6 +18,15 @@ public class SystemAuthorizingUser implements Serializable{
 
 	/** 真实姓名 */
 	private String realName;
+	
+	public SystemAuthorizingUser(Integer accountId, String loginName,
+			String userName, String realName) {
+		super();
+		this.accountId = accountId;
+		this.loginName = loginName;
+		this.userName = userName;
+		this.realName = realName;
+	}
 
 	public Integer getAccountId() {
 		return accountId;
@@ -48,15 +57,6 @@ public class SystemAuthorizingUser implements Serializable{
 	}
 
 	public void setRealName(String realName) {
-		this.realName = realName;
-	}
-
-	public SystemAuthorizingUser(Integer accountId, String loginName,
-			String userName, String realName) {
-		super();
-		this.accountId = accountId;
-		this.loginName = loginName;
-		this.userName = userName;
 		this.realName = realName;
 	}
 }

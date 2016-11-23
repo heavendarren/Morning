@@ -99,7 +99,7 @@ public class AdminUserController extends BaseController{
 	@RequestMapping(value = "/list/audit", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> audit(@ModelAttribute("user") User user) {
-		Map<String, Object> json = new HashMap<String, Object>();
+		Map<String, Object> json = new HashMap<>();
 		userService.updateUserStates(user);
 		json = this.setJson(true);
 		return json;
@@ -113,7 +113,7 @@ public class AdminUserController extends BaseController{
 	@RequestMapping(value = "/list/{accountId}/delete", method = RequestMethod.DELETE)
 	@ResponseBody
 	public Map<String, Object> delete(@PathVariable Integer accountId){
-		Map<String, Object> json = new HashMap<String, Object>();
+		Map<String, Object> json = new HashMap<>();
 		userService.deleteUser(accountId);
 		json = this.setJson(true);
 		return json;
@@ -177,7 +177,7 @@ public class AdminUserController extends BaseController{
 	@RequestMapping(value="/list/save" ,method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> update(@ModelAttribute("user") User user){
-		Map<String, Object> json = new HashMap<String, Object>(); 
+		Map<String, Object> json = new HashMap<>(); 
 		if(user.getAccountId() == null){
 			if(user.getEmail()==null || user.getEmail().trim().length()==0 || !WebUtil.isEmail(user.getEmail())){
 				json = this.setJson(false, "请输入正确的邮箱号");

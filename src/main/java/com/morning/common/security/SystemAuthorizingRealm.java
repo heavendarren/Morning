@@ -88,7 +88,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			
 			//获得用户角色列表
 			List<SystemUserRole> systemUserRoles = systemUserRoleService.selectRoleListByAccountId(authorizingUser.getAccountId());
-			List<Integer> roleIdList = new ArrayList<Integer>();
+			List<Integer> roleIdList = new ArrayList<>();
 			for (SystemUserRole systemRole : systemUserRoles) {  // 添加用户角色信息
 				simpleAuthorizationInfo.addRole(systemRole.getRoleName());
 				roleIdList.add(systemRole.getRoleId());

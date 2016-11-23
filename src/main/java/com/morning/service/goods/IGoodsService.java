@@ -74,9 +74,9 @@ public interface IGoodsService extends ISuperService<Goods> {
 	/**
 	 * 通过商品ID更新商品状态
 	 * @param goodsId
-	 * @param Status
+	 * @param status
 	 */
-	void updateGoodsStatus(Integer goodsId, Integer Status);
+	void updateGoodsStatus(Integer goodsId, Integer status);
 	
 	/**
 	 * 删除商品，同时删除商品图片和商品规格

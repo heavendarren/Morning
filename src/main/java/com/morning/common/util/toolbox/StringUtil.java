@@ -18,6 +18,9 @@ import java.util.Map.Entry;
  *
  */
 public class StringUtil {
+	
+	private StringUtil() {
+	}
 
 	public static final String SPACE = " ";
 	public static final String DOT = ".";

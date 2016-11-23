@@ -21,7 +21,10 @@ import com.morning.common.util.toolbox.DateUtil;
  * @version 创建时间：2016年8月19日  上午11:19:57
  */
 public class UploadFileUtils {
-
+	
+	private UploadFileUtils() {
+	}
+	
 	/**
 	 * 上传文件存放服务器
 	 * @param request
@@ -29,7 +32,7 @@ public class UploadFileUtils {
 	 * @return
 	 */
 	public static String getServerSaveDir(HttpServletRequest request, String dir){
-		StringBuffer uploadPath = new StringBuffer(request.getSession().getServletContext().getRealPath("upload"));
+		StringBuilder uploadPath = new StringBuilder(request.getSession().getServletContext().getRealPath("upload"));
 		uploadPath.append(File.separator);
 		uploadPath.append(dir);
 		uploadPath.append(File.separator);
@@ -62,7 +65,7 @@ public class UploadFileUtils {
 	 * @return
 	 */
 	public static String getSavaDir(HttpServletRequest request,String serverSaveDir, String newFileName){
-		StringBuffer savaPath = new StringBuffer();
+		StringBuilder savaPath = new StringBuilder();
 		//文件存放路径
 		savaPath.append(serverSaveDir);
 		savaPath.append(File.separator);
@@ -87,7 +90,7 @@ public class UploadFileUtils {
 	 * @return 
 	 */
     public static Map<String, Object> Upload(HttpServletRequest request, MultipartFile avatar_file, String avatar_data, String dir){
-    	Map<String, Object> returnMap = new HashMap<String, Object>();
+    	Map<String, Object> returnMap = new HashMap<>();
     	//获取服务器的实际路径
     	String serverSaveDir = getServerSaveDir(request, dir);
     	//生成文件名称

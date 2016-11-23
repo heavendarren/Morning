@@ -161,7 +161,7 @@ public class CollectionUtil {
 	 * @return HashMap对象
 	 */
 	public static <T, K> HashMap<T, K> newHashMap() {
-		return new HashMap<T, K>();
+		return new HashMap<>();
 	}
 	
 	/**
@@ -170,7 +170,7 @@ public class CollectionUtil {
 	 * @return HashMap对象
 	 */
 	public static <T, K> HashMap<T, K> newHashMap(int size) {
-		return new HashMap<T, K>((int)(size / 0.75));
+		return new HashMap<>((int)(size / 0.75));
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class CollectionUtil {
 	 * @return HashSet对象
 	 */
 	public static <T> HashSet<T> newHashSet() {
-		return new HashSet<T>();
+		return new HashSet<>();
 	}
 	
 	/**
@@ -189,7 +189,7 @@ public class CollectionUtil {
 	 */
 	@SafeVarargs
 	public static <T> HashSet<T> newHashSet(T... ts) {
-		HashSet<T> set = new HashSet<T>();
+		HashSet<T> set = new HashSet<>();
 		for (T t : ts) {
 			set.add(t);
 		}
@@ -202,7 +202,7 @@ public class CollectionUtil {
 	 * @return ArrayList对象
 	 */
 	public static <T> ArrayList<T> newArrayList() {
-		return new ArrayList<T>();
+		return new ArrayList<>();
 	}
 	
 	/**
@@ -212,7 +212,7 @@ public class CollectionUtil {
 	 */
 	@SafeVarargs
 	public static <T> ArrayList<T> newArrayList(T... values) {
-		return new ArrayList<T>(Arrays.asList(values));
+		return new ArrayList<>(Arrays.asList(values));
 	}
 	
 	/**

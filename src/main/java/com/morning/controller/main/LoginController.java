@@ -2,8 +2,6 @@ package com.morning.controller.main;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -60,12 +58,11 @@ public class LoginController extends BaseController{
 	
 	/**
 	 * GET 登录
-	 * @param request
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String login(HttpServletRequest request, Model model) {
+	public String login(Model model) {
 		// 将公钥的 modulus 和 exponent 传给页面
 		Map<String, Object> publicKeyMap = RSAUtils.getPublicKeyMap();
 		model.addAttribute("publicKeyMap", publicKeyMap);

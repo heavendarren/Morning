@@ -2,9 +2,6 @@ package com.morning.entity.order;
 
 import java.io.Serializable;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 /**
  * 
 * 项目名称：morning Maven Webapp   
@@ -16,16 +13,35 @@ import lombok.EqualsAndHashCode;
 * 修改时间：2016年11月6日 下午10:53:20   
 * @version
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
 public class QueryOrder implements Serializable{
 	
 	private static final long serialVersionUID = -4092172938320503826L;
 	
-	/**用户ID*/
+	/** 用户ID */
 	private Integer accountId;
-	/**订单状态*/
+
+	/** 订单状态 */
 	private Integer orderState;
-	/**订单搜索*/
+
+	/** 订单搜索 */
 	private String orderSearch;
+	
+	public Integer getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
+	}
+	public Integer getOrderState() {
+		return orderState;
+	}
+	public void setOrderState(Integer orderState) {
+		this.orderState = orderState;
+	}
+	public String getOrderSearch() {
+		return orderSearch;
+	}
+	public void setOrderSearch(String orderSearch) {
+		this.orderSearch = orderSearch;
+	}
 }

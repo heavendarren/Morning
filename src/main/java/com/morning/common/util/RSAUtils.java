@@ -429,7 +429,7 @@ public abstract class RSAUtils {
      * @return  Map<"modulus","exponent">
      */
     public static Map<String, Object> getPublicKeyMap() {
-    	Map<String, Object> publicKeyMap = new HashMap<String, Object>();
+    	Map<String, Object> publicKeyMap = new HashMap<>();
     	RSAPublicKey rsaPublicKey = getDefaultPublicKey();
     	publicKeyMap.put("modulus", new String(Hex.encodeHex(rsaPublicKey.getModulus().toByteArray())));
     	publicKeyMap.put("exponent", new String(Hex.encodeHex(rsaPublicKey.getPublicExponent().toByteArray())));

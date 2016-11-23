@@ -49,12 +49,12 @@ public class SystemUserServiceImpl extends SuperServiceImpl<SystemUserMapper, Sy
 		this.insertSelective(systemUser);//插入用户
 		
 		if (roleIds != null && roleIds.length > 0) {
-			List<SystemUserRole> systemUserRoles = new ArrayList<SystemUserRole>();
+			List<SystemUserRole> systemUserRoles = new ArrayList<>();
 			for(int i = 0; i<roleIds.length; i++){
 				SystemUserRole systemUserRole = new SystemUserRole();
 				systemUserRole.setAccountId(systemUser.getAccountId());
 				systemUserRole.setCreateTime(new Date());
-				systemUserRole.setRoleId(Integer.valueOf(roleIds[i]).intValue());
+				systemUserRole.setRoleId(Integer.valueOf(roleIds[i]));
 				systemUserRole.setCreateBy(SingletonLoginUtils.getSystemUserName());
 				systemUserRoles.add(systemUserRole);
 			}
@@ -139,12 +139,12 @@ public class SystemUserServiceImpl extends SuperServiceImpl<SystemUserMapper, Sy
 		//插入SystemUserLoginLog 表用户记录
 		
 		if (roleIds != null && roleIds.length > 0) {
-			List<SystemUserRole> systemUserRoles = new ArrayList<SystemUserRole>();
+			List<SystemUserRole> systemUserRoles = new ArrayList<>();
 			for(int i = 0; i<roleIds.length; i++){
 				SystemUserRole systemUserRole = new SystemUserRole();
 				systemUserRole.setAccountId(systemUser.getAccountId());
 				systemUserRole.setCreateTime(new Date());
-				systemUserRole.setRoleId(Integer.valueOf(roleIds[i]).intValue());
+				systemUserRole.setRoleId(Integer.valueOf(roleIds[i]));
 				systemUserRole.setCreateBy(SingletonLoginUtils.getSystemUserName());
 				systemUserRoles.add(systemUserRole);
 			}

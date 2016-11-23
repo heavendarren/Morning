@@ -14,6 +14,10 @@ import java.util.Properties;
  */
 public class PropertiesUtils {
 	
+	private PropertiesUtils() {
+		// 静态类不可实例化
+	}
+	
     private static Properties properties = new Properties();
 
     /**

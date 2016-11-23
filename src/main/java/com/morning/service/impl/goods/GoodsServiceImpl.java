@@ -55,7 +55,7 @@ public class GoodsServiceImpl extends SuperServiceImpl<GoodsMapper, Goods> imple
 		queryGoods.setStatus(1);
 		pageInfo.setTotalNumber(totalNumber);//商品总数量
 		pageInfo.setpageNumber(12);//单页商品数量
-		Map<String,Object> parameter = new HashMap<String, Object>();
+		Map<String,Object> parameter = new HashMap<>();
 		parameter.put("queryGoods", queryGoods);
 		parameter.put("pageInfo", pageInfo);
 		return goodsMapper.selectGoodsListByPage(parameter);
@@ -84,10 +84,10 @@ public class GoodsServiceImpl extends SuperServiceImpl<GoodsMapper, Goods> imple
 	}
 
 	@Override
-	public void updateGoodsStatus(Integer goodsId, Integer Status) {
+	public void updateGoodsStatus(Integer goodsId, Integer status) {
 		Goods goods = new Goods();
 		goods.setGoodsId(goodsId);
-		goods.setStatus(Status);
+		goods.setStatus(status);
 		goods.setUpdateTime(new Date());
 		goods.setUpdateBy(SingletonLoginUtils.getSystemUserName());
 		goodsMapper.updateSelectiveById(goods);
@@ -95,9 +95,7 @@ public class GoodsServiceImpl extends SuperServiceImpl<GoodsMapper, Goods> imple
 
 	@Override
 	public void deleteGoods(Integer goodsId) {
-		// TODO Auto-generated method stub
 		
 	}
-
 
 }

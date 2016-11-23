@@ -55,13 +55,11 @@ public class ImageUtils {
             ImageReader reader = (ImageReader) readers.next();
             ImageInputStream iis = ImageIO.createImageInputStream(file);
             reader.setInput(iis, true);
-            System.out.println("width:" + reader.getWidth(0));
-            System.out.println("height:" + reader.getHeight(0));
         } catch (IOException e) {
         	logger.error("ImageUtils.getImageSizeByImageReader", e);
         }
         long endTime = new Date().getTime();
-        System.out.println("使用[ImageReader]获取图片尺寸耗时：[" + (endTime - beginTime)+"]ms");
+        logger.info("使用[ImageReader]获取图片尺寸耗时：[{}]ms", endTime - beginTime);
     }
 
     /**
@@ -81,13 +79,13 @@ public class ImageUtils {
         BufferedImage sourceImg = null;
         try {
             sourceImg = javax.imageio.ImageIO.read(is);
-            System.out.println("width:" + sourceImg.getWidth());
-            System.out.println("height:" + sourceImg.getHeight());
+            logger.info("width:{}", sourceImg.getWidth());
+            logger.info("heightheight:{}", sourceImg.getHeight());
         } catch (IOException e1) {
         	logger.error("ImageUtils.getImageSizeByImageReader", e1);
         }
         long endTime = new Date().getTime();
-        System.out.println("使用[BufferedImage]获取图片尺寸耗时：[" + (endTime - beginTime)+"]ms");
+        logger.info("使用[ImageReader]获取图片尺寸耗时：[{}]ms", endTime - beginTime);
     }
 
     /**

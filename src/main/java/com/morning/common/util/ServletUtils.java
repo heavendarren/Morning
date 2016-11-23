@@ -34,6 +34,9 @@ import eu.bitwalker.useragentutils.UserAgent;
 *
  */
 public class ServletUtils {
+	
+	private ServletUtils() {
+	}
  
     //-- Content Type 定义 --//
     public static final String EXCEL_TYPE = "application/vnd.ms-excel";
@@ -145,6 +148,7 @@ public class ServletUtils {
             String encodedfileName = new String(fileName.getBytes(), "ISO8859-1");
             response.setHeader("Content-Disposition", "attachment; filename=\"" + encodedfileName + "\"");
         } catch (UnsupportedEncodingException e) {
+        	
         }
     }
     

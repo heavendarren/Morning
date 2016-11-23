@@ -16,6 +16,9 @@ package com.morning.common.constants;
  */
 public class GlobalConstants {
 	
+	private GlobalConstants() {
+	}
+	
 	/**
 	 * 显示/隐藏
 	 */

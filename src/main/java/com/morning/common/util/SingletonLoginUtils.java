@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
-import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +21,9 @@ import com.morning.entity.user.User;
  * @version 创建时间：2016年8月19日  上午11:18:39
  */
 public class SingletonLoginUtils {
+	
+	private SingletonLoginUtils() {
+	}
 	
 	private static final Logger logger = LoggerFactory.getLogger(SingletonLoginUtils.class);
 
@@ -138,8 +140,6 @@ public class SingletonLoginUtils {
 				return systemUser;
 			}
 		} catch (UnavailableSecurityManagerException e) {
-			logger.error("SystemUserServiceImpl.getSystemUser", e);
-		} catch (InvalidSessionException e) {
 			logger.error("SystemUserServiceImpl.getSystemUser", e);
 		}
 		return null;

@@ -17,7 +17,11 @@ import java.text.DecimalFormat;
 *
  */
 public class NumberUtil {
-
+	
+	private NumberUtil() {
+		// 静态类不可实例化
+	}
+	
 	/**
 	 * 计算两数百分数
 	 * @param divisor 除数

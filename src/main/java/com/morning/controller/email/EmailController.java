@@ -22,7 +22,6 @@ import com.morning.service.email.UserEmailMsgService;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：EmailController   
 * 类描述：邮件发送表示层   
@@ -30,9 +29,7 @@ import com.morning.service.email.UserEmailMsgService;
 * 创建时间：2016年11月6日 下午10:25:47   
 * 修改人：陈星星   
 * 修改时间：2016年11月6日 下午10:25:47   
-* 修改备注：   
 * @version    
-*
  */
 @Controller
 public class EmailController extends BaseController{
@@ -50,7 +47,7 @@ public class EmailController extends BaseController{
     @RequestMapping(value="sendEmail")
     @ResponseBody
     public Map<String, Object> sendEmailForCreatUser(HttpServletRequest request){
-    	Map<String, Object> json = new HashMap<String, Object>();
+    	Map<String, Object> json = new HashMap<>();
     	try{
     		String email = request.getParameter("email")==null?"":request.getParameter("email");
     		String type = request.getParameter("type")==null?"":request.getParameter("type");
@@ -65,7 +62,7 @@ public class EmailController extends BaseController{
 			} 
 	    	userEmailMsg.setToEmails(returnMap.get("returnList").toString());
 	    	//内容
-	        Map<String, Object> model = new HashMap<String, Object>();
+	        Map<String, Object> model = new HashMap<>();
     		if(type.equals("0")){ //验证邮箱
         		//将验证码和验证时间存放在Session
         		request.getSession().setAttribute("registerTime", registerTime);
@@ -113,7 +110,7 @@ public class EmailController extends BaseController{
     @RequestMapping(value="verifyCaptcha", method=RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> verifyCaptcha(HttpServletRequest request){
-    	Map<String, Object> json = new HashMap<String,Object>();
+    	Map<String, Object> json = new HashMap<>();
     	try{
     		String type = request.getParameter("type")==null?"":request.getParameter("type");
     		Object sessionCaptcha = null;

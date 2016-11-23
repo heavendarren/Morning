@@ -65,13 +65,13 @@ public class MailServiceImpl implements MailService{
 			
             //设置收件人
 			if (userEmailMsg.getToEmails() != null && userEmailMsg.getToEmails().trim().length() > 0) {
-				String to[] = userEmailMsg.getToEmails().split(";");
+				String[]  to= userEmailMsg.getToEmails().split(";");
 				helper.setTo(to);
 			}
 			
 			//设置抄送
 			if (userEmailMsg.getCcEmails() != null && userEmailMsg.getCcEmails().trim().length() > 0) {
-				String cc[] = userEmailMsg.getCcEmails().split(";");
+				String[] cc = userEmailMsg.getCcEmails().split(";");
 				helper.setCc(cc);
 			}
 			
