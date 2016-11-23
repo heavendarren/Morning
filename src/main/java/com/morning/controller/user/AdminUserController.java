@@ -1,15 +1,12 @@
 package com.morning.controller.user;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,8 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.morning.common.dto.AjaxResult;
 import com.morning.common.util.MD5Utils;
 import com.morning.common.util.toolbox.DateUtil;
 import com.morning.common.util.toolbox.WebUtil;
@@ -77,17 +74,16 @@ public class AdminUserController extends BaseController{
 	 */
 	@RequiresPermissions("user:list:view")
 	@RequestMapping(value = "/list")
-	public ModelAndView list(HttpServletRequest request, @ModelAttribute("queryUser") QueryUser queryUser) {
-		ModelAndView modelAndView = new ModelAndView(USER_LIST);
+	public String list(Model model, @ModelAttribute("queryUser") QueryUser queryUser) {
 		//用户总数量
 		int userNumber = userService.getUserNumber();
-		modelAndView.addObject("userNumber", userNumber);
+		model.addAttribute("userNumber", userNumber);
 		String updateTime = DateUtil.formatDateTime(new Date());
-		modelAndView.addObject("updateTime", updateTime);
+		model.addAttribute("updateTime", updateTime);
 		//用户列表
 		List<User> userList = userService.queryUserList(queryUser);
-		modelAndView.addObject("userList", userList);
-		return modelAndView;
+		model.addAttribute("userList", userList);
+		return USER_LIST;
 	}
 	
 	/**
@@ -98,11 +94,9 @@ public class AdminUserController extends BaseController{
 	@RequiresPermissions("user:list:audit")
 	@RequestMapping(value = "/list/audit", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> audit(@ModelAttribute("user") User user) {
-		Map<String, Object> json = new HashMap<>();
+	public AjaxResult audit(@ModelAttribute("user") User user) {
 		userService.updateUserStates(user);
-		json = this.setJson(true);
-		return json;
+		return success(true);
 	}
 	
 	/**
@@ -112,11 +106,9 @@ public class AdminUserController extends BaseController{
 	@RequiresPermissions("user:list:delete")
 	@RequestMapping(value = "/list/{accountId}/delete", method = RequestMethod.DELETE)
 	@ResponseBody
-	public Map<String, Object> delete(@PathVariable Integer accountId){
-		Map<String, Object> json = new HashMap<>();
+	public AjaxResult delete(@PathVariable Integer accountId){
 		userService.deleteUser(accountId);
-		json = this.setJson(true);
-		return json;
+		return success(true);
 	}
 	/**
 	 * GET 用户个人资料
@@ -125,11 +117,10 @@ public class AdminUserController extends BaseController{
 	 */
 	@RequiresPermissions("user:list:view")
 	@RequestMapping(value = "/list/{accountId}/detail", method = RequestMethod.GET)
-	public ModelAndView detail(@PathVariable Integer accountId) {
-		ModelAndView modelAndView = new ModelAndView(USER_DETAIL);
+	public String detail(Model model, @PathVariable Integer accountId) {
 		User user = userService.queryUserById(accountId);
-		modelAndView.addObject("user", user);
-		return modelAndView;
+		model.addAttribute("user", user);
+		return USER_DETAIL;
 	}
 	
 	/**
@@ -139,11 +130,10 @@ public class AdminUserController extends BaseController{
 	 */
 	@RequiresPermissions("user:list:view")
 	@RequestMapping(value = "/list/{accountId}/log", method = RequestMethod.GET)
-	public ModelAndView listLog(@PathVariable Integer accountId){
-		ModelAndView modelAndView = new ModelAndView(USER_LOGIN_LOG);
+	public String listLog(Model model, @PathVariable Integer accountId){
 		List<UserLoginLog> userLoginLogList = userLoginLogService.queryUserLoginLog(accountId);
-		modelAndView.addObject("userLoginLogList", userLoginLogList);
-		return modelAndView;
+		model.addAttribute("userLoginLogList", userLoginLogList);
+		return USER_LOGIN_LOG;
 	}
 	
 	/**
@@ -152,11 +142,10 @@ public class AdminUserController extends BaseController{
 	 */
 	@RequiresPermissions("user:list:edit")
 	@RequestMapping(value="/list/{accountId}/edit" ,method=RequestMethod.GET)
-	public ModelAndView edit(@PathVariable Integer accountId){
-		ModelAndView modelAndView = new ModelAndView(ADD_USER);
+	public String edit(Model model, @PathVariable Integer accountId){
 		User user = userService.queryUserById(accountId);
-		modelAndView.addObject("user", user);
-		return modelAndView;
+		model.addAttribute("user", user);
+		return ADD_USER;
 	}
 	
 	/**
@@ -176,48 +165,38 @@ public class AdminUserController extends BaseController{
 	@RequiresPermissions({"user:list:add","user:list:edit"})
 	@RequestMapping(value="/list/save" ,method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> update(@ModelAttribute("user") User user){
-		Map<String, Object> json = new HashMap<>(); 
+	public AjaxResult update(@ModelAttribute("user") User user){
 		if(user.getAccountId() == null){
 			if(user.getEmail()==null || user.getEmail().trim().length()==0 || !WebUtil.isEmail(user.getEmail())){
-				json = this.setJson(false, "请输入正确的邮箱号");
-				return json;
+				return fail(false, "请输入正确的邮箱号");
 			}
 			if(userService.checkEmail(user.getEmail().trim())){
-				json = this.setJson(false, "该邮箱号已被使用");
-				return json;
+				return fail(false, "该邮箱号已被使用");
 			}
 			if(user.getTelephone()==null || user.getTelephone().trim().length()==0 || !WebUtil.isTelephone(user.getTelephone())){
-				json = this.setJson(false, "请输入正确的手机号");
-				return json;
+				return fail(false, "请输入正确的手机号");
 			}
 			if(userService.checkMobile(user.getTelephone())){
-				json = this.setJson(false, "该手机号已被使用");
-				return json;
+				return fail(false, "该手机号已被使用");
 			}
 			if(user.getUserIdentity()==null || !WebUtil.isUserIdentity(user.getUserIdentity())){
-				json = this.setJson(false, "请输入正确的身份证号");
-				return json;
+				return fail(false, "请输入正确的身份证号");
 			}
 			user.setLoginPassword(MD5Utils.getMD5(user.getLoginPassword()));
 			userService.createUser(user);
-			json = this.setJson(true, "用户创建成功!");
+			return success(true, "用户创建成功!");
 		}else{
 			if(user.getEmail()==null || user.getEmail().trim().length()==0 || !WebUtil.isEmail(user.getEmail())){
-				json = this.setJson(false, "请输入正确的邮箱号");
-				return json;
+				return fail(false, "请输入正确的邮箱号");
 			}
 			if(user.getTelephone()==null || user.getTelephone().trim().length()==0 || !WebUtil.isTelephone(user.getTelephone())){
-				json = this.setJson(false, "请输入正确的手机号");
-				return json;
+				return fail(false, "请输入正确的手机号");
 			}
 			if(user.getUserIdentity()==null || !WebUtil.isUserIdentity(user.getUserIdentity())){
-				json = this.setJson(false, "请输入正确的身份证号");
-				return json;
+				return fail(false, "请输入正确的身份证号");
 			}
-			json = this.setJson(true, "用户信息修改成功!");
 			userService.updateUser(user);
+			return success(true, "用户信息修改成功!");
 		}
-		return json;
 	}
 }

@@ -56,14 +56,14 @@ public class EmailController extends BaseController{
 	    	UserEmailMsg userEmailMsg=new UserEmailMsg();
 	    	// 验证邮箱
 			Map<String, Object> returnMap = userEmailMsgService.checkEmail(email);
-			if (Boolean.parseBoolean(returnMap.get("flag").toString()) == false) {
+			if (!Boolean.parseBoolean(returnMap.get("flag").toString())) {
 				json = this.setJson(false, returnMap.get("errorMessage").toString());
 				return json;
 			} 
 	    	userEmailMsg.setToEmails(returnMap.get("returnList").toString());
 	    	//内容
 	        Map<String, Object> model = new HashMap<>();
-    		if(type.equals("0")){ //验证邮箱
+    		if("0".equals(type)){ //验证邮箱
         		//将验证码和验证时间存放在Session
         		request.getSession().setAttribute("registerTime", registerTime);
         		request.getSession().setAttribute("emailCaptcha", emailCaptcha);
@@ -77,7 +77,7 @@ public class EmailController extends BaseController{
     	        model.put("registerTime", registerTime);
     		}
 	    	
-    		if(type.equals("1")){ //找回密码
+    		if("1".equals(type)){ //找回密码
         		//将验证码和验证时间存放在Session
         		request.getSession().setAttribute("registerTimePsw", registerTime);
         		request.getSession().setAttribute("emailCaptchaPsw", emailCaptcha);
@@ -115,11 +115,11 @@ public class EmailController extends BaseController{
     		String type = request.getParameter("type")==null?"":request.getParameter("type");
     		Object sessionCaptcha = null;
     		Date registerTimeDate = null;
-    		if(type.equals("0")){ 
+    		if("0".equals(type)){ 
         		sessionCaptcha = request.getSession().getAttribute("emailCaptcha");
         		registerTimeDate = DateUtil.parseDateTime((String)request.getSession().getAttribute("registerTime"));//验证时间
     		}
-    		if(type.equals("1")){
+    		if("1".equals(type)){
         		sessionCaptcha = request.getSession().getAttribute("emailCaptchaPsw");
         		registerTimeDate = DateUtil.parseDateTime((String)request.getSession().getAttribute("registerTimePsw"));//验证时间
     		}

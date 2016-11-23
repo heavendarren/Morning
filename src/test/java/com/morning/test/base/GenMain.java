@@ -14,10 +14,18 @@ import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.exception.InvalidConfigurationException;
 import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.DefaultShellCallback;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GenMain {
-    public static void main(String[] args) throws URISyntaxException {
-        List<String> warnings = new ArrayList<String>();
+	
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomGenerator.class);
+   
+    private GenMain() {
+    }
+    
+    public static void main(String[] args) throws URISyntaxException, InterruptedException {
+        List<String> warnings = new ArrayList<>();
         boolean overwrite = true;
         String genCfg = GenMain.class.getResource("/generatorConfig.xml").getFile();
         String path = new URI(genCfg).getPath();
@@ -36,16 +44,16 @@ public class GenMain {
         try {
             myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
         } catch (InvalidConfigurationException e) {
-            e.printStackTrace();
+        	LOGGER.error("GenMain.main.InvalidConfigurationException:{}", e);
         }
         try {
             myBatisGenerator.generate(null);
         } catch (SQLException e) {
-            e.printStackTrace();
+        	LOGGER.error("GenMain.main.SQLException:{}", e);
         } catch (IOException e) {
-            e.printStackTrace();
+        	LOGGER.error("GenMain.main.IOException:{}", e);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+        	LOGGER.error("GenMain.main.InterruptedException:{}", e);
         }
     }
 }

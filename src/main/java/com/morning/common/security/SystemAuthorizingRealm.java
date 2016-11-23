@@ -64,9 +64,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 					systemUser.getAccountId(), systemUser.getLoginName(),
 					systemUser.getUserName(), systemUser.getRealName());
 			// 认证缓存信息
-			SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
-					authorizingUser, systemUser.getLoginPassword(), getName());
-			return simpleAuthenticationInfo;
+			return new SimpleAuthenticationInfo(authorizingUser, systemUser.getLoginPassword(), getName());
 		} else {
 			return null;
 		}

@@ -46,9 +46,9 @@ public class ImageUploadController extends BaseController {
 		        }
 				//头像存放文件
 				String dir = "icon";
-				Map<String, Object> returnMap = UploadFileUtils.Upload(request,avatar_file,avatar_data,dir);
+				Map<String, Object> returnMap = UploadFileUtils.upload(request,avatar_file,avatar_data,dir);
 				//返回的布尔型参数的值为true，如果字符串参数不为null，是相等的，忽略大小写字符串“true”。
-				if (Boolean.parseBoolean(returnMap.get("flag").toString()) == true) {
+				if (Boolean.parseBoolean(returnMap.get("flag").toString())) {
 					json = this.setJson(true, "上传成功!", returnMap.get("savaPath").toString());
 					return json;
 				} 

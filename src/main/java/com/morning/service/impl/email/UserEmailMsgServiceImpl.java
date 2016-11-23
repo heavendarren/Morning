@@ -32,7 +32,7 @@ import com.morning.service.email.UserEmailMsgService;
 @Service("userEmailMsgService")
 public class UserEmailMsgServiceImpl implements UserEmailMsgService{
 	
-	private static Logger logger = LoggerFactory.getLogger(UserEmailMsgServiceImpl.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(UserEmailMsgServiceImpl.class);
 	
 	@Autowired
 	private MailService mailService;
@@ -44,7 +44,7 @@ public class UserEmailMsgServiceImpl implements UserEmailMsgService{
 	 */
 	@Override
 	public Map<String, Object> checkEmail(String emailStr) {
-		Map<String, Object> returnMap = new HashMap<String, Object>();
+		Map<String, Object> returnMap = new HashMap<>();
 		emailStr = emailStr.trim();
 		emailStr = emailStr.replaceAll("\r\n", "");// 去除空格回车
 		emailStr = emailStr.replaceAll(" ", "");// 去除空格回车
@@ -54,8 +54,8 @@ public class UserEmailMsgServiceImpl implements UserEmailMsgService{
 
 		String[] lm = emailStr.split(";");// 定义数组
 		
-		List<String> list = new ArrayList<String>();// new一个arralist
-		Set<String> set = new HashSet<String>();// new 一个hashset
+		List<String> list = new ArrayList<>();// new一个arralist
+		Set<String> set = new HashSet<>();// new 一个hashset
 		set.addAll(Arrays.asList(lm));// 将数组转为list并存入set中，就可以去掉重复项了
 		for (Iterator<String> it = set.iterator(); it.hasNext();) {
 			list.add((String) it.next());// 遍历set 将所有元素键入list中
@@ -93,10 +93,9 @@ public class UserEmailMsgServiceImpl implements UserEmailMsgService{
     public void batchSendEmail(UserEmailMsg userEmailMsg , int num){
     	String [] toEmail = userEmailMsg.getToEmails().split(",");
         if(toEmail.length > 100 ){
-            List<String> list = new ArrayList<String>();
+            List<String> list = new ArrayList<>();
             list.addAll(Arrays.asList(toEmail));
             EmailThread emailThread = new EmailThread(list,userEmailMsg ,mailService);
-            System.out.println("批量发送邮件线程启动：线程数："+num+"发送邮件数："+list.size());
             //启动多少线程
             for(int i=0;i<num;i++){
                 new Thread(emailThread).start();
@@ -107,8 +106,7 @@ public class UserEmailMsgServiceImpl implements UserEmailMsgService{
         		try {
 					mailService.sendMail(userEmailMsg);
 				} catch (Exception e) {
-					e.printStackTrace();
-					logger.error("UserEmailMsgServiceImpl.batchSendEmail", e);
+					LOGGER.error("UserEmailMsgServiceImpl.batchSendEmail", e);
 				}
         	}
         }

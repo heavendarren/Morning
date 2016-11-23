@@ -1,11 +1,11 @@
 package com.morning.service.impl.email;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import com.alibaba.fastjson.JSON;
-import com.morning.common.util.toolbox.DateUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.morning.entity.email.UserEmailMsg;
 import com.morning.service.email.MailService;
 
@@ -21,6 +21,8 @@ import com.morning.service.email.MailService;
 * @version
  */
 public class EmailThread implements Runnable {
+	
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmailThread.class);
 	
 	private MailService mailService;
 	
@@ -39,16 +41,12 @@ public class EmailThread implements Runnable {
 	public void run() {
         try {
             //每10个邮箱批量发一次，发完休息1秒，直到发完为止
-    		System.out.println(Thread.currentThread().getName());
                 while(true){
-                    if(list.size()>0){
-                        List<String> list = queryList(10);
-                    	System.out.println(Thread.currentThread().getName());
-                        String[] arr = (String[])list.toArray(new String[list.size()]);
-                    	System.out.println(arr);
+                    if(!list.isEmpty()){
+                        List<String> listStrings = queryList(10);
+                        String[] arr = listStrings.toArray(new String[listStrings.size()]);
                         for(String mail : arr){
                     		userEmailMsg.setToEmails(mail);
-                        	System.out.println(Thread.currentThread().getName()+"邮件"+JSON.toJSON(mail));
                     		mailService.sendMail(userEmailMsg);
                         }
                         Thread.sleep(1000);
@@ -57,20 +55,18 @@ public class EmailThread implements Runnable {
                     }
                 }
         }catch (Exception e){
-            e.printStackTrace();
+        	LOGGER.error("EmailThread.run:{}", e);
         }
 	}
 	
     //获得要发送的list加锁
 	public synchronized List<String> queryList(int num) {
-		List<String> newList = new ArrayList<String>();
+		List<String> newList = new ArrayList<>();
 		if (list.size() <= num) {
-			System.out.println("发送完成时间" + DateUtil.formatDateTime(new Date()));
 			for (int i = 0; i < list.size(); i++) {
 				newList.add(list.get(i));
 			}
-			list = new ArrayList<String>();
-			System.out.println(JSON.toJSON(newList));
+			list = new ArrayList<>();
 			return newList;
 		} else {
 			for (int i = 0; i < num; i++) {
@@ -82,5 +78,4 @@ public class EmailThread implements Runnable {
 		}
 		return newList;
 	}
-
 }

@@ -1,4 +1,0 @@
-2016-11-01 23:04:13.596 [main] DEBUG mylog - debug level
-2016-11-01 23:04:13.626 [main] INFO  mylog - info level
-2016-11-01 23:04:13.627 [main] WARN  mylog - warn level
-2016-11-01 23:04:13.627 [main] ERROR mylog - error level

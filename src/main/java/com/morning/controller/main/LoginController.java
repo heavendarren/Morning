@@ -8,6 +8,8 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +46,8 @@ import com.morning.service.system.ISystemUserService;
 @Controller
 @RequestMapping("/system")
 public class LoginController extends BaseController{
+	
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 	
 	/** 后台管理登录页面 */
 	private static final String ADMIN_LOGIN = getViewPath("admin/login/admin_login");
@@ -92,12 +96,16 @@ public class LoginController extends BaseController{
 			SystemUser user = systemUserService.selectByLoginName(systemUser.getLoginName());
 			systemUserService.updateLogByLoginName(user.getAccountId(), ServletUtils.getIpAddr(), ServletUtils.getUserBrowser(), ServletUtils.getUserOperatingSystem());
 		} catch (UnknownAccountException e) {
+			LOGGER.error("该账号不存在!", e);
 			return fail(false, "该账号不存在!");
 		} catch (DisabledAccountException e) {
+			LOGGER.error("该账号已被冻结!", e);
 			return fail(false, "该账号已被冻结!");
 		} catch (IncorrectCredentialsException e) {
+			LOGGER.error("密码错误", e);
 			return fail(false, "密码错误");
 		} catch (RuntimeException e) {
+			LOGGER.error("未知错误,请联系管理员!", e);
 			return fail(false, "未知错误,请联系管理员!");
 		}
 		return success(true);

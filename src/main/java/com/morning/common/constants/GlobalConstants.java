@@ -16,9 +16,6 @@ package com.morning.common.constants;
  */
 public class GlobalConstants {
 	
-	private GlobalConstants() {
-	}
-	
 	/**
 	 * 显示/隐藏
 	 */
@@ -37,6 +34,9 @@ public class GlobalConstants {
 	 */
 	public static final String TRUE = "true";
 	public static final String FALSE = "false";
+	
+	private GlobalConstants() {
+	}
 	
 	/**
 	 * 获取Key加载信息
@@ -61,5 +61,4 @@ public class GlobalConstants {
 		return true;
 	}
 	
-
 }

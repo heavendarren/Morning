@@ -28,8 +28,8 @@ public class FileUtils {
      * @param sPath
      * @return
      */
-	public static boolean deleteFolder(String Path) {
-		File file = new File(Path);
+	public static boolean deleteFolder(String path) {
+		File file = new File(path);
 		String sPath = file.getParent();
 		// 如果sPath不以文件分隔符结尾，自动添加文件分隔符
 		if (!sPath.endsWith(File.separator)) {
@@ -83,10 +83,6 @@ public class FileUtils {
 		if (!flag)
 			return false;
 		// 删除当前目录
-		if (dirFile.delete()) {
-			return true;
-		} else {
-			return false;
-		}
+		return dirFile.delete();
 	}
 }

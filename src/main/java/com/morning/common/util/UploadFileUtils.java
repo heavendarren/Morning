@@ -9,6 +9,8 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
@@ -21,6 +23,8 @@ import com.morning.common.util.toolbox.DateUtil;
  * @version 创建时间：2016年8月19日  上午11:19:57
  */
 public class UploadFileUtils {
+	
+    private static final Logger LOGGER = LoggerFactory.getLogger(UploadFileUtils.class);
 	
 	private UploadFileUtils() {
 	}
@@ -53,8 +57,7 @@ public class UploadFileUtils {
 		//获取原始文件名  
 		String fileName = file.getOriginalFilename();
 		//新文件名称，不设置时默认为原文件名
-        String newFileName = new Date().getTime()+(new Random().nextInt(9999-1000+1)+1000)+fileName.substring(fileName.lastIndexOf('.'));
-		return newFileName;
+		return new Date().getTime()+(new Random().nextInt(9999-1000+1)+1000)+fileName.substring(fileName.lastIndexOf('.'));
 	} 
 	
 	/**
@@ -77,8 +80,7 @@ public class UploadFileUtils {
 		//查询"/morning"最后一个字母的位置
 		int index =savaFilePath.lastIndexOf(request.getSession().getServletContext().getContextPath())+request.getSession().getServletContext().getContextPath().length();
 		//文件保存路径
-		String filePath = savaFilePath.substring(index+1,savaFilePath.length());
-		return filePath;
+		return savaFilePath.substring(index+1,savaFilePath.length());
 	}
 	
 	/**
@@ -89,19 +91,19 @@ public class UploadFileUtils {
 	 * @param dir 地址名称
 	 * @return 
 	 */
-    public static Map<String, Object> Upload(HttpServletRequest request, MultipartFile avatar_file, String avatar_data, String dir){
+    public static Map<String, Object> upload(HttpServletRequest request, MultipartFile avatarFile, String avatarData, String dir){
     	Map<String, Object> returnMap = new HashMap<>();
     	//获取服务器的实际路径
     	String serverSaveDir = getServerSaveDir(request, dir);
     	//生成文件名称
-    	String newFileName = rename(avatar_file);
+    	String newFileName = rename(avatarFile);
     	
         //先把用户上传到原图保存到服务器上  
         File targetFile = new File(serverSaveDir, newFileName);
         boolean flag = false;
         try{
         	//创建JSONObject对象
-            JSONObject joData = (JSONObject) JSONObject.parse(avatar_data);
+            JSONObject joData = (JSONObject) JSONObject.parse(avatarData);
             // 用户经过剪辑后的图片的大小  
             float x = joData.getFloatValue("x");
             float y = joData.getFloatValue("y");
@@ -113,7 +115,7 @@ public class UploadFileUtils {
             if(!targetFile.exists()){  
                 targetFile.mkdirs(); 
                 //获取文件流，可以进行处理
-                InputStream is = avatar_file.getInputStream();
+                InputStream is = avatarFile.getInputStream();
                 //旋转后剪裁图片
                 ImageUtils.cutAndRotateImage(is, targetFile, (int)x,(int)y,(int)w,(int)h,(int)r); 
                 //关闭该流并释放与该流关联的所有系统资源。
@@ -121,7 +123,7 @@ public class UploadFileUtils {
                 flag = true;
             }  
         }catch(Exception e){
-            e.printStackTrace();  
+        	LOGGER.error("UploadFileUtils.Upload:{}", e);
         }
         returnMap.put("savaPath", getSavaDir(request, serverSaveDir, newFileName));
         returnMap.put("flag", flag);

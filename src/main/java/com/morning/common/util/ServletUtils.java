@@ -4,14 +4,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.StringTokenizer;
- 
-
-
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -21,7 +19,6 @@ import eu.bitwalker.useragentutils.UserAgent;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：ServletUtils   
 * 类描述：Http与Servlet工具类  
@@ -29,15 +26,12 @@ import eu.bitwalker.useragentutils.UserAgent;
 * 创建时间：2016年10月25日 下午4:06:13   
 * 修改人：陈星星   
 * 修改时间：2016年10月25日 下午4:06:13   
-* 修改备注：   
 * @version    
-*
  */
 public class ServletUtils {
 	
-	private ServletUtils() {
-	}
- 
+	private static Logger LOGGER = LoggerFactory.getLogger(ServletUtils.class);
+	
     //-- Content Type 定义 --//
     public static final String EXCEL_TYPE = "application/vnd.ms-excel";
     public static final String HTML_TYPE = "text/html";
@@ -49,8 +43,8 @@ public class ServletUtils {
     //-- Header 定义 --//
     public static final String AUTHENTICATION_HEADER = "Authorization";
  
-    //-- 常用数值定义 --//
-    public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
+	private ServletUtils() {
+	}
  
     /**
      * 设置客户端缓存过期时间 的Header.
@@ -148,7 +142,7 @@ public class ServletUtils {
             String encodedfileName = new String(fileName.getBytes(), "ISO8859-1");
             response.setHeader("Content-Disposition", "attachment; filename=\"" + encodedfileName + "\"");
         } catch (UnsupportedEncodingException e) {
-        	
+        	LOGGER.error("ServletUtils.setFileDownloadHeader", e);
         }
     }
     
@@ -160,12 +154,7 @@ public class ServletUtils {
 	 * @return
 	 */
 	public static HttpServletRequest getRequest() {
-		try {
-			return ((ServletRequestAttributes) RequestContextHolder
-					.getRequestAttributes()).getRequest();
-		} catch (Exception e) {
-			return null;
-		}
+		return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 	}
     
     /**

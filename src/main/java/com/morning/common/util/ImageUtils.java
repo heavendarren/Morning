@@ -52,7 +52,7 @@ public class ImageUtils {
         File file = new File(src);
         try {
             Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName("jpg");
-            ImageReader reader = (ImageReader) readers.next();
+            ImageReader reader = readers.next();
             ImageInputStream iis = ImageIO.createImageInputStream(file);
             reader.setInput(iis, true);
         } catch (IOException e) {
@@ -97,12 +97,12 @@ public class ImageUtils {
          try {
         	 File file = new File(srcImageFile);
              Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName("jpg");
-             ImageReader reader = (ImageReader) readers.next();
+             ImageReader reader = readers.next();
              ImageInputStream iis = ImageIO.createImageInputStream(file);
              reader.setInput(iis, true);
              return reader.getWidth(0);
          } catch (IOException e) {
-             e.printStackTrace();
+        	 logger.error("ImageUtils.getImageWidth", e);
              return 0;
          }
     }
@@ -117,13 +117,13 @@ public class ImageUtils {
     	File file = new File(srcImageFile);
         try {
             Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName("jpg");
-            ImageReader reader = (ImageReader) readers.next();
+            ImageReader reader = readers.next();
             ImageInputStream iis = ImageIO.createImageInputStream(file);
             reader.setInput(iis, true);
            
             return reader.getHeight(0);
         } catch (IOException e) {
-            e.printStackTrace();
+        	logger.error("ImageUtils.getImageHeight", e);
             return 0;
         }
     }
@@ -134,28 +134,29 @@ public class ImageUtils {
 	  * @param angel 旋转度
 	  * @return
 	  */
-	 public static BufferedImage Rotate(Image src, int angel) {  
-	        int src_width = src.getWidth(null);   // 源图宽度  
-	        int src_height = src.getHeight(null);   // 源图高度  
-	        angel=angel>0?angel:(360+angel); 
-	        Rectangle rect_des = CalcRotatedSize(new Rectangle(new Dimension(  
-	                src_width, src_height)), angel);  
-	  
-	        BufferedImage res = null;  
-	        res = new BufferedImage(rect_des.width, rect_des.height,  
-	                BufferedImage.TYPE_INT_RGB);  
-	        Graphics2D g2 = res.createGraphics();  
-	        g2.setPaint(Color.WHITE);
-	        g2.fillRect(0, 0, rect_des.width,  rect_des.height);
-	        // transform  
-	        g2.translate((rect_des.width - src_width) / 2,  
-	                (rect_des.height - src_height) / 2);  
-	        g2.rotate(Math.toRadians(angel), src_width / 2, src_height / 2);  
-	  
-	        g2.drawImage(src, null, null);  
-	        return res;  
+	 public static BufferedImage rotate(Image src, int angel) {  
+        int srcWidth = src.getWidth(null);   // 源图宽度  
+        int srcHeight = src.getHeight(null);   // 源图高度  
+        angel = angel > 0 ? angel : (360 + angel);
+        Rectangle rectDes = calcRotatedSize(new Rectangle(new Dimension(  
+        		srcWidth, srcHeight)), angel);  
+  
+        BufferedImage res = null;  
+        res = new BufferedImage(rectDes.width, rectDes.height,  
+                BufferedImage.TYPE_INT_RGB);  
+        Graphics2D g2 = res.createGraphics();  
+        g2.setPaint(Color.WHITE);
+        g2.fillRect(0, 0, rectDes.width,  rectDes.height);
+        // transform  
+        g2.translate((rectDes.width - srcWidth) / 2,  
+                (rectDes.height - srcHeight) / 2);  
+        g2.rotate(Math.toRadians(angel), (double)srcWidth / 2, (double)srcHeight / 2);  
+  
+        g2.drawImage(src, null, null);  
+        return res;  
 	 }
-	 public static Rectangle CalcRotatedSize(Rectangle src, int angel) {  
+	 
+	 public static Rectangle calcRotatedSize(Rectangle src, int angel) {  
          // if angel is greater than 90 degree, we need to do some conversion  
          if (angel >= 90) {  
              if(angel / 90 % 2 == 1){  
@@ -165,19 +166,19 @@ public class ImageUtils {
              }  
              angel = angel % 90;  
          }  
-         double r = Math.sqrt(src.height * src.height + src.width * src.width) / 2;  
+         double r = Math.sqrt((double)src.height * src.height + src.width * src.width) / 2;  
          double len = 2 * Math.sin(Math.toRadians(angel) / 2) * r;  
-         double angel_alpha = (Math.PI - Math.toRadians(angel)) / 2;  
-         double angel_dalta_width = Math.atan((double) src.height / src.width);  
-         double angel_dalta_height = Math.atan((double) src.width / src.height);  
+         double angelAlpha = (Math.PI - Math.toRadians(angel)) / 2;  
+         double angelDaltaWidth = Math.atan((double) src.height / src.width);  
+         double angelDaltaHeight = Math.atan((double) src.width / src.height);  
    
-         int len_dalta_width = (int) (len * Math.cos(Math.PI - angel_alpha  
-                 - angel_dalta_width));  
-         int len_dalta_height = (int) (len * Math.cos(Math.PI - angel_alpha  
-                 - angel_dalta_height));  
-         int des_width = src.width + len_dalta_width * 2;  
-         int des_height = src.height + len_dalta_height * 2;  
-         return new java.awt.Rectangle(new Dimension(des_width, des_height));  
+         int lenDaltaWidth = (int) (len * Math.cos(Math.PI - angelAlpha  
+                 - angelDaltaWidth));  
+         int lenDaltaHeight = (int) (len * Math.cos(Math.PI - angelAlpha  
+                 - angelDaltaHeight));  
+         int desWidth = src.width + lenDaltaWidth * 2;  
+         int desHeight = src.height + lenDaltaHeight * 2;  
+         return new java.awt.Rectangle(new Dimension(desWidth, desHeight));  
     }
     
 	/***
@@ -195,7 +196,7 @@ public class ImageUtils {
          try{
         	 BufferedImage src = ImageIO.read(srcImageFile); // 读入文件
 			 Iterator<ImageReader> iterator = ImageIO.getImageReadersByFormatName("jpg");   
-	         ImageReader reader = (ImageReader)iterator.next();  
+	         ImageReader reader = iterator.next();  
 	         
 	        //获取图片流   
 	         ByteArrayOutputStream bs = new ByteArrayOutputStream();  
@@ -205,15 +206,15 @@ public class ImageUtils {
 	         ImageInputStream iis = ImageIO.createImageInputStream(in);   
 	         reader.setInput(iis, true); 
 	         ImageReadParam param = reader.getDefaultReadParam(); 
-	         x=(x>0?x:0);
-	         y=(y>0?y:0);
+	         x = x > 0 ? x : 0;
+	         y = y > 0 ? y : 0;
 	         Rectangle rect = new Rectangle(x, y, w,h);    
 	         param.setSourceRegion(rect);   
 	         BufferedImage bi = reader.read(0,param);     
 	         ImageIO.write(bi, "jpg", dest);    
 	         return true;
          }catch (Exception e) {
-        	 e.printStackTrace();
+         	logger.error("ImageUtils.cutImage", e);
         	 return false;
 		}
     }
@@ -238,11 +239,11 @@ public class ImageUtils {
 			BufferedImage src = ImageIO.read(srcImageFile); // 读入文件
 	
 	        //图片旋转指定角度 
-			BufferedImage tag= Rotate(src, r);
+			BufferedImage tag= rotate(src, r);
 			
 			//读取图片文件 
 			Iterator<ImageReader> iterator = ImageIO.getImageReadersByFormatName("jpg");   
-	        ImageReader reader = (ImageReader)iterator.next(); 
+	        ImageReader reader = iterator.next(); 
 	        
 	        //获取图片流   
 	        ByteArrayOutputStream bs = new ByteArrayOutputStream();  
@@ -252,8 +253,8 @@ public class ImageUtils {
 	        ImageInputStream iis=ImageIO.createImageInputStream(in);
 	        reader.setInput(iis, true);   
 	        ImageReadParam param = reader.getDefaultReadParam(); 
-	        x=(x>0?x:0);
-	        y=(y>0?y:0);
+	         x = x > 0 ? x : 0;
+	         y = y > 0 ? y : 0;
 	        
 	        //定义一个矩形 
 	        Rectangle rect = new Rectangle(x, y, w,h);    
@@ -266,6 +267,7 @@ public class ImageUtils {
 	        ImageIO.write(bi, "jpg", dest);  
 			return true;
 		}catch (Exception e) {
+         	logger.error("ImageUtils.cutAndRotateImage", e);
 			return false;
 		}
 	}
@@ -284,7 +286,7 @@ public class ImageUtils {
 	        	File file = new File(srcImageFile);
 	            BufferedImage src = ImageIO.read(file); // 读入文件
 	             Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName("jpg");
-	             ImageReader reader = (ImageReader) readers.next();
+	             ImageReader reader = readers.next();
 	             ImageInputStream iis = ImageIO.createImageInputStream(file);
 	             reader.setInput(iis, true);
 	            int width = reader.getWidth(0); // 得到源图宽
@@ -306,7 +308,7 @@ public class ImageUtils {
 	            ImageIO.write(tag, "jpg", new File(result));// 输出到文件流
 	            return true;
 	        } catch (IOException e) {
-	            e.printStackTrace();
+	        	logger.error("ImageUtils.scale", e);
 	            return false;
 	        }
 	    }
@@ -328,7 +330,7 @@ public class ImageUtils {
 	        File file = new File(srcImageFile);
 	        BufferedImage bi = ImageIO.read(file); // 读入文件
 	        Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName("jpg");
-	        ImageReader reader = (ImageReader) readers.next();
+	        ImageReader reader = readers.next();
 	        ImageInputStream iis = ImageIO.createImageInputStream(file);
 	        reader.setInput(iis, true);
 	        int width1 = reader.getWidth(0); // 得到源图宽
@@ -367,7 +369,7 @@ public class ImageUtils {
 	        ImageIO.write((BufferedImage) itemp, "JPEG", new File(result));
 	        return true;
 	    } catch (IOException e) {
-	        e.printStackTrace();
+         	logger.error("ImageUtils.scale2", e);
 	        return false;
 	    }
 	}
@@ -381,7 +383,7 @@ public class ImageUtils {
 	  * @author roychenyi
 	  * @date   2016-3-30下午2:49:15
 	  */
-	public  static boolean convert(String srcImageFile, String formatName, String destImageFile) {
+	public static boolean convert(String srcImageFile, String formatName, String destImageFile) {
 	    try {
 	        File f = new File(srcImageFile);
 	        f.canRead();
@@ -390,7 +392,7 @@ public class ImageUtils {
 	        ImageIO.write(src, formatName, new File(destImageFile));
 	        return true;
 	    } catch (Exception e) {
-	        e.printStackTrace();
+         	logger.error("ImageUtils.convert", e);	    	
 	        return false;
 	    }
 	}
@@ -400,7 +402,7 @@ public class ImageUtils {
 	 * @param srcImageFile 源图像地址
 	 * @param destImageFile 目标图像地址
 	 */
-	public final static void gray(String srcImageFile, String destImageFile) {
+	public static final void gray(String srcImageFile, String destImageFile) {
 	    try {
 	        BufferedImage src = ImageIO.read(new File(srcImageFile));
 	        ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
@@ -408,7 +410,7 @@ public class ImageUtils {
 	        src = op.filter(src, null);
 	        ImageIO.write(src, "jpg", new File(destImageFile));
 	    } catch (IOException e) {
-	        e.printStackTrace();
+         	logger.error("ImageUtils.gray", e);	    
 	    }
 	}
 	    
@@ -421,13 +423,13 @@ public class ImageUtils {
 	 * @param y 修正值。 默认在中间
 	 * @param alpha 透明度：alpha 必须是范围 [0.0, 1.0] 之内（包含边界值）的一个浮点数字
 	 */
-	public  static boolean pressImage(String pressImg, String srcImageFile,String destImageFile,
+	public static boolean pressImage(String pressImg, String srcImageFile,String destImageFile,
 	        int x, int y, float alpha) {
 	    try {
 	    	File file = new File(srcImageFile);
 	        BufferedImage src = ImageIO.read(file); // 读入文件
 	         Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName("jpg");
-	         ImageReader reader = (ImageReader) readers.next();
+	         ImageReader reader = readers.next();
 	         ImageInputStream iis = ImageIO.createImageInputStream(file);
 	         reader.setInput(iis, true);
 	        int width = reader.getWidth(0); // 得到源图宽
@@ -437,19 +439,19 @@ public class ImageUtils {
 	        Graphics2D g = image.createGraphics();
 	        g.drawImage(src, 0, 0, width, height, null);
 	        // 水印文件
-	        Image src_biao = ImageIO.read(new File(pressImg));
-	        int wideth_biao = src_biao.getWidth(null);
-	        int height_biao = src_biao.getHeight(null);
+	        Image srcBiao = ImageIO.read(new File(pressImg));
+	        int widethBiao = srcBiao.getWidth(null);
+	        int heightBiao = srcBiao.getHeight(null);
 	        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP,
 	                alpha));
-	        g.drawImage(src_biao, (width-wideth_biao-x) ,
-	                (height-height_biao-y) , wideth_biao, height_biao, null);
+	        g.drawImage(srcBiao, width-widethBiao-x,
+	                height-heightBiao-y , widethBiao, heightBiao, null);
 	        // 水印文件结束
 	        g.dispose();
 	        ImageIO.write((BufferedImage) image,  "jpg", new File(destImageFile));
 	        return true;
 	    } catch (Exception e) {
-	        e.printStackTrace();
+         	logger.error("ImageUtils.pressImage:{}", e);	 	    	
 	        return false;
 	    }
 	}
@@ -467,7 +469,7 @@ public class ImageUtils {
 	 * @param y 修正值
 	 * @param alpha 透明度：alpha 必须是范围 [0.0, 1.0] 之内（包含边界值）的一个浮点数字
 	 */
-	public  static boolean pressText(String pressText,
+	public static boolean pressText(String pressText,
 	        String srcImageFile, String destImageFile, String fontName,
 	        int fontStyle, Color color, int fontSize,int x,
 	        int y, float alpha) {
@@ -475,7 +477,7 @@ public class ImageUtils {
 	    	File file = new File(srcImageFile);
 	        BufferedImage src = ImageIO.read(file); // 读入文件
 	         Iterator<ImageReader> readers = ImageIO.getImageReadersByFormatName("jpg");
-	         ImageReader reader = (ImageReader) readers.next();
+	         ImageReader reader = readers.next();
 	         ImageInputStream iis = ImageIO.createImageInputStream(file);
 	         reader.setInput(iis, true);
 	        int width = reader.getWidth(0); // 得到源图宽
@@ -495,7 +497,7 @@ public class ImageUtils {
 	        ImageIO.write(image, "jpg", new File(destImageFile));// 输出到文件流
 	        return true;
 	    } catch (Exception e) {
-	        e.printStackTrace();
+         	logger.error("ImageUtils.pressText:{}", e);	
 	        return false;
 	    }
 	}
@@ -505,15 +507,15 @@ public class ImageUtils {
 	 * @param text
 	 * @return
 	 */
-	public  static int getLength(String text) {
-	    int length = 0;
-	    for (int i = 0; i < text.length(); i++) {
-	        if (new String(text.charAt(i) + "").getBytes().length > 1) {
-	            length += 2;
-	        } else {
-	            length += 1;
-	        }
-	    }
-	    return length / 2;
+	public static int getLength(String text) {
+		int length = 0;
+		for (int i = 0; i < text.length(); i++) {
+			if (new String(String.valueOf(text.charAt(i))).getBytes().length > 1) {
+				length += 2;
+			} else {
+				length += 1;
+			}
+		}
+		return length / 2;
 	}
 }

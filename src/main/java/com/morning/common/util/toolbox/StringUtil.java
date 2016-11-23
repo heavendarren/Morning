@@ -12,16 +12,18 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * 字符串工具类
  * 
- * @author xiaoleilu
- *
+* 项目名称：morning Maven Webapp   
+* 类名称：StringUtil   
+* 类描述：字符串工具类   
+* 创建人：陈星星   
+* 创建时间：2016年11月23日 下午5:15:22   
+* 修改人：陈星星   
+* 修改时间：2016年11月23日 下午5:15:22   
+* @version
  */
 public class StringUtil {
 	
-	private StringUtil() {
-	}
-
 	public static final String SPACE = " ";
 	public static final String DOT = ".";
 	public static final String SLASH = "/";
@@ -40,7 +42,9 @@ public class StringUtil {
 
 	public static final String EMPTY_JSON = "{}";
 
-
+	private StringUtil() {
+	}
+	
 	/**
 	 * 首字母变小写
 	 */
@@ -68,12 +72,12 @@ public class StringUtil {
 	}
 
 	// ------------------------------------------------------------------------ Blank
+	
 	/**
 	 * 字符串是否为空白 空白的定义如下： <br>
 	 * 1、为null <br>
 	 * 2、为不可见字符（如空格）<br>
 	 * 3、""<br>
-	 * 
 	 * @param str 被检测的字符串
 	 * @return 是否为空
 	 */
@@ -84,7 +88,7 @@ public class StringUtil {
 		}
 		for (int i = 0; i < length; i++) {
 			// 只要有一个非空字符即为非空字符串
-			if (false == Character.isWhitespace(str.charAt(i))) {
+			if (!Character.isWhitespace(str.charAt(i))) {
 				return false;
 			}
 		}
@@ -101,7 +105,7 @@ public class StringUtil {
 	 * @return 是否为非空
 	 */
 	public static boolean notBlank(String str) {
-		return false == isBlank(str);
+		return !isBlank(str);
 	}
 
 	/**
@@ -161,7 +165,7 @@ public class StringUtil {
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(String str) {
-		return false == isEmpty(str);
+		return !isEmpty(str);
 	}
 
 	/**
@@ -594,8 +598,8 @@ public class StringUtil {
 		if(isEmpty(str) || isEmpty(prefix)){
 			return str;
 		}
-		if(false == str.startsWith(prefix)){
-			str = prefix + str;
+		if (!str.startsWith(prefix)) {
+			return prefix + str;
 		}
 		return str;
 	}
@@ -610,8 +614,8 @@ public class StringUtil {
 		if(isEmpty(str) || isEmpty(suffix)){
 			return str;
 		}
-		if(false == str.endsWith(suffix)){
-			str += suffix;
+		if (!str.endsWith(suffix)) {
+			return str += suffix;
 		}
 		return str;
 	}
@@ -653,9 +657,9 @@ public class StringUtil {
 	 */
 	public static List<String> split(String str, char separator, int limit) {
 		if (str == null) {
-			return null;
+			return new ArrayList<>();
 		}
-		List<String> list = new ArrayList<String>(limit == 0 ? 16 : limit);
+		List<String> list = new ArrayList<>(limit == 0 ? 16 : limit);
 		if (limit == 1) {
 			list.add(str);
 			return list;
@@ -693,7 +697,7 @@ public class StringUtil {
 	 */
 	public static String[] split(String str, String delimiter) {
 		if (str == null) {
-			return null;
+			return new String[0];
 		}
 		if (str.trim().length() == 0) {
 			return new String[] { str };
@@ -703,7 +707,8 @@ public class StringUtil {
 		int maxparts = (str.length() / dellen) + 2; // one more for the last
 		int[] positions = new int[maxparts];
 
-		int i, j = 0;
+		int i = 0;
+		int j = 0;
 		int count = 0;
 		positions[0] = -dellen;
 		while ((i = str.indexOf(delimiter, j)) != -1) {
@@ -740,7 +745,7 @@ public class StringUtil {
 	public static String sub(String string, int fromIndex, int toIndex) {
 		int len = string.length();
 		if (fromIndex < 0) {
-			fromIndex = len + fromIndex;
+			fromIndex += len;
 			if(fromIndex < 0 ) { 
 				fromIndex = 0;
 			}
@@ -889,7 +894,7 @@ public class StringUtil {
 	 * 
 	 * @return 如果两个字符串相同，或者都是<code>null</code>，则返回<code>true</code>
 	 */
-	public static boolean equals(String str1, String str2) {
+	public static boolean equalsStr(String str1, String str2) {
 		if (str1 == null) {
 			return str2 == null;
 		}
@@ -1002,9 +1007,8 @@ public class StringUtil {
 	 */
 	public static byte[] bytes(String str, Charset charset) {
 		if (str == null) {
-			return null;
+			return new byte[0];
 		}
-
 		if (null == charset) {
 			return str.getBytes();
 		}
@@ -1122,7 +1126,9 @@ public class StringUtil {
 			}
 			if (Character.isUpperCase(c)) {
 				if (!isPreUpperCase || !isNextUpperCase) {
-					if (i > 0) sb.append(UNDERLINE);
+					if (i > 0) {
+						sb.append(UNDERLINE);
+					}
 				}
 				isPreUpperCase = true;
 			} else {
@@ -1323,7 +1329,7 @@ public class StringUtil {
 	 */
 	public static byte[] encode(String str, String charset) {
 		if (str == null) {
-			return null;
+			return new byte[0];
 		}
 
 		if(isBlank(charset)) {

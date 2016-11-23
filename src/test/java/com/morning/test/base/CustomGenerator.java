@@ -2,6 +2,8 @@ package com.morning.test.base;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -14,12 +16,16 @@ import com.baomidou.mybatisplus.generator.ConfigGenerator;
  * mybatisplus 代码生成器配置
  */
 public class CustomGenerator {
+	
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomGenerator.class);
 
     /* 生成代码包名 */
     private static final String PACKAGE_NAME = "com.morning";
+    
+    private CustomGenerator() {
+    }
 
     public static void main(String[] args) {
-    	
 
         /* 获取 JDBC 配置文件 */
         Properties props = getProperties();
@@ -87,7 +93,7 @@ public class CustomGenerator {
         try {
             props = PropertiesLoaderUtils.loadProperties(resource);
         } catch (IOException e) {
-            e.printStackTrace();
+        	LOGGER.error("CustomGenerator.getProperties:{}", e);
         }
         return props;
     }

@@ -6,15 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.morning.common.util.NumberUtil;
 import com.morning.common.util.toolbox.DateUtil;
@@ -83,8 +80,7 @@ public class MainController extends BaseController {
 	 */
 	@RequiresPermissions("system:view")
 	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView mainIndex(HttpServletRequest request) {
-		ModelAndView modelAndView = new ModelAndView(MAIN_INDEX);
+	public String mainIndex(Model model) {
 		Map<String, Object> webCountMap = new HashMap<>();
 		// 今天未支付订单数
 		int unpayOrder = statisticsDayService.getOrderNumber(new Date(), 1);
@@ -106,8 +102,8 @@ public class MainController extends BaseController {
 		// 支付金额同比
 		String payPercent = NumberUtil.getPercent((int) ytdPayMoney, (int) (payMoney - ytdPayMoney));
 		webCountMap.put("payPercent", payPercent);
-		modelAndView.addObject("webCountMap", webCountMap);
-		return modelAndView;
+		model.addAttribute("webCountMap", webCountMap);
+		return MAIN_INDEX;
 	}
 	
 }

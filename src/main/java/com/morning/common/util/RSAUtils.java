@@ -76,7 +76,7 @@ public abstract class RSAUtils {
 			keyPairGenerator = KeyPairGenerator.getInstance(ALGORITHOM,DEFAULT_PROVIDER);//返回生成指定算法的 public/private 密钥对的 KeyPairGenerator 对象
 			keyFactory = KeyFactory.getInstance(ALGORITHOM, DEFAULT_PROVIDER);//返回转换指定算法的 public/private 关键字的 KeyFactory 对象。
 		} catch (NoSuchAlgorithmException ex) {
-			LOGGER.error(ex.getMessage());
+			LOGGER.error("RSAUtils.static",ex);
 		}
 		rsaPairFile = new File(getRSAPairFilePath());
 	}
@@ -103,7 +103,7 @@ public abstract class RSAUtils {
 	 */
 	private static String getRSAPairFilePath() {
 		String urlPath = RSAUtils.class.getResource("/").getPath();
-		return (new File(urlPath).getParent() + File.separator + RSA_PAIR_FILENAME);
+		return new File(urlPath).getParent() + File.separator + RSA_PAIR_FILENAME;
 	}
     
     /**
@@ -131,7 +131,7 @@ public abstract class RSAUtils {
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(keyPair);
         } catch (Exception ex) {
-            ex.printStackTrace();
+        	LOGGER.error("RSAUtils.saveKeyPair",ex);
         } finally {
         	IOUtils.closeQuietly(objectOutputStream);
             IOUtils.closeQuietly(fileOutputStream);
@@ -163,7 +163,7 @@ public abstract class RSAUtils {
             oneKeyPair = (KeyPair) objectInputStream.readObject();
             return oneKeyPair;
         } catch (Exception ex) {
-            ex.printStackTrace();
+        	LOGGER.error("RSAUtils.readKeyPair",ex);
         } finally {
             IOUtils.closeQuietly(objectInputStream);
             IOUtils.closeQuietly(fileInputStream);
@@ -231,7 +231,7 @@ public abstract class RSAUtils {
             modulus = Hex.decodeHex(hexModulus.toCharArray());
             privateExponent = Hex.decodeHex(hexPrivateExponent.toCharArray());
         } catch(DecoderException ex) {
-            LOGGER.error("hexModulus or hexPrivateExponent value is invalid. return null(RSAPrivateKey).");
+            LOGGER.error("hexModulus or hexPrivateExponent value is invalid. return null(RSAPrivateKey).",ex);
         }
         if(modulus != null && privateExponent != null) {
             return generateRSAPrivateKey(modulus, privateExponent);
@@ -259,7 +259,7 @@ public abstract class RSAUtils {
             modulus = Hex.decodeHex(hexModulus.toCharArray());
             publicExponent = Hex.decodeHex(hexPublicExponent.toCharArray());
         } catch(DecoderException ex) {
-            LOGGER.error("hexModulus or hexPublicExponent value is invalid. return null(RSAPublicKey).");
+            LOGGER.error("hexModulus or hexPublicExponent value is invalid. return null(RSAPublicKey).", ex);
         }
         if(modulus != null && publicExponent != null) {
             return generateRSAPublicKey(modulus, publicExponent);
@@ -309,12 +309,12 @@ public abstract class RSAUtils {
         }
         byte[] data = plaintext.getBytes();
         try {
-            byte[] en_data = encrypt(publicKey, data);
-            return new String(Hex.encodeHex(en_data));
-        } catch (Exception ex) {
-            LOGGER.error(ex.getCause().getMessage());
-        }
-        return null;
+            byte[] enData = encrypt(publicKey, data);
+            return new String(Hex.encodeHex(enData));
+		} catch (Exception ex) {
+			LOGGER.error("RSAUtils.encryptString", ex);
+		}
+		return null;
     }
     
     /**
@@ -332,12 +332,12 @@ public abstract class RSAUtils {
         byte[] data = plaintext.getBytes();
         KeyPair keyPair = getKeyPair();
         try {
-            byte[] en_data = encrypt((RSAPublicKey)keyPair.getPublic(), data);
-            return new String(Hex.encodeHex(en_data));
+            byte[] enData = encrypt((RSAPublicKey)keyPair.getPublic(), data);
+            return new String(Hex.encodeHex(enData));
         } catch(NullPointerException ex) {
-            LOGGER.error("keyPair cannot be null.");
+            LOGGER.error("keyPair cannot be null.", ex);
         } catch(Exception ex) {
-            LOGGER.error(ex.getCause().getMessage());
+			LOGGER.error("RSAUtils.encryptString", ex);
         }
         return null;
     }
@@ -357,10 +357,11 @@ public abstract class RSAUtils {
             return null;
         }
         try {
-            byte[] en_data = Hex.decodeHex(encrypttext.toCharArray());
-            byte[] data = decrypt(privateKey, en_data);
+            byte[] enData = Hex.decodeHex(encrypttext.toCharArray());
+            byte[] data = decrypt(privateKey, enData);
             return new String(data);
         } catch (Exception ex) {
+			LOGGER.error("RSAUtils.decryptString", ex);
             LOGGER.error(String.format("\"%s\" Decryption failed. Cause: %s", encrypttext, ex.getCause().getMessage()));
         }
         return null;
@@ -381,12 +382,13 @@ public abstract class RSAUtils {
         }
         KeyPair keyPair = getKeyPair();
         try {
-            byte[] en_data = Hex.decodeHex(encrypttext.toCharArray());
-            byte[] data = decrypt((RSAPrivateKey)keyPair.getPrivate(), en_data);
+            byte[] enData = Hex.decodeHex(encrypttext.toCharArray());
+            byte[] data = decrypt((RSAPrivateKey)keyPair.getPrivate(), enData);
             return new String(data);
         } catch(NullPointerException ex) {
-            LOGGER.error("keyPair cannot be null.");
+            LOGGER.error("keyPair cannot be null.", ex);
         } catch (Exception ex) {
+			LOGGER.error("RSAUtils.decryptString", ex);
             LOGGER.error(String.format("\"%s\" Decryption failed. Cause: %s", encrypttext, ex.getMessage()));
         }
         return null;

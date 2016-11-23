@@ -33,11 +33,9 @@ public class NumberUtil {
 		decimalFormat.setMaximumFractionDigits(1);
 		decimalFormat.setMinimumFractionDigits(1);
 		if(divisor!=0){
-			String percent = decimalFormat.format(dividend * 100.00 / divisor) + "%";
-			return percent;
+			return decimalFormat.format(dividend * 100.00 / divisor) + "%";
 		}else{
-			String percent = decimalFormat.format(0.00) + "%";
-			return percent;
+			return decimalFormat.format(0.00) + "%";
 		}
 	} 
 	
@@ -48,10 +46,10 @@ public class NumberUtil {
 	 */
 	public static String fmtMicrometer(String text) {
 		DecimalFormat df = null;
-		if (text.indexOf(".") > 0) {
-			if (text.length() - text.indexOf(".") - 1 == 0) {
+		if (text.indexOf('.') >= 0) {
+			if (text.length() - text.indexOf('.') - 1 == 0) {
 				df = new DecimalFormat("###,##0.");
-			} else if (text.length() - text.indexOf(".") - 1 == 1) {
+			} else if (text.length() - text.indexOf('.') - 1 == 1) {
 				df = new DecimalFormat("###,##0.0");
 			} else {
 				df = new DecimalFormat("###,##0.00");

@@ -22,10 +22,10 @@ import com.morning.entity.user.User;
  */
 public class SingletonLoginUtils {
 	
+	private static final Logger logger = LoggerFactory.getLogger(SingletonLoginUtils.class);
+	
 	private SingletonLoginUtils() {
 	}
-	
-	private static final Logger logger = LoggerFactory.getLogger(SingletonLoginUtils.class);
 
 	/**
 	 * 创建储存购物车信息的模型
@@ -124,8 +124,7 @@ public class SingletonLoginUtils {
 		if (StringUtil.isBlank(registerCode)) {
 			return false;
 		}
-		boolean result = registerCode.equalsIgnoreCase(captcha.toString());
-		return result;
+		return registerCode.equalsIgnoreCase(captcha.toString());
 	}
 	
 	/**

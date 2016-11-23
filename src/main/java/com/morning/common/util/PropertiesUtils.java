@@ -6,6 +6,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 
  * @description：读取配置通用处理工具类
@@ -14,11 +17,12 @@ import java.util.Properties;
  */
 public class PropertiesUtils {
 	
-	private PropertiesUtils() {
-		// 静态类不可实例化
-	}
+    private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesUtils.class);
 	
     private static Properties properties = new Properties();
+    
+	private PropertiesUtils() {
+	}
 
     /**
      * 读取配置文件
@@ -30,7 +34,7 @@ public class PropertiesUtils {
             BufferedReader bf = new BufferedReader(new  InputStreamReader(in,"UTF-8"));
             properties.load(bf);
         }catch (IOException e){
-            e.printStackTrace();
+        	LOGGER.error("PropertiesUtils.readProperties:{}", e);
         }
     }
 

@@ -109,7 +109,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> userLogin(HttpServletRequest request, @ModelAttribute("user") User user){
-		Map<String,Object> json = new HashMap<String,Object>();
+		Map<String,Object> json = new HashMap<>();
     	try{
 			// 服务器端，使用RSAUtils工具类对密文进行解密
 			String passWord = RSAUtils.decryptStringByJs(user.getLoginPassword());
@@ -166,7 +166,7 @@ public class UserController extends BaseController {
     @RequestMapping(value="/userSignin", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> verifyUser(HttpServletRequest request, @ModelAttribute("user") User user){
-    	Map<String, Object> json = new HashMap<String,Object>();
+    	Map<String, Object> json = new HashMap<>();
     	try{
     		Object captcha = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
     		String registerCode = request.getParameter("registerCode")==null?"":request.getParameter("registerCode");
@@ -211,7 +211,7 @@ public class UserController extends BaseController {
     @RequestMapping(value="/creatUser", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> creatUser(HttpServletRequest request, @ModelAttribute("user") User user){
-    	Map<String, Object> json = new HashMap<String,Object>();
+    	Map<String, Object> json = new HashMap<>();
     	try{
     		//验证验证码
     		String emailCaptcha = request.getParameter("emailCaptcha")==null?"":request.getParameter("emailCaptcha");
@@ -253,7 +253,7 @@ public class UserController extends BaseController {
     @RequestMapping(value="/userGetPsw", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> userGetEmail(HttpServletRequest request){
-    	Map<String, Object> json = new HashMap<String,Object>();
+    	Map<String, Object> json = new HashMap<>();
     	try{
     		Object captcha = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
     		String registerCode = request.getParameter("registerCode")==null?"":request.getParameter("registerCode");
@@ -262,7 +262,7 @@ public class UserController extends BaseController {
 				return json;
 			}
     		String email = request.getParameter("email")==null?"":request.getParameter("email");
-			if(userService.checkEmail(email.trim()) == false){
+			if (!userService.checkEmail(email.trim())) {
 				json = this.setJson(false, "该邮箱没有注册过帐号", null);
 				return json;
 			}
@@ -282,7 +282,7 @@ public class UserController extends BaseController {
     @RequestMapping(value="/updatePsw", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> updatePsw(HttpServletRequest request){
-    	Map<String, Object> json = new HashMap<String,Object>();
+    	Map<String, Object> json = new HashMap<>();
     	try{
     		//验证验证码
     		String emailCaptcha = request.getParameter("emailCaptcha")==null?"":request.getParameter("emailCaptcha");
@@ -318,7 +318,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "/userExit")
 	@ResponseBody
 	public Map<String,Object> userExit(){
-		Map<String,Object> json = new HashMap<String,Object>();
+		Map<String,Object> json = new HashMap<>();
 		try{
 			Subject subject = SecurityUtils.getSubject();
 			subject.logout();
@@ -349,7 +349,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value="/updateUser")
 	@ResponseBody
 	public Map<String, Object> updateUserInfo(HttpServletRequest request,@ModelAttribute("user") User user){
-		Map<String,Object> json = new HashMap<String,Object>();
+		Map<String,Object> json = new HashMap<>();
 		try{
 			if(user.getAccountId()>=0){
 				userService.updateUser(user);
@@ -375,14 +375,14 @@ public class UserController extends BaseController {
 	@RequestMapping("/updateImg")
 	@ResponseBody
 	public Map<String,Object> updatePicImg(HttpServletRequest request,@ModelAttribute("user") User user){
-		Map<String,Object> json = new HashMap<String,Object>();
+		Map<String,Object> json = new HashMap<>();
 		try{
 			if(user.getAccountId()>0){
 				//删除旧头像
 				User findUser = userService.queryUserById(user.getAccountId());
 		    	String picImgPath = findUser.getPicImg();
 		    	if(picImgPath !=null){
-			    	StringBuffer uploadPath = new StringBuffer(request.getSession().getServletContext().getRealPath(picImgPath));
+		    		StringBuilder uploadPath = new StringBuilder(request.getSession().getServletContext().getRealPath(picImgPath));
 			    	FileUtils.deleteFile(uploadPath.toString());//删除该头像
 			    	FileUtils.deleteFolder(uploadPath.toString());//如果该目录为空，则删除该目录
 		    	}
@@ -410,17 +410,17 @@ public class UserController extends BaseController {
 	@RequestMapping(value="/updatePwd")
 	@ResponseBody
 	public Map<String, Object> updatePwdInfo(HttpServletRequest request,@ModelAttribute("user") User user){
-		Map<String, Object> json = new HashMap<String, Object>();
+		Map<String, Object> json = new HashMap<>();
 		try{
-			user = userService.queryUserById(user.getAccountId());
-			if(user != null){
+			User findUser = userService.queryUserById(user.getAccountId());
+			if(findUser != null){
 				//原密码
 				String nowPassword = request.getParameter("nowPassword")==null?"":request.getParameter("nowPassword");
 				//新密码
 				String newPassword = request.getParameter("newPassword")==null?"":request.getParameter("newPassword");
 				//确认密码
 				String confirmPwd = request.getParameter("confirmPwd")==null?"":request.getParameter("confirmPwd");
-				if(nowPassword.equals("")||nowPassword.trim().length() == 0){
+				if("".equals(nowPassword)||nowPassword.trim().length() == 0){
 					json = this.setJson(false, "原密码不能为空!", null);
 					return json;
 				}
@@ -428,7 +428,7 @@ public class UserController extends BaseController {
 					json = this.setJson(false, "原密码不正确!", null);
 					return json;
 				}
-				if(newPassword.equals("")||newPassword.trim().length() == 0){
+				if("".equals(newPassword)||newPassword.trim().length() == 0){
 					json = this.setJson(false, "新密码不能为空!", null);
 					return json;
 				}
@@ -478,7 +478,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value="/saveAddress")
 	@ResponseBody
 	public Map<String, Object> saveAddress(HttpServletRequest request, @ModelAttribute("userAddress") UserAddress userAddress){
-		Map<String, Object> json = new HashMap<String, Object>();
+		Map<String, Object> json = new HashMap<>();
 		try{
 			int accountId = SingletonLoginUtils.getLoginUserId(request);
 			if(accountId >= 0){
@@ -509,7 +509,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value="/myorder/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> deleteAddress(HttpServletRequest request, @ModelAttribute("userAddress") UserAddress userAddress){
-		Map<String, Object> json = new HashMap<String, Object>();
+		Map<String, Object> json = new HashMap<>();
 		try{
 			userAddressService.deleteAddress(userAddress.getAddressId());
 			json = this.setJson(true, "删除成功!", null);
@@ -528,7 +528,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/getloginUser")
 	@ResponseBody
 	public Map<String,Object> getLoginUser(HttpServletRequest request,HttpServletResponse response){
-		Map<String,Object> json = new HashMap<String,Object>();
+		Map<String,Object> json = new HashMap<>();
 		try{
 			User user = SingletonLoginUtils.getLoginUser(request);
 			if(user == null){

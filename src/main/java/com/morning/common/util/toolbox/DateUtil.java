@@ -17,34 +17,35 @@ import org.slf4j.LoggerFactory;
  */
 public class DateUtil extends DateUtils {
 	
-	private DateUtil() {
-	}
-	
 	private static Logger logger = LoggerFactory.getLogger(DateUtil.class);
 	
 	/** 毫秒 */
-	public final static long MS = 1;
+	public static final long MS = 1;
 	/** 每秒钟的毫秒数 */
-	public final static long SECOND_MS = MS * 1000;
+	public static final long SECOND_MS = MS * 1000;
 	/** 每分钟的毫秒数 */
-	public final static long MINUTE_MS = SECOND_MS * 60;
+	public static final long MINUTE_MS = SECOND_MS * 60;
 	/** 每小时的毫秒数 */
-	public final static long HOUR_MS = MINUTE_MS * 60;
+	public static final long HOUR_MS = MINUTE_MS * 60;
 	/** 每天的毫秒数 */
-	public final static long DAY_MS = HOUR_MS * 24;
+	public static final long DAY_MS = HOUR_MS * 24;
 	/** 每月的毫秒数 */
-	public final static long MONTH_MS = DAY_MS * 30;
+	public static final long MONTH_MS = DAY_MS * 30;
 	/** 每年的毫秒数 */
-	public final static long YEAR_MS = MONTH_MS * 12;
+	public static final long YEAR_MS = MONTH_MS * 12;
 
 	/** 标准日期（不含时间）格式化器 */
-	private final static SimpleDateFormat NORM_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+	private  static final SimpleDateFormat NORM_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	/** 标准日期时间格式化器 */
-	private final static SimpleDateFormat NORM_DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private  static final SimpleDateFormat NORM_DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	/** HTTP日期时间格式化器 */
-	private final static SimpleDateFormat HTTP_DATETIME_FORMAT = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z",
+	private  static final SimpleDateFormat HTTP_DATETIME_FORMAT = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z",
 			Locale.US);
-
+	
+	private DateUtil() {
+		
+	}
+	
 	/**
 	 * 当前时间，格式 yyyy-MM-dd HH:mm:ss
 	 * @return 当前时间的标准形式字符串
@@ -108,7 +109,7 @@ public class DateUtil extends DateUtils {
 		try {
 			return (new SimpleDateFormat(format)).parse(dateString);
 		} catch (ParseException e) {
-			logger.error("Parse " + dateString + " with format " + format + " error!", e);
+			logger.error("Parse" + dateString + " with format " + format + " error!", e);
 		}
 		return null;
 	}

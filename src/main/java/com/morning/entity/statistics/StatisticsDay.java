@@ -1,5 +1,6 @@
 package com.morning.entity.statistics;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Date;
 * @version    
 *
  */
-public class StatisticsDay extends SecurityException{
+public class StatisticsDay implements Serializable {
 	
 	private static final long serialVersionUID = -1624793003739254732L;
 	

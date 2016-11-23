@@ -1,15 +1,13 @@
 package com.morning.controller.order;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.morning.common.dto.AjaxResult;
 import com.morning.common.util.MD5Utils;
 import com.morning.common.util.ServletUtils;
 import com.morning.common.util.SingletonLoginUtils;
@@ -49,8 +48,6 @@ import com.morning.service.user.UserService;
 @Controller
 public class OrderController extends BaseController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
-	
 	/** 我的订单列表 */
 	private static final String USER_ORDER = getViewPath("web/usercentre/user_order");
 	//ajax:全部订单、待付款、待收货订单
@@ -64,7 +61,14 @@ public class OrderController extends BaseController {
 	/** 订单详情 */
 	private static final String USER_ORDER_VIEW = getViewPath("web/usercentre/user_order_view");
 	//顶部导航栏购物车
-	private static final String shoppingCart = getViewPath("web/common/ajax-cart");
+	private static final String AJAX_CART = getViewPath("web/common/ajax-cart");
+	
+	@Autowired
+	private UserAddressService userAddressService;
+	@Autowired
+	private UserService userService;
+	@Autowired 
+	private OrderService orderService;
 	
     // 绑定变量名字和属性，参数封装进类
 	@InitBinder("order")
@@ -82,13 +86,6 @@ public class OrderController extends BaseController {
 		binder.setFieldDefaultPrefix("queryOrder.");
 	}
     
-	@Autowired
-	private UserAddressService userAddressService;
-	@Autowired
-	private UserService userService;
-	@Autowired 
-	private OrderService orderService;
-    
 	/**
 	 * 跳转购物车页面
 	 * @return
@@ -100,27 +97,24 @@ public class OrderController extends BaseController {
     
 	@RequestMapping(value="/cart/update")
 	@ResponseBody
-	public Map<String, Object> cartUpdate(Integer cartId, Integer count, HttpServletRequest request) {
+	public AjaxResult cartUpdate(Integer cartId, Integer count, HttpServletRequest request) {
 		// 获取购物车信息
-		Map<String, Object> json = new HashMap<String, Object>();
-		ShoppingCart shoppingCart = SingletonLoginUtils.getShoppingCart(request);
-		List<OrderMessage> cartMessageList = shoppingCart.getCartMessageList();
+		ShoppingCart shoppingCartInfo = SingletonLoginUtils.getShoppingCart(request);
+		List<OrderMessage> cartMessageList = shoppingCartInfo.getCartMessageList();
 		for (int i = 0; i < cartMessageList.size(); i++) {
 			if (cartId.equals(cartMessageList.get(i).getCartId())) {
-				if (count > cartMessageList.get(i).getGoods()
-						.getGoodsSaveInfo()) {
-					json = this.setJson(false, "对不起,商品库存不足,请您修改数量!");
+				if (count > cartMessageList.get(i).getGoods().getGoodsSaveInfo()) {
+					return fail(false, "对不起,商品库存不足,请您修改数量!");
 				} else {
 					cartMessageList.get(i).setOrderNumber(count);
 					// 更新购物车信息
-					orderService.updateShoppingCart(shoppingCart,
-							cartMessageList);
+					orderService.updateShoppingCart(shoppingCartInfo,cartMessageList);
 				}
 			} else {
-				json = this.setJson(false, "该商品不存在,请刷新后重试!");
+				return fail(false, "该商品不存在,请刷新后重试!");
 			}
 		}
-		return json;
+		return success(true);
 	}
 	
 	/**
@@ -129,19 +123,18 @@ public class OrderController extends BaseController {
 	 * @param session
 	 */
 	@RequestMapping(value = "/cart/delete")
-	public Map<String, Object> cartDelate(Integer cartId, HttpServletRequest request){
+	public AjaxResult cartDelate(Integer cartId, HttpServletRequest request){
 		//获取购物车信息
-		Map<String, Object> json = new HashMap<String, Object>();
-		ShoppingCart shoppingCart = SingletonLoginUtils.getShoppingCart(request);
-		List<OrderMessage> cartMessageList =shoppingCart.getCartMessageList();
+		ShoppingCart shoppingCartInfo = SingletonLoginUtils.getShoppingCart(request);
+		List<OrderMessage> cartMessageList =shoppingCartInfo.getCartMessageList();
 		for(int i=0;i<cartMessageList.size();i++){
 			if(cartId.equals(cartMessageList.get(i).getCartId())){
 				cartMessageList.remove(i);
 			}else{
-				json = this.setJson(false, "该商品不存在,请刷新后重试!");
+				return fail(false, "该商品不存在,请刷新后重试!");
 			}
 		}
-		return json;
+		return success(true);
 	}
     
     /**
@@ -150,91 +143,72 @@ public class OrderController extends BaseController {
      * @return
      */
     @RequestMapping(value="/buy")
- 	public ModelAndView getBuyPage(HttpServletRequest request){
- 		ModelAndView modelAndView = new ModelAndView(PAY_ORDER);
- 		try{
- 			int accountId = SingletonLoginUtils.getLoginUserId(request);
- 			List<UserAddress> userAddressList = userAddressService.queryAddressByUser(accountId);
- 			modelAndView.addObject("userAddressList", userAddressList);
- 		}catch(Exception e){
- 			logger.error("OrderController.getBuyPage", e);
- 		}
-		return modelAndView;
+ 	public String getBuyPage(Model model, HttpServletRequest request){
+		int accountId = SingletonLoginUtils.getLoginUserId(request);
+		List<UserAddress> userAddressList = userAddressService.queryAddressByUser(accountId);
+		model.addAttribute("userAddressList", userAddressList);
+		return PAY_ORDER;
  	}
     
     @RequestMapping(value="/order/creatOrder", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> creatOrder(HttpServletRequest request, @ModelAttribute("order") Order order){
-    	Map<String, Object> json = new HashMap<String, Object>();
-    	try{
-    		//获取购物车信息
-    		ShoppingCart shoppingCart = SingletonLoginUtils.getShoppingCart(request);
-    		List<OrderMessage> orderMessageList =shoppingCart.getCartMessageList();
-    		
-    		//插入订单和详情
-    		Map<String, Object> returnMap = orderService.createOrderAndMessage(shoppingCart, order, orderMessageList);
-    		if (Boolean.parseBoolean(returnMap.get("flag").toString()) == true) {
-    			orderMessageList.clear(); // 清空购物车
-    			shoppingCart.setTotalMoney(null);
-    			shoppingCart.setTotalNumber(null);
-    		}
-    		json = this.setJson(true, String.valueOf(returnMap.get("orderNumber")));
-    	}catch(Exception e){
-    		logger.error("OrderController.creatOrder", e);
-    	}
-    	return json;
-    	
+    public AjaxResult creatOrder(HttpServletRequest request, @ModelAttribute("order") Order order){
+		//获取购物车信息
+		ShoppingCart shoppingCartInfo = SingletonLoginUtils.getShoppingCart(request);
+		List<OrderMessage> orderMessageList =shoppingCartInfo.getCartMessageList();
+		
+		//插入订单和详情
+		Map<String, Object> returnMap = orderService.createOrderAndMessage(shoppingCartInfo, order, orderMessageList);
+		if (Boolean.parseBoolean(returnMap.get("flag").toString())) {
+			orderMessageList.clear(); // 清空购物车
+			shoppingCartInfo.setTotalMoney(null);
+			shoppingCartInfo.setTotalNumber(null);
+		}
+		return success(true, String.valueOf(returnMap.get("orderNumber")));
     }
     
 	@RequestMapping(value = "/order/{orderNumber}/payment", method = RequestMethod.GET)
-	public ModelAndView orderConfirm(HttpServletRequest request, @PathVariable String orderNumber) {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName(PAY_CONFIRM);
+	public String orderConfirm(Model model, HttpServletRequest request, @PathVariable String orderNumber) {
 		int accountId = SingletonLoginUtils.getLoginUserId(request);
 		Order order = orderService.queryOrderByNumber(orderNumber, accountId, 1);
-		modelAndView.addObject("order", order);
-		return modelAndView;
+		model.addAttribute("order", order);
+		return PAY_CONFIRM;
 	}
     
 	@RequestMapping(value = "/order/{orderNumber}/confirmation", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> confirmation(HttpServletRequest request,
+	public AjaxResult confirmation(HttpServletRequest request,
 			@PathVariable String orderNumber) {
-		Map<String, Object> json = new HashMap<String, Object>();
 		int accountId = SingletonLoginUtils.getLoginUserId(request);
 		Order order = orderService
 				.queryOrderByNumber(orderNumber, accountId, 1);
 		if (order != null) {
 			String payment = getParameter("order.payment");
 			orderService.updateOrder(order, payment, 1, 2);
-			json = this.setJson(true);
 		} else {
-			json = this.setJson(false, "抱歉,该订单不存在!");
+			return fail(false, "抱歉,该订单不存在!");
 		}
-		return json;
+		return success(true);
 	}
 	
 	@RequestMapping(value = "/order/{orderNumber}/delete", method = RequestMethod.DELETE)
 	@ResponseBody
-	public Map<String, Object> orderDelete(HttpServletRequest request,
+	public AjaxResult orderDelete(HttpServletRequest request,
 			@PathVariable String orderNumber) {
-		Map<String, Object> json = new HashMap<String, Object>();
 		int accountId = SingletonLoginUtils.getLoginUserId(request);
 		Order order = orderService
 				.queryOrderByNumber(orderNumber, accountId, 1);
 		if (order != null) {
 			orderService.updateOrder(order, null, null, 0);
-			json = this.setJson(true);
 		} else {
-			json = this.setJson(false, "抱歉,该订单不存在!");
+			return fail(false, "抱歉,该订单不存在!");
 		}
-		return json;
+		return success(true);
 	}
 	
 	@RequestMapping(value = "/order/{orderNumber}/receiving", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> orderReceiving(@PathVariable String orderNumber) {
-		Map<String, Object> json = new HashMap<String, Object>();
+	public AjaxResult orderReceiving(@PathVariable String orderNumber) {
 		String loginPassword = getParameter("loginPassword");
 		int accountId = SingletonLoginUtils.getLoginUserId(ServletUtils.getRequest());
 		User user = new User();
@@ -244,14 +218,13 @@ public class OrderController extends BaseController {
 			Order order = orderService.queryOrderByNumber(orderNumber, accountId, 3);
 			if(order !=null){
 				orderService.updateOrder(order, null, null , 5 );
-				json = this.setJson(true);
 			}else{
-				json = this.setJson(false, "抱歉,该订单不存在!");
+				return fail(false, "抱歉,该订单不存在!");
 			}
 		}else{
-			json = this.setJson(false, "密码不正确,请重新输入!");
+			return fail(false, "密码不正确,请重新输入!");
 		}
-		return json;
+		return success(true);
 	}
 	
 	@RequestMapping(value="/order/{orderNumber}/view",method = RequestMethod.GET)
@@ -278,23 +251,18 @@ public class OrderController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/user/ajax/myorder")
-	public ModelAndView getorderList(HttpServletRequest request, @ModelAttribute("pageInfo") PageInfo pageInfo, @ModelAttribute("queryOrder") QueryOrder queryOrder){
-		ModelAndView modelAndView = new ModelAndView(AJAXORDERRECOMMEND);
-		try{
-			int accountId = SingletonLoginUtils.getLoginUserId(request);
-			if(accountId >= 0){
-				pageInfo.setpageNumber(8);//单页订单数量
-				queryOrder.setAccountId(accountId);//账户ID
-				//搜索订单列表
-				List<Order> orderList = orderService.queryOrder(queryOrder,pageInfo);//全部订单
-				modelAndView.addObject("orderList", orderList);
-				modelAndView.addObject("pageInfo", pageInfo);
-				modelAndView.addObject("queryOrder", queryOrder);
-			}
-		}catch(Exception e){
-			logger.error("OrderController.getorderList", e);
+	public String getorderList(Model model, HttpServletRequest request, @ModelAttribute("pageInfo") PageInfo pageInfo, @ModelAttribute("queryOrder") QueryOrder queryOrder){
+		int accountId = SingletonLoginUtils.getLoginUserId(request);
+		if(accountId >= 0){
+			pageInfo.setpageNumber(8);//单页订单数量
+			queryOrder.setAccountId(accountId);//账户ID
+			//搜索订单列表
+			List<Order> orderList = orderService.queryOrder(queryOrder,pageInfo);//全部订单
+			model.addAttribute("orderList", orderList);
+			model.addAttribute("pageInfo", pageInfo);
+			model.addAttribute("queryOrder", queryOrder);
 		}
-		return modelAndView;
+		return AJAXORDERRECOMMEND;
 	}
 
 }

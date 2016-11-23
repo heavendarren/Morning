@@ -9,9 +9,6 @@ import com.morning.common.util.PropertiesUtils;
  */
 public class CommonConstants {  
 	
-	private CommonConstants() {
-	}
-
 	/** 获取properties配置文件属性 */
 	private static final String CONSTANTSPROPERTIES = "properties/constants.properties";
 	// 用static修饰的代码块表示静态代码块，当Java虚拟机（JVM）加载类时，就会执行该代码块
@@ -27,4 +24,6 @@ public class CommonConstants {
 	private static final String STATICSERVER = "staticServer";
 	public static final String staticServer = PropertiesUtils.getProperty(STATICSERVER);
 	
+	private CommonConstants() {
+	}
 }
