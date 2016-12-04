@@ -27,5 +27,11 @@ public interface SystemMenuMapper extends AutoMapper<SystemMenu> {
 	 * @return List<SystemMenu>
 	 */
 	List<SystemMenu> selectSystemMenu(@Param("status") Integer status, @Param("menuType") Integer menuType);
+	
+	/**
+	 * 查询用户授权列表
+	 * @return List<SystemMenu>
+	 */
+	List<SystemMenu> selectSystemMenus();
 
 }

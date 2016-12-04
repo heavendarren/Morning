@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.morning.common.dto.AjaxResult;
 import com.morning.controller.BaseController;
 import com.morning.entity.goods.Goods;
+import com.morning.entity.goods.GoodsClassify;
 import com.morning.entity.goods.GoodsSpec;
 import com.morning.entity.goods.QueryGoods;
+import com.morning.service.goods.IGoodsClassifyService;
 import com.morning.service.goods.IGoodsService;
 import com.morning.service.goods.IGoodsSpecService;
 
@@ -42,11 +45,15 @@ public class AdminGoodsController extends BaseController{
 	private static final String SYSTEM_GOODS_LIST = getViewPath("admin/goods/system_goods_list");
 	/** 商品规格列表 */
 	private static final String SYSTEM_GOODS_SPEC = getViewPath("admin/goods/system_goods_spec");
+	/** 类目商品列表  */
+	private static final String SYSTEM_GOODS_CLASSIFY = getViewPath("admin/goods/system_goods_classify");
 	
 	@Autowired
 	private IGoodsService goodsService;
 	@Autowired
 	private IGoodsSpecService goodsSpecService;
+	@Autowired
+	private IGoodsClassifyService goodsClassifyService;
 	
 	
 	@InitBinder("queryGoods")
@@ -62,6 +69,7 @@ public class AdminGoodsController extends BaseController{
 	@RequiresPermissions("goods:list:view")
 	@RequestMapping(value = "/list")
 	public String list(Model model, @ModelAttribute("queryGoods") QueryGoods queryGoods) {
+		System.out.println(JSON.toJSON(queryGoods));
 		Integer allGoodsNumber = goodsService.selectAllGoodsNumber(null);
 		model.addAttribute("allGoodsNumber", allGoodsNumber);// 商品总数量
 		Integer onGoodsNumber = goodsService.selectAllGoodsNumber(1);//上架商品
@@ -70,11 +78,10 @@ public class AdminGoodsController extends BaseController{
 		model.addAttribute("outGoodsNumber", outGoodsNumber);// 商品总数量	
 		List<Goods> goodsList = goodsService.selectGoodsListBySystem(queryGoods);
 		model.addAttribute("goodsList", goodsList);// 商品列表
-//		List<SystemRole> systemRoles = systemRoleService.selectRoleAndNumber();
-//		model.addAttribute("systemRoles", systemRoles);// 权限列表
+		List<GoodsClassify> goodsClassifies = goodsClassifyService.selectClassifieAndNumber();
+		model.addAttribute("goodsClassifies", goodsClassifies);// 类目列表
 		return SYSTEM_GOODS_LIST;
 	}
-	
 	
 	/**
 	 * Get 商品规格列表
@@ -113,5 +120,19 @@ public class AdminGoodsController extends BaseController{
 	public AjaxResult delete(@PathVariable Integer goodsId) {
 		goodsService.deleteGoods(goodsId);
 		return success(true);
+	}
+	
+	/**
+	 * GET 类目ID下商品列表
+	 * @param model 
+	 * @param goodsClassifyId 类目ID
+	 * @return
+	 */
+	@RequiresPermissions("goods:list:view")
+	@RequestMapping(value = "/list/{goodsClassifyId}/goods", method = RequestMethod.GET)
+	public String classifyGoods(Model model, @PathVariable Integer goodsClassifyId) {
+		List<Goods> goodsList = goodsService.selectGoodsByClassifyId(goodsClassifyId);
+		model.addAttribute("goodsList", goodsList);
+		return SYSTEM_GOODS_CLASSIFY;
 	}
 }

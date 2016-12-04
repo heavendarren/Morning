@@ -37,4 +37,10 @@ public interface IGoodsClassifyService extends ISuperService<GoodsClassify> {
 	 * @return
 	 */
 	GoodsClassify selectGoodsClassifyById(Integer classifyId);
+	
+	/**
+	 * 查询类目及类目商品数量
+	 * @return
+	 */
+	List<GoodsClassify> selectClassifieAndNumber();
 }

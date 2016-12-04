@@ -46,6 +46,8 @@ public class SystemUserServiceImpl extends SuperServiceImpl<SystemUserMapper, Sy
 		systemUser.setLoginPassword(MD5Utils.getMD5(systemUser.getLoginPassword()));
 		systemUser.setCreateBy(SingletonLoginUtils.getSystemUserName());
 		systemUser.setCreateTime(new Date());
+		systemUser.setUpdateBy(SingletonLoginUtils.getSystemUserName());
+		systemUser.setUpdateTime(new Date());
 		this.insertSelective(systemUser);//插入用户
 		
 		if (roleIds != null && roleIds.length > 0) {
@@ -128,6 +130,7 @@ public class SystemUserServiceImpl extends SuperServiceImpl<SystemUserMapper, Sy
 	}
 	
 	@Override
+	@Transactional
 	public void updateUserInfoBySystem(SystemUser systemUser, String[] roleIds) {
 		systemUser.setUpdateTime(new Date());
 		systemUser.setUpdateBy(SingletonLoginUtils.getSystemUserName());
@@ -168,6 +171,7 @@ public class SystemUserServiceImpl extends SuperServiceImpl<SystemUserMapper, Sy
 	}
 
 	@Override
+	@Transactional
 	public void deleteSysUser(Integer accountId) {
 		//删除SystemUser 表信息
 		systemUserMapper.deleteById(Long.valueOf(accountId));

@@ -23,5 +23,17 @@ public interface ISystemMenuService extends ISuperService<SystemMenu> {
 	 * @return List<SystemMenu>
 	 */
 	List<SystemMenu> selectSystemMenu();
-
+	
+	/**
+	 * 查询角色授权表
+	 * @return List<SystemMenu>
+	 */
+	List<SystemMenu> selectMenus();
+	
+	/**
+	 * 查询选中角色授权表
+	 * @param roleId 角色ID
+	 * @return
+	 */
+	List<SystemMenu> selectCheckedMenus(Integer roleId);
 }

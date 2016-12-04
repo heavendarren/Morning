@@ -145,12 +145,12 @@
                                             <c:if test="${systemUsers.status==0}"><span class="label label-danger">冻结</span></c:if>
                                             </td>
                                             <td class="td-manage">  
-                                            <c:if test="${systemUsers.status==1}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,${systemUsers.accountId})" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
-                                            <c:if test="${systemUsers.status==0}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,${systemUsers.accountId})" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
+                                            <c:if test="${systemUsers.status==1}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,'${ctx}/system/sysuser/list/${systemUsers.accountId}/audit')" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
+                                            <c:if test="${systemUsers.status==0}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,'${ctx}/system/sysuser/list/${systemUsers.accountId}/audit')" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
                                             <a class="edit m-l-sm text-warning" href="javascript:void(0)" onclick="member_show('${systemUsers.userName}','${ctx}/system/sysuser/list','${systemUsers.accountId}','edit','900',null)" title="编辑">
                                             <i class="glyphicon glyphicon-edit"></i>
                                             </a>
-                                            <a class="remove m-l-sm text-danger" href="javascript:void(0)" onclick="member_del(this,${systemUsers.accountId})" title="删除">
+                                            <a class="remove m-l-sm text-danger" href="javascript:void(0)" onclick="member_delete(this,'${ctx}/system/sysuser/list/'+${systemUsers.accountId}+'/delete','确认要删除该用户吗?')" title="删除">
                                             <i class="glyphicon glyphicon-remove"></i>
                                             </a>
                                             <a class="remove m-l-sm text-primary" href="javascript:void(0)" onclick="member_show('${systemUsers.userName}','${ctx}/system/sysuser/list','${systemUsers.accountId}','log','900',null)" title="日志">
@@ -173,8 +173,6 @@
     <myfooter>
     <!-- jquery-ui-->
     <script src="${ctxsta}/common/jquery/jquery-ui.min.js"></script>
-    <!-- layer javascript -->
-    <script src="${ctxsta}/common/layer/layer.js"></script>
     <!-- Bootstrap table -->
     <script src="${ctxsta}/common/bootstrap-table-master/bootstrap-table.min.js"></script>
     <script src="${ctxsta}/common/bootstrap-table-master/extensions/export/bootstrap-table-export.js"></script>
@@ -182,10 +180,24 @@
     <script src="${ctxsta}/common/bootstrap-table-master/locale/bootstrap-table-zh-CN.min.js"></script>
     <!-- Data picker -->
     <script src="${ctxsta}/common/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
-    
-    <!-- 自定义js -->
-    <script src="${ctxsta}/admin/main/js/systemUserList.js"></script>
+    <script type="text/javascript">
+    // 日期插件
+	$(document).ready(function () {
+		$('#data_5 .input-daterange').datepicker({
+			keyboardNavigation: false,
+			forceParse: false,
+			autoclose: true,
+			format: 'yyyy/mm/dd',  
+		});
+	})
+	
+	//拖动面板
+	$(document).ready(function () {
+	    $(".sortable-list").sortable({
+	        connectWith: ".connectList"
+	    }).disableSelection();
+	});
+    </script>
     </myfooter>
-
   </body>
 </html>

@@ -53,7 +53,7 @@
                                 <tr>
                                 	<td>${systemUsers.accountId}</td>
                                     <td>
-                                        <a href="javascript:void(0)" onclick="member_show('${systemUsers.userName}','${ctx}/system/sysuser/list/info','${systemUsers.accountId}','500','400')">${systemUsers.userName}</a>
+                                        <a href="javascript:void(0)" onclick="member_show('${systemUsers.userName}','${ctx}/system/sysuser/list','${systemUsers.accountId}','detail','500','400')">${systemUsers.userName}</a>
                                     </td>
                                     <td>${systemUsers.realName}</td>
                                     <td>${systemUsers.telephone}</td>

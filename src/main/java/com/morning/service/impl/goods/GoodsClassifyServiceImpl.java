@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.morning.dao.goods.GoodsClassifyMapper;
+import com.morning.dao.goods.GoodsMapper;
+import com.morning.entity.goods.Goods;
 import com.morning.entity.goods.GoodsClassify;
 import com.morning.service.goods.IGoodsClassifyService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
@@ -26,6 +28,8 @@ public class GoodsClassifyServiceImpl extends SuperServiceImpl<GoodsClassifyMapp
 	
 	@Autowired
 	private GoodsClassifyMapper goodsClassifyMapper;
+	@Autowired
+	private GoodsMapper goodsMapper;
 	
 	
 	@Override
@@ -44,6 +48,16 @@ public class GoodsClassifyServiceImpl extends SuperServiceImpl<GoodsClassifyMapp
 		return goodsClassifyMapper.selectGoodsClassifyById(classifyId);
 	}
 
-
+	@Override
+	public List<GoodsClassify> selectClassifieAndNumber() {
+		List<GoodsClassify> goodsClassifies = goodsClassifyMapper.selectAllGoodsClassify();
+		Goods goods = new Goods();
+		for (int i = 0; i < goodsClassifies.size(); i++) {
+			goods.setClassifyId(goodsClassifies.get(i).getClassifyId());
+			int number = goodsMapper.selectCount(goods);
+			goodsClassifies.get(i).setNumber(number);
+		}
+		return goodsClassifies;
+	}
 
 }

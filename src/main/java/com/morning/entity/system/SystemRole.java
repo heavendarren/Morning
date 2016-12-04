@@ -62,9 +62,10 @@ public class SystemRole implements Serializable {
 
 	/** 备注信息 */
 	private String remarks;
-	
-    /**角色人数*/
-    private Integer number;
+
+	/** 角色人数 */
+	@TableField(exist = false)
+	private Integer number;
 
 	public Integer getRoleId() {
 		return this.roleId;

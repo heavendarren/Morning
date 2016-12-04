@@ -36,7 +36,13 @@ public class ISystemUserRoleServiceTest extends BaseTest{
 	
 	@Test
 	public void testselectRoleAndNumber(){
-		List<SystemRole> roles = systemRoleService.selectRoleAndNumber();
+		List<SystemRole> roles = systemRoleService.selectRoleList();
 		logger.info("roles={}", JSON.toJSON(roles));
+	}
+	
+	@Test
+	public void testselectMenu() {
+		List<SystemMenu> systemMenus = systemMenuService.selectMenus();
+		logger.info("menus={}", JSON.toJSON(systemMenus));
 	}
 }

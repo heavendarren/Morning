@@ -49,6 +49,13 @@ public class GoodsServiceImpl extends SuperServiceImpl<GoodsMapper, Goods> imple
 	}
 	
 	@Override
+	public List<Goods> selectGoodsByClassifyId(Integer goodsClassifyId) {
+		QueryGoods queryGoods = new QueryGoods();
+		queryGoods.setClassifyId(goodsClassifyId);
+		return goodsMapper.selectGoodsList(queryGoods);
+	}
+	
+	@Override
 	public List<Goods> selectGoodsListByPage(QueryGoods queryGoods,
 			PageInfo pageInfo) {
 		int totalNumber = goodsMapper.selectGoodsCount(queryGoods);
@@ -60,6 +67,7 @@ public class GoodsServiceImpl extends SuperServiceImpl<GoodsMapper, Goods> imple
 		parameter.put("pageInfo", pageInfo);
 		return goodsMapper.selectGoodsListByPage(parameter);
 	}
+	
 
 	@Override
 	public Goods selectGoodsByGoodsId(Integer goodsId) {

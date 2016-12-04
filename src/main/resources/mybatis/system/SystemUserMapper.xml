@@ -33,10 +33,10 @@
 				OR AGE LIKE '%' #{searchContent} '%' OR LAST_LOGIN_IP LIKE '%' #{searchContent} '%'
 				OR EMAIL LIKE '%' #{searchContent} '%' OR TELEPHONE LIKE '%' #{searchContent} '%')
 			</if>
-			<if test="beginCreateTime != null and beginCreateTime !=''">
+			<if test="beginCreateTime != null">
 				AND CREATE_TIME >= #{beginCreateTime}
 			</if>
-			<if test="endCreateTime != null and endCreateTime !=''">
+			<if test="endCreateTime != null">
 				AND <![CDATA[CREATE_TIME  <= #{endCreateTime}]]>
 			</if>
 		</where>

@@ -30,4 +30,16 @@
 	    	BY SORT ASC
     </select>
     
+    <!-- 查询用户授权列表 -->
+	<select id="selectSystemMenus" resultType="SystemMenu" >
+        SELECT
+			MENU_ID AS menuId, 
+			PARENT_ID AS parentId, 
+			MENU_NAME AS menuName
+        FROM
+            tb_system_menu
+	    ORDER 
+	    	BY SORT ASC
+    </select>
+    
 </mapper>

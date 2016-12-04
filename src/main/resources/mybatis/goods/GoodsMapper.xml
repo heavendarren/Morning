@@ -34,13 +34,16 @@
 	      	<if test="status != null" >
 				and g.STATUS = #{status}
 	      	</if>
+	      	<if test="classifyId != null" >
+	        	and g.CLASSIFY_ID = #{classifyId}
+	      	</if>  
 	      	<if test="search != null and search != ''" >
 	        	and g.GOODS_NAME LIKE '%' #{search} '%' or g.GOODS_DESCRIPT LIKE '%' #{search} '%' or g.GOODS_NUMBER LIKE '%' #{search} '%' or c.CLASSIFY_NAME LIKE '%' #{search} '%' 
 	      	</if>
-	      	<if test="beginCreateTime != null and beginCreateTime !=''">
+	      	<if test="beginCreateTime != null">
 				AND CREATE_TIME >= #{beginCreateTime}
 			</if>
-			<if test="endCreateTime != null and endCreateTime !=''">
+			<if test="endCreateTime != null">
 				AND <![CDATA[CREATE_TIME  <= #{endCreateTime}]]>
 			</if>
  		</where> 	
@@ -90,7 +93,7 @@
 	      	<if test="search != null and search != ''" >
 	        	and g.GOODS_NAME LIKE '%' #{search} '%' or g.GOODS_DESCRIPT LIKE '%' #{search} '%' or c.CLASSIFY_NAME LIKE '%' #{search} '%' 
 	      	</if>
-	      	<if test="classifyId != null and classifyId != ''" >
+	      	<if test="classifyId != null" >
 	        	and g.CLASSIFY_ID = #{classifyId}
 	      	</if> 
  		</where> 	

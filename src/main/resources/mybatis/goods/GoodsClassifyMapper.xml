@@ -66,4 +66,12 @@
 		WHERE
 			CLASSIFY_ID = ${classifyId}
 	</select>
+	
+	<!-- 查询类目 -->
+	<select id="selectAllGoodsClassify" resultType="GoodsClassify">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM
+			tb_goods_classify
+	</select>
 </mapper>

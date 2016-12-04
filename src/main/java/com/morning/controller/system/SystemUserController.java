@@ -36,7 +36,6 @@ import com.morning.service.system.ISystemUserService;
 
 /**
  * 
-*    
 * 项目名称：morning Maven Webapp   
 * 类名称：SystemUserController   
 * 类描述：系统管理员表示层   
@@ -143,10 +142,9 @@ public class SystemUserController extends BaseController {
 	 * @return
 	 */
 	@RequiresPermissions("sysuser:list:audit")
-	@RequestMapping(value = "/list/audit", method = RequestMethod.POST)
+	@RequestMapping(value = "/list/{accountId}/audit", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxResult audit() {
-		Integer accountId = Integer.valueOf(getParameter("accountId"));
+	public AjaxResult audit(@PathVariable Integer accountId) {
 		Integer status = Integer.valueOf(getParameter("status"));
 		systemUserService.updateUserStatus(accountId, status);
 		return success(true);
@@ -171,7 +169,7 @@ public class SystemUserController extends BaseController {
 	 */
 	@RequiresPermissions("sysuser:list:view")
 	@RequestMapping(value = "/list/{roleId}/role", method = RequestMethod.GET)
-	public String listrole(Model model, @PathVariable Integer roleId) {
+	public String listRole(Model model, @PathVariable Integer roleId) {
 		List<SystemUser> systemUsers = systemUserService.selectSysUserByRoleId(roleId);
 		model.addAttribute("systemUsers", systemUsers);
 		return SYSTEM_USER_ROLE;
@@ -212,7 +210,7 @@ public class SystemUserController extends BaseController {
 	@RequiresPermissions({"sysuser:list:add","sysuser:list:edit"})
 	@RequestMapping(value = "/list/save", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxResult update(@ModelAttribute("systemUser") SystemUser systemUser){
+	public AjaxResult update(@ModelAttribute("systemUser") SystemUser systemUser) {
 		String[] roleIds = getParameterValues("roleId");
 		if(!WebUtil.isEmail(systemUser.getEmail())){
 			return fail(false, "请输入正确的电子邮箱");

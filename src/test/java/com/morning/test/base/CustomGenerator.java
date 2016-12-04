@@ -17,6 +17,7 @@ import com.baomidou.mybatisplus.generator.ConfigGenerator;
  */
 public class CustomGenerator {
 	
+	
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomGenerator.class);
 
     /* 生成代码包名 */

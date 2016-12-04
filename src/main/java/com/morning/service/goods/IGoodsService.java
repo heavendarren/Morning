@@ -38,6 +38,13 @@ public interface IGoodsService extends ISuperService<Goods> {
 	List<Goods> selectGoodsListBySystem(QueryGoods queryGoods);
 	
 	/**
+	 * 根据类目ID查找商品列表
+	 * @param goodsClassifyId 类目ID
+	 * @return List<Goods>
+	 */
+	List<Goods> selectGoodsByClassifyId(Integer goodsClassifyId);
+	
+	/**
 	 * 根据查询条件、分页查找商品列表
 	 * @param queryGoods 查询条件
 	 * @param pageInfo 分页条件

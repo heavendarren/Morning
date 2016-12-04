@@ -8,7 +8,7 @@
   </head>
   
   <body class="gray-bg">
-    <div class="wrapper add-member-content animated fadeInRight">
+    <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
@@ -118,8 +118,6 @@
 	<script src="${ctxsta}/common/icheck/icheck.min.js"></script>
 	 <!-- bootstrapvalidator-master前端验证框架 -->
 	<script src="${ctxsta}/common/bootstrapvalidator-master/js/bootstrapValidator.min.js"></script>
-	<!-- layer javascript -->
-    <script src="${ctxsta}/common/layer/layer.js"></script>
 	<!-- 自定义js -->
     <script src="${ctxsta}/admin/main/js/add-list.js"></script>
 	</myfooter>  

@@ -37,6 +37,7 @@ public class SystemRoleMenu implements Serializable {
 	private Integer menuId;
 	
 	/** 权限标识 */
+	@TableField(exist = false)
 	private String permission;
 
 	public Integer getRoleMenuId() {

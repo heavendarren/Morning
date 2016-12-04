@@ -71,10 +71,10 @@
 		EMAIL LIKE '%' #{searchContent} '%' OR TELEPHONE LIKE '%'
 		#{searchContent} '%')
 	</if>
-	  <if test="beginCreateTime != null and beginCreateTime !=''">
+	  <if test="beginCreateTime != null">
 		AND CREATE_DATE >= #{beginCreateTime}
 	  </if>
-	<if test="endCreateTime != null and endCreateTime !=''">
+	<if test="endCreateTime != null">
 		AND <![CDATA[CREATE_DATE  <= #{endCreateTime}]]>
 	</if>
     </where>

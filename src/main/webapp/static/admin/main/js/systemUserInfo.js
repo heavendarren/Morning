@@ -6,7 +6,6 @@ $(document).ready(function(){
   });
 });
 
-
 //表单验证
 $(function(){
 	$('#form-info').bootstrapValidator({

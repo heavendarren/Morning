@@ -31,6 +31,12 @@ public class GoodsClassifyServiceImplTest extends BaseTest{
 		logger.info("goodsClassify={}", JSON.toJSON(goodsClassify));
 	}
 	
+	@Test
+	public void testSelectClassifieAndNumber() {
+		List<GoodsClassify> goodsClassifies = goodsClassifyService.selectClassifieAndNumber();
+		System.out.println(JSON.toJSON(goodsClassifies));
+	}
+	
 	
 
 }

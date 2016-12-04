@@ -68,12 +68,12 @@
                         <h3>产品类目列表</h3>
                         <p class="small"><i class="fa fa-hand-o-up"></i> 在列表之间拖动产品分类</p>
                         <ul class="sortable-list connectList agile-list">
-                        <c:forEach items="${systemRoles}" var="systemRole" varStatus="status">
+                        <c:forEach items="${goodsClassifies}" var="goodsClassify" varStatus="status">
                             <li class="<c:if test="${status.index % 3 == 0 }">success-element</c:if><c:if test="${status.index % 3 == 1 }">warning-element</c:if><c:if test="${status.index % 3 == 2 }">info-element</c:if>">
-                                ${systemRole.roleName }<span class="badge <c:if test="${status.index % 3 == 0 }">badge-primary</c:if><c:if test="${status.index % 3 == 1 }">badge-warning</c:if><c:if test="${status.index % 3 == 2 }">badge-success</c:if> m-l">${systemRole.number}</span>
+                                ${goodsClassify.classifyName }<span class="badge <c:if test="${status.index % 3 == 0 }">badge-primary</c:if><c:if test="${status.index % 3 == 1 }">badge-warning</c:if><c:if test="${status.index % 3 == 2 }">badge-success</c:if> m-l">${goodsClassify.number}</span>
                                 <div class="agile-detail">
-                                    <a onclick="member_show('${systemRole.roleName }','${ctx }/system/sysuser/list','${systemRole.roleId}','role','1000',null)" class="pull-right btn btn-xs <c:if test="${status.index % 3 == 0 }">btn-primary</c:if><c:if test="${status.index % 3 == 1 }">btn-warning</c:if><c:if test="${status.index % 3 == 2 }">btn-success</c:if>">查看</a>
-                                    <i class="fa fa-clock-o"></i> <fmt:formatDate value="${systemRole.updateTime}" pattern="yyyy.MM.dd" />
+                                    <a onclick="member_show('${goodsClassify.classifyName }','${ctx }/system/goods/list','${goodsClassify.classifyId}','goods','1000',null)" class="pull-right btn btn-xs <c:if test="${status.index % 3 == 0 }">btn-primary</c:if><c:if test="${status.index % 3 == 1 }">btn-warning</c:if><c:if test="${status.index % 3 == 2 }">btn-success</c:if>">查看</a>
+                                    <i class="fa fa-clock-o"></i> 
                                 </div>
                             </li>
                         </c:forEach>
@@ -99,12 +99,14 @@
                                             <button type="button" class="btn btn-default"  title="创建用户" onclick="member_show('创建用户','${ctx}/system/sysuser/list/add',null,null,'900',null)">
                                                 <i class="glyphicon glyphicon-plus"></i>
                                             </button>
+                                            <button type="button" class="btn btn-default"  title="刷新列表" onclick="javascript:window.location.reload()">
+                                                <i class="glyphicon glyphicon-refresh"></i>
+                                            </button>                                           
                                         </div>
                                         <table id="table"
                                            data-toggle="table"
                                            data-height="500"
                                            data-search="true"
-                                           data-show-refresh="true"
                                            data-show-toggle="true"
                                            data-show-export="true"
                                            data-show-pagination-switch="true"
@@ -183,6 +185,5 @@
     <!-- 自定义js -->
     <script src="${ctxsta}/admin/main/js/systemGoodsList.js"></script>
     </myfooter>
-
   </body>
 </html>

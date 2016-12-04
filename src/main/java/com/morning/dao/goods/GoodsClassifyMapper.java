@@ -39,4 +39,10 @@ public interface GoodsClassifyMapper extends AutoMapper<GoodsClassify> {
 	 * @return GoodsClassify
 	 */
 	GoodsClassify selectGoodsClassifyById(@Param("classifyId") Integer classifyId);
+	
+	/**
+	 * 查询类目
+	 * @return List<GoodsClassify> 
+	 */
+	List<GoodsClassify> selectAllGoodsClassify();
 }

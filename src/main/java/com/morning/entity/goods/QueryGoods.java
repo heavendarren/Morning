@@ -18,8 +18,8 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 public class QueryGoods implements Serializable {
 
-	private static final long serialVersionUID = 8453228267684177653L;
-	
+	private static final long serialVersionUID = 3256155739091789961L;
+
 	/** 商品类别 */
 	private Integer classifyId;
 	
@@ -86,5 +86,20 @@ public class QueryGoods implements Serializable {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
+
+	public Date getBeginCreateTime() {
+		return beginCreateTime;
+	}
+
+	public void setBeginCreateTime(Date beginCreateTime) {
+		this.beginCreateTime = beginCreateTime;
+	}
+
+	public Date getEndCreateTime() {
+		return endCreateTime;
+	}
+
+	public void setEndCreateTime(Date endCreateTime) {
+		this.endCreateTime = endCreateTime;
+	}
 }

@@ -80,9 +80,13 @@ public class SystemMenu implements Serializable {
 	/** 备注信息 */
 	private String remarks;
 	
-	
-	/**子级权限List*/
+	/** 子级权限List */
+	@TableField(exist = false)
 	private List<SystemMenu> childMenuList;
+
+	/** 是否选中 */
+	@TableField(exist = false)
+	private boolean checked;
 
 	public Integer getMenuId() {
 		return this.menuId;
@@ -210,6 +214,14 @@ public class SystemMenu implements Serializable {
 
 	public void setChildMenuList(List<SystemMenu> childMenuList) {
 		this.childMenuList = childMenuList;
+	}
+
+	public boolean isChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 	
 }

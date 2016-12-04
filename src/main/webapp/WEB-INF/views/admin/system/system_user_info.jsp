@@ -149,7 +149,6 @@
                 <input name="nowPassword" type="password" class="form-control" >
             </div>
         </div>
-        
         <div class="form-group">
             <label class="col-sm-4 control-label">新密码：</label>
             <div class="col-sm-6">
@@ -164,8 +163,6 @@
         </div>
     </div>
     <myfooter>
-    <!-- layer javascript -->
-    <script src="${ctxsta}/common/layer/layer.js"></script>
     <!-- bootstrapvalidator-master前端验证框架 -->
 	<script src="${ctxsta}/common/bootstrapvalidator-master/js/bootstrapValidator.min.js"></script>
     <!-- Bootstrap table -->
@@ -178,8 +175,7 @@
     <!-- iCheck -->
 	<script src="${ctxsta}/common/icheck/icheck.min.js"></script>
     <!-- 自定义js -->
-    <script src="${ctxsta}/admin/main/js/sysuser-info.js"></script>
+    <script src="${ctxsta}/admin/main/js/systemUserInfo.js"></script>
     </myfooter>
-
   </body>
 </html>

@@ -51,6 +51,9 @@ public class GoodsClassify implements Serializable {
 	
 	/**  类目商品  */
 	private List<Goods> goodsList;
+	
+	/** 类目商品数量 */
+	private Integer number;
 
 	public Integer getClassifyId() {
 		return this.classifyId;
@@ -107,4 +110,13 @@ public class GoodsClassify implements Serializable {
 	public void setGoodsList(List<Goods> goodsList) {
 		this.goodsList = goodsList;
 	}
+
+	public Integer getNumber() {
+		return number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+	
 }

@@ -22,6 +22,8 @@
 	<script src="${ctxsta}/common/bootstrap/js/bootstrap.min.js"></script>
 	<script src="${ctxsta}/admin/main/js/metisMenu/jquery.metisMenu.js"></script>
 	<script src="${ctxsta}/admin/main/js/slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- layer javascript -->
+    <script src="${ctxsta}/common/layer/layer.js"></script>
 	<!-- 自定义js -->
 	<script src="${ctxsta}/admin/main/js/contabs.js"></script>
 	<script src="${ctxsta}/admin/main/js/content.js"></script>

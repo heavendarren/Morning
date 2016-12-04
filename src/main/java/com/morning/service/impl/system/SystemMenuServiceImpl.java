@@ -1,13 +1,17 @@
 package com.morning.service.impl.system;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.morning.dao.system.SystemMenuMapper;
+import com.morning.dao.system.SystemRoleMenuMapper;
 import com.morning.entity.system.SystemMenu;
+import com.morning.entity.system.SystemRoleMenu;
 import com.morning.service.system.ISystemMenuService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 
@@ -27,6 +31,8 @@ public class SystemMenuServiceImpl extends SuperServiceImpl<SystemMenuMapper, Sy
 	
 	@Autowired
 	private SystemMenuMapper systemMenuMaper;
+	@Autowired
+	private SystemRoleMenuMapper systemRoleMenuMapper;
 	
 	@Override
 	public List<SystemMenu> selectSystemMenu() {
@@ -58,5 +64,26 @@ public class SystemMenuServiceImpl extends SuperServiceImpl<SystemMenuMapper, Sy
 		}
 		parentMenu.setChildMenuList(childMenus);
 		systemMenus.add(parentMenu);
+	}
+
+	@Override
+	public List<SystemMenu> selectMenus() {
+		return systemMenuMaper.selectSystemMenus();
+	}
+
+	@Override
+	public List<SystemMenu> selectCheckedMenus(Integer roleId) {
+		Map<String, Object> columnMap = new HashMap<>();
+		columnMap.put("ROLE_ID", roleId);
+		List<SystemRoleMenu> systemRoleMenus = systemRoleMenuMapper.selectByMap(columnMap);// 角色拥有的菜单
+		List<SystemMenu> systemMenus = systemMenuMaper.selectSystemMenus();
+		for (SystemMenu menu:systemMenus) {
+			for (SystemRoleMenu roleMenu : systemRoleMenus) {
+				if (menu.getMenuId().equals(roleMenu.getMenuId())) {
+					menu.setChecked(true);
+				}
+			}
+		}
+		return systemMenus;
 	}
 }
