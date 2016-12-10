@@ -69,13 +69,13 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">权限：</label>
                                 <div class="col-sm-6">
-                                     <input type="text" class="form-control" disabled="disabled" value="${userRole }">
+                                     <input type="text" class="form-control disabled-form-control" disabled="disabled" value="${userRole }">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">注册时间：</label>
                                 <div class="col-sm-6">
-                                     <input type="text" class="form-control" disabled="disabled" value="<fmt:formatDate value="${systemUser.createTime}" pattern="yyyy/MM/dd HH:mm" />">
+                                     <input type="text" class="form-control disabled-form-control" disabled="disabled" value="<fmt:formatDate value="${systemUser.createTime}" pattern="yyyy/MM/dd HH:mm" />">
                                 </div>
                             </div>
                             <div class="form-group">

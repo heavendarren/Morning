@@ -18,6 +18,7 @@
                         <prop key="kaptcha.image.height">38</prop>  
                         <prop key="kaptcha.textproducer.font.size">30</prop>  
                         <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop>
+                        <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
                         <prop key="kaptcha.session.key">code</prop>  
                         <prop key="kaptcha.background.clear.from">white</prop>
                         <prop key="kaptcha.background.clear.to">white</prop>
@@ -38,8 +39,9 @@
                         <prop key="kaptcha.image.width">85</prop>  
                         <prop key="kaptcha.image.height">42</prop>  
                         <prop key="kaptcha.textproducer.font.size">30</prop>  
-                        <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop>
+                        <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop>
                         <prop key="kaptcha.session.key">code</prop>  
+                        <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
                         <prop key="kaptcha.background.clear.from">92,189,170</prop>
                         <prop key="kaptcha.background.clear.to">92,189,170</prop>
                         <prop key="kaptcha.textproducer.char.length">4</prop>  

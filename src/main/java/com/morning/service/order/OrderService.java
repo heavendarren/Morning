@@ -79,12 +79,11 @@ public interface OrderService {
 	
 	/**
 	 * 创建新订单和订单详情
-	 * @param shoppingCart 购物车信息
 	 * @param order 订单信息
-	 * @param orderMessageList
+	 * @param addressId 地址ID
 	 * @return
 	 */
-	public Map<String, Object> createOrderAndMessage(ShoppingCart shoppingCart, Order order, List<OrderMessage> orderMessageList);
+	public Map<String, Object> createOrderAndMessage(Order order, Integer addressId,ShoppingCart shoppingCart);
 	
 	/**
 	 * 更新购物车商品数量和价钱

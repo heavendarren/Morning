@@ -27,7 +27,7 @@
 							</span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">${systemUser.userName }</strong></span>
+                                <span class="block m-t-xs"><strong class="font-bold">${systemUser.userName }</strong></span>
                                 <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
                                 </span>
                             </a>
@@ -51,7 +51,7 @@
 							<c:when test="${systemMenus.childMenuList != null && systemMenus.childMenuList.size()>0}">
 								<li>
 			                        <a href="${ctx}${systemMenus.href}">
-			                            <i class="fa ${systemMenus.icon}"></i>
+			                            <i class="fa fa-${systemMenus.icon}"></i>
 			                            <span class="nav-label">${systemMenus.menuName}</span>
 										<c:choose>
 											<c:when test="${systemMenus.menuCode == 'order'}"><span class="label label-warning pull-right">16</span></c:when>
@@ -62,7 +62,7 @@
 			                        <ul class="nav nav-second-level">
 			                        <c:forEach items="${systemMenus.childMenuList}" var="childMenuList">
 			                            <li>
-			                                <a class="J_menuItem" href="${ctx}${childMenuList.href}">${childMenuList.menuName}</a>
+			                                <a class="J_menuItem" href="${ctx}${childMenuList.href}"><i class="fa fa-${childMenuList.icon}"></i>${childMenuList.menuName}</a>
 			                            </li>
 			                        </c:forEach>
 			                        </ul>
@@ -71,7 +71,7 @@
 							<c:otherwise>
 								<li>
 			                        <a class="J_menuItem" href="${ctx}${systemMenus.href}">
-			                            <i class="fa ${systemMenus.icon}"></i>
+			                            <i class="fa fa-${systemMenus.icon}"></i>
 			                            <span class="nav-label">${systemMenus.menuName}</span>
 			                        </a>
 			                    </li>

@@ -104,10 +104,8 @@
 	<script src="${ctxsta}/common/icheck/icheck.min.js"></script>
 	 <!-- bootstrapvalidator-master前端验证框架 -->
 	<script src="${ctxsta}/common/bootstrapvalidator-master/js/bootstrapValidator.min.js"></script>
-	<!-- layer javascript -->
-    <script src="${ctxsta}/common/layer/layer.js"></script>
 	<!-- 自定义js -->
-    <script src="${ctxsta}/admin/main/js/add-list.js"></script>
+    <script src="${ctxsta}/admin/main/js/add-list.js?v=1.0"></script>
 	</myfooter>  
 </body>
 </html>

@@ -42,4 +42,25 @@
 	    	BY SORT ASC
     </select>
     
+    <!-- 查询系统菜单 -->
+    <select id="selectMenus" resultType="SystemMenu">
+    	SELECT
+    		MENU_ID AS menuId, 
+    		PARENT_ID AS parentId, 
+    		MENU_TYPE AS menuType, 
+    		MENU_CODE AS menuCode, 
+    		MENU_NAME AS menuName, 
+    		SORT, 
+    		HREF, 
+    		ICON, 
+    		STATUS, 
+    		PERMISSION, 
+    		REMARKS
+    	FROM
+    		tb_system_menu
+		WHERE
+			MENU_TYPE = #{menuType}
+		ORDER 
+	    	BY SORT ASC
+    </select>
 </mapper>

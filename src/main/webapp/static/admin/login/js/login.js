@@ -98,3 +98,12 @@ $(function(){
 	});
 	})
 });
+
+/**
+ * 回车登录实现
+ */
+$(document).keyup(function(event){
+	  if(event.keyCode ==13){
+	    $(".submit_btn").trigger("click");
+	  }
+});

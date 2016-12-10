@@ -73,7 +73,7 @@
                             <li class="<c:if test="${status.index % 3 == 0 }">success-element</c:if><c:if test="${status.index % 3 == 1 }">warning-element</c:if><c:if test="${status.index % 3 == 2 }">info-element</c:if>">
                                 ${systemRole.roleName }<span class="badge <c:if test="${status.index % 3 == 0 }">badge-primary</c:if><c:if test="${status.index % 3 == 1 }">badge-warning</c:if><c:if test="${status.index % 3 == 2 }">badge-success</c:if> m-l">${systemRole.number}</span>
                                 <div class="agile-detail">
-                                    <a onclick="member_show('${systemRole.roleName }','${ctx }/system/sysuser/list','${systemRole.roleId}','role','1000',null)" class="pull-right btn btn-xs <c:if test="${status.index % 3 == 0 }">btn-primary</c:if><c:if test="${status.index % 3 == 1 }">btn-warning</c:if><c:if test="${status.index % 3 == 2 }">btn-success</c:if>">查看</a>
+                                    <a onclick="member_show('${systemRole.roleName }','${ctx }/system/sysuser/list','${systemRole.roleId}','role','1000','600')" class="pull-right btn btn-xs <c:if test="${status.index % 3 == 0 }">btn-primary</c:if><c:if test="${status.index % 3 == 1 }">btn-warning</c:if><c:if test="${status.index % 3 == 2 }">btn-success</c:if>">查看</a>
                                     <i class="fa fa-clock-o"></i> <fmt:formatDate value="${systemRole.updateTime}" pattern="yyyy.MM.dd" />
                                 </div>
                             </li>
@@ -97,7 +97,7 @@
                                 <div class="example-wrap">
                                     <div class="example">
                                         <div id="toolbar" class="btn-group m-t-sm">
-                                            <button type="button" class="btn btn-default"  title="创建用户" onclick="member_show('创建用户','${ctx}/system/sysuser/list/add',null,null,'900',null)">
+                                            <button type="button" class="btn btn-default"  title="创建用户" onclick="member_show('创建用户','${ctx}/system/sysuser/list/add',null,null,'900','600')">
                                                 <i class="glyphicon glyphicon-plus"></i>
                                             </button>
                                         </div>
@@ -147,13 +147,13 @@
                                             <td class="td-manage">  
                                             <c:if test="${systemUsers.status==1}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,'${ctx}/system/sysuser/list/${systemUsers.accountId}/audit')" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
                                             <c:if test="${systemUsers.status==0}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,'${ctx}/system/sysuser/list/${systemUsers.accountId}/audit')" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
-                                            <a class="edit m-l-sm text-warning" href="javascript:void(0)" onclick="member_show('${systemUsers.userName}','${ctx}/system/sysuser/list','${systemUsers.accountId}','edit','900',null)" title="编辑">
+                                            <a class="edit m-l-sm text-warning" href="javascript:void(0)" onclick="member_show('${systemUsers.userName}','${ctx}/system/sysuser/list','${systemUsers.accountId}','edit','900','600')" title="编辑">
                                             <i class="glyphicon glyphicon-edit"></i>
                                             </a>
                                             <a class="remove m-l-sm text-danger" href="javascript:void(0)" onclick="member_delete(this,'${ctx}/system/sysuser/list/'+${systemUsers.accountId}+'/delete','确认要删除该用户吗?')" title="删除">
                                             <i class="glyphicon glyphicon-remove"></i>
                                             </a>
-                                            <a class="remove m-l-sm text-primary" href="javascript:void(0)" onclick="member_show('${systemUsers.userName}','${ctx}/system/sysuser/list','${systemUsers.accountId}','log','900',null)" title="日志">
+                                            <a class="remove m-l-sm text-primary" href="javascript:void(0)" onclick="member_show('${systemUsers.userName}','${ctx}/system/sysuser/list','${systemUsers.accountId}','log','900','600')" title="日志">
                                             <i class="glyphicon glyphicon-list-alt"></i>
                                             </a>
                                             </td>

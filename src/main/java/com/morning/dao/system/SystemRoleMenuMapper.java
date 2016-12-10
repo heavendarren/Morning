@@ -27,5 +27,11 @@ public interface SystemRoleMenuMapper extends AutoMapper<SystemRoleMenu> {
 	 * @return List<SystemRoleMenu> 
 	 */
 	List<SystemRoleMenu> selectMenuListByRoleId(@Param("roleIdList") List<Integer> roleIdList);
+	
+	/**
+	 * 通过目录ID删除角色授权记录
+	 * @param menuIds 目录ID列表
+	 */
+	void deleteMenuList(@Param("menuIds") List<Integer> menuIds);
 
 }

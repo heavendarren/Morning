@@ -23,5 +23,16 @@
 	    		#{roleId}
 	    	</foreach>
     </select>
+    
+	<!-- 通过目录ID删除角色授权记录 -->	
+    <delete id="deleteMenuList">
+    	DELETE FROM
+    		tb_system_role_menu
+    	WHERE
+    		MENU_ID in
+	        <foreach collection="menuIds" item="menuId" open="(" close=")" separator=",">
+	    		#{menuId}
+	    	</foreach>    		
+    </delete>
 
 </mapper>

@@ -65,7 +65,7 @@ public class CustomGenerator {
          *  类型：String[]
          *  描述：要生成代码的表名称（若为空就直接指定所有表，格式为逗号分割）
          */
-        String[] tableNames = {"tb_goods_favorites"}; 
+        String[] tableNames = {"tb_order_ship"}; 
         cg.setTableNames(tableNames);
         
         /* 生成文件保存位置 */

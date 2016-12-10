@@ -28,8 +28,13 @@
                                 </div>
 								<label class="col-sm-2 control-label">归属部门：</label>
 								<div class="col-sm-4">
-                                	<input type="text" maxlength="10" class="form-control" name="systemRole.roleOffice" value="${systemRole.roleOffice }">
-                                </div>  
+								   <select class="form-control" name="account">
+                                        <option>${systemRole.roleOffice }</option>
+                                        <option>选项 2</option>
+                                        <option>选项 3</option>
+                                        <option>选项 4</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">

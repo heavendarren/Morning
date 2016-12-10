@@ -45,6 +45,13 @@ public interface ISystemRoleService extends ISuperService<SystemRole> {
 	void updateSystemRole(SystemRole systemRole, String[] menuIds);
 	
 	/**
+	 * 更新角色状态
+	 * @param roleId
+	 * @param status
+	 */
+	void updateRoleStatus(Integer roleId, Integer status);
+	
+	/**
 	 * 根据角色ID删除角色，同时删除角色记录
 	 * @param roleId 角色ID
 	 */

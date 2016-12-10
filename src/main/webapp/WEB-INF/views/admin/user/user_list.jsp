@@ -78,7 +78,7 @@
                         <div class="example-wrap">
                             <div class="example">
                                 <div id="toolbar" class="btn-group m-t-sm">
-                                    <button type="button" class="btn btn-default" onclick="member_show('创建用户','${ctx}/system/user//list/add',null,'900',null)">
+                                    <button type="button" class="btn btn-default" onclick="member_show('创建用户','${ctx}/system/user//list/add',null,null,'900','600')">
                                         <i class="glyphicon glyphicon-plus"></i>
                                     </button>
                                     <button type="button" class="btn btn-default">
@@ -133,13 +133,13 @@
                                     <td class="td-manage">  
                                     <c:if test="${userList.status==1}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,${userList.accountId})" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
 									<c:if test="${userList.status==0}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,${userList.accountId})" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
-                                    <a class="edit m-l-sm text-warning" href="javascript:void(0)" onclick="member_show('${userList.loginName}','${ctx}/system/user/list','${userList.accountId}','edit','900',null)" title="编辑">
+                                    <a class="edit m-l-sm text-warning" href="javascript:void(0)" onclick="member_show('${userList.loginName}','${ctx}/system/user/list','${userList.accountId}','edit','900','600')" title="编辑">
                                     <i class="glyphicon glyphicon-edit"></i>
                                     </a>
                                     <a class="remove m-l-sm text-danger" href="javascript:void(0)" onclick="member_del(this,${userList.accountId})" title="删除">
                                     <i class="glyphicon glyphicon-remove"></i>
                                     </a>
-                                    <a class="remove m-l-sm text-primary" href="javascript:void(0)" onclick="member_show('${userList.loginName}','${ctx}/system/user/list','${userList.accountId}','log','900',null)" title="日志">
+                                    <a class="remove m-l-sm text-primary" href="javascript:void(0)" onclick="member_show('${userList.loginName}','${ctx}/system/user/list','${userList.accountId}','log','900','600')" title="日志">
                                     <i class="glyphicon glyphicon-list-alt"></i>
                                     </a>
                                     </td>
@@ -157,8 +157,6 @@
         </div>
     </div>
     <myfooter>
-    <!-- layer javascript -->
-    <script src="${ctxsta}/common/layer/layer.js"></script>
     <!-- Bootstrap table -->
     <script src="${ctxsta}/common/bootstrap-table-master/bootstrap-table.min.js"></script>
     <script src="${ctxsta}/common/bootstrap-table-master/extensions/export/bootstrap-table-export.js"></script>
@@ -166,7 +164,6 @@
     <script src="${ctxsta}/common/bootstrap-table-master/locale/bootstrap-table-zh-CN.min.js"></script>
     <!-- Data picker -->
     <script src="${ctxsta}/common/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
-    
     <!-- 自定义js -->
     <script src="${ctxsta}/admin/main/js/user-list.js"></script>
     </myfooter>

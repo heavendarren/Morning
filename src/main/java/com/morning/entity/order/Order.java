@@ -48,6 +48,9 @@ public class Order implements Serializable{
     private List<OrderMessage> orderMessageList;
     /**收货地址信息*/
     private UserAddress userAddress;
+    /**收货地址信息*/
+    private OrderShip orderShip;
+    
 	public Integer getOrderId() {
 		return orderId;
 	}
@@ -150,5 +153,10 @@ public class Order implements Serializable{
 	public void setUserAddress(UserAddress userAddress) {
 		this.userAddress = userAddress;
 	}
-
+	public OrderShip getOrderShip() {
+		return orderShip;
+	}
+	public void setOrderShip(OrderShip orderShip) {
+		this.orderShip = orderShip;
+	}
 }

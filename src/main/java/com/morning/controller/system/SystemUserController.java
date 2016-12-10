@@ -48,7 +48,7 @@ import com.morning.service.system.ISystemUserService;
 *
  */
 @Controller
-@RequestMapping("/system/sysuser")
+@RequestMapping(value = "/system/sysuser")
 public class SystemUserController extends BaseController {
 
 	/** 系统管理员列表 */
@@ -86,7 +86,8 @@ public class SystemUserController extends BaseController {
 	
 	/**
 	 * GET 管理员列表
-	 * @param request
+	 * @param model
+	 * @param queryUser
 	 * @return
 	 */
 	@RequiresPermissions("sysuser:list:view")

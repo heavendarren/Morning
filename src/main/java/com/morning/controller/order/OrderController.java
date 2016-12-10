@@ -1,5 +1,6 @@
 package com.morning.controller.order;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,9 +27,11 @@ import com.morning.entity.PageInfo;
 import com.morning.entity.ShoppingCart;
 import com.morning.entity.order.Order;
 import com.morning.entity.order.OrderMessage;
+import com.morning.entity.order.OrderShip;
 import com.morning.entity.order.QueryOrder;
 import com.morning.entity.user.User;
 import com.morning.entity.user.UserAddress;
+import com.morning.service.order.IOrderShipService;
 import com.morning.service.order.OrderService;
 import com.morning.service.user.UserAddressService;
 import com.morning.service.user.UserService;
@@ -69,6 +72,8 @@ public class OrderController extends BaseController {
 	private UserService userService;
 	@Autowired 
 	private OrderService orderService;
+	@Autowired
+	private IOrderShipService orderShipService;
 	
     // 绑定变量名字和属性，参数封装进类
 	@InitBinder("order")
@@ -150,28 +155,31 @@ public class OrderController extends BaseController {
 		return PAY_ORDER;
  	}
     
-    @RequestMapping(value="/order/creatOrder", method = RequestMethod.POST)
-    @ResponseBody
-    public AjaxResult creatOrder(HttpServletRequest request, @ModelAttribute("order") Order order){
-		//获取购物车信息
-		ShoppingCart shoppingCartInfo = SingletonLoginUtils.getShoppingCart(request);
-		List<OrderMessage> orderMessageList =shoppingCartInfo.getCartMessageList();
-		
-		//插入订单和详情
-		Map<String, Object> returnMap = orderService.createOrderAndMessage(shoppingCartInfo, order, orderMessageList);
+	@RequestMapping(value = "/order/creatOrder", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxResult creatOrder(HttpServletRequest request,@ModelAttribute("order") Order order) {
+		Integer addressId = Integer.valueOf(getParameter("addressId"));
+		// 获取购物车信息
+		ShoppingCart shoppingCartInfo = SingletonLoginUtils.getShoppingCart(getRequest());
+		List<OrderMessage> orderMessageList = shoppingCartInfo.getCartMessageList();
+
+		// 插入订单和详情
+		Map<String, Object> returnMap = orderService.createOrderAndMessage(order,addressId,shoppingCartInfo);
 		if (Boolean.parseBoolean(returnMap.get("flag").toString())) {
 			orderMessageList.clear(); // 清空购物车
 			shoppingCartInfo.setTotalMoney(null);
 			shoppingCartInfo.setTotalNumber(null);
 		}
 		return success(true, String.valueOf(returnMap.get("orderNumber")));
-    }
+	}
     
 	@RequestMapping(value = "/order/{orderNumber}/payment", method = RequestMethod.GET)
 	public String orderConfirm(Model model, HttpServletRequest request, @PathVariable String orderNumber) {
 		int accountId = SingletonLoginUtils.getLoginUserId(request);
 		Order order = orderService.queryOrderByNumber(orderNumber, accountId, 1);
 		model.addAttribute("order", order);
+		OrderShip orderShip = orderShipService.selectByOrderId(order.getOrderId());
+		model.addAttribute("orderShip", orderShip);
 		return PAY_CONFIRM;
 	}
     

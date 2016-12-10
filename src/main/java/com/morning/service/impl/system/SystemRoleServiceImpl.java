@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 import com.morning.common.util.SingletonLoginUtils;
 import com.morning.dao.system.SystemRoleMapper;
@@ -100,6 +99,16 @@ public class SystemRoleServiceImpl extends SuperServiceImpl<SystemRoleMapper, Sy
 			systemRoleMenuMapper.insertBatch(systemRoleMenus);// 添加角色授权
 		}
 	}
+	
+	@Override
+	public void updateRoleStatus(Integer roleId, Integer status) {
+		SystemRole systemRole = new SystemRole();
+		systemRole.setRoleId(roleId);
+		systemRole.setStatus(status);
+		systemRole.setUpdateBy(SingletonLoginUtils.getSystemUserName());
+		systemRole.setUpdateTime(new Date());
+		systemRoleMapper.updateSelectiveById(systemRole);
+	}
 
 	@Override
 	@Transactional
@@ -112,4 +121,6 @@ public class SystemRoleServiceImpl extends SuperServiceImpl<SystemRoleMapper, Sy
 		systemRoleMenu.setRoleId(roleId);
 		systemRoleMenuMapper.deleteSelective(systemRoleMenu);//删除角色权限表记录
 	}
+
+
 }

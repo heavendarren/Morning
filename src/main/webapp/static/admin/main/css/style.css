@@ -1,6 +1,6 @@
 /*
  *
- *   H+ - 后台主题UI框架
+ *   H+ - 鍚庡彴涓婚UI妗嗘灦
  *   version 4.0
  *
 */
@@ -3936,6 +3936,12 @@ img.circle-size {
     text-decoration: none;
 }
 
+.fontawesome-icon-list .fa-hover .active {
+    background-color: #1c84c6;
+    color: #ffffff;
+    text-decoration: none;
+}
+
 .fontawesome-icon-list .fa-hover a:hover .fa {
     font-size: 30px;
     vertical-align: -6px;
@@ -7211,7 +7217,7 @@ body.rtls.top-navigation .footer.fixed {
 
 /*
  *
- *   SKIN 1 - H+ - 后台主题UI框架
+ *   SKIN 1 - H+ - 鍚庡彴涓婚UI妗嗘灦
  *   NAME - Blue light
  *
 */
@@ -7360,7 +7366,7 @@ body.skin-1 {
 
 /*
  *
- *   SKIN 3 - H+ - 后台主题UI框架
+ *   SKIN 3 - H+ - 鍚庡彴涓婚UI妗嗘灦
  *   NAME - Yellow/purple
  *
 */
@@ -7899,7 +7905,7 @@ body.skin-3 {
 
 
 
-/******用户信息********/
+/******鐢ㄦ埛淇℃伅********/
 .middle-box .hr-line-dashed {
 	color: #ffffff;
 	background-color: #1ab394;
@@ -7930,7 +7936,7 @@ body.skin-3 {
 	line-height: 0;
 }
 
-/*添加会员*/
+/*娣诲姞浼氬憳*/
 .add-member-content {
 	margin-right: auto;
 	margin-left: auto;
@@ -7943,7 +7949,6 @@ body.skin-3 {
 .add-submit{
 	text-align: center;
 }
-/*管理员个人信息*/
 .form-control[disabled],fieldset[disabled] .form-control{
 	cursor: auto;
 	background-color: #FFF;
@@ -7967,7 +7972,6 @@ body.skin-3 {
 .system-message .form-control{
 	-webkit-transition: none!important;
     transition: none!important;
-
 }
 .change_Pass_style{ display:none;}
 .layui-layer-btn

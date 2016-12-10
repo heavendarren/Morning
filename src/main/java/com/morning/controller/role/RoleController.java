@@ -85,15 +85,10 @@ public class RoleController extends BaseController{
 	@RequiresPermissions("sysuser:role:edit")
 	@RequestMapping(value = "/{roleId}/edit", method = RequestMethod.GET)
 	public String edit(Model model,@PathVariable("roleId") Integer roleId) {
-		try {
-			List<SystemMenu> systemMenus = systemMenuService.selectCheckedMenus(roleId);
-			model.addAttribute("systemMenus", JSON.toJSON(systemMenus));
-			SystemRole systemRole = systemRoleService.selectById(roleId);
-			model.addAttribute("systemRole", systemRole);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		List<SystemMenu> systemMenus = systemMenuService.selectCheckedMenus(roleId);
+		model.addAttribute("systemMenus", JSON.toJSON(systemMenus));
+		SystemRole systemRole = systemRoleService.selectById(roleId);
+		model.addAttribute("systemRole", systemRole);
 		return SYSTEM_ROLE_UPDATE;
 	}
 	
@@ -112,8 +107,27 @@ public class RoleController extends BaseController{
 			return success(true,"角色创建成功!");
 		} else {
 			systemRoleService.updateSystemRole(systemRole, menuIds);
-			return success(true,"角色修稿成功!");
+			return success(true,"角色修改成功!");
 		}
+	}
+	
+	/**
+	 * POST 更新角色状态
+	 * @param roleId 角色ID
+	 * @return
+	 */
+	@RequiresPermissions("sysuser:role:audit")
+	@RequestMapping(value = "/{roleId}/audit", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxResult audit(@PathVariable("roleId") Integer roleId) {
+		try {
+			Integer status = Integer.valueOf(getParameter("status"));
+			systemRoleService.updateRoleStatus(roleId, status);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return success(true);
 	}
 	
 	/**

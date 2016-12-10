@@ -41,7 +41,7 @@
                                         <span class="edit-btn J_editAddr">编辑</span>
                                     </dd>
                                     <dd style="display:none">
-                                    <input type="radio" name="order.addressId" class="addressId" value="${userAddressList.addressId}">
+                                    	<input type="radio" name="addressId" class="addressId" value="${userAddressList.addressId}">
                                     </dd>
                                 </dl>
                                 </c:forEach>
@@ -210,7 +210,6 @@
                     </div>
                     </div>
                     <!-- 发票信息 END-->
-
                 </div>
             
             	<div class="checkout-box-ft">

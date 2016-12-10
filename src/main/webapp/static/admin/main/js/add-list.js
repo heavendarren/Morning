@@ -194,3 +194,34 @@ $(function() {
 		})
 	})
 })
+
+/**菜单-编辑*/
+$(function() {
+	$("#menu-submit").click(function() {
+		var params = '';
+		$("form input,form textarea").each(function() {
+			params += $(this).serialize() + "&";
+		});
+		$.ajax({
+			data : params,
+			dataType : 'json',
+			type : 'post',
+			url : baselocation + '/system/manage/menu/save',
+			success : function(result) {
+				if (result.success == true) {
+					parent.layer.msg(result.message, {
+						shade : 0.3,
+						time : 1500
+					}, function() {
+						window.parent.location.reload(); // 刷新父页面
+					});
+				} else {
+					layer.msg(result.message, {
+						icon : 2,
+						time : 1000
+					});
+				}
+			}
+		})
+	})
+})

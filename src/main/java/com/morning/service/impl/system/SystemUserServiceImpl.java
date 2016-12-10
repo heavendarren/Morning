@@ -174,7 +174,7 @@ public class SystemUserServiceImpl extends SuperServiceImpl<SystemUserMapper, Sy
 	@Transactional
 	public void deleteSysUser(Integer accountId) {
 		//删除SystemUser 表信息
-		systemUserMapper.deleteById(Long.valueOf(accountId));
+		systemUserMapper.deleteById(accountId);
 		//删除SystemUserLoginLog 表用户记录
 		SystemUserLoginLog loginLog = new SystemUserLoginLog();
 		loginLog.setUserId(accountId);

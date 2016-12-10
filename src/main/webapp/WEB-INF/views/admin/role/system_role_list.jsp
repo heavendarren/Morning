@@ -66,15 +66,15 @@
                                     <td>${systemRole.updateBy}</td>
 									<td><fmt:formatDate value="${systemRole.updateTime}" pattern="yyyy/MM/dd HH:mm" /></td>                                    
                                     <td class="td-manage">  
-	                                    <c:if test="${systemRole.status==1}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,${systemUsers.accountId})" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
-	                                    <c:if test="${systemRole.status==0}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,${systemUsers.accountId})" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
+	                                    <c:if test="${systemRole.status==1}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,'${ctx}/system/sysuser/role/${systemRole.roleId}/audit')" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
+	                                    <c:if test="${systemRole.status==0}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,'${ctx}/system/sysuser/role/${systemRole.roleId}/audit')" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
 	                                    <a class="edit m-l-sm text-warning" href="javascript:void(0)" onclick="member_show('${systemRole.roleName }','${ctx}/system/sysuser/role','${systemRole.roleId}','edit','1000',null)" title="编辑">
 	                                    <i class="glyphicon glyphicon-edit"></i>
 	                                    </a>
 	                                    <a class="remove m-l-sm text-danger" href="javascript:void(0)" onclick="member_delete(this,'${ctx}/system/sysuser/role/'+${systemRole.roleId}+'/delete','确认要删除该用户吗?')" title="删除">
 	                                    <i class="glyphicon glyphicon-remove"></i>
 	                                    </a>
-	                                    <a class="remove m-l-sm text-primary" href="javascript:void(0)" onclick="member_show('${systemRole.roleName }','${ctx}/system/sysuser/list','${systemRole.roleId}','role','1000',null)" title="用户列表">
+	                                    <a class="remove m-l-sm text-primary" href="javascript:void(0)" onclick="member_show('${systemRole.roleName }','${ctx}/system/sysuser/list','${systemRole.roleId}','role','1000','600')" title="用户列表">
 	                                    <i class="glyphicon glyphicon-list-alt"></i>
 	                                    </a>
                                    </td>

@@ -17,6 +17,12 @@ import com.morning.entity.system.SystemMenu;
 * @version
  */
 public interface ISystemMenuService extends ISuperService<SystemMenu> {
+	
+	/**
+	 * 创建菜单
+	 * @param systemMenu 系统菜单
+	 */
+	void insertMenu(SystemMenu systemMenu);
 
 	/**
 	 * 查询系统目录,网站目录列表
@@ -36,4 +42,28 @@ public interface ISystemMenuService extends ISuperService<SystemMenu> {
 	 * @return
 	 */
 	List<SystemMenu> selectCheckedMenus(Integer roleId);
+	
+	/**
+	 * 查询系统菜单,按照排序顺序
+	 */
+	List<SystemMenu> selectMenuList();
+	
+	/**
+	 * 更新目录状态
+	 * @param menuId 目录ID
+	 * @param status 状态
+	 */
+	void updateMenuStatus(Integer menuId, Integer status);
+	
+	/**
+	 * 更新菜单
+	 * @param systemMenu 系统菜单
+	 */
+	void updateMenu(SystemMenu systemMenu);
+	
+	/**
+	 * 删除目录，同时删除角色权限表记录
+	 * @param menuId 目录ID
+	 */
+	void deleteMenu(Integer menuId);
 }

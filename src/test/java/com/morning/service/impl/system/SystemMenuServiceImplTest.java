@@ -14,7 +14,7 @@ import com.morning.test.base.BaseTest;
 
 public class SystemMenuServiceImplTest extends BaseTest {
 	
-	private static Logger LOGGER = LoggerFactory.getLogger(SystemMenuServiceImplTest.class);
+	private static Logger logger = LoggerFactory.getLogger(SystemMenuServiceImplTest.class);
 
 	@Autowired
 	private ISystemMenuService systemMenuService;
@@ -22,7 +22,18 @@ public class SystemMenuServiceImplTest extends BaseTest {
 	@Test
 	public void testSelectCheckedMenus() {
 		List<SystemMenu> systemMenus = systemMenuService.selectCheckedMenus(1);
-		LOGGER.info("systemMenus:{}",JSON.toJSON(systemMenus));
+		logger.info("systemMenus:{}",JSON.toJSON(systemMenus));
+	}
+	
+	@Test
+	public void testselectMenuList() {
+		List<SystemMenu> systemMenus = systemMenuService.selectMenuList();
+		logger.info("systemMenus:{}",JSON.toJSON(systemMenus));
+	}
+	
+	@Test
+	public void testdeleteMenu() {
+		systemMenuService.deleteMenu(79);
 	}
 
 }

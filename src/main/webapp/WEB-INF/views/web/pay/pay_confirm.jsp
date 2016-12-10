@@ -21,7 +21,7 @@
 	                    <p>金额：<span class="pay-total">${order.totalMoney }</span></p>
 	                    <p>订单：${order.orderNumber }</p>
 	                    <p>配送：${order.userAddress.orderUserName }<span class="line">/</span>${order.userAddress.orderUserTelphone }
-	                    <span class="line">/</span>${order.userAddress.provinceName },${order.userAddress.cityName },${order.userAddress.districtName },${order.userAddress.orderUserAddress }
+	                    <span class="line">/</span>${orderShip.provinceName },${orderShip.cityName },${orderShip.districtName },${orderShip.orderUserAddress }
 	                    <span class="line">/</span><c:if test="${order.sendTime==1 }">不限送货时间</c:if><c:if test="${order.sendTime==2 }">工作日送货</c:if><c:if test="${order.sendTime==3 }">双休日、假日送货</c:if>
 	                    <span class="line">/</span><c:if test="${order.invoicelType == 1 }">个人普通发票</c:if><c:if test="${order.invoicelType == 4 }">电子发票</c:if></p>
 	                </div>

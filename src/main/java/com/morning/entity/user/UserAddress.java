@@ -37,6 +37,7 @@ public class UserAddress implements Serializable{
     private Integer area;
 	/**详细地址*/
     private String orderUserAddress;
+    
 	public Integer getAddressId() {
 		return addressId;
 	}

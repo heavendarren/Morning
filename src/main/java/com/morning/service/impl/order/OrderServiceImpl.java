@@ -22,6 +22,7 @@ import com.morning.entity.order.Order;
 import com.morning.entity.order.OrderMessage;
 import com.morning.entity.order.QueryOrder;
 import com.morning.service.goods.IGoodsService;
+import com.morning.service.order.IOrderShipService;
 import com.morning.service.order.OrderLogService;
 import com.morning.service.order.OrderService;
 
@@ -59,6 +60,8 @@ public class OrderServiceImpl implements OrderService {
 	private IGoodsService goodsService;
 	@Autowired
 	private OrderLogService orderLogService;
+	@Autowired
+	private IOrderShipService orderShipService;
 	
 	@Override
 	public int createOrder(Order order) {
@@ -116,7 +119,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Map<String, Object> createOrderAndMessage(ShoppingCart shoppingCart, Order order, List<OrderMessage> orderMessageList) {
+	public Map<String, Object> createOrderAndMessage(Order order, Integer addressId,ShoppingCart shoppingCart) {
+		// 获取购物车信息
+		List<OrderMessage> orderMessageList = shoppingCart.getCartMessageList();
 		Map<String, Object> returnMap = new HashMap<>();
 		boolean flag = false;
 		try{
@@ -131,6 +136,9 @@ public class OrderServiceImpl implements OrderService {
 			
 			//创建订单日志
 			orderLogService.createOrderLog("1", String.valueOf(order.getAccountId()), "w" , order.getOrderId(), order.getOrderNumber());
+			
+			//创建订单配送表
+			orderShipService.insertOrderShip(order.getOrderId(), addressId);
 			
 			//插入订单详情
 			for(int i = 0; i<orderMessageList.size();i++){
