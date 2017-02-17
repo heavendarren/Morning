@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	
+	<!-- Web容器加载顺序 ServletContext:servletContext接口是Servlet中最大的一个接口，呈现了web应用的Servlet视图。 / context-param /listener /filter/servlet -->  
+	<display-name>morning</display-name>   <!-- Web应用名称：提供GUI工具可能会用来标记这个特定的Web应用的一个名称 -->  
+	
+	<!-- 1.指定Spring的配置文件 -->  
+    <!-- 否则Spring会默认从WEB-INF下寻找配置文件,contextConfigLocation属性是Spring内部固定的 -->  
+    <!-- 通过ContextLoaderListener的父类ContextLoader的第120行发现CONFIG_LOCATION_PARAM固定为contextConfigLocation -->  
+	<context-param>                                                 <!-- Sping应用上下文参数：声明应用范围内的初始化参数。 context-param元素声明应用范围内的初始化参数。 -->
+		<param-name>contextConfigLocation</param-name>              <!-- 环境配置位置  -->
+		<param-value>classpath*:spring/spring-context*.xml</param-value>
+	</context-param>
+	
+	<!-- 2.实例化Spring容器 -->  
+    <!-- 应用启动时,该监听器被执行,它会读取Spring相关配置文件,其默认会到WEB-INF中查找applicationContext.xml -->  
+	<!-- Spring监听器:ContextLoaderListener的作用就是启动Web容器时，自动装配ApplicationContext的配置信息。 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>	
+	
+	<!-- 3.防止Spring内存溢出监听器:保证在web 应用关闭的时候释放与掉这个web 应用相关的class loader 和由它管理的类。 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	
+	<!-- 4.配置Shiro过滤器,先让Shiro过滤系统接收到的请求 -->  
+	<!-- 这里filter-name必须对应applicationContext.xml中定义的<bean id="shiroFilter"/> -->  
+	<!-- 使用[/*]匹配所有请求,保证所有的可控请求都经过Shiro的过滤 -->  
+	<!-- 通常会将此filter-mapping放置到最前面(即其他filter-mapping前面),以保证它是过滤器链中第一个起作用的 -->  
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<!-- 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理 -->  
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 5.解决乱码问题 -->  
+    <!-- forceEncoding默认为false,此时效果可大致理解为request.setCharacterEncoding("UTF-8") -->  
+    <!-- forceEncoding=true后,可大致理解为request.setCharacterEncoding("UTF-8")和response.setCharacterEncoding("UTF-8") -->  
+	<!-- 编码过滤器  所有的请求及响应都经过  过滤中文乱码  -->
+	<filter>
+		<filter-name>SpringEncodingFilter</filter-name>     
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> <!--具体的过滤器的类的完整的包名+类名。注意：不能写错了。否则容器不能正确的实例化过滤器  --> 
+		<async-supported>true</async-supported>                     <!-- 异步支持 -->
+		<init-param>
+			<param-name>encoding</param-name>   					<!-- 参数名 --> 
+			<param-value>UTF-8</param-value>    					<!-- 参数值:编码方式 -->
+		</init-param>
+		<init-param>  
+            <param-name>forceEncoding</param-name>  
+            <param-value>true</param-value>  
+        </init-param> 
+	</filter>
+	<filter-mapping>
+		<filter-name>SpringEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>    							<!-- 指定过滤器负责过滤的URL。这里指定了*.jsp表示在访问任何一个jsp页面时都会先使用CharacterEncodingFilter过滤器进行过滤。如果写成login.jsp.则只有在访问login.jsp时才会调用该过滤器进行过滤。 --> 
+	</filter-mapping>
+	
+	<!-- 6.网页布局和修饰的框架 -->
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 7.Druid:WebStatFilter用于采集web-jdbc关联监控的数据。 -->
+	<filter>
+        <filter-name>DruidWebStatFilter</filter-name>
+        <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+        <!-- 经常需要排除一些不必要的url，比如.js,/jslib/等等。配置在init-param中 -->
+        <init-param>
+            <param-name>exclusions</param-name>
+            <param-value>/static/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>DruidWebStatFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
+	<!-- 8.SpringMVC核心分发器:Spring MVC servlet   -->
+	<servlet>
+		<servlet-name>SpringMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- contextConfigLocation不是必须的， 如果不配置contextConfigLocation， springmvc的配置文件默认在：WEB-INF/servlet的name+"-servlet.xml" -->
+		<init-param>                                             <!--定义Servlet的初始化参数(包括参数名和参数值)一个<servlet>元素里可以有多个<init-param>元素。在Servlet类中通过ServletConfig类的来访问这些参数。   -->
+			<param-name>contextConfigLocation</param-name>  	 <!-- 环境配置位置 -->
+			<param-value>classpath:springmvc/spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>        			 <!-- <load-on-startup>1</load-on-startup>是启动顺序，指定当前Web应用启动时装载Servlet的次序。让这个Servlet随Servletp容器一起启动。 -->
+		<async-supported>true</async-supported>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpringMVC</servlet-name>
+		<url-pattern>/</url-pattern>               				 <!--  <url-pattern>/</url-pattern> 指定访问这个Servlet的URL。这里给出的是对于整个Web应用的相对URL路径. 会拦截/结尾的请求。 -->
+	</servlet-mapping>
+	
+	<!-- 9.配置 Druid 监控信息显示页面 -->  
+    <servlet>
+        <servlet-name>DruidStatView</servlet-name>
+        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+        <init-param>  
+	    <!-- 允许清空统计数据 -->  
+	    <param-name>resetEnable</param-name>  
+	    <param-value>true</param-value>  
+	    </init-param>  
+	    <init-param>  
+	    <!-- 用户名 -->  
+	    <param-name>loginUsername</param-name>  
+	    <param-value>druid</param-value>  
+	    </init-param>  
+	    <init-param>  
+	    <!-- 密码 -->  
+	    <param-name>loginPassword</param-name>  
+	    <param-value>druid</param-value>  
+	    </init-param> 
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DruidStatView</servlet-name>
+        <url-pattern>/druid/*</url-pattern>
+    </servlet-mapping>
+	
+	<!-- 默认欢迎页 -->  
+    <!-- Servlet2.5中可直接在此处执行Servlet应用,如<welcome-file>servlet/InitSystemParamServlet</welcome-file> -->  
+    <!-- 这里使用了SpringMVC提供的<mvc:view-controller>标签,实现了首页隐藏的目的,详见applicationContext.xml -->  
+	<!--     <welcome-file-list>   -->
+	<!--         <welcome-file>login</welcome-file>   -->
+	<!--     </welcome-file-list>   -->
+	
+	<!-- 当你在客户端用view source看JSP生成的代码时，会发现有很多空行，他们是由< %...% >后的回车换行而生成的，也就是说每一行由< %...% >包含的JSP代码到客户端都变成一个空行，虽然不影响浏览，但还是希望能把他们删掉。 -->
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<trim-directive-whitespaces>true</trim-directive-whitespaces>
+		</jsp-property-group>
+	</jsp-config>
+	<!-- 还有一种就是在单个的jsp中添加<%@ page trimDirectiveWhitespaces="true"%>. -->
+	
+	<!-- 配置404与500错误处理 -->   
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/common/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>400</error-code>
+		<location>/WEB-INF/views/common/400.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/WEB-INF/views/common/403.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/common/404.jsp</location>
+	</error-page>
+	
+	<!-- Session超时10分钟(零或负数表示会话永不超时) -->  
+	<session-config> 
+		<session-timeout>10</session-timeout> 					 <!-- 设 定HttpSession的生命周期。这里以分钟计算。下面的设定指明Session在最长不活动时间为10分钟。过了这个时间，Servlet容器将它 作为无效处理。注意这里和程序里指定的计数单位不同，程序里是以秒为单位。<session-config>只有<session- timeout>这个元素–>  -->
+	</session-config>
+	
+</web-app>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.pussinboots.morning</groupId>
+		<artifactId>morning-app-parent</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>morning-cms</artifactId>
+	<packaging>pom</packaging>
+	<name>morning-cms</name>
+	<url>http://maven.apache.org</url>
+	<description>后台管理子系统父模块</description>
+	<modules>
+		<module>morning-cms-pojo</module>
+		<module>morning-cms-biz</module>
+		<module>morning-cms-facade</module>
+		<module>morning-cms-webapp</module>
+	</modules>
+</project>

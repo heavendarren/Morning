@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pussinboots.morning.cms.modules.system.mapper.VersionLogMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.pussinboots.morning.cms.modules.system.entity.VersionLog">
+		<id column="log_id" property="logId" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="log_title" property="logTitle" />
+		<result column="log_content" property="logContent" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        log_id AS logId, create_time AS createTime, create_by AS createBy, log_content AS logContent
+    </sql>
+</mapper>

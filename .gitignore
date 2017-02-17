@@ -1,0 +1,12 @@
+.mymetadata
+.checkstyle
+.classpath
+.tern-project
+.springBeans
+.project
+.class
+.war
+.zip
+.rar
+.settings
+target

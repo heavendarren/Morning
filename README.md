@@ -1,65 +1,46 @@
-##  猫宁Morning公益商城系统
+﻿﻿##  猫宁Morning公益商城系统
 
-------------------------------------------------
 
-> 但行好事，莫问前程。
+> 但行好事，莫问前程。（基于SSM框架的公益B2C网上商城的设计与实现）<br>
+QQ群：558243903 <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=454hcs1"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="猫宁Morning技术讨论" title="猫宁Morning技术讨论"></a>
+![猫宁Morning技术讨论群二维码](http://git.oschina.net/uploads/images/2017/0217/213032_75339153_755773.png "猫宁Morning技术讨论群二维码")
 
-------------------------------------------------
+
+## 项目背景
+据相关统计，2015年有2.7亿网友通过阿里系平台（不含支付宝）参与公益30亿次，累计产生捐赠1.9亿元。淘宝公益突破了传统的公益模式，开创了适合企业自身的公益道路，以“授人以渔”的方式将公益与自身商业模式捆绑销售，加速了“人人公益”时代的到来，让公众看到了中国公益事业的巨大改变和影响。
+
+
 ## 平台简介
-
 猫宁Morning公益商城是中国公益性在线电子商城，以商城B2C模式运营的公益在线商城，是一家致力于将传统公益商城互联网化的创新公益商城。
 
-系统分为前台和后台,前台主要功能包括注册和登录、商品浏览、个人信息管理、购物车、我的订单、网上支付、评价、提问、公益活动、公益论坛、商城论坛等系统，后台主要功能包括管理成员信息管理、用户信息管理、商品管理、公益活动管理、商品分类管理、订单管理、公告资讯管理、论坛平台管理、商品提上管理、商品评价管理等。 
+该网上商城系统分为**电子商城系统**、**公益商城系统**、**后台管理系统**，使用Maven对项目进行模块化管理，搭建多模块企业级项目。	
 
-Morning是在Spring Framework基础上搭建的一个Java基础开发平台，以Spring MVC为模型视图控制器，MyBatis为数据访问层，
-Apache Shiro为权限授权层，Ehcahe对常用数据进行缓存，SLF4J+Log4j2为日志管理。
+Morning是在Spring Framework基础上搭建的一个Java基础开发平台，以Spring MVC为模型视图控制器，MyBatis为数据访问层，Apache Shiro为权限授权层，SLF4J+Log4j2为日志管理，Ehcahe对常用数据进行缓存，采用Dubbo分布式服务框架进行分布式系统开发。
 
-Morning系統目前包括以下四大模块，系统管理模块、电子商城模块、在线社区模块（未搭建）、公益商城模块（未搭建）。
- **系统管理模块** ，包括管理员管理、会员管理、产品管理、交易管理、邮件管理、系统信息、系统管理等。
- **电子商城模块** ，包括用户登录、商品游览、商品购买、在线评论、在线提问、账户管理、订单中心、个人中心等。
- **在线社区模块** ，包括文章列表、游览文章、发表评论、问答列表等。
- **公益商城模块** ，包括公益捐赠、进度查询、发布公益项目等。
+Morning系統目前包括以下三大系统，电子商城系统、公益商城系统、后台管理系统。
+ **后台管理系统（CMS）** ，包括管理员管理模块、会员管理模块、产品管理模块、交易管理模块、系统管理模块等。（已重构完毕）
+ **电子商城系统（OS）** ，包括用户登录模块、商品游览模块、商品购买模块、在线评论模块、在线提问模块、个人中心模块、账户管理模块等。（在重构中）
+ **公益商城系统（DS）** ，包括公益申请模块、积分捐赠模块、进度查看模块、在线评论模块等。（未搭建）
 
-## 内置功能
-
- **系统管理模块**
-1.	管理员管理：管理员列表（增删改查）、个人信息（改查、登录日志）、角色管理（增删改查、角色授权）。
-2.	会员管理：会员列表（增删改查）、等级管理（未搭建）、会员记录管理（未搭建）。
-3.      产品管理：产品列表（改查、分类列表、搭建ing）、分类管理（未搭建）、问答管理（未搭建）。
-4.      交易管理：订单管理（未搭建）、交易信息（未搭建）、评论管理（未搭建）。
-5.      系统管理：系统菜单（增删改查、排序）、导航管理（搭建ing）、基本配置（未搭建）、项目管理（未搭建）、连接池监视。
-
- **电子商城模块**
-1.	已完成：用户登录、用户注册、找回密码（通过邮箱）、上传头像、商品游览、商品购买、账户管理、地址管理、订单查看。
-2.	搭建中：商品交易、订单中心。
-3.	未搭建：在线评论、在线提问、个人中心。
-
- **在线社区模块** 
-1.	未搭建
-
- **公益商城模块** 
-1.	未搭建
-
-
+ 
 ## 技术选型
 
 1、后端
 
-* 核心框架：Spring Framework 4.3.3
-* 安全框架：Apache Shiro 1.2
-* 视图框架：Spring MVC 4.1
-* 布局框架：SiteMesh 2.4
+* 核心框架：Spring Framework 4.3.5
+* 安全框架：Apache Shiro 1.3.2
+* 视图框架：Spring MVC 4.3.5
 * 任务调度：Spring + Quartz 2.2.3
-* 持久层框架：MyBatis 3.4.1 + Mybatis-plus 1.5
+* 持久层框架：MyBatis 3.4.2 + Mybatis-plus 2.0.1
 * 数据库连接池：Alibaba Druid 1.0
-* 缓存框架：Ehcache 2.6
-* 日志管理：SLF4J 1.7、Log4j2 2.7
+* 缓存框架：Ehcache 2.6 + Redis 2.9.0
+* 日志管理：SLF4J 1.7 + Log4j2 2.7
 * 布局框架：SiteMesh 3.0.1 
-* 工具类：Apache Commons、Jackson 2.2
+* 工具类：Apache Commons、Jackson 2.2、fastjson 1.2.20
 
 2、前端
 
-* JS框架：jquery-2.2.3
+* JS框架：jquery-3.1.1
 * 表格插件：Bootstrap Table
 * 表单验证插件：bootstrapValidator
 * 日期选择插件：Datepicker for Bootstrap
@@ -68,20 +49,51 @@ Morning系統目前包括以下四大模块，系统管理模块、电子商城�
 * 表单美化插件：iCheck
 * 树形视图插件：ztree
 
+## 项目结构
+![输入图片说明](http://git.oschina.net/uploads/images/2017/0218/001739_ad0ca473_755773.png "项目结构")
+<br>
+
+
 ## 快速体验
 
-
 > 运行项目配置说明
+
+1.后台管理系统（CMS）项目依赖Redis和ZooKeeper服务。(Dubbo分布式服务框架进行分布式系统开发)
 
 ```
 1、具备运行环境：JDK1.7+、Maven3.0+、MySql5+
 
-2、根据 src\main\resources\properties\jdbc.properties 配置数据库
+2、根据 morning-common-config\src\main\resources\properties\jdbc.properties 配置数据库
 
-3、导入数据库 doc\database\db_morning.sql
+3、导入数据库 project-doc\database\pussinboots_morning.sql
 
-4、前台用户账号，账号：810170512@qq.com  密码：xh2013212542    测试地址：http://localhost:8080/morning/index
-   后台管理员账号，账号：admdin 密码：xh2013212542    测试地址：http://localhost:8080/morning/system
+4、开启Redis、ZooKeeper服务，默认端口号
+
+5、运行morning-cms-biz\src\test\java\com\pussinboots\morning\cms\test\service\DubboProvider Main方法，启动Dubbo消费提供者
+
+6、用Tomcat等服务器运行morning-cms-webapp
+
+7、后台管理系统（CMS），账号：admdin 密码：123456    测试地址：http://localhost:8080/system.morning/login
+
+```
+
+2.后台管理系统（CMS）项目不ZooKeeper服务。（不使用Dubbo分布式服务框架进行分布式系统开发）
+
+```
+1、具备运行环境：JDK1.7+、Maven3.0+、MySql5+
+
+2、根据 morning-common-config\src\main\resources\properties\jdbc.properties 配置数据库
+
+3、导入数据库 project-doc\database\pussinboots_morning.sql
+
+4、将morning-cms-biz依赖导入到morning-cms-webapp的pom.xml
+
+5、删除morning-cms-webapp项目\src\main\resources\properties\spring\spring-context.xml applicationContext-dubbo-consumer.xml文件的引入
+   加入applicationContext-mybatis.xml文件的引入
+
+6、用Tomcat等服务器运行morning-cms-webapp
+
+7、后台管理系统（CMS），账号：admdin 密码：123456    测试地址：http://localhost:8080/system.morning/login
 
 ```
 
@@ -91,7 +103,7 @@ Morning系統目前包括以下四大模块，系统管理模块、电子商城�
 
 2.QQ：810170512  Email：<chenxingxing1994@foxmail.com>  欢迎各位大佬的指导。
 
-3.虚心接受指导，杜绝肆意谩骂。
+3.如有不足之处，请提出，我会尽快修正。
 
 
 ## 特别鸣谢
@@ -104,19 +116,34 @@ Morning系統目前包括以下四大模块，系统管理模块、电子商城�
 
 4.[轩少 / spring-shiro-training](https://git.oschina.net/wangzhixuan/spring-shiro-training)   spring-shiro-training
 
+5.[iBase4J / iBase4J](https://git.oschina.net/iBase4J/iBase4J)   iBase4J
+
 ## 小白求助
 
 1.系统服务中**日志记录**怎么应用到项目中
+<br>
+<br>
 
-2.系统服务中**异常处理**在项目中的具体应用
+## 开发进度
+![公益B2C网上商城项目结构](http://git.oschina.net/uploads/images/2017/0217/233047_df7e1a51_755773.png "公益B2C网上商城项目结构")
 
-3.数据字典如何在项目中应用，及应用数据字典的好处
+### 后台管理系统（CMS）开发进度
+![后台管理系统（CMS）开发进度](http://git.oschina.net/uploads/images/2017/0217/235802_913f1961_755773.png "后台管理系统（CMS）开发进度")
 
 ## 演示界面
 
+### 后台管理系统（CMS）预览图
+![输入图片说明](http://git.oschina.net/uploads/images/2016/1107/002717_a03a5a3c_755773.png "后台管理系统用户登录界面")
+![输入图片说明](http://git.oschina.net/uploads/images/2017/0218/000700_6c60b895_755773.png "后台管理系统角色管理界面")
+![输入图片说明](http://git.oschina.net/uploads/images/2017/0218/000846_6634a71f_755773.png "后台管理系统菜单管理界面")
+<br>
+
+### 电子商城系统（OS）预览图，未重构
 ![输入图片说明](http://git.oschina.net/uploads/images/2016/1107/001913_2396bb4f_755773.png "前台登陆界面")
 ![输入图片说明](http://git.oschina.net/uploads/images/2016/1107/002154_c7600f3c_755773.png "前台首页")
 ![输入图片说明](http://git.oschina.net/uploads/images/2016/1107/002342_d58db7c0_755773.png "商品显示界面")
 ![输入图片说明](http://git.oschina.net/uploads/images/2016/1205/022016_b7856cc6_755773.png "订单查看界面")
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1107/002717_a03a5a3c_755773.png "后台登录界面")
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1107/003030_9d1c798f_755773.png "后台主界面")
+<br>
+
+### 公益商城系统（DS）预览图，未搭建
+

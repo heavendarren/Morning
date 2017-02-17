@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+        
+	<!-- 服务提供者暴露服务配置：服务接口名及服务对象实现引用 -->
+	<dubbo:service
+		interface="com.pussinboots.morning.cms.modules.system.service.IMenuService"
+		ref="menuServiceImpl" />    
+	<dubbo:service
+		interface="com.pussinboots.morning.cms.modules.system.service.IVersionLogService"
+		ref="versionLogServiceImpl" /> 
+
+</beans>
