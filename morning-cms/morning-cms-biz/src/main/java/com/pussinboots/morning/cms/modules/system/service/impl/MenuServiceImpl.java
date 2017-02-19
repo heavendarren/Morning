@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pussinboots.morning.cms.modules.administrator.mapper.RoleMenuMapper;
-import com.pussinboots.morning.cms.modules.administrator.mapper.UserRoleMapper;
 import com.pussinboots.morning.cms.modules.system.entity.Menu;
 import com.pussinboots.morning.cms.modules.system.enums.MenuStatusEnum;
 import com.pussinboots.morning.cms.modules.system.enums.MenuTypeEnum;
@@ -27,8 +26,6 @@ import com.pussinboots.morning.cms.modules.system.service.IMenuService;
 @Service
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
 
-	@Autowired
-	private UserRoleMapper userRoleMapper;
 	@Autowired
 	private MenuMapper menuMapper;
 	@Autowired

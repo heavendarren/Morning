@@ -13,7 +13,7 @@
             return '每页显示 ' + pageNumber + ' 条记录';
         },
         formatShowingRows: function (pageFrom, pageTo, totalRows) {
-            return S"第 "+a+" 到第 "+b+" 条记录，总共 "+c+" 条";
+            return "第 "+a+" 到第 "+b+" 条记录，总共 "+c+" 条";
         },
         formatSearch: function () {
             return '搜索';

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.pussinboots.morning.cms.common.security.AuthorizingUser;
 import com.pussinboots.morning.cms.modules.administrator.entity.Organization;
+import com.pussinboots.morning.cms.modules.administrator.vo.OrganizationVO;
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -28,6 +29,12 @@ public interface IOrganizationService extends IService<Organization> {
 	 * @return
 	 */
 	List<Organization> selectOrganizations();
+	
+	/**
+	 * 查找组织及其组织人员
+	 * @return
+	 */
+	List<OrganizationVO> selectOrganizationsDetail();
 	
 	/**
 	 * 根据组织状态查找组织列表

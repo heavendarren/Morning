@@ -34,11 +34,11 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
 	private RoleMapper roleMapper;
 	
 	@Override
-	public Map<String, Set<String>> selectRolesByUserId(Long UserId) {
+	public Map<String, Set<String>> selectRolesByUserId(Long userId) {
 		
         Map<String, Set<String>> resourceMap = new HashMap<>();
 		
-		List<Long> roleIdList = userRoleMapper.selectRoleIdsByUserId(UserId);
+		List<Long> roleIdList = userRoleMapper.selectRoleIdsByUserId(userId);
 		
 		Set<String> roleSigns = new HashSet<>();
 		Set<String> roleIds = new HashSet<>();

@@ -27,7 +27,7 @@ public class PasswordUtils {
 	 * @param salt 盐值
 	 * @return
 	 */
-	public final static String getMd5(String password, String loginName, String salt) {
+	public static String getMd5(String password, String loginName, String salt) {
 		String md5Password = new Md5Hash(password, getCredentialsSalt(
 				loginName, salt), iterations).toString();
 		return md5Password;

@@ -1,8 +1,10 @@
 package com.pussinboots.morning.cms.modules.administrator.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +12,11 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pussinboots.morning.cms.common.security.AuthorizingUser;
 import com.pussinboots.morning.cms.modules.administrator.entity.Organization;
+import com.pussinboots.morning.cms.modules.administrator.entity.User;
 import com.pussinboots.morning.cms.modules.administrator.mapper.OrganizationMapper;
 import com.pussinboots.morning.cms.modules.administrator.mapper.UserMapper;
 import com.pussinboots.morning.cms.modules.administrator.service.IOrganizationService;
+import com.pussinboots.morning.cms.modules.administrator.vo.OrganizationVO;
 
 /**
  * 
@@ -47,6 +51,25 @@ public class OrganizationServiceImpl extends ServiceImpl<OrganizationMapper, Org
 	}
 	
 	@Override
+	public List<OrganizationVO> selectOrganizationsDetail() {
+		List<OrganizationVO> organizationVOs = new ArrayList<>();
+		// 查询所有组织
+		List<Organization> organizations = organizationMapper.selectList(new EntityWrapper<Organization>());
+		// 循环遍历组织,将用户信息添加该组织中
+		for (Organization organization : organizations) {
+			User user = new User();
+			user.setOrganizationId(organization.getOrganizationId());
+			List<User> users = userMapper.selectList(new EntityWrapper<User>(user));
+			OrganizationVO organizationVO = new OrganizationVO();
+			BeanUtils.copyProperties(organization, organizationVO);
+			organizationVO.setUsers(users);
+			organizationVO.setNumberUser(users.size());
+			organizationVOs.add(organizationVO);
+		}
+		return organizationVOs;
+	}
+	
+	@Override
 	public List<Organization> selectOrganizations(Integer status) {
 		Organization organization = new Organization();
 		organization.setStatus(status);
@@ -78,5 +101,6 @@ public class OrganizationServiceImpl extends ServiceImpl<OrganizationMapper, Org
 		// 重置管理员组织记录
 		userMapper.updateOrganization(organizationId);
 	}
+
 
 }

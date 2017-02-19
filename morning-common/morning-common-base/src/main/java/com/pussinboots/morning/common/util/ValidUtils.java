@@ -15,7 +15,7 @@ import java.util.Map;
 * @version
  */
 @SuppressWarnings("rawtypes")
-public final class ValidUtils {
+public class ValidUtils {
 	
 	private ValidUtils() { }
 
@@ -25,7 +25,7 @@ public final class ValidUtils {
      * @param format 时间格式
      * @return 是否符合
      */
-	public final static boolean isDate(String date, String format) {
+	public static boolean isDate(String date, String format) {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat(format);
 			sdf.parse(date);
@@ -39,7 +39,7 @@ public final class ValidUtils {
     /**
      * 判断字符串有效性
      */
-	public final static boolean valid(String src) {
+	public static boolean valid(String src) {
 		return !(src == null || "".equals(src.trim()));
 	}
 
@@ -48,7 +48,7 @@ public final class ValidUtils {
      * @param src
      * @return
      */
-    public final static boolean valid(String... src) {
+    public static boolean valid(String... src) {
         for (String s : src) {
             if (!valid(s)) {
                 return false;
@@ -61,7 +61,7 @@ public final class ValidUtils {
     /**
      * 判断一个对象是否为空
      */
-    public final static boolean valid(Object obj) {
+    public static boolean valid(Object obj) {
         return !(null == obj);
     }
 
@@ -70,7 +70,7 @@ public final class ValidUtils {
      * @param objs
      * @return
      */
-    public final static boolean valid(Object... objs) {
+    public static boolean valid(Object... objs) {
         if (objs != null && objs.length != 0) {
             return true;
         }
@@ -80,7 +80,7 @@ public final class ValidUtils {
     /**
      * 判断集合的有效性
      */
-    public final static boolean valid(Collection col) {
+	public static boolean valid(Collection col) {
         return !(col == null || col.isEmpty());
     }
 
@@ -89,7 +89,7 @@ public final class ValidUtils {
      * @param cols
      * @return
      */
-    public final static boolean valid(Collection... cols) {
+    public static boolean valid(Collection... cols) {
         for (Collection c : cols) {
             if (!valid(c)) {
                 return false;
@@ -103,7 +103,7 @@ public final class ValidUtils {
      * @param map
      * @return
      */
-    public final static boolean valid(Map map) {
+    public static boolean valid(Map map) {
         return !(map == null || map.isEmpty());
     }
 
@@ -112,7 +112,7 @@ public final class ValidUtils {
      * @param maps 需要判断map
      * @return 是否全部有效
      */
-	public final static boolean valid(Map... maps) {
+	public static boolean valid(Map... maps) {
 		for (Map m : maps) {
 			if (!valid(m)) {
 				return false;

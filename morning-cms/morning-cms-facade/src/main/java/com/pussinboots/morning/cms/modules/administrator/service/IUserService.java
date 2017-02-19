@@ -49,6 +49,13 @@ public interface IUserService extends IService<User> {
 	List<UserVO> selectAllUser(UserVO userVO);
 	
 	/**
+	 * 根据组织ID查找管理员列表
+	 * @param organizationId
+	 * @return
+	 */
+	List<UserVO> selectUsersByOrganizationId(Long organizationId);
+	
+	/**
 	 * 根据管理员ID查找管理员信息
 	 * @param userId 管理员ID
 	 * @return UserVO

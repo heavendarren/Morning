@@ -17,6 +17,9 @@ import com.pussinboots.morning.cms.common.security.AuthorizingUser;
 import com.pussinboots.morning.cms.common.util.SingletonLoginUtils;
 import com.pussinboots.morning.cms.modules.administrator.entity.Organization;
 import com.pussinboots.morning.cms.modules.administrator.service.IOrganizationService;
+import com.pussinboots.morning.cms.modules.administrator.service.IUserService;
+import com.pussinboots.morning.cms.modules.administrator.vo.OrganizationVO;
+import com.pussinboots.morning.cms.modules.administrator.vo.UserVO;
 import com.pussinboots.morning.common.controller.BaseController;
 import com.pussinboots.morning.common.result.ResponseResult;
 
@@ -34,6 +37,10 @@ public class AdministratorOrganizationController extends BaseController{
 	
 	/** 组织列表 */
 	private static final String ADMIN_ORGANIZATION_LIST = getViewPath("modules/organization/admin_organization_list");
+	/** 组织列表详情 */
+	private static final String ADMIN_ORGANIZATION_DETAIL = getViewPath("modules/organization/admin_organization_detail");
+	/** 组织详情 */
+	private static final String ADMIN_ORGANIZATION_USER = getViewPath("modules/organization/admin_organization_user");	
 	/** 创建组织 */
 	private static final String ADMIN_ORGANIZATION_CREATE = getViewPath("modules/organization/admin_organization_create");
 	/** 修改组织 */
@@ -41,6 +48,8 @@ public class AdministratorOrganizationController extends BaseController{
 	
 	@Autowired
 	private IOrganizationService organizationService;
+	@Autowired
+	private IUserService userService;
 	
 	/**
 	 * GET 组织列表
@@ -55,6 +64,31 @@ public class AdministratorOrganizationController extends BaseController{
 		return ADMIN_ORGANIZATION_LIST;
 	}
 	
+	/**
+	 * GET 组织列表详情
+	 * @param model
+	 * @return
+	 */
+	@RequiresPermissions("administrator:organization:view")
+	@GetMapping(value = "/detail")
+	public String listDetail(Model model) {
+		List<OrganizationVO> organizationVOs = organizationService.selectOrganizationsDetail();
+		model.addAttribute("organizationVOs", organizationVOs);
+		return ADMIN_ORGANIZATION_DETAIL;
+	}
+	
+	/**
+	 * GET 组织详情
+	 * @param model
+	 * @return
+	 */
+	@RequiresPermissions("administrator:organization:view")
+	@GetMapping(value = "/{organizationId}/detail")
+	public String listDetail(Model model, @PathVariable("organizationId") Long organizationId) {
+		List<UserVO> userVOs = userService.selectUsersByOrganizationId(organizationId);
+		model.addAttribute("userVOs", userVOs);
+		return ADMIN_ORGANIZATION_USER;
+	}
 	
 	/**
 	 * GET 添加组织
@@ -151,5 +185,6 @@ public class AdministratorOrganizationController extends BaseController{
 			return fail(false, "您未登录或者登录已超时,请先登录!");
 		}
 	}
+	
 
 }

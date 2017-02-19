@@ -76,7 +76,10 @@
     		</if>
     		<if test="endLoginTime != null">
     			AND last_login_time &lt;= #{endLoginTime}
-    		</if>      		 		
+    		</if>   
+    		<if test="organizationId != null">
+    			AND u.organization_id = #{organizationId}
+    		</if>      		   		 		
     	</where>
     </select>
     

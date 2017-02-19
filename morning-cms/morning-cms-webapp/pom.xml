@@ -20,9 +20,12 @@
 			<artifactId>morning-cms-facade</artifactId>
 			<version>${morning.version}</version>
 		</dependency>
-		<!-- 不使用Dubbo分布式服务框架，导入该依赖 <dependency> <groupId>com.pussinboots.morning</groupId> 
-			<artifactId>morning-cms-biz</artifactId> <version>${morning.version}</version> 
-			</dependency> -->
+		<!-- 不使用Dubbo分布式服务框架，导入该依赖
+		 <dependency> 
+		 	<groupId>com.pussinboots.morning</groupId> 
+			<artifactId>morning-cms-biz</artifactId> 
+			<version>${morning.version}</version> 
+		</dependency> -->
 		<!-- Morning相关依赖 end -->
 
 		<!-- 2.SPRING相关依赖 begin√ -->

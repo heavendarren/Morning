@@ -1,9 +1,11 @@
 package com.pussinboots.morning.cms.modules.administrator.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.pussinboots.morning.cms.modules.administrator.entity.Role;
 import com.pussinboots.morning.cms.modules.administrator.entity.User;
 
 public class UserVO extends User{
@@ -31,6 +33,9 @@ public class UserVO extends User{
 	/** 登录时间结束 */
 	@DateTimeFormat(pattern="yyyy/MM/dd")
 	private Date endLoginTime;
+	
+	/** 用户角色 */
+	private List<Role> roles;
 
 	public String getOrganizationName() {
 		return organizationName;
@@ -78,6 +83,14 @@ public class UserVO extends User{
 
 	public void setEndLoginTime(Date endLoginTime) {
 		this.endLoginTime = endLoginTime;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 	
 }

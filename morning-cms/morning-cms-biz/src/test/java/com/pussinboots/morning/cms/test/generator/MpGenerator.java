@@ -103,7 +103,7 @@ public class MpGenerator {
 		InjectionConfig cfg = new InjectionConfig() {
 			@Override
 			public void initMap() {
-				Map<String, Object> map = new HashMap<String, Object>();
+				Map<String, Object> map = new HashMap<>();
 				map.put("abc", this.getConfig().getGlobalConfig().getAuthor()+ "-mp");
 				this.setMap(map);
 			}

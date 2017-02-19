@@ -32,7 +32,7 @@ public class VersionLogServiceImpl extends ServiceImpl<VersionLogMapper, Version
 	public VersionLogDTO selectByPullPage(PageInfo pageInfo) {
 		
 		// 下拉分页
-		Page<VersionLog> page = new Page<VersionLog>(1, pageInfo.getNowpage() * pageInfo.getPagesize());
+		Page<VersionLog> page = new Page<>(1, pageInfo.getNowpage() * pageInfo.getPagesize());
         List<VersionLog> versionLogs = versionLogMapper.selectPage(page, new EntityWrapper<VersionLog>().orderBy("logId", false));
         
         pageInfo.setTotal(page.getTotal());

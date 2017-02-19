@@ -60,7 +60,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
 
     @Override
     public Collection<Session> getActiveSessions() {
-        Set<Session> sessions = new HashSet<Session>();
+        Set<Session> sessions = new HashSet<>();
 
         Set<byte[]> keys = redisManager.keys(this.keyPrefix + "*");
         if (keys != null && keys.size() > 0) {

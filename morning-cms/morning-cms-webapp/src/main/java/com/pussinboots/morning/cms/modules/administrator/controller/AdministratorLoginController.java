@@ -33,7 +33,6 @@ import com.google.code.kaptcha.Producer;
 import com.pussinboots.morning.cms.common.util.SingletonLoginUtils;
 import com.pussinboots.morning.cms.modules.administrator.entity.User;
 import com.pussinboots.morning.cms.modules.administrator.entity.UserLoginLog;
-import com.pussinboots.morning.cms.modules.administrator.service.IUserLoginLogService;
 import com.pussinboots.morning.cms.modules.administrator.service.IUserService;
 import com.pussinboots.morning.common.controller.BaseController;
 import com.pussinboots.morning.common.result.ResponseResult;
@@ -60,8 +59,6 @@ public class AdministratorLoginController extends BaseController{
 	private Producer captchaProducer;
 	@Autowired
 	private IUserService userService;
-	@Autowired
-	private IUserLoginLogService userLoginLogService;
 
 	/**
 	 * GET 登录
@@ -126,7 +123,7 @@ public class AdministratorLoginController extends BaseController{
 	 */
 	@RequestMapping(value = "/unauth", method = RequestMethod.GET)
     public String unauth() {
-		if (SecurityUtils.getSubject().isAuthenticated() == false) {
+		if (!SecurityUtils.getSubject().isAuthenticated()) {
 			return redirectTo("/login");
 		}
         return "unauth";

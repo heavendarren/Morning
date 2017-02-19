@@ -18,7 +18,7 @@ public class PageInfo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	/** 默认显示的记录数 */
-	private final static int PAGESIZE = 10;
+	private static final int PAGESIZE = 10;
 	/** 总记录 */
 	private int total;
 	/** 数据库中limit的参数，从第几条开始取 */

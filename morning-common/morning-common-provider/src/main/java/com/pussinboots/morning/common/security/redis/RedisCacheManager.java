@@ -52,7 +52,7 @@ public class RedisCacheManager implements CacheManager {
             redisManager.init();
 
             // create a new cache instance
-            c = new RedisCache<K, V>(redisManager, keyPrefix);
+            c = new RedisCache<>(redisManager, keyPrefix);
 
             // add it to the cache collection
             caches.put(name, c);

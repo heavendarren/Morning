@@ -28,16 +28,8 @@ public enum MenuTypeEnum {
 		return type;
 	}
 
-	public void setType(Integer type) {
-		this.type = type;
-	}
-
 	public String getTypeinfo() {
 		return typeinfo;
-	}
-
-	public void setTypeinfo(String typeinfo) {
-		this.typeinfo = typeinfo;
 	}
 
 	public static MenuTypeEnum stateOf(int index) {

@@ -12,9 +12,11 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pussinboots.morning.cms.common.security.AuthorizingUser;
 import com.pussinboots.morning.cms.common.util.PasswordUtils;
+import com.pussinboots.morning.cms.modules.administrator.entity.Role;
 import com.pussinboots.morning.cms.modules.administrator.entity.User;
 import com.pussinboots.morning.cms.modules.administrator.entity.UserLoginLog;
 import com.pussinboots.morning.cms.modules.administrator.entity.UserRole;
+import com.pussinboots.morning.cms.modules.administrator.enums.RoleStatusEnum;
 import com.pussinboots.morning.cms.modules.administrator.mapper.UserLoginLogMapper;
 import com.pussinboots.morning.cms.modules.administrator.mapper.UserMapper;
 import com.pussinboots.morning.cms.modules.administrator.mapper.UserRoleMapper;
@@ -109,6 +111,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	}
 	
 	@Override
+	public List<UserVO> selectUsersByOrganizationId(Long organizationId) {
+		// 通过组织ID查找管理员
+		UserVO userVO = new UserVO();
+		userVO.setOrganizationId(organizationId);
+		List<UserVO> userVOs = userMapper.selectAllUser(userVO);
+		
+		// 对管理员列表进行遍历,获取角色信息
+		for(UserVO vo : userVOs){  // TODO 按理说,foreach循环不能对其中的元素进行修改. 但是这里,userVOs中重置了角色信息?
+			List<Role> roles = userRoleMapper.selectRolesByUserId(vo.getUserId(), RoleStatusEnum.NORMAL.getStatus());
+			vo.setRoles(roles);
+		}
+		return userVOs;
+	}
+	
+	@Override
 	public void updateUserInfo(User user, AuthorizingUser authorizingUser) {
 		user.setUpdateBy(authorizingUser.getUserName());
 		user.setUpdateTime(new Date());
@@ -196,5 +213,4 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		}
 		return false;
 	}
-
 }

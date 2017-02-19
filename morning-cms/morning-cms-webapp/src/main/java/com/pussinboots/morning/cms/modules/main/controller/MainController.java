@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.pussinboots.morning.cms.common.util.SingletonLoginUtils;
 import com.pussinboots.morning.cms.modules.administrator.service.IRoleMenuService;
-import com.pussinboots.morning.cms.modules.system.service.IMenuService;
 import com.pussinboots.morning.cms.modules.system.vo.MenuVO;
 import com.pussinboots.morning.common.controller.BaseController;
 
@@ -31,8 +30,6 @@ public class MainController extends BaseController {
 	/** 后台管理主界面初始化首页 */
 	private static final String MAIN_INDEX = getViewPath("modules/main/index");
 	
-	@Autowired
-	private IMenuService menuService;
 	@Autowired
 	private IRoleMenuService roleMenuService;
 	

@@ -160,7 +160,7 @@ public class RedisCache<K, V> implements Cache<K, V> {
                 return Collections.emptySet();
             }
             else {
-                Set<K> newKeys = new HashSet<K>();
+                Set<K> newKeys = new HashSet<>();
                 for (byte[] key : keys) {
                     newKeys.add((K) key);
                 }
@@ -177,7 +177,7 @@ public class RedisCache<K, V> implements Cache<K, V> {
         try {
             Set<byte[]> keys = cache.keys(this.keyPrefix + "*");
             if (!CollectionUtils.isEmpty(keys)) {
-                List<V> values = new ArrayList<V>(keys.size());
+                List<V> values = new ArrayList<>(keys.size());
                 for (byte[] key : keys) {
                     @SuppressWarnings("unchecked")
                     V value = get((K) key);

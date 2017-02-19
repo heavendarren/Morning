@@ -674,7 +674,7 @@ public class StringUtils {
 			return null;
 		}
 		
-		List<String> list = new ArrayList<String>(limit == 0 ? 16 : limit);
+		List<String> list = new ArrayList<>(limit == 0 ? 16 : limit);
 		if (limit == 1) {
 			list.add(str);
 			return list;

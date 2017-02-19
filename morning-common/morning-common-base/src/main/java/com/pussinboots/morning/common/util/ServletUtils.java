@@ -27,7 +27,7 @@ import eu.bitwalker.useragentutils.UserAgent;
  */
 public class ServletUtils {
 	
-	private static Logger LOGGER = LoggerFactory.getLogger(ServletUtils.class);
+	private static Logger logger = LoggerFactory.getLogger(ServletUtils.class);
 	
     //-- Content Type 定义 --//
     public static final String EXCEL_TYPE = "application/vnd.ms-excel";
@@ -138,7 +138,7 @@ public class ServletUtils {
             String encodedfileName = new String(fileName.getBytes(), "ISO8859-1");
             response.setHeader("Content-Disposition", "attachment; filename=\"" + encodedfileName + "\"");
         } catch (UnsupportedEncodingException e) {
-        	LOGGER.error("ServletUtils.setFileDownloadHeader", e);
+        	logger.error("ServletUtils.setFileDownloadHeader", e);
         }
     }
     

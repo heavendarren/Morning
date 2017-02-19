@@ -26,16 +26,8 @@ public enum MenuStatusEnum {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
 	public String getStateinfo() {
 		return stateinfo;
-	}
-
-	public void setStateinfo(String stateinfo) {
-		this.stateinfo = stateinfo;
 	}
 
 	public static MenuStatusEnum stateOf(int index) {

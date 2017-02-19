@@ -24,6 +24,7 @@
                   <button type="button" class="btn btn-default"  title="创建组织" onclick="member_show('创建组织','${ctx}/administrator/organization/create',null,null,'1000','600')"> <i class="glyphicon glyphicon-plus"></i> </button>
                 </shiro:hasPermission>
                 <button type="button" class="btn btn-default"  title="刷新列表" onclick="javascript:window.location.reload()"> <i class="glyphicon glyphicon-refresh"></i> </button>
+                <button type="button" class="btn btn-default"  title="查看详情" onclick="javascript:window.location.href='${ctx}/administrator/organization/detail'"> <i class="glyphicon glyphicon-th-list"></i> </button>
               </div>
               <table id="table"
                                    data-toggle="table"
