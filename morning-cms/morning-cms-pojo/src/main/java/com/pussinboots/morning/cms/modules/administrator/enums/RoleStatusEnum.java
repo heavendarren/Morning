@@ -15,27 +15,19 @@ public enum RoleStatusEnum {
 
     private Integer status;
     
-    private String stateinfo;
+    private String stateInfo;
     
-	private RoleStatusEnum(Integer status, String stateinfo) {
+	private RoleStatusEnum(Integer status, String stateInfo) {
 		this.status = status;
-		this.stateinfo = stateinfo;
+		this.stateInfo = stateInfo;
 	}
 
 	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public String getStateinfo() {
-		return stateinfo;
-	}
-
-	public void setStateinfo(String stateinfo) {
-		this.stateinfo = stateinfo;
+	public String getStateInfo() {
+		return stateInfo;
 	}
 
 	public static RoleStatusEnum stateOf(int index) {

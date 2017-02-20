@@ -28,7 +28,7 @@
 		</dependency> -->
 		<!-- Morning相关依赖 end -->
 
-		<!-- 2.SPRING相关依赖 begin√ -->
+		<!-- 2.SPRING相关依赖 begin -->
 		<!-- ①.spring核心依赖 -->
 		<dependency>
 			<groupId>org.springframework</groupId>

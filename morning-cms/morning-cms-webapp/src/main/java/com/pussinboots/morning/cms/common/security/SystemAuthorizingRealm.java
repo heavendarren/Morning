@@ -26,14 +26,12 @@ import com.pussinboots.morning.cms.modules.administrator.service.IUserService;
 
 /**
  * 
-* 项目名称：morning Maven Webapp   
+* 项目名称：morning-cms-webapp   
 * 类名称：SystemAuthorizingRealm   
-* 类描述：Shiro验证用户登录的类   
+* 类描述：shiro 认证回调及授权查询回调函数实现类   
 * 创建人：陈星星   
-* 创建时间：2016年11月14日 上午1:43:58   
-* 修改人：陈星星   
-* 修改时间：2016年11月14日 上午1:43:58   
-* @version
+* 创建时间：2017年2月20日 上午2:01:25    
+*
  */
 public class SystemAuthorizingRealm extends AuthorizingRealm {
 	
@@ -61,7 +59,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			throw new UnknownAccountException();// 没找到帐号
 		}
 		
-		if (UserStatusEnum.NORMAL.getStatus().equals(user.getStatus().toString())) {
+		if (UserStatusEnum.FREEZE.getStatus().equals(user.getStatus())) {
 			throw new DisabledAccountException();// 校验用户状态
 		}
 		

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.1.xsd"
+	default-lazy-init="true">
+
+	<description>Redis Configuration</description>
+
+    <!-- Redis 连接池 -->
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.pool.maxActive}" />
+        <property name="maxIdle" value="${redis.pool.maxIdle}" />
+        <property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />
+        <property name="testOnReturn" value="${redis.pool.testOnReturn}" />
+        <property name="maxWaitMillis" value="${redis.pool.maxWait}" />
+    </bean>
+
+    <!-- Redis 连接工厂 -->
+    <bean id="redisConnFactory"
+        class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.ip}" />
+        <property name="port" value="${redis.port}" />
+		<!-- <property name="password" value="${redis.password}" /> -->
+        <property name="timeout" value="${redis.timeout}" />
+        <property name="poolConfig" ref="jedisPool" />
+    </bean>
+
+    <!-- redis 操作对象 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="redisConnFactory" />
+    </bean>
+    
+</beans>

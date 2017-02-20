@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* CSS Document */
+html,body{height:100%}
+input:focus {outline: none} 
+.min-width{min-width:1080px;}
+.main{width:1080px;min-width:1080px;margin:0 auto;}
+.login-box{min-height:100%;height:auto;margin-bottom:-50px;}
+label{ margin:0; font-weight:normal;}
+.container-nav{padding-left: 15px;padding-right: 15px;height: 60px;width: 100%;border-bottom: 1px solid #e6e9f0;}
+.container-nav .navbar-brand{line-height: 30px;color:#7a8599;}
+.navbar-nav-right{float: right;z-index: 99;}
+.navbar-nav-right > li > a{padding:10px 15px;color:#7a8599}
+.navbar-nav-right > li > a:hover{color: #0033FF}
+.navbar-nav-right .link-line{display:inline-block;line-height:56px;padding:0 12px;color:#dcdfe5}
+.navbar-nav-right > li{float:left;	line-height: 60px;}
+.login-box-pan{ padding:50px 80px 50px 30px;}
+.login-info{ width:290px;}
+.login-info h2{ border-bottom:2px solid #eeeff3; color:#3498db; font-size:18px; font-weight:700; line-height:38px; width:100%;}
+.login-info h2 span{ border-bottom:2px solid #3498db; height:38px; display:inline-block; padding:0 10px;position:relative; bottom:-2px;}
+.login-info .item{ height:70px; width:290px;}
+.login-info .item-input{ border:1px solid #e5e5e5; height:38px; line-height:24px; padding:7px 10px;}
+.txt02{ height:24px; line-height:24px; border:0; float:left; font-size:13px;}
+.login-info .item-input .txt02{ width:220px; float:left;}
+.login-info .item-tips{ line-height:30px; font-size:12px; color:#ee1615;}
+.login-info img{ width:70px; height:30px; margin:2px 10px 0;}
+.f-h34{ height:34px; line-height:34px;}.f-h24{height:24px; line-height:24px;}
+.login-box a.c-blue:hover{ color:#ff7d27; text-decoration:underline;}
+.reg-box-pan{ padding:40px; width:100%;padding-bottom:0px;}
+.txt03{width:270px;line-height: 16px;padding:9px 10px;border: 1px solid #cccccc;float: none;font-size: 14px;color: #999;overflow: hidden;}
+.reg-box .item {height:68px;line-height:34px;position: relative;z-index:5;}
+.reg-box .intelligent-label {width:100px;text-align: right;font-size: 14px;color: #666;padding-right: 10px;}
+.reg-box .intelligent-label b{font-family: "????";margin-right: 5px;font-weight: normal; color:red;}
+.reg-box .item .item-ifo{position: relative;width: 274px;}
+.reg-box .item .item-ifo label img{width:94px; height:38px;border:1px solid #cccccc;border-radius:3px;}
+.f-fl{float:left!important}
+.reg-box .txt02{width:270px;line-height: 16px;padding:9px 10px;border: 1px solid #cccccc;float: none;font-size: 14px;font-family: arial,"宋体";color: #999;overflow: hidden;}
+.reg-box .txt03.v_error{border-color:#FF0000;}
+.reg-box .txt03:focus{border-color:#1a97d7;}
+.reg-box .blank {width:16px;height:16px; font-size:16px;position: absolute;left:280px;top:11px;float: none; color:#7abd54}
+.reg-box .close{position: absolute;top:5px;right:25px;font-size: 24px;}
+.reg-box .focus,.reg-box .focusa,.reg-box .error{line-height:34px;height:34px;position: absolute;top: 0px;left:280px;width:270px;padding: 0 5px;z-index:3; font-weight:normal; font-size:12px; color:#999}
+.reg-box .focus span,.reg-box .error span{ line-height:16px; display:block; padding:3px 0;}
+.reg-box .focus{color: #999;}
+.reg-box .valid{color: #f00;}
+.reg-box .line{border-top: 2px solid #e6e9f0;display: block;text-align: center;width: 270px;margin-top: 60px;margin-right: 0;margin-bottom: 50px;padding-top: 10px;}
+.reg-box .strength {color: #999;line-height: 22px;padding-right: 10px;clear: both;float: none;position: absolute;top:39px;right: -9px; display:none}
+.reg-box .strength b {float: left;width: 108px;height:16px;overflow: hidden;margin-top: 5px; font-weight:400;}
+.reg-box .strength b i{ font-style:normal; font-size:10px; width:34px; height:16px;line-height:16px; display:inline-block; float:left; background:#dbdbdb; text-align:center; margin-left:1px; color:#fff;}
+.reg-box .strength b i.on{ background:#ff6160}
+.reg-box .btn-blue{ font-size:18px; height:44px; line-height:44px; padding:0; width:270px;margin-top:10px;}
+.reg-box .btn-gray{ height:38px; line-height:34px; padding:0 12px;}
+.reg-box .part1,.reg-box .part2,.reg-box .part3{ padding-left:150px;}
+.reg-box .part2{margin-top:40px;}
+.reg-box .part3{margin-top:40px; padding-left:250px;}
+.reg-box .part4{margin-top:80px;}
+.message{display: none;}
+.regcon {width: 482px;height:360px;margin-left: -241px;margin-top: -180px;background: #fff;}
+.regcon pre {border: 1px solid #B2B2B2;height: 240px;margin: 10px;overflow-x: hidden;overflow-y: scroll;padding: 5px;resize: both;width: 450px;background: #fff;font-size: 12px;color: #333;line-height: 1.7em;}
+.showpwd{ display:inline-block; width:16px; height:16px; background:url(../images/showPwd.png) no-repeat center center; background-size:16px 16px; position:absolute; top:12px;right:10px; cursor:pointer;}
+.showpwd.hidepwd{ background-image:url(../images/hidePwd.png);}
+.login{padding-left: 100px;padding-top: 50px;}
+.login .focus{position: static;}
+.login .item{height:73px;}
+.login .part1{padding-left:250px;}
+.retrieve-psw .part1{margin-top:60px; padding-left:250px;}
+.retrieve-psw .item{height:75px;}
+.retrieve-psw .part1 .focus{position: static;}
+.footer{clear:both;text-align:center;font-size:12px;padding-bottom:20px}
+.footer a:hover{color:#333}
+.footer_links,.footer_copyright,.footer_others{line-height: 30px;}

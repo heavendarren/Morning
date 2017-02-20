@@ -18,16 +18,12 @@ public final class RandomUtils {
 	/** 用于随机选的数字 */
 	public static final String NUMBERCHAR = "0123456789";
 
-	private RandomUtils() {
-	}
+	private RandomUtils() { }
 
 	/**
 	 * 生成制定范围内的随机数
-	 * 
-	 * @param scopeMin
-	 *            最小数
-	 * @param scoeMax
-	 *            最大数
+	 * @param scopeMin 最小数
+	 * @param scoeMax 最大数
 	 * @return 随机数
 	 */
 	public static int integer(int scopeMin, int scoeMax) {
@@ -37,9 +33,7 @@ public final class RandomUtils {
 
 	/**
 	 * 返回固定长度的数字
-	 * 
-	 * @param length
-	 *            长度
+	 * @param length 长度
 	 * @return 随机数
 	 */
 	public static String number(int length) {
@@ -53,9 +47,7 @@ public final class RandomUtils {
 
 	/**
 	 * 返回一个定长的随机字符串(只包含大小写字母、数字)
-	 * 
-	 * @param length
-	 *            随机字符串长度
+	 * @param length 随机字符串长度
 	 * @return 随机字符串
 	 */
 	public static String String(int length) {
@@ -69,9 +61,7 @@ public final class RandomUtils {
 
 	/**
 	 * 返回一个定长的随机纯字母字符串(只包含大小写字母)
-	 * 
-	 * @param length
-	 *            随机字符串长度
+	 * @param length 随机字符串长度
 	 * @return 随机字符串
 	 */
 	public static String getMixString(int length) {
@@ -85,9 +75,7 @@ public final class RandomUtils {
 
 	/**
 	 * 返回一个定长的随机纯大写字母字符串(只包含大小写字母)
-	 * 
-	 * @param length
-	 *            随机字符串长度
+	 * @param length 随机字符串长度
 	 * @return 随机字符串
 	 */
 	public static String getLowerString(int length) {
@@ -96,9 +84,7 @@ public final class RandomUtils {
 
 	/**
 	 * 返回一个定长的随机纯小写字母字符串(只包含大小写字母)
-	 * 
-	 * @param length
-	 *            随机字符串长度
+	 * @param length 随机字符串长度
 	 * @return 随机字符串
 	 */
 	public static String getUpperString(int length) {
@@ -107,9 +93,7 @@ public final class RandomUtils {
 
 	/**
 	 * 生成一个定长的纯0字符串
-	 * 
-	 * @param length
-	 *            字符串长度
+	 * @param length 字符串长度
 	 * @return 纯0字符串
 	 */
 	public static String getZeroString(int length) {
@@ -122,11 +106,8 @@ public final class RandomUtils {
 
 	/**
 	 * 根据数字生成一个定长的字符串，长度不够前面补0
-	 * 
-	 * @param num
-	 *            数字
-	 * @param fixdlenth
-	 *            字符串长度
+	 * @param num  数字
+	 * @param fixdlenth 字符串长度
 	 * @return 定长的字符串
 	 */
 	public static String toFixdLengthString(long num, int fixdlenth) {
@@ -143,11 +124,8 @@ public final class RandomUtils {
 
 	/**
 	 * 根据数字生成一个定长的字符串，长度不够前面补0
-	 * 
-	 * @param num
-	 *            数字
-	 * @param fixdlenth
-	 *            字符串长度
+	 * @param num 数字
+	 * @param fixdlenth 字符串长度
 	 * @return 定长的字符串
 	 */
 	public static String toFixdLengthString(int num, int fixdlenth) {
@@ -164,7 +142,6 @@ public final class RandomUtils {
 
 	/**
 	 * 每次生成的len位数都不相同
-	 * 
 	 * @param param
 	 * @return 定长的数字
 	 */
@@ -185,9 +162,7 @@ public final class RandomUtils {
 
 	/**
 	 * 从指定的数组中随机数组中的某个元素
-	 * 
-	 * @param param
-	 *            指定的数组
+	 * @param param 指定的数组
 	 * @return 随机元素
 	 */
 	public static <T> T randomItem(T[] param) {
@@ -197,11 +172,8 @@ public final class RandomUtils {
 
 	/**
 	 * 实现一个简单的字符串乘法
-	 * 
-	 * @param str
-	 *            字符串
-	 * @param multiplication
-	 *            乘法数量
+	 * @param str 字符串
+	 * @param multiplication 乘法数量
 	 * @return
 	 */
 	@SuppressWarnings("unused")
@@ -215,7 +187,6 @@ public final class RandomUtils {
 
 	/**
 	 * 返回一个UUID编码 UUID:通用唯一识别码 (Universally Unique Identifier)
-	 * 
 	 * @return 小写的UUID
 	 */
 	public static String uuid() {
@@ -226,7 +197,6 @@ public final class RandomUtils {
 
 	/**
 	 * 返回一个UUID编码 UUID:通用唯一识别码 (Universally Unique Identifier)
-	 * 
 	 * @return 大写的UUID
 	 */
 	public static String getUUID() {

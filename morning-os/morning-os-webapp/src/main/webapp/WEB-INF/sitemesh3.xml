@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+    <!-- 排除，不进行装饰的路径 -->
+    <mapping path="/login" exclue="true"/>
+    <mapping path="/register" exclue="true"/>
+    <mapping path="/forgetPassword" exclue="true"/>
+    <mapping path="/ajax/*" exclue="true"/>
+    <mapping path="/user/ajax/*" exclue="true"/>
+    <mapping path="/druid/*" exclue="true"/>
+    
+  	<!-- 前端商城布局 -->
+    <mapping>
+      <path>/*/*</path>
+      <path>/*</path>
+      <path>/index</path>
+      <path>/</path>
+      <decorator>/WEB-INF/layouts/web/default.jsp</decorator>
+    </mapping>
+    
+    <!-- 前端用户中心布局 -->
+    <mapping>
+      <path>/user/*</path>
+      <path>/user/**/*</path>
+      <path>/order/**/view</path>
+      <decorator>/WEB-INF/layouts/web/user/default_uc.jsp</decorator>
+    </mapping>
+
+    <!-- 自定义 tag 规则 -->
+    <content-processor>
+      <tag-rule-bundle class="com.pussinboots.morning.common.tagrulebundle.ExtHtmlTagRuleBundle" />
+    </content-processor>
+    
+</sitemesh>

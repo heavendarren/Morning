@@ -17,19 +17,19 @@ public enum MenuTypeEnum {
 
 	private Integer type;
 
-	private String typeinfo;
+	private String typeInfo;
     
-	private MenuTypeEnum(Integer type, String typeinfo) {
+	private MenuTypeEnum(Integer type, String typeInfo) {
 		this.type = type;
-		this.typeinfo = typeinfo;
+		this.typeInfo = typeInfo;
 	}
 
 	public Integer getType() {
 		return type;
 	}
 
-	public String getTypeinfo() {
-		return typeinfo;
+	public String getTypeInfo() {
+		return typeInfo;
 	}
 
 	public static MenuTypeEnum stateOf(int index) {

@@ -17,6 +17,7 @@ import java.io.Serializable;
 * 类描述：User 表实体类     
 * 创建人：陈星星   
 * 创建时间：2017年2月3日 下午12:38:39
+* 
  */
 @TableName("cms_user")
 public class User extends Model<User> {

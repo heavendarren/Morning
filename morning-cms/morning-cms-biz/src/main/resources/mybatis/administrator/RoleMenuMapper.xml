@@ -36,24 +36,33 @@
     
     <!-- 通过角色ID/目录状态/目录等级查找目录列表 -->
     <select id="selectMenusByRolesIdAndStatus" resultType="Menu">
-    	SELECT DISTINCT
-    		m.menu_id AS menuId, 
-    		parent_id AS parentId, 
-    		menu_name AS menuName, 
+    	SELECT 
+    		menuId, 
+    		parentId,
+    		menuName, 
     		href, 
     		icon
     	FROM
-    		cms_menu m
-		LEFT JOIN cms_role_menu r ON r.menu_id = m.menu_id
-        WHERE
-        	status = #{status} 
-        AND menu_type = #{menuType}
-        AND r.role_id in
-	        <foreach collection="roleIds" item="roleId" open="(" close=")" separator=",">
-	    		#{roleId}
-	    	</foreach>    
-	    ORDER BY 
-	    	sort ASC   
+    		(
+	     	SELECT DISTINCT
+	    		m.menu_id AS menuId, 
+	    		parent_id AS parentId, 
+	    		menu_name AS menuName, 
+	    		href, 
+	    		icon
+	    	FROM
+	    		cms_menu m
+			LEFT JOIN cms_role_menu r ON r.menu_id = m.menu_id
+	        WHERE
+	        	status = #{status} 
+	        AND menu_type = #{menuType}
+	        AND r.role_id in
+		        <foreach collection="roleIds" item="roleId" open="(" close=")" separator=",">
+		    		#{roleId}
+		    	</foreach>    
+		    ORDER BY 
+		    	sort ASC      		
+    		) AS t;
     </select>    
     
     <!-- 通过角色ID查找权限列表 -->

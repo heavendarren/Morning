@@ -15,19 +15,19 @@ public enum OrganizationStatusEnum {
 
     private Integer status;
     
-    private String stateinfo;
+    private String stateInfo;
     
-	private OrganizationStatusEnum(Integer status, String stateinfo) {
+	private OrganizationStatusEnum(Integer status, String stateInfo) {
 		this.status = status;
-		this.stateinfo = stateinfo;
+		this.stateInfo = stateInfo;
 	}
 
 	public Integer getStatus() {
 		return status;
 	}
 
-	public String getStateinfo() {
-		return stateinfo;
+	public String getStateInfo() {
+		return stateInfo;
 	}
 
 	public static OrganizationStatusEnum stateOf(int index) {

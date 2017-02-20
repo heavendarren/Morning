@@ -72,8 +72,7 @@ $(function(){
 		exponent = $("input[name='loginPassword']").attr("data-exponent")
 		if (loginPassword.length != 256) {
 			var publicKey = RSAUtils.getKeyPair(exponent, '', modulus);
-			$("input[name='loginPassword']").val(RSAUtils.encryptedString(publicKey, loginPassword));
-			loginPassword = $("input[name='loginPassword']").val();
+			loginPassword = RSAUtils.encryptedString(publicKey, loginPassword);
 		}
 	    $.ajax({
 		url:baselocation+'/login',

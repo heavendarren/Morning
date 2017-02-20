@@ -15,19 +15,19 @@ public enum MenuStatusEnum {
 
     private Integer status;
     
-    private String stateinfo;
+    private String stateInfo;
     
-	private MenuStatusEnum(Integer status, String stateinfo) {
+	private MenuStatusEnum(Integer status, String stateInfo) {
 		this.status = status;
-		this.stateinfo = stateinfo;
+		this.stateInfo = stateInfo;
 	}
 
 	public Integer getStatus() {
 		return status;
 	}
 
-	public String getStateinfo() {
-		return stateinfo;
+	public String getStateInfo() {
+		return stateInfo;
 	}
 
 	public static MenuStatusEnum stateOf(int index) {

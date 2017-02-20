@@ -16,26 +16,6 @@
 		<!-- 0.Morning相关依赖 begin -->
 		<dependency>
 			<groupId>com.pussinboots.morning</groupId>
-			<artifactId>morning-common-base</artifactId>
-			<version>${morning.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.pussinboots.morning</groupId>
-			<artifactId>morning-common-config</artifactId>
-			<version>${morning.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.pussinboots.morning</groupId>
-			<artifactId>morning-common-core</artifactId>
-			<version>${morning.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.pussinboots.morning</groupId>
-			<artifactId>morning-common-provider</artifactId>
-			<version>${morning.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.pussinboots.morning</groupId>
 			<artifactId>morning-os-pojo</artifactId>
 			<version>${morning.version}</version>
 		</dependency>

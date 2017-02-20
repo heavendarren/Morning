@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,7 +23,6 @@ import com.pussinboots.morning.common.controller.BaseController;
 * 创建时间：2017年2月4日 下午5:27:46
  */
 @Controller
-@RequestMapping("/index")
 public class MainController extends BaseController {
 
 	/** 后台管理主界面 */
@@ -34,11 +34,19 @@ public class MainController extends BaseController {
 	private IRoleMenuService roleMenuService;
 	
 	/**
-	 * 进入操作中心
-	 * @param request
+	 * GET 首页
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping("/")
+	public String index() {
+		return redirectTo("/index");
+	}
+	
+	/**
+	 * GET 首页/操作中心
+	 * @return
+	 */
+	@GetMapping(value="/index")
 	public String main(Model model) {
 //		// 未处理订单数
 //		int undisposedOrder = orderService.queryOrderCountBySystem(2);
@@ -60,7 +68,7 @@ public class MainController extends BaseController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "index", method = RequestMethod.GET)
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String mainIndex(Model model) {
 //		Map<String, Object> webCountMap = new HashMap<>();
 //		// 今天未支付订单数

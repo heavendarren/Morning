@@ -10,6 +10,36 @@
 	<artifactId>morning-os-pojo</artifactId>
 	<name>morning-os-pojo</name>
 	<url>http://maven.apache.org</url>
-	<description>电子商城子系统：后台管理子系统：实体类模块</description>
+	<description>电子商城子系统：实体类模块</description>
 
+	<dependencies>
+		<!-- 0.Morning相关依赖 begin -->
+		<dependency>
+			<groupId>com.pussinboots.morning</groupId>
+			<artifactId>morning-common-base</artifactId>
+			<version>${morning.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.pussinboots.morning</groupId>
+			<artifactId>morning-common-config</artifactId>
+			<version>${morning.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.pussinboots.morning</groupId>
+			<artifactId>morning-common-core</artifactId>
+			<version>${morning.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.pussinboots.morning</groupId>
+			<artifactId>morning-common-provider</artifactId>
+			<version>${morning.version}</version>
+		</dependency>
+		<!-- Morning相关依赖 end -->
+		
+		<!-- mybatis-plus Mybatis增强辅助工具 -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus</artifactId>
+		</dependency>
+	</dependencies>
 </project>

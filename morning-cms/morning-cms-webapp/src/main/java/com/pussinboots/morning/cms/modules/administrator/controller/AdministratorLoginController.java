@@ -65,7 +65,7 @@ public class AdministratorLoginController extends BaseController{
 	 * @param model
 	 * @return
 	 */
-	@GetMapping(value = { "", "/login" })
+	@GetMapping(value = "/login")
 	public String login(Model model) {
 		// 将公钥的 modulus 和 exponent 传给页面
 		Map<String, Object> publicKeyMap = RSAUtils.getPublicKeyMap();
@@ -75,7 +75,7 @@ public class AdministratorLoginController extends BaseController{
 	
 	/**
 	 * POST 登录
-	 * @param systemUser
+	 * @param user
 	 * @return
 	 */
 	@PostMapping(value = "/login")

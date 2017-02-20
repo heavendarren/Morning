@@ -169,7 +169,7 @@
                 <a href="${ctx}/logout" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
             </div>
             <div class="row J_mainContent" id="content-main">
-                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${ctx}/index/index"></iframe>
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${ctx}/main"></iframe>
             </div>
             <div class="footer">
                 <div class="pull-right">© 2016<a href="http://wpa.qq.com/msgrd?v=3&uin=810170512&site=qq&menu=yes" target="_Blank"> 穿鞋子的猫 </a>
