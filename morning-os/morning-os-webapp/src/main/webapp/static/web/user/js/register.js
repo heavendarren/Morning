@@ -121,11 +121,11 @@
 			var $this = this;
 			if (config.code) {
 				$("#verifyYz").click(function() {
-					var email = $("input[name='user.email']").val();
+					var email = $("input[name='email']").val();
 					var type = $("#verifyYz").attr("data-type");
 					$.ajax({
 						type : "POST",
-						url : baselocation + '/sendEmail',
+						url : baselocation + '/sendEmailTicket',
 						data : {
 							email : email,
 							type : type
@@ -697,10 +697,10 @@ $(function() {
 	$("#btn_Pswpart1").click(function() {
 		if (!verifyCheck._click()) return;
 		var registerCode = $("input[name='registerCode']").val(),
-			email = $("input[name='user.email']").val();
+			email = $("input[name='email']").val();
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/user/userGetPsw',
+			url : baselocation + '/forgetPassword',
 			data : {
 				registerCode : registerCode,
 				email : email
@@ -711,10 +711,12 @@ $(function() {
 					$(".part1").hide();
 					$(".part2").show();
 					$(".step li").eq(1).addClass("on");
-					$(".part2").children(".item").children(".c-blue").text(result.entity);
+					$(".part2").children(".item").children(".c-blue").text(result.data);
 					$(".message").hide();
 				} else {
 					$(".message").show();
+					$("#kaptchaImage").trigger("click");
+					$("input[name='registerCode']").val("");
 					$(".message").children("label").text(result.message);
 				}
 			}
@@ -744,7 +746,6 @@ $(function() {
 				}
 			}
 		})
-
 	});
 	//第三页的确定按钮
 	$("#btn_Pswpart3").click(function() {

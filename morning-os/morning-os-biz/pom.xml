@@ -112,6 +112,16 @@
 			<artifactId>velocity</artifactId>
 		</dependency>
 
+		<!-- mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+		</dependency>
+
 		<!-- dubbo服务提供者依赖 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>

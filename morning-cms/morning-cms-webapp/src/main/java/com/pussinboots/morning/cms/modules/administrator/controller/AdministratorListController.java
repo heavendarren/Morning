@@ -186,7 +186,7 @@ public class AdministratorListController extends BaseController{
 	 * @return
 	 */
 	@RequiresPermissions("administrator:list:create")
-	@GetMapping(value = "/{userId}/create")
+	@GetMapping(value = "/create")
 	public String create(Model model) {
 		// 用户权限
 		List<Role> roles = roleService.selectRoles(RoleStatusEnum.NORMAL.getStatus());

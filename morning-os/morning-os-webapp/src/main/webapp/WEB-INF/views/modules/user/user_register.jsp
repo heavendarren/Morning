@@ -16,10 +16,7 @@
 	<script src="${ctxsta}/common/bootstrap/js/bootstrap.min.js"></script>
 	<script src="${ctxsta}/web/user/js/register.js"></script>
 	<script src="${ctxsta}/common/icheck/icheck.min.js"></script>
-	<script type="text/javascript"> 
-		var t1 = new Date().getTime(); 
-		baselocation='${ctx}';
-	</script>
+	<script> var t1 = new Date().getTime(); baselocation='${ctx}';</script>
 </head>
 <body class="bgf4">
 <script zIndex="-1" src="${ctxsta}/web/user/js/canvas-nest.min.js"></script>
@@ -32,8 +29,8 @@
             <li><a href="#">益行者</a></li>
             <li><a href="#">猫粉社区</a></li>
             <li class="link-line">|</li>
-            <li><a href="${ctx}/user/userLogin">登录</a></li>
-            <li><a href="${ctx}/user/userSignin">注册</a></li>
+            <li><a href="${ctx}/login">登录</a></li>
+            <li><a href="${ctx}/register">注册</a></li>
         </ul>
     </div>
 	<div class="main">   

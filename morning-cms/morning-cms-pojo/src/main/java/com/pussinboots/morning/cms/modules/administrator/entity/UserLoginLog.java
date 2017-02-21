@@ -54,8 +54,9 @@ public class UserLoginLog extends Model<UserLoginLog> {
 	private String browser;
 
 	public UserLoginLog() {
+		super();
 	}
-	
+
 	public UserLoginLog(Date loginTime, String userIp, Long userId,
 			String operatingSystem, String browser) {
 		this.loginTime = loginTime;

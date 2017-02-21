@@ -113,7 +113,7 @@ public class ArrayUtils {
 	 * @return 是否为非空
 	 */
 	public static <T> boolean isNotEmpty(final T[] array) {
-		return (array != null && array.length != 0);
+		return array != null && array.length != 0;
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class ArrayUtils {
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final long[] array) {
-		return (array != null && array.length != 0);
+		return array != null && array.length != 0;
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class ArrayUtils {
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final int[] array) {
-		return (array != null && array.length != 0);
+		return array != null && array.length != 0;
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class ArrayUtils {
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final short[] array) {
-		return (array != null && array.length != 0);
+		return array != null && array.length != 0;
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class ArrayUtils {
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final char[] array) {
-		return (array != null && array.length != 0);
+		return array != null && array.length != 0;
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class ArrayUtils {
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final byte[] array) {
-		return (array != null && array.length != 0);
+		return array != null && array.length != 0;
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class ArrayUtils {
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final double[] array) {
-		return (array != null && array.length != 0);
+		return array != null && array.length != 0;
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class ArrayUtils {
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final float[] array) {
-		return (array != null && array.length != 0);
+		return array != null && array.length != 0;
 	}
 
 	/**
@@ -201,7 +201,7 @@ public class ArrayUtils {
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final boolean[] array) {
-		return (array != null && array.length != 0);
+		return array != null && array.length != 0;
 	}
 
 	/**
@@ -759,6 +759,8 @@ public class ArrayUtils {
 					return Arrays.toString((float[]) obj);
 				case "double":
 					return Arrays.toString((double[]) obj);
+				default:
+					break;
 				}
 			}
 		}

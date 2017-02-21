@@ -75,9 +75,7 @@ public abstract class RSAUtils {
 		rsaPairFile = new File(getRSAPairFilePath());
 	}
 
-    public RSAUtils() {
-		super();
-	}
+    private RSAUtils() { }
 
 	/**
      * 生成并返回RSA密钥对

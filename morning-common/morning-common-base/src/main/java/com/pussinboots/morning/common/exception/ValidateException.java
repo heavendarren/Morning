@@ -15,9 +15,6 @@ public class ValidateException extends StatefulException {
 	
 	private static final long serialVersionUID = 6057602589533840889L;
 
-	public ValidateException() {
-	}
-
 	public ValidateException(String msg) {
 		super(msg);
 	}

@@ -12,22 +12,22 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.code.kaptcha.Constants;
 import com.pussinboots.morning.common.controller.BaseController;
 import com.pussinboots.morning.common.result.ResponseResult;
 import com.pussinboots.morning.common.util.RSAUtils;
+import com.pussinboots.morning.common.util.RegexUtils;
 import com.pussinboots.morning.common.util.ServletUtils;
 import com.pussinboots.morning.os.common.util.SingletonLoginUtils;
 import com.pussinboots.morning.os.modules.user.entity.User;
 import com.pussinboots.morning.os.modules.user.entity.UserLoginLog;
+import com.pussinboots.morning.os.modules.user.service.IUserService;
 
 /**
  * 
@@ -45,11 +45,14 @@ public class UserLoginController extends BaseController {
 	private static final Logger logger = LoggerFactory.getLogger(UserLoginController.class);
 	
 	/** 前台用户注册 */
-	private static final String USER_SIGNIN = getViewPath("modules/user/user_signin");
+	private static final String USER_REGISTER = getViewPath("modules/user/user_register");
 	/** 前台用户登录 */
 	private static final String USER_LOGIN = getViewPath("modules/user/user_login");
 	/** 找回密码 */
-	private static final String USER_GETPSW = getViewPath("modules/user/user_getPsw");
+	private static final String USER_FORGET_PASSWORD = getViewPath("modules/user/user_forget_password");
+	
+	@Autowired
+	private IUserService userService;
 	
 	/**
 	 * GET 登录
@@ -60,7 +63,6 @@ public class UserLoginController extends BaseController {
 	public String login(Model model) {
 		// 将公钥的 modulus 和 exponent 传给页面
 		Map<String, Object> publicKeyMap = RSAUtils.getPublicKeyMap();
-		System.out.println(publicKeyMap);
 		model.addAttribute("publicKeyMap", publicKeyMap);
 		return USER_LOGIN;
 	}
@@ -86,7 +88,7 @@ public class UserLoginController extends BaseController {
 					ServletUtils.getIpAddr(), SingletonLoginUtils.getUserId(),
 					ServletUtils.getUserOperatingSystem(),
 					ServletUtils.getUserBrowser());
-//			userService.updateLogByUserId(SingletonLoginUtils.getUserId(), userLoginLog);
+			userService.updateLogByUserId(SingletonLoginUtils.getUserId(), userLoginLog);
 		} catch (UnknownAccountException e) {
 			logger.error("该账号不存在!", e);
 			return fail(false, "该账号不存在!");
@@ -113,7 +115,7 @@ public class UserLoginController extends BaseController {
 	 */
 	@GetMapping(value = "/register")
 	public String register() {
-		return USER_SIGNIN;
+		return USER_REGISTER;
 	}
 	
 	
@@ -122,8 +124,28 @@ public class UserLoginController extends BaseController {
 	 * @return
 	 */
 	@GetMapping(value = "/forgetPassword")
-	public String forgetPassword() {
-		return USER_GETPSW;
+	public String getPorgetPassword() {
+		return USER_FORGET_PASSWORD;
 	}
-
+	
+	/**
+	 * POST 找回密码
+	 * @param model
+	 * @return
+	 */
+	@PostMapping(value = "/forgetPassword")
+	@ResponseBody
+	public ResponseResult postForgetPassword() {
+		if (!SingletonLoginUtils.validate()) {
+			return fail(false, "请输入正确的验证码");
+		}
+		if (!RegexUtils.isEmail(ServletUtils.getParameter("email"))) {
+			return fail(false, "请输入正确的邮箱地址");
+		}
+		if (!userService.checkEmail(ServletUtils.getParameter("email").trim())) {
+			return fail(false, "该邮箱没有注册过帐号");
+		}
+		return success(true, "验证通过!", ServletUtils.getParameter("email"));
+	}
+	
 }

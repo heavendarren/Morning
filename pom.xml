@@ -32,7 +32,7 @@
 		<shiro.version>1.3.2</shiro.version>
 
 		<!-- tools version setting -->
-		<mybatis-spring.version>1.3.0</mybatis-spring.version>
+		<mybatis-spring.version>1.3.1</mybatis-spring.version>
 		<mybaitsplus.version>2.0.1</mybaitsplus.version>		
 		<ehcache.version>3.1.3</ehcache.version>
 		<sitemesh.version>3.0.1</sitemesh.version>
@@ -58,7 +58,7 @@
 		<!-- 该元素描述了项目相关的所有依赖。 这些依赖组成了项目构建过程中的一个个环节。它们自动从项目定义的仓库中下载. -->
 		<dependencies>
 
-			<!-- 1.TEST:单元测试框架 begin√ -->
+			<!-- 1.TEST:单元测试框架 begin -->
 			<dependency>
 				<groupId>junit</groupId>         		<!--依赖的group ID -->
 				<artifactId>junit</artifactId>   		<!--依赖的artifact ID -->
@@ -67,7 +67,7 @@
 			</dependency>
 			<!-- TEST end -->
 
-			<!-- 2.SPRING相关依赖 begin√ -->
+			<!-- 2.SPRING相关依赖 begin -->
 			<!-- ①.spring核心依赖 -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -138,7 +138,7 @@
 			</dependency>
 			<!-- SPRING相关依赖 end -->
 
-			<!-- 3.SERVLET WEB begin√ -->
+			<!-- 3.SERVLET WEB begin -->
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId><!--j2ee web spec -->
@@ -161,7 +161,7 @@
 			</dependency>
 			<!-- SERVLET WEB end -->
 
-			<!-- 4.MYBATIS 持久层框架 begin√ -->
+			<!-- 4.MYBATIS 持久层框架 begin -->
 			<dependency>
 				<groupId>org.mybatis</groupId>
 				<artifactId>mybatis</artifactId>
@@ -179,7 +179,7 @@
 			</dependency>			
 			<!-- MYBATIS 持久层框架 end -->
 
-			<!-- 5.MYSQL 数据库相关依赖 begin√ -->
+			<!-- 5.MYSQL 数据库相关依赖 begin -->
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId><!-- 导入Mysql数据库驱动包 -->
@@ -192,7 +192,7 @@
 			</dependency>
 			<!-- MYSQL 数据库相关依赖 end -->
 
-			<!-- 6.LOG 日志相关依赖 begin √-->
+			<!-- 6.LOG 日志相关依赖 begin -->
 			<dependency>
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-api</artifactId>			<!--核心log4j2jar包 -->
@@ -220,7 +220,7 @@
 			</dependency>
 			<!-- LOG 日志相关依赖 end -->
 
-			<!-- 7.安全框架SECURITY:shiro begin√ -->
+			<!-- 7.安全框架SECURITY:shiro begin -->
 			<dependency>
 				<groupId>org.apache.shiro</groupId>
 				<artifactId>shiro-core</artifactId>
@@ -250,7 +250,7 @@
 			</dependency>
 			<!-- 安全框架SECURITY:shiro end -->
 
-			<!-- ehcache:缓存框架 begin√ -->
+			<!-- ehcache:缓存框架 begin -->
 			<dependency>
 				<groupId>org.ehcache</groupId>
 				<artifactId>ehcache</artifactId>
@@ -258,7 +258,7 @@
 			</dependency>
 			<!-- ehcache:缓存框架 end -->
 
-			<!-- redis:缓存框架 begin √-->
+			<!-- redis:缓存框架 begin -->
 			<dependency>
 				<groupId>org.springframework.data</groupId>
 				<artifactId>spring-data-redis</artifactId>
@@ -278,21 +278,21 @@
 				<version>${quartz.version}</version>
 			</dependency>
 
-			<!-- 验证码工具√ -->
+			<!-- 验证码工具 -->
 			<dependency>
 				<groupId>com.github.penggle</groupId>
 				<artifactId>kaptcha</artifactId>
 				<version>2.3.2</version>
 			</dependency>
 
-			<!-- 获取User Agent用户代理:解析客户端操作系统、浏览器等 √-->
+			<!-- 获取User Agent用户代理:解析客户端操作系统、浏览器等 -->
 			<dependency>
 				<groupId>eu.bitwalker</groupId>
 				<artifactId>UserAgentUtils</artifactId>
 				<version>1.20</version>
 			</dependency>
 
-			<!-- 上传组件包√-->
+			<!-- 上传组件包-->
 			<dependency>
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
@@ -304,7 +304,7 @@
 				<version>${commons-io.version}</version>
 			</dependency>
 
-			<!-- RSA加密工具 √ -->
+			<!-- RSA加密工具  -->
 			<dependency>
 				<groupId>org.bouncycastle</groupId>
 				<artifactId>bcprov-jdk15on</artifactId>
@@ -333,28 +333,28 @@
 				<version>1.1.1</version>
 			</dependency>
 
-			<!-- 使用Velocity 模板引擎快速生成代码√ -->
+			<!-- 使用Velocity 模板引擎快速生成代码 -->
 			<dependency>
 				<groupId>org.apache.velocity</groupId>
 				<artifactId>velocity</artifactId>
 				<version>${velocity.version}</version>
 			</dependency>
 			
-			<!-- Commons项目中用来处理Java基本对象方法的工具类包√ -->
+			<!-- Commons项目中用来处理Java基本对象方法的工具类包 -->
 			<dependency>
 			    <groupId>org.apache.commons</groupId>
 			    <artifactId>commons-lang3</artifactId>
 			    <version>3.5</version>
 			</dependency>
 
-			<!-- 网页布局和修饰的框架包√ -->
+			<!-- 网页布局和修饰的框架包 -->
 			<dependency>
 				<groupId>org.sitemesh</groupId>
 				<artifactId>sitemesh</artifactId>
 				<version>${sitemesh.version}</version>
 			</dependency>
 			
-			<!-- dubbo服务提供者依赖√ -->
+			<!-- dubbo服务提供者依赖 -->
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>dubbo</artifactId>

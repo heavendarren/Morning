@@ -16,7 +16,9 @@ public class VersionLogDTO implements Serializable{
 	/** 分页实体类 */
 	private PageInfo pageInfo;
 	
-	public VersionLogDTO() { }
+	public VersionLogDTO() {
+		super();
+	}
 
 	public VersionLogDTO(List<VersionLog> versionLogs, PageInfo pageInfo) {
 		this.versionLogs = versionLogs;

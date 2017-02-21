@@ -43,9 +43,11 @@ public class PageInfo implements Serializable{
     @JsonIgnore
     private String order = "asc";
 
-	public PageInfo() { }
+    public PageInfo() {
+		super();
+	}
 
-    //构造方法
+	//构造方法
     public PageInfo(int nowpage, int pagesize) {
         //计算当前页  
         if (nowpage < 0) {

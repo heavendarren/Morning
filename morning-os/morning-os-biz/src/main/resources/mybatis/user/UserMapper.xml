@@ -49,4 +49,16 @@
     		email = #{loginName} 
     	OR telephone = #{loginName}
     </select>
+    
+    <!-- 更新用户登录日志 -->
+    <update id="updateByUser">
+    	UPDATE os_user
+    	SET
+    		last_login_time = #{lastLoginTime}, 
+    		last_login_ip = #{lastLoginIp}, 
+    		login_number = login_number + 1 
+    	WHERE
+    		user_id = #{userId}
+    </update>
+    
 </mapper>

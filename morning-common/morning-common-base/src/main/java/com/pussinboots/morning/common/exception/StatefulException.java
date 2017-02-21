@@ -19,6 +19,7 @@ public class StatefulException extends RuntimeException {
 	private int status;
 
 	public StatefulException() {
+		super();
 	}
 
 	public StatefulException(String msg) {
@@ -55,4 +56,9 @@ public class StatefulException extends RuntimeException {
 	public int getStatus() {
 		return status;
 	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
 }

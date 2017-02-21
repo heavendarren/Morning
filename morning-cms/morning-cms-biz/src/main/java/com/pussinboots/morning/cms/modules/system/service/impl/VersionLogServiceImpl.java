@@ -37,9 +37,7 @@ public class VersionLogServiceImpl extends ServiceImpl<VersionLogMapper, Version
         
         pageInfo.setTotal(page.getTotal());
         
-        VersionLogDTO versionLogDTO = new VersionLogDTO(versionLogs, pageInfo);
-        
-		return versionLogDTO;
+		return new VersionLogDTO(versionLogs, pageInfo);
 	}
 	
 }

@@ -44,7 +44,7 @@ public class SerializeUtils {
 	}
 
     public static boolean isEmpty(byte[] data) {
-        return (data == null || data.length == 0);
+        return data == null || data.length == 0;
     }
 
     /**

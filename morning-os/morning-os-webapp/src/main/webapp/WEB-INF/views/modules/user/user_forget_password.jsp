@@ -15,10 +15,7 @@
 	<script src="${ctxsta}/common/bootstrap/js/bootstrap.min.js"></script>
 	<script src="${ctxsta}/web/user/js/register.js"></script>
 	<script src="${ctxsta}/web/js/base.js"></script>
-	<script> 
-		var t1 = new Date().getTime(); 
-		baselocation='${ctx}';
-	</script>
+	<script> var t1 = new Date().getTime(); baselocation='${ctx}';</script>
 </head>
 <body class="bgf4">
 <script zIndex="-1" src="${ctxsta}/web/user/js/canvas-nest.min.js"></script>
@@ -31,8 +28,8 @@
             <li><a href="#">益行者</a></li>
             <li><a href="#">猫粉社区</a></li>
             <li class="link-line">|</li>
-            <li><a href="${ctx}/user/userLogin">登录</a></li>
-            <li><a href="${ctx}/user/userSignin">注册</a></li>
+            <li><a href="${ctx}/login">登录</a></li>
+            <li><a href="${ctx}/register">注册</a></li>
         </ul>
     </div>
 	<div class="main">   
@@ -62,7 +59,7 @@
                     <div class="item col-xs-12">
                         <span class="intelligent-label f-fl"><b class="ftx04">*</b>电子邮箱：</span>    
                         <div class="f-fl item-ifo">
-                            <input type="text" name="user.email" class="txt03 f-r3 required" keycodes="mail" tabindex="2" data-valid="isNonEmpty||isEmail" data-error="email不能为空||邮箱格式不正确"  id="mail" /> 
+                            <input type="text" name="email" class="txt03 f-r3 required" keycodes="mail" tabindex="2" data-valid="isNonEmpty||isEmail" data-error="email不能为空||邮箱格式不正确"  id="mail" /> 
                             <span class="ie8 icon-close close hide"></span>                           
                             <label class="icon-sucessfill blank hide"></label>
                             <label class="focus">请填写正确格式的电子邮箱</label>
@@ -173,7 +170,7 @@
 </div>
 <footer class="footer clear">
     <div class="footer_copyright">
-    © 2016<a href=""> 穿鞋子的猫 </a>/ <span id="showsectime"></span> / <span id="TimeShow"></span> / 当前在线用户人数：${userNumber }
+    © 2016<a href=""> 穿鞋子的猫 </a>/ <span id="showsectime"></span> / <span id="TimeShow"></span>
     </div>
 </footer>
 </body>

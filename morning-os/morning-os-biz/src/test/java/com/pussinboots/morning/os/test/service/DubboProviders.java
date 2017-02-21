@@ -19,7 +19,7 @@ public class DubboProviders {
 	public static void main(String[] args) {
 		try {
 			@SuppressWarnings("resource")
-			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/spring-context.xml");
+			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-spring.xml");
 			context.start();
 			logger.info("Dubbo started!");
 		} catch (Exception e) {

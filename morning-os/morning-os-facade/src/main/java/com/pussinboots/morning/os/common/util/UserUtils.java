@@ -7,25 +7,25 @@ import com.pussinboots.morning.common.enums.WebSiteFileBelongEnum;
 import com.pussinboots.morning.common.util.RandomUtils;
 
 public class UserUtils {
-	
-	/** 用户编号后缀的数量 */
-	private static int SUFFIX_NUMBER = 4;
-	
+
+	/** 用户编号后缀位数 */
+	private static final int SUFFIX_NUMBER = 2;
+
 	/** 系统默认头像 */
 	private static String[] defaultAvatar = { "avatar_1.jpg", "avatar_2.jpg", "avatar_3.jpg", "avatar_4.jpg",
-			"avatar_5.jpg", "avatar_6.jpg", "avatar_7.jpg", "avatar_8.jpg", "avatar_9.jpg" };	
-	
-	private UserUtils() { }
-	
+			"avatar_5.jpg", "avatar_6.jpg", "avatar_7.jpg", "avatar_8.jpg", "avatar_9.jpg" };
+
+	private UserUtils() {
+	}
+
 	/** 获得用户编号 */
 	public static Long getUserNumber() {
-		String userNumber = new String();
 		String prefixNumber = Long.toString(new Date().getTime());
 		String suffixNumber = RandomUtils.number(SUFFIX_NUMBER);
-		userNumber = prefixNumber + suffixNumber;
+		String userNumber = prefixNumber + suffixNumber;
 		return Long.valueOf(userNumber);
 	}
-	
+
 	/** 获得系统默认的头像 */
 	public static String getPicImg() {
 		// 系统默认头像名
@@ -37,11 +37,11 @@ public class UserUtils {
 		picImgUrl.append(WebSiteFileBelongEnum.AVATAR.getBelong());
 		picImgUrl.append(File.separator);
 		picImgUrl.append(picImg);
-		
-		//将绝对路径"\"替换成"/"
+
+		// 将绝对路径"\"替换成"/"
 		String savaFilePath = picImgUrl.toString().replaceAll("\\\\", "/");
-		
-		return savaFilePath.toString();
+
+		return savaFilePath;
 	}
-	
+
 }

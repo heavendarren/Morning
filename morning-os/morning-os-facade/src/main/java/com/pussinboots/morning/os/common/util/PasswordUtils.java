@@ -13,10 +13,10 @@ import com.pussinboots.morning.common.util.RandomUtils;
 * 创建时间：2017年2月5日 下午9:09:37
  */
 public class PasswordUtils {
-	
-	private static int iterations = 6;
-	
-	private static int saltNumber = 6;
+	/** 迭代次数 */
+	private static final int ITERATIONS = 6;
+	/** 盐值数位 */
+	private static final int SALT_NUMBER = 6;
 	
 	private PasswordUtils() { }
 	
@@ -28,9 +28,7 @@ public class PasswordUtils {
 	 * @return
 	 */
 	public static String getMd5(String password, Long userNumber, String salt) {
-		String md5Password = new Md5Hash(password, getCredentialsSalt(
-				userNumber, salt), iterations).toString();
-		return md5Password;
+		return new Md5Hash(password, getCredentialsSalt(userNumber, salt), ITERATIONS).toString();
 	}
 
 	/** 证书凭证 */
@@ -40,7 +38,7 @@ public class PasswordUtils {
 	
 	/** 获得密码盐值 */
 	public static String getSalt() {
-		return RandomUtils.String(saltNumber);
+		return RandomUtils.getString(SALT_NUMBER);
 	}
 	
 }

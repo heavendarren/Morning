@@ -217,7 +217,7 @@ public class ServletUtils {
 				try {
 					inet = InetAddress.getLocalHost();
 				} catch (UnknownHostException e) {
-					e.printStackTrace();
+					logger.error("ServletUtils.getIpAddr", e);
 				}
 				ipAddress = inet.getHostAddress();
 			}

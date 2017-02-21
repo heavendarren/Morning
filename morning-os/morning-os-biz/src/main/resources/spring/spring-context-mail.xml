@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	
+	<!-- 配置velocity引擎 -->  
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+	    <property name="velocityProperties">
+	        <props>
+	        	<!--  配置模板加载器类型 -->
+	            <prop key="resource.loader">file</prop>
+	            <!--  配置加载器类 -->
+	            <prop key="file.resource.loader.class">org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader</prop>
+	            <!-- 配置是否启用模板缓存 -->
+	            <prop key="file.resource.loader.cache">false</prop>
+	            <!-- 配置检查模板更改时间间隔 -->
+	            <prop key="file.resource.loader.modificationCheckInterval">3</prop>
+	            <prop key="input.encoding">UTF-8</prop>
+	            <prop key="output.encoding">UTF-8</prop>
+	        </props>
+	    </property>
+	</bean>
+	
+	<!-- 默认用来发送邮件的smtp服务 -->
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">   
+	       <property name="host" value="${mail.smtp.host}"/>   
+	       <property name="username" value="${mail.smtp.username}"/>   
+	       <property name="password" value="${mail.smtp.password}"/>   
+	       <property name="defaultEncoding" value="${mail.smtp.encoding}"></property>   
+	       <property name="javaMailProperties">   
+	             <props>   
+	             	<!-- 服务器需要smtp认证 -->
+	                <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>   
+	                <prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>   
+	                <!--   
+	                <prop key="mail.smtp.starttls.enable">true</prop>   
+	                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>   
+	                <prop key="mail.smtp.socketFactory.fallback">false</prop>   
+	                -->   
+	            </props>   
+	        </property>   
+	 </bean>   
+	
+</beans>

@@ -28,7 +28,7 @@ public final class RandomUtils {
 	 */
 	public static int integer(int scopeMin, int scoeMax) {
 		Random random = new Random();
-		return (random.nextInt(scoeMax) % (scoeMax - scopeMin + 1) + scopeMin);
+		return random.nextInt(scoeMax) % (scoeMax - scopeMin + 1) + scopeMin;
 	}
 
 	/**
@@ -50,7 +50,7 @@ public final class RandomUtils {
 	 * @param length 随机字符串长度
 	 * @return 随机字符串
 	 */
-	public static String String(int length) {
+	public static String getString(int length) {
 		StringBuilder sb = new StringBuilder();
 		Random random = new Random();
 		for (int i = 0; i < length; i++) {

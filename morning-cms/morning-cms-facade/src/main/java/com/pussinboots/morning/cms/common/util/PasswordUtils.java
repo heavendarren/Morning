@@ -28,9 +28,7 @@ public class PasswordUtils {
 	 * @return
 	 */
 	public static String getMd5(String password, String loginName, String salt) {
-		String md5Password = new Md5Hash(password, getCredentialsSalt(
-				loginName, salt), iterations).toString();
-		return md5Password;
+		return new Md5Hash(password, getCredentialsSalt(loginName, salt), iterations).toString();
 	}
 
 	/** 证书凭证 */
@@ -40,6 +38,6 @@ public class PasswordUtils {
 	
 	/** 获得密码盐值 */
 	public static String getSalt() {
-		return RandomUtils.String(saltNumber);
+		return RandomUtils.getString(saltNumber);
 	}
 }

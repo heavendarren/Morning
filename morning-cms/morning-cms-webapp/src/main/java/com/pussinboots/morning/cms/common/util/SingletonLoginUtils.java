@@ -13,7 +13,7 @@ import com.pussinboots.morning.common.util.StringUtils;
 
 /**
  * 
-* 项目名称：morning-cms-webapp   
+* 项目名称：morning-os-webapp   
 * 类名称：SingletonLoginUtils   
 * 类描述：登录用户通用处理工具类   
 * 创建人：陈星星   
@@ -45,7 +45,7 @@ public class SingletonLoginUtils {
 	}
 	
 	/**
-	 * 获取后台登录用户
+	 * 获取登录用户
 	 * @return
 	 */
 	public static AuthorizingUser getUser() {
@@ -62,7 +62,7 @@ public class SingletonLoginUtils {
 	}
 	
 	/**
-	 * 获取后台登录用户ID
+	 * 获取登录用户ID
 	 * @return
 	 */
 	public static Long getUserId(){
@@ -70,7 +70,7 @@ public class SingletonLoginUtils {
 	}
 	
 	/**
-	 * 获取后台登录用户昵称
+	 * 获取登录用户昵称
 	 * @return
 	 */
 	public static String getUserName(){
