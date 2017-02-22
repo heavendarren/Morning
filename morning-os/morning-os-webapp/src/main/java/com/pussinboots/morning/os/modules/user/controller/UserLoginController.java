@@ -16,15 +16,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pussinboots.morning.common.controller.BaseController;
+import com.pussinboots.morning.common.exception.ValidateException;
 import com.pussinboots.morning.common.result.ResponseResult;
 import com.pussinboots.morning.common.util.RSAUtils;
 import com.pussinboots.morning.common.util.RegexUtils;
 import com.pussinboots.morning.common.util.ServletUtils;
+import com.pussinboots.morning.common.util.StringUtils;
 import com.pussinboots.morning.os.common.util.SingletonLoginUtils;
+import com.pussinboots.morning.os.modules.email.entity.Email;
+import com.pussinboots.morning.os.modules.email.enums.EmailStatusEnum;
+import com.pussinboots.morning.os.modules.email.service.IEmailService;
 import com.pussinboots.morning.os.modules.user.entity.User;
 import com.pussinboots.morning.os.modules.user.entity.UserLoginLog;
 import com.pussinboots.morning.os.modules.user.service.IUserService;
@@ -53,6 +60,8 @@ public class UserLoginController extends BaseController {
 	
 	@Autowired
 	private IUserService userService;
+	@Autowired
+	private IEmailService emailService;
 	
 	/**
 	 * GET 登录
@@ -90,8 +99,8 @@ public class UserLoginController extends BaseController {
 					ServletUtils.getUserBrowser());
 			userService.updateLogByUserId(SingletonLoginUtils.getUserId(), userLoginLog);
 		} catch (UnknownAccountException e) {
-			logger.error("该账号不存在!", e);
-			return fail(false, "该账号不存在!");
+			logger.error("该账号不存在或者该账号未被激活!", e);
+			return fail(false, "该账号不存在或者该账号未被激活!");
 		} catch (DisabledAccountException e) {
 			logger.error("该账号已被冻结!", e);
 			return fail(false, "该账号已被冻结!");
@@ -118,6 +127,78 @@ public class UserLoginController extends BaseController {
 		return USER_REGISTER;
 	}
 	
+	/**
+	 * POST 注册
+	 * @param user
+	 * @return
+	 */
+	@PostMapping(value = "/register")
+	@ResponseBody
+	public ResponseResult register(@ModelAttribute("user") User user) {
+		if (!SingletonLoginUtils.validate()) {
+			return fail(false, "请输入正确的验证码");
+		}
+		if (StringUtils.isEmpty(user.getEmail()) || !RegexUtils.isEmail(user.getEmail())) {
+			return fail(false, "请输入正确的电子邮箱");
+		}
+		if (StringUtils.isEmpty(user.getLoginPassword()) || !RegexUtils.isPassword(user.getLoginPassword())) {
+			return fail(false, "密码长度6~20位，其中数字，字母和符号至少包含两种!");
+		}
+		try {
+			userService.insertUser(user);
+			return success(true,"验证成功!",user.getEmail());
+		} catch (ValidateException e) {
+			logger.error(e.getMessage(), e);
+			return fail(false, e.getMessage());
+		}
+	}
+	
+	/**
+	 * POST 注册,邮箱激活
+	 * @param user
+	 * @return
+	 */
+	@PostMapping(value = "/emailActive")
+	@ResponseBody
+	public ResponseResult emailActive(@RequestParam("email") String email, @RequestParam("captcha") String captcha,
+			@RequestParam("emailSign") Long emailSign) {
+		Email queryEmail = emailService.selectByEmailSign(emailSign);
+		if (queryEmail == null) {
+			return fail(false, "该邮件不存在,请重新发送邮件!");
+		}
+		boolean result = queryEmail.getUserEmail().equals(email) && queryEmail.getCaptcha().equals(captcha);
+		if (!result) {
+			return fail(false, "验证码错误,请重新输入!");
+		}
+		if(!EmailStatusEnum.VALID.getStatus().equals(queryEmail.getStatus())) {
+			return fail(false, "该验证码已失效,请重新发送邮件!");
+		}
+		userService.updateEmailActive(email);// 激活该账号
+		emailService.updateStatus(emailSign);// 更新链接已失效
+		return success(true);
+	}
+	
+	/**
+	 * POST 注册,完善个人信息
+	 * @param email 邮箱
+	 * @param telephone 手机号码
+	 * @param realName 真实姓名
+	 * @return
+	 */
+	@PostMapping(value = "/perfectUser")
+	@ResponseBody
+	public ResponseResult perfectUser(@RequestParam("email") String email, @RequestParam("telephone") String telephone,
+			@RequestParam("realName") String realName) {
+		if (StringUtils.isEmpty(telephone) || !RegexUtils.isTelephone(telephone)) {
+			return fail(false, "请输入正确的手机号码");
+		}
+		if (StringUtils.isEmpty(realName)) {
+			return fail(false, "请输入正确的真实姓名");
+		}
+		userService.updatePerfectUser(email, telephone, realName);
+		return success(true, "注册成功!", email);
+	}
+	
 	
 	/**
 	 * GET 找回密码
@@ -135,17 +216,47 @@ public class UserLoginController extends BaseController {
 	 */
 	@PostMapping(value = "/forgetPassword")
 	@ResponseBody
-	public ResponseResult postForgetPassword() {
+	public ResponseResult postForgetPassword(@RequestParam("email") String email) {
 		if (!SingletonLoginUtils.validate()) {
 			return fail(false, "请输入正确的验证码");
 		}
-		if (!RegexUtils.isEmail(ServletUtils.getParameter("email"))) {
+		if (!RegexUtils.isEmail(email)) {
 			return fail(false, "请输入正确的邮箱地址");
 		}
-		if (!userService.checkEmail(ServletUtils.getParameter("email").trim())) {
+		if (!userService.checkEmail(email)) {
 			return fail(false, "该邮箱没有注册过帐号");
 		}
-		return success(true, "验证通过!", ServletUtils.getParameter("email"));
+		return success(true, "验证通过!", email);
 	}
 	
+	/**
+	 * POST 重置密码
+	 * @param email 邮箱
+	 * @param captcha 验证码
+	 * @param emailSign 邮箱标识
+	 * @param loginPassword 密码
+	 * @return
+	 */
+	@PostMapping(value = "/resetPassword")
+	@ResponseBody
+	public ResponseResult resetPassword(@RequestParam("email") String email, @RequestParam("captcha") String captcha,
+			@RequestParam("emailSign") Long emailSign, @RequestParam("loginPassword") String loginPassword) {
+		Email queryEmail = emailService.selectByEmailSign(emailSign);
+		if (queryEmail == null) {
+			return fail(false, "该邮件不存在,请重新发送邮件!");
+		}
+		boolean result = queryEmail.getUserEmail().equals(email) && queryEmail.getCaptcha().equals(captcha);
+		if (!result) {
+			return fail(false, "验证码错误,请重新输入!");
+		}
+		if(!EmailStatusEnum.VALID.getStatus().equals(queryEmail.getStatus())) {
+			return fail(false, "该验证码已失效,请重新发送邮件!");
+		}
+		if (!RegexUtils.isPassword(loginPassword)) {
+			return fail(false, "密码长度6~20位，其中数字，字母和符号至少包含两种!");
+		}
+		userService.updatePasswordByEmail(loginPassword, email);// 更新账户密码
+		emailService.updateStatus(emailSign);// 更新链接已失效
+		return success(true, "重置密码成功!", email);
+	}
 }

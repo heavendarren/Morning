@@ -125,16 +125,18 @@
 					var type = $("#verifyYz").attr("data-type");
 					$.ajax({
 						type : "POST",
-						url : baselocation + '/sendEmailTicket',
+						url : baselocation + type,
 						data : {
-							email : email,
-							type : type
+							email : email
 						},
 						dataType : "json",
 						success : function(result) {
 							if (result.success == true) {
+								$("#verifyYz").attr("data-emailSign", result.data);
 								$("#time_box").text("60 s后可重发");
 								$this._sendVerify()
+							}else{
+								$(".message").children("label").text(result.message);
 							}
 						}
 					})
@@ -571,7 +573,7 @@ $(function() {
 		});
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/user/userSignin',
+			url : baselocation + '/register',
 			data : params,
 			dataType : "json",
 			success : function(result) {
@@ -579,7 +581,7 @@ $(function() {
 					$(".part1").hide();
 					$(".part2").show();
 					$(".step li").eq(1).addClass("on");
-					$(".part2").children(".item").children(".c-blue").text(result.entity);
+					$(".part2").children(".item").children(".c-blue").text(result.data);
 					$(".message").hide();
 				} else {
 					$(".message").show();
@@ -590,15 +592,17 @@ $(function() {
 	});
 	//第二页的确定按钮
 	$("#btn_part2").click(function() {
-		var emailCaptcha = $("#verifyNo").val();
-		var type = $("#verifyYz").attr("data-type");
+		var captcha = $("#verifyNo").val();
+		var email = $("input[name='email']").val();
+		var emailSign = $("#verifyYz").attr("data-emailSign");
 		if (!verifyCheck._click()) return;
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/verifyCaptcha',
+			url : baselocation + '/emailActive',
 			data : {
-				emailCaptcha : emailCaptcha,
-				type : type
+				captcha : captcha,
+				email : email,
+				emailSign : emailSign,
 			},
 			dataType : "json",
 			success : function(result) {
@@ -616,20 +620,22 @@ $(function() {
 	});
 	//第三页的确定按钮
 	$("#btn_part3").click(function() {
-		var params = '';
-		$("#creatUser input,#verifyUser input").each(function() {
-			params += $(this).serialize() + "&";
-		});
-		alert(params);
+		var email = $("input[name='email']").val();
+		var realName = $("input[name='realName']").val();
+		var telephone = $("input[name='telephone']").val();
 		if (!verifyCheck._click()) return;
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/user/creatUser',
-			data : params,
+			url : baselocation + '/perfectUser',
+			data : {
+				email : email,
+				realName : realName,
+				telephone : telephone,
+			},
 			dataType : "json",
 			success : function(result) {
 				if (result.success == true) {
-					$(".part4").children("h3").text("恭喜" + result.entity + "，您已注册成功，现在开始您的购物之旅吧！");
+					$(".part4").children("h3").text("恭喜" + result.data + "，您已注册成功，现在开始您的购物之旅吧！");
 					$(".part3").hide();
 					$(".part4").show();
 					$(".step li").eq(2).addClass("on");
@@ -639,7 +645,7 @@ $(function() {
 							$("#times").text(c);
 						},
 						after : function() {
-							window.location.href = baselocation + '/user/userLoginPage';
+							window.location.href = baselocation + '/login';
 						}
 					});
 					$(".message").hide();
@@ -724,15 +730,17 @@ $(function() {
 	});
 	//第二页的确定按钮
 	$("#btn_Pswpart2").click(function() {
-		var emailCaptcha = $("#verifyNo").val();
-		var type = $("#verifyYz").attr("data-type");
+		var captcha = $("#verifyNo").val();
+		var email = $("input[name='email']").val();
+		var emailSign = $("#verifyYz").attr("data-emailSign");
 		if (!verifyCheck._click()) return;
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/verifyCaptcha',
+			url : baselocation + '/verifyEmail',
 			data : {
-				emailCaptcha : emailCaptcha,
-				type : type
+				captcha : captcha,
+				email : email,
+				emailSign : emailSign,
 			},
 			dataType : "json",
 			success : function(result) {
@@ -749,20 +757,24 @@ $(function() {
 	});
 	//第三页的确定按钮
 	$("#btn_Pswpart3").click(function() {
-		var loginPassword = $("input[name='user.loginPassword']").val(),
-			emailCaptcha = $("#verifyNo").val();
+		var loginPassword = $("input[name='loginPassword']").val();
+		var captcha = $("#verifyNo").val();
+		var email = $("input[name='email']").val();
+		var emailSign = $("#verifyYz").attr("data-emailSign");
 		if (!verifyCheck._click()) return;
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/user/updatePsw',
+			url : baselocation + '/resetPassword',
 			data : {
 				loginPassword : loginPassword,
-				emailCaptcha : emailCaptcha
+				captcha : captcha,
+				email : email,
+				emailSign : emailSign,
 			},
 			dataType : "json",
 			success : function(result) {
 				if (result.success == true) {
-					$(".part4").children("h3").text("恭喜" + result.entity + "，您已成功找回密码，现在开始您的购物之旅吧！");
+					$(".part4").children("h3").text("恭喜" + result.data + "猫宁用户,您已成功找回密码,现在开始您的购物之旅吧!");
 					$(".part3").hide();
 					$(".part4").show();
 					$(".step li").eq(2).addClass("on");
@@ -772,7 +784,7 @@ $(function() {
 							$("#times").text(c);
 						},
 						after : function() {
-							window.location.href = baselocation + '/user/userLogin';
+							window.location.href = baselocation + '/login';
 						}
 					});
 					$(".message").hide();
@@ -804,10 +816,62 @@ $(function() {
 
 
 /**
- * 回车登录
+ * 回车提交
  */
-$(document).keyup(function(event) {
-	if (event.keyCode == 13) {
-		$("#btn_login").trigger("click");
-	}
+$(function() {
+    // 登录按钮
+    $(".loginPage").keypress(function(e) {
+        var key = window.event ? e.keyCode : e.which;
+        if (key.toString() == "13") {
+        	$("#btn_login").trigger("click");
+        	return false;
+        }
+    });
+
+    // 找回密码按钮
+    $(".btn_Pswpart1").keypress(function(e) {
+        var key = window.event ? e.keyCode : e.which;
+        if (key.toString() == "13") {
+        	$("#btn_Pswpart1").trigger("click");
+        	return false;
+        }
+    }); 
+    // 找回密码提交按钮
+    $(".btn_Pswpart2").keypress(function(e) {
+        var key = window.event ? e.keyCode : e.which;
+        if (key.toString() == "13") {
+        	$("#btn_Pswpart2").trigger("click");
+        	return false;
+        }
+    }); 
+    // 找回密码确定按钮
+    $(".btn_Pswpart3").keypress(function(e) {
+        var key = window.event ? e.keyCode : e.which;
+        if (key.toString() == "13") {
+        	$("#btn_Pswpart3").trigger("click");
+        	return false;
+        }
+    }); 
+    // 注册下一按钮
+    $(".btn_part1").keypress(function(e) {
+        var key = window.event ? e.keyCode : e.which;
+        if (key.toString() == "13") {
+        	$("#btn_part1").trigger("click");
+        	return false;
+        }
+    });
+    $(".btn_part2").keypress(function(e) {
+        var key = window.event ? e.keyCode : e.which;
+        if (key.toString() == "13") {
+        	$("#btn_part2").trigger("click");
+        	return false;
+        }
+    });
+    $(".btn_part3").keypress(function(e) {
+        var key = window.event ? e.keyCode : e.which;
+        if (key.toString() == "13") {
+        	$("#btn_part3").trigger("click");
+        	return false;
+        }
+    });
 });

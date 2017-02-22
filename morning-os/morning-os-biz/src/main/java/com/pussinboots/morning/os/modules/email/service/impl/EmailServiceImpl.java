@@ -1,8 +1,10 @@
 package com.pussinboots.morning.os.modules.email.service.impl;
 
 import com.pussinboots.morning.os.modules.email.entity.Email;
+import com.pussinboots.morning.os.modules.email.enums.EmailStatusEnum;
 import com.pussinboots.morning.os.modules.email.mapper.EmailMapper;
 import com.pussinboots.morning.os.modules.email.service.IEmailService;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,22 @@ public class EmailServiceImpl extends ServiceImpl<EmailMapper, Email> implements
 	@Override
 	public void insertByEmail(Email email) {
 		emailMapper.insert(email);
+	}
+
+	@Override
+	public Email selectByEmailSign(Long emailSign) {
+		Email email = new Email();
+		email.setEmailSign(emailSign);
+		return emailMapper.selectOne(email);
+	}
+
+	@Override
+	public void updateStatus(Long emailSign) {
+		Email email = new Email();
+		email.setStatus(EmailStatusEnum.INVALID.getStatus());
+		Email queryEmail = new Email();
+		queryEmail.setEmailSign(emailSign);
+		emailMapper.update(email, new EntityWrapper<Email>(queryEmail));
 	}
 	
 }

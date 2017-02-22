@@ -1,5 +1,7 @@
 package com.pussinboots.morning.os.modules.email.service;
 
+import java.util.Map;
+
 import com.pussinboots.morning.os.modules.email.entity.EmailMsg;
 
 /**
@@ -23,6 +25,14 @@ import com.pussinboots.morning.os.modules.email.entity.EmailMsg;
 *
  */
 public interface IEmailSendService {
+	
+	/**
+	 * 发送Velocity模版邮件通过邮件账号及邮件类型
+	 * @param email 邮件账号
+	 * @param type 邮件类型
+	 * @return result:true,成功/false:失败 emailSign：邮箱标识
+	 */
+	Map<String, Object> sendMailByVelocity(String email, Integer type);
 	
 	
 	/**

@@ -14,12 +14,14 @@
 		<result column="age" property="age" />
 		<result column="pic_img" property="picImg" />
 		<result column="status" property="status" />
+		<result column="email_is_active" property="emailIsActive" />
 		<result column="email" property="email" />
 		<result column="telephone" property="telephone" />
 		<result column="last_login_time" property="lastLoginTime" />
 		<result column="last_login_ip" property="lastLoginIp" />
 		<result column="login_number" property="loginNumber" />
 		<result column="regeist_time" property="regeistTime" />
+		<result column="create_by" property="createBy" />
 		<result column="update_time" property="updateTime" />
 		<result column="update_by" property="updateBy" />
 		<result column="amount" property="amount" />
@@ -29,7 +31,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        user_id AS userId, user_number AS userNumber, user_name AS userName, login_password AS loginPassword, salt, real_name AS realName, sex, age, pic_img AS picImg, status, email, telephone, last_login_time AS lastLoginTime, last_login_ip AS lastLoginIp, login_number AS loginNumber, regeist_time AS regeistTime, update_time AS updateTime, update_by AS updateBy, amount, rank_id AS rankId, score
+        user_id AS userId, user_number AS userNumber, user_name AS userName, login_password AS loginPassword, salt, real_name AS realName, sex, age, pic_img AS picImg, status, email_is_active AS emailIsActive, email, telephone, last_login_time AS lastLoginTime, last_login_ip AS lastLoginIp, login_number AS loginNumber, regeist_time AS regeistTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, amount, rank_id AS rankId, score
     </sql>
     
     <!-- 根据登录名查找用户信息 -->
@@ -38,9 +40,11 @@
     		user_id AS userId, 
     		user_number AS userNumber, 
     		user_name AS userName, 
-    		login_password AS loginPassword, real_name AS realName, 
+    		login_password AS loginPassword, 
+    		real_name AS realName, 
     		salt,
     		status,
+    		email_is_active AS emailIsActive,
     		email, 
     		telephone
     	FROM

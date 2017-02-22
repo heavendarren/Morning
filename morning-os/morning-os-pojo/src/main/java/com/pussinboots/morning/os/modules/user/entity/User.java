@@ -65,6 +65,11 @@ public class User extends Model<User> {
 	@TableField("pic_img")
 	private String picImg;
     /**
+     * 邮箱激活：0.未激活；1.已激活；
+     */
+	@TableField("email_is_active")
+	private Integer emailIsActive;
+    /**
      * 状态：0.冻结；1.正常；2.删除
      */
 	private Integer status;
@@ -97,6 +102,11 @@ public class User extends Model<User> {
 	@TableField("regeist_time")
 	private Date regeistTime;
     /**
+     * 创建者
+     */
+	@TableField("create_by")
+	private String createBy;
+    /**
      * 更新时间
      */
 	@TableField("update_time")
@@ -119,7 +129,15 @@ public class User extends Model<User> {
      * 会员积分
      */
 	private Integer score;
+	
+	public User() {
+		super();
+	}
 
+	public User(String email) {
+		super();
+		this.email = email;
+	}
 
 	public Long getUserId() {
 		return userId;
@@ -193,6 +211,14 @@ public class User extends Model<User> {
 		this.picImg = picImg;
 	}
 
+	public Integer getEmailIsActive() {
+		return emailIsActive;
+	}
+
+	public void setEmailIsActive(Integer emailIsActive) {
+		this.emailIsActive = emailIsActive;
+	}
+
 	public Integer getStatus() {
 		return status;
 	}
@@ -247,6 +273,14 @@ public class User extends Model<User> {
 
 	public void setRegeistTime(Date regeistTime) {
 		this.regeistTime = regeistTime;
+	}
+
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
 	}
 
 	public Date getUpdateTime() {

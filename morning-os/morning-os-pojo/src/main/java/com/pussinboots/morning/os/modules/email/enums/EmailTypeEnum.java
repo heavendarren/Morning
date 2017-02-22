@@ -10,21 +10,24 @@ package com.pussinboots.morning.os.modules.email.enums;
  */
 public enum EmailTypeEnum {
 
-	FORGET(0, "找回密码", "『但行好事·莫问前程』猫宁帐号安全验证"), 
-	REGISTER(1, "账号注册","『但行好事·莫问前程』很高兴遇见您!"), 
-	CHANGE(2, "邮箱更改","『但行好事·莫问前程』猫宁邮箱认证验证"), 
-	INFORM(3, "通知","自定义");
+	FORGET(0, "找回密码", "『但行好事·莫问前程』猫宁帐号安全验证", "PswCaptcha.vm"), 
+	REGISTER(1, "账号注册","『但行好事·莫问前程』很高兴遇见您!", "EmailCaptcha.vm"), 
+	CHANGE(2, "邮箱更改","『但行好事·莫问前程』猫宁邮箱认证验证", "PswCaptcha.vm"), 
+	INFORM(3, "通知","自定义", null);
 
     private Integer type;
     
     private String typeInfo;
     
     private String emailSubject;
+    
+    private String velocityTemplate;
 
-	private EmailTypeEnum(Integer type, String typeInfo, String emailSubject) {
+	private EmailTypeEnum(Integer type, String typeInfo, String emailSubject, String velocityTemplate) {
 		this.type = type;
 		this.typeInfo = typeInfo;
 		this.emailSubject = emailSubject;
+		this.velocityTemplate = velocityTemplate;
 	}
 
 	public Integer getType() {
@@ -37,6 +40,10 @@ public enum EmailTypeEnum {
 	
 	public String getEmailSubject() {
 		return emailSubject;
+	}
+	
+	public String getVelocityTemplate() {
+		return velocityTemplate;
 	}
 
 	public static EmailTypeEnum stateOf(int index) {

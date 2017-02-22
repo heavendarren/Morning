@@ -1,4 +1,4 @@
-package com.pussinboots.morning.os.modules.email.enums;
+package com.pussinboots.morning.os.modules.user.enums;
 
 /**
  * 
@@ -8,16 +8,16 @@ package com.pussinboots.morning.os.modules.email.enums;
 * 创建人：陈星星   
 * 创建时间：2017年2月3日 下午5:15:45
  */
-public enum EmailStatusEnum {
+public enum EmailActiveEnum {
 
-	VALID(1, "有效"), 
-	INVALID(0, "无效");
+	ACTIVATED(1, "激活"), 
+	NONACTIVATED(0, "未激活");
 
     private Integer status;
     
     private String stateInfo;
     
-	private EmailStatusEnum(Integer status, String stateInfo) {
+	private EmailActiveEnum(Integer status, String stateInfo) {
 		this.status = status;
 		this.stateInfo = stateInfo;
 	}
@@ -30,8 +30,8 @@ public enum EmailStatusEnum {
 		return stateInfo;
 	}
 
-	public static EmailStatusEnum stateOf(int index) {
-		for (EmailStatusEnum statusEnum : values()) {
+	public static EmailActiveEnum stateOf(int index) {
+		for (EmailActiveEnum statusEnum : values()) {
 			if (statusEnum.getStatus() == index) {
 				return statusEnum;
 			}

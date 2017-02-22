@@ -63,6 +63,10 @@ public class Email extends Model<Email> {
 	@TableField("new_email")
 	private String newEmail;
     /**
+     * 链接是否已失效：0.失效；1.未失效；
+     */
+	private Integer status;
+    /**
      * 发送状态：0.发送失败；1.发送成功；
      */
 	@TableField("send_status")
@@ -163,6 +167,14 @@ public class Email extends Model<Email> {
 
 	public void setNewEmail(String newEmail) {
 		this.newEmail = newEmail;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	public Integer getSendStatus() {

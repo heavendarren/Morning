@@ -34,7 +34,7 @@
           <form>
             <div class="item col-xs-12">
               <div class="f-fl item-ifo">
-                <input type="text" name="loginName" maxlength="20" placeholder="邮箱/手机号码" class="txt03 f-r3 required" tabindex="1" data-valid="isNonEmpty" data-error="请输入帐号" id="adminNo" />
+                <input type="text" name="loginName" maxlength="20" placeholder="邮箱/手机号码" class="txt03 f-r3 required loginPage" tabindex="1" data-valid="isNonEmpty" data-error="请输入帐号" id="adminNo" />
                 <span class="ie8 icon-close close hide"></span>
                 <label class="icon-sucessfill blank hide"></label>
                 <label class="focus"><span></span></label>
@@ -43,7 +43,7 @@
             </div>
             <div class="item col-xs-12">
               <div class="f-fl item-ifo">
-                <input type="password" name="loginPassword" id="password" maxlength="20" placeholder="密码" class="txt03 f-r3 required" tabindex="3" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off" data-valid="isNonEmpty" data-error="密码不能为空" data-exponent="${publicKeyMap.exponent}" data-modulus="${publicKeyMap.modulus}"/>
+                <input type="password" name="loginPassword" id="password" maxlength="20" placeholder="密码" class="txt03 f-r3 required loginPage" tabindex="3" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off" data-valid="isNonEmpty" data-error="密码不能为空" data-exponent="${publicKeyMap.exponent}" data-modulus="${publicKeyMap.modulus}"/>
                 <span class="ie8 icon-close close hide" style="right:55px"></span> <span class="showpwd" data-eye="password"></span>
                 <label class="icon-sucessfill blank hide"></label>
                 <label class="focus"></label>

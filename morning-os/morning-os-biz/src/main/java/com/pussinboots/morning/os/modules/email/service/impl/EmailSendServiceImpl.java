@@ -1,7 +1,9 @@
 package com.pussinboots.morning.os.modules.email.service.impl;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -20,9 +22,16 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
+import com.alibaba.fastjson.JSON;
 import com.pussinboots.morning.common.util.DateUtils;
+import com.pussinboots.morning.os.common.util.EmailUtils;
+import com.pussinboots.morning.os.modules.email.entity.Email;
 import com.pussinboots.morning.os.modules.email.entity.EmailMsg;
+import com.pussinboots.morning.os.modules.email.enums.EmailSendStatusEnum;
+import com.pussinboots.morning.os.modules.email.enums.EmailTypeEnum;
+import com.pussinboots.morning.os.modules.email.mapper.EmailMapper;
 import com.pussinboots.morning.os.modules.email.service.IEmailSendService;
+import com.pussinboots.morning.os.modules.user.mapper.UserMapper;
 
 /**
  * 
@@ -43,6 +52,38 @@ public class EmailSendServiceImpl implements IEmailSendService{
     private JavaMailSenderImpl javaMailSender; 
 	@Autowired
     private VelocityEngine velocityEngine ;
+	@Autowired
+	private UserMapper userMapper;
+	@Autowired
+	private EmailMapper emailMapper;
+	
+	@Override
+	public Map<String, Object> sendMailByVelocity(String email, Integer type) {
+		Map<String, Object> returnMap = new HashMap<>();
+		Date startTime = new Date(); // 发送时间
+		Date endTime = DateUtils.getOffsiteDate(startTime, Calendar.MINUTE, EmailUtils.getCaptchaTime());// 验证时间向后偏移3分钟
+		String captcha = EmailUtils.getCaptcha(); // 验证码
+		Map<String, Object> model = new HashMap<>();
+		model.put("createTime", startTime);
+		model.put("captcha", captcha);
+		model.put("email", email);
+		model.put("userNumber", userMapper.selectByLoginName(email).getUserNumber());
+		
+		EmailMsg emailMsg = new EmailMsg();
+		emailMsg.setToEmails(email); // 收件人
+		emailMsg.setSubject(EmailTypeEnum.stateOf(type).getEmailSubject());// 邮件主题
+		emailMsg.setVelocityTemplate(EmailTypeEnum.stateOf(type).getVelocityTemplate());// 模版
+		emailMsg.setModel(model);// 邮件正文
+		
+		boolean result = sendMails(emailMsg);
+		Email emailRecord = new Email(EmailUtils.getEmailSign(), email, EmailTypeEnum.stateOf(type).getType(), startTime,
+				startTime, endTime, EmailSendStatusEnum.resultOf(result).getStatus(), captcha,
+				EmailTypeEnum.stateOf(type).getEmailSubject(), JSON.toJSON(model).toString());
+		emailMapper.insert(emailRecord);
+		returnMap.put("result", result);
+		returnMap.put("emailSign", emailRecord.getEmailSign());
+		return returnMap;
+	}
 	
 	@Override
 	public void sendMail(EmailMsg emailMsg) {

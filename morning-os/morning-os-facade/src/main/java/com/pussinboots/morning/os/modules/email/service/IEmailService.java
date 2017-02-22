@@ -20,4 +20,17 @@ public interface IEmailService extends IService<Email> {
 	 */
 	void insertByEmail(Email email);
 	
+	/**
+	 * 通过邮箱标志查找邮箱
+	 * @param emailSign 邮箱标志
+	 * @return
+	 */
+	Email selectByEmailSign(Long emailSign);
+	
+	/**
+	 * 通过邮箱标识更新邮箱验证码状态
+	 * @param emailSign 邮箱标志
+	 */
+	void updateStatus(Long emailSign);
+	
 }

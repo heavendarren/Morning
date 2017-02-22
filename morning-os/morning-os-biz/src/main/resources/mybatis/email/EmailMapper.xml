@@ -12,6 +12,7 @@
 		<result column="start_time" property="startTime" />
 		<result column="end_time" property="endTime" />
 		<result column="new_email" property="newEmail" />
+		<result column="status" property="status" />
 		<result column="send_status" property="sendStatus" />
 		<result column="captcha" property="captcha" />
 		<result column="email_subject" property="emailSubject" />
@@ -20,6 +21,6 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        email_id AS emailId, email_sign AS emailSign, user_email AS userEmail, email_type AS emailType, create_time AS createTime, start_time AS startTime, end_time AS endTime, new_email AS newEmail, send_status AS sendStatus, captcha, email_subject AS emailSubject, email_content AS emailContent
+        email_id AS emailId, email_sign AS emailSign, user_email AS userEmail, email_type AS emailType, create_time AS createTime, start_time AS startTime, end_time AS endTime, new_email AS newEmail, status, send_status AS sendStatus, captcha, email_subject AS emailSubject, email_content AS emailContent
     </sql>
 </mapper>

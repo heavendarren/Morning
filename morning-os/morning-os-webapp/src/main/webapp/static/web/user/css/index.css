@@ -43,6 +43,7 @@ label{ margin:0; font-weight:normal;}
 .reg-box .focus{color: #999;}
 .reg-box .valid{color: #f00;}
 .reg-box .line{border-top: 2px solid #e6e9f0;display: block;text-align: center;width: 270px;margin-top: 60px;margin-right: 0;margin-bottom: 50px;padding-top: 10px;}
+.reg-box .lines{display: block;margin-top: 60px;}
 .reg-box .strength {color: #999;line-height: 22px;padding-right: 10px;clear: both;float: none;position: absolute;top:39px;right: -9px; display:none}
 .reg-box .strength b {float: left;width: 108px;height:16px;overflow: hidden;margin-top: 5px; font-weight:400;}
 .reg-box .strength b i{ font-style:normal; font-size:10px; width:34px; height:16px;line-height:16px; display:inline-block; float:left; background:#dbdbdb; text-align:center; margin-left:1px; color:#fff;}

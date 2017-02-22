@@ -1,29 +1,21 @@
 package com.pussinboots.morning.os.modules.email.controller;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.pussinboots.morning.common.controller.BaseController;
 import com.pussinboots.morning.common.result.ResponseResult;
-import com.pussinboots.morning.common.util.DateUtils;
 import com.pussinboots.morning.common.util.RegexUtils;
-import com.pussinboots.morning.common.util.ServletUtils;
-import com.pussinboots.morning.os.common.util.EmailUtils;
 import com.pussinboots.morning.os.modules.email.entity.Email;
-import com.pussinboots.morning.os.modules.email.entity.EmailMsg;
-import com.pussinboots.morning.os.modules.email.enums.EmailStatusEnum;
 import com.pussinboots.morning.os.modules.email.enums.EmailTypeEnum;
 import com.pussinboots.morning.os.modules.email.service.IEmailSendService;
 import com.pussinboots.morning.os.modules.email.service.IEmailService;
-import com.pussinboots.morning.os.modules.user.service.IUserService;
 
 /**
  * 
@@ -38,46 +30,69 @@ import com.pussinboots.morning.os.modules.user.service.IUserService;
 public class EmailController extends BaseController {
 	
 	@Autowired
-	private IUserService userService;
-	@Autowired
 	private IEmailSendService emailSendService;
 	@Autowired
 	private IEmailService emailService;
 	
+	/**
+	 * POST 找回密码,发送邮件
+	 * @return
+	 */
 	@PostMapping(value = "/sendEmailTicket")
 	@ResponseBody
-	public ResponseResult sendEmailTicket() {
-		String email = ServletUtils.getParameter("email");
-		
+	public ResponseResult sendEmailTicket(@RequestParam("email") String email) {
 		if (!RegexUtils.isEmail(email)) {
 			return fail(false, "请输入正确的邮箱地址");
 		}
-		
-		Date startTime = new Date(); // 发送时间
-		Date endTime = DateUtils.getOffsiteDate(startTime, Calendar.MINUTE, EmailUtils.getCaptchaTime());// 验证时间向后偏移3分钟
-		String captcha = EmailUtils.getCaptcha(); // 验证码
-		Map<String, Object> model = new HashMap<>();
-		model.put("createTime", startTime);
-		model.put("captcha", captcha);
-		model.put("email", ServletUtils.getParameter("email"));
-		model.put("userNumber", userService.selectByLoginName(email).getUserNumber());
-		
-		EmailMsg emailMsg = new EmailMsg();
-		emailMsg.setToEmails(ServletUtils.getParameter("email")); // 收件人
-		emailMsg.setSubject(EmailTypeEnum.FORGET.getEmailSubject());// 邮件主题
-		emailMsg.setVelocityTemplate("PswCaptcha.vm");// 模版
-		emailMsg.setModel(model);// 邮件正文
-		
-		boolean result = emailSendService.sendMails(emailMsg);
-		Email emailRecord = new Email(EmailUtils.getEmailSign(), email, EmailTypeEnum.FORGET.getType(), startTime,
-				startTime, endTime, EmailStatusEnum.resultOf(result).getStatus(), captcha,
-				EmailTypeEnum.FORGET.getEmailSubject(), JSON.toJSON(model).toString());
-		emailService.insertByEmail(emailRecord);
-		if(result){
-			return success(true, "邮件发送成功!");
-		}else {
+
+		Map<String, Object> returnMap = emailSendService.sendMailByVelocity(email, EmailTypeEnum.FORGET.getType());
+
+		if ((boolean) returnMap.get("result")) {
+			return success(true, "邮件发送成功!", returnMap.get("emailSign"));
+		} else {
 			return fail(false, "邮件发送失败,请联系管理员处理!");
 		}
 	}
+	
+	/**
+	 * POST 注册账号,发送邮件
+	 * @return
+	 */
+	@PostMapping(value = "/sendEmailRegister")
+	@ResponseBody
+	public ResponseResult sendEmailRegister(@RequestParam("email") String email) {
+		if (!RegexUtils.isEmail(email)) {
+			return fail(false, "请输入正确的邮箱地址");
+		}
 
+		Map<String, Object> returnMap = emailSendService.sendMailByVelocity(email, EmailTypeEnum.REGISTER.getType());
+
+		if ((boolean) returnMap.get("result")) {
+			return success(true, "邮件发送成功!", returnMap.get("emailSign"));
+		} else {
+			return fail(false, "邮件发送失败,请联系管理员处理!");
+		}
+	}
+	
+	/**
+	 * POST 验证邮箱验证码
+	 * @return
+	 */
+	@PostMapping(value = "/verifyEmail")
+	@ResponseBody
+	public ResponseResult verifyEmail(@RequestParam("email") String email, @RequestParam("captcha") String captcha,
+			@RequestParam("emailSign") Long emailSign) {
+		Email queryEmail = emailService.selectByEmailSign(emailSign);
+		if (queryEmail == null) {
+			return fail(false, "该邮件不存在,请重新发送邮件!");
+		}
+		boolean result = queryEmail.getUserEmail().equals(email) && queryEmail.getCaptcha().equals(captcha);
+		if (!result) {
+			return fail(false, "验证码错误,请重新输入!");
+		}
+		if (new Date().after(queryEmail.getEndTime())) { // 验证验证时间是否过期
+			return fail(false, "验证码已过期,请重新输入验证码");
+		}
+		return success(true);
+	}
 }
