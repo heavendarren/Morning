@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemesh>
     <!-- 排除，不进行装饰的路径 -->
-    <mapping path="/login" exclue="true"/>
-    <mapping path="/register" exclue="true"/>
-    <mapping path="/forgetPassword" exclue="true"/>
-    <mapping path="/ajax/*" exclue="true"/>
-    <mapping path="/user/ajax/*" exclue="true"/>
+    <mapping path="/pass/login" exclue="true"/>
+    <mapping path="/pass/register" exclue="true"/>
+    <mapping path="/pass/forgetPassword" exclue="true"/>
     <mapping path="/druid/*" exclue="true"/>
     
   	<!-- 前端商城布局 -->

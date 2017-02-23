@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
  * 
 * 项目名称：morning-os-pojo   
 * 类名称：Email   
-* 类描述：Email 类实体表   
+* 类描述：Email 表实体类
 * 创建人：陈星星   
 * 创建时间：2017年2月21日 下午10:44:53   
 *

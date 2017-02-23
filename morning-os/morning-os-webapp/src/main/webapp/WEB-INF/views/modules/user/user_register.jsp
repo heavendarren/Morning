@@ -7,7 +7,7 @@
 <meta name="author" content="猫宁Morning. - 但行好事，莫问前程。" />
 <meta name="keywords" content="猫宁商城,猫宁Morning,猫宁公益商城,公益,电子商城,猫宁社区,公益商城,在线购物,社会责任">
 <meta name="description" content="猫宁Morning公益商城是中国公益性在线电子商城，以商城B2C模式运营的公益在线商城，是一家致力于将传统公益商城互联网化的创新公益商城。">
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="${ctxsta}/web/img/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="${ctxsta}/common/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="${ctxsta}/common/icheck/minimal/blue.css" />
 <link rel="stylesheet" href="${ctxsta}/web/user/css/gloab.css" />
@@ -24,8 +24,8 @@
       <li><a href="#">益行者</a></li>
       <li><a href="#">猫粉社区</a></li>
       <li class="link-line">|</li>
-      <li><a href="${ctx}/login">登录</a></li>
-      <li><a href="${ctx}/register">注册</a></li>
+      <li><a href="${ctx}/pass/login">登录</a></li>
+      <li><a href="${ctx}/pass/register">注册</a></li>
     </ul>
   </div>
   <div class="main">
@@ -88,7 +88,7 @@
               <div class="f-fl item-ifo">
                 <input type="text" name="registerCode" maxlength="4" class="txt03 f-r3 f-fl required btn_part1" tabindex="4" style="width:167px" id="randCode" data-valid="isNonEmpty" data-error="验证码不能为空" />
                 <span class="ie8 icon-close close hide"></span>
-                <label class="f-size12 c-999 f-fl f-pl10"> <img src="${ctx}/captcha-image.jpg" id="kaptchaImage" /> </label>
+                <label class="f-size12 c-999 f-fl f-pl10"> <img src="${ctx}/pass/captcha-image.jpg" id="kaptchaImage" /> </label>
                 <label class="icon-sucessfill blank hide" style="left:380px"></label>
                 <label class="focusa">看不清？<a href="javascript:;" class="c-blue" onclick="$(this).parent().prev().prev().find('img').click()">换一张</a></label>
                 <label class="focus valid" style="left:370px"></label>
@@ -116,7 +116,7 @@
             <div class="item col-xs-12"> <span class="intelligent-label f-fl"><b class="ftx04">*</b>验证码：</span>
               <div class="f-fl item-ifo">
                 <input type="text" maxlength="6" name="emailCaptcha" id="verifyNo" class="txt03 f-r3 f-fl required btn_part2" tabindex="4" style="width:167px" data-valid="isNonEmpty" data-error="验证码不能为空" />
-                <span class="btn btn-gray f-r3 f-ml5 f-size13" id="time_box" disabled style="width:97px;display:none;">发送验证码</span> <span class="btn btn-gray f-r3 f-ml5 f-size13" id="verifyYz" data-type="/sendEmailRegister" data-emailSign="" style="width:97px;">发送验证码</span> <span class="ie8 icon-close close hide" style="right:130px"></span>
+                <span class="btn btn-gray f-r3 f-ml5 f-size13" id="time_box" disabled style="width:97px;display:none;">发送验证码</span> <span class="btn btn-gray f-r3 f-ml5 f-size13" id="verifyYz" data-type="/pass/sendEmailRegister" data-emailSign="" style="width:97px;">发送验证码</span> <span class="ie8 icon-close close hide" style="right:130px"></span>
                 <label class="icon-sucessfill blank hide"></label>
                 <label class="focus"><span>请查收电子邮箱邮件，并填写邮件中的验证码（此验证码3分钟内有效）</span></label>
                 <label class="focus valid"></label>
@@ -159,7 +159,7 @@
         </form>
         <div class="part4 text-center" style="display:none">
           <h3></h3>
-          <p class="c-666 f-mt30 f-mb50">页面将在 <strong id="times" class="f-size18">10</strong> 秒钟后，跳转到 <a href="${ctx}/login" class="c-blue">登陆界面</a></p>
+          <p class="c-666 f-mt30 f-mb50">页面将在 <strong id="times" class="f-size18">10</strong> 秒钟后，跳转到 <a href="${ctx}/pass/login" class="c-blue">登陆界面</a></p>
         </div>
         <div class="item col-xs-12" style="height:auto">
             <div class="lines" ></div>

@@ -7,7 +7,7 @@
 <meta name="author" content="猫宁Morning. - 但行好事，莫问前程。" />
 <meta name="keywords" content="猫宁商城,猫宁Morning,猫宁公益商城,公益,电子商城,猫宁社区,公益商城,在线购物,社会责任">
 <meta name="description" content="猫宁Morning公益商城是中国公益性在线电子商城，以商城B2C模式运营的公益在线商城，是一家致力于将传统公益商城互联网化的创新公益商城。">
-<link rel="shortcut icon" href="${ctx}/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="${ctxsta}/web/img/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="${ctxsta}/common/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="${ctxsta}/web/user/css/gloab.css" />
 <link rel="stylesheet" href="${ctxsta}/web/user/css/index.css" />
@@ -23,8 +23,8 @@
       <li><a href="#">益行者</a></li>
       <li><a href="#">猫粉社区</a></li>
       <li class="link-line">|</li>
-      <li><a href="${ctx}/login">登录</a></li>
-      <li><a href="${ctx}/register">注册</a></li>
+      <li><a href="${ctx}/pass/login">登录</a></li>
+      <li><a href="${ctx}/pass/register">注册</a></li>
     </ul>
   </div>
   <div class="main">
@@ -60,7 +60,7 @@
             <div class="f-fl item-ifo"> <a href="javascript:;" class="btn btn-blue f-r3" id="btn_login">立即登录</a> </div>
           </div>
           <div class="item col-xs-12" style="height:auto">
-            <label class="valid  line" ><a href="${ctx }/forgetPassword">忘记密码？</a></label>
+            <label class="valid  line" ><a href="${ctx }/pass/forgetPassword">忘记密码？</a></label>
           </div>
         </div>
       </div>

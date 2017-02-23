@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,6 +48,7 @@ import com.pussinboots.morning.os.modules.user.service.IUserService;
 *
  */
 @Controller
+@RequestMapping(value = "/pass")
 public class UserLoginController extends BaseController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserLoginController.class);

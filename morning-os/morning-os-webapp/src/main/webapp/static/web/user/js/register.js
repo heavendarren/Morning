@@ -573,7 +573,7 @@ $(function() {
 		});
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/register',
+			url : baselocation + '/pass/register',
 			data : params,
 			dataType : "json",
 			success : function(result) {
@@ -598,7 +598,7 @@ $(function() {
 		if (!verifyCheck._click()) return;
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/emailActive',
+			url : baselocation + '/pass/emailActive',
 			data : {
 				captcha : captcha,
 				email : email,
@@ -626,7 +626,7 @@ $(function() {
 		if (!verifyCheck._click()) return;
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/perfectUser',
+			url : baselocation + '/pass/perfectUser',
 			data : {
 				email : email,
 				realName : realName,
@@ -675,7 +675,7 @@ $(function() {
 		}
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/login',
+			url : baselocation + '/pass/login',
 			data : {
 				"loginName" : loginName,
 				"loginPassword" : loginPassword
@@ -706,7 +706,7 @@ $(function() {
 			email = $("input[name='email']").val();
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/forgetPassword',
+			url : baselocation + '/pass/forgetPassword',
 			data : {
 				registerCode : registerCode,
 				email : email
@@ -736,7 +736,7 @@ $(function() {
 		if (!verifyCheck._click()) return;
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/verifyEmail',
+			url : baselocation + '/pass/verifyEmail',
 			data : {
 				captcha : captcha,
 				email : email,
@@ -764,7 +764,7 @@ $(function() {
 		if (!verifyCheck._click()) return;
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/resetPassword',
+			url : baselocation + '/pass/resetPassword',
 			data : {
 				loginPassword : loginPassword,
 				captcha : captcha,
@@ -810,7 +810,7 @@ function closeClause() {
  */
 $(function() {
 	$('#kaptchaImage').click(function() {
-		$(this).attr('src', baselocation + '/captcha-image.jpg?' + Math.floor(Math.random() * 100));
+		$(this).attr('src', baselocation + '/pass/captcha-image.jpg?' + Math.floor(Math.random() * 100));
 	})
 });
 

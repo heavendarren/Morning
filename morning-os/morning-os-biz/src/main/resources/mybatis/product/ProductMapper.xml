@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pussinboots.morning.os.modules.product.mapper.ProductMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.pussinboots.morning.os.modules.product.entity.Product">
+		<id column="product_id" property="productId" />
+		<result column="product_number" property="productNumber" />
+		<result column="label_id" property="labelId" />
+		<result column="name" property="name" />
+		<result column="introduce" property="introduce" />
+		<result column="search_key" property="searchKey" />
+		<result column="pic_img" property="picImg" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+		<result column="page_title" property="pageTitle" />
+		<result column="page_description" property="pageDescription" />
+		<result column="page_keyword" property="pageKeyword" />
+		<result column="remarks" property="remarks" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        product_id AS productId, product_number AS productNumber, label_id AS labelId, name, introduce, search_key AS searchKey, pic_img AS picImg, status, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, page_title AS pageTitle, page_description AS pageDescription, page_keyword AS pageKeyword, remarks
+    </sql>
+</mapper>

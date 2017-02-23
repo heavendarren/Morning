@@ -22,7 +22,6 @@
 		<jsp:include page="/WEB-INF/layouts/web/header.jsp" />
 		<!-- 公共头引入 -->
 		<!-- 目录导航栏引入 -->
-		<jsp:include page="/WEB-INF/views/modules/common/topnav.jsp" />
 		<!-- 目录导航栏引入 -->
 		<div class="clear"></div>
 		<div class="breadcrumbs">

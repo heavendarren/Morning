@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pussinboots.morning.os.modules.product.mapper.ProductCategoryMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.pussinboots.morning.os.modules.product.entity.ProductCategory">
+		<id column="product_category_id" property="productCategoryId" />
+		<result column="product_id" property="productId" />
+		<result column="category_id" property="categoryId" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        product_category_id AS productCategoryId, product_id AS productId, category_id AS categoryId, create_time AS createTime, create_by AS createBy
+    </sql>
+</mapper>

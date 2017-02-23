@@ -59,7 +59,7 @@
 				/common/** = anon
 				/login = anon
 				/captcha-image.jpg = anon
-				/** = user
+				/** = anon
 			</value>
 		</property>
 	</bean>

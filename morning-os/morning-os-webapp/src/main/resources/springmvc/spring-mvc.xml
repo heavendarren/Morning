@@ -69,7 +69,22 @@
         <property name="maxInMemorySize" value="40960" />  
     </bean> 
     
-	<!-- 8.支持Shiro对Controller的方法级AOP安全控制 begin-->
+   	<!-- 拦截器的配置 -->
+	<mvc:interceptors>
+		<!-- /**所有文件夹及里面的子文件夹;/*是所有文件夹，不含子文件夹 -->
+		<!-- 网站配置拦截器配置-->
+		<mvc:interceptor>
+			<mvc:mapping path="/"/>
+		    <mvc:mapping path="/**"/>
+		    <mvc:exclude-mapping path="/pass/**"/>
+		    <mvc:exclude-mapping path="/static/**"/>
+		    <mvc:exclude-mapping path="/common/**"/>
+		    <bean class="com.pussinboots.morning.os.common.intercepter.LimitIntercepterForWebsite">
+		    </bean>
+		</mvc:interceptor> 
+	</mvc:interceptors>
+    
+	<!-- 9.支持Shiro对Controller的方法级AOP安全控制 begin-->
 	<!-- AOP式方法级权限检查  -->
 	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
 		<property name="proxyTargetClass" value="true" />

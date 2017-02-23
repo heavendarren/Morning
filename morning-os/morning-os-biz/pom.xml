@@ -106,22 +106,6 @@
 		</dependency>
 		<!-- MYSQL 数据库相关依赖 end -->
 
-		<!-- 使用Velocity 模板引擎快速生成代码 -->
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-		</dependency>
-
-		<!-- mail -->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.activation</groupId>
-			<artifactId>activation</artifactId>
-		</dependency>
-
 		<!-- dubbo服务提供者依赖 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>

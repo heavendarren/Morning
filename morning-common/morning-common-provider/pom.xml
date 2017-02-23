@@ -23,6 +23,11 @@
 			<groupId>com.pussinboots.morning</groupId>
 			<artifactId>morning-common-core</artifactId>
 			<version>${morning.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.pussinboots.morning</groupId>
+			<artifactId>morning-common-config</artifactId>
+			<version>${morning.version}</version>
 		</dependency>		
 		<!-- 安全框架SECURITY:shiro begin -->
 		<dependency>
@@ -66,6 +71,22 @@
 		<dependency>
 			<groupId>org.sitemesh</groupId>
 			<artifactId>sitemesh</artifactId>
+		</dependency>
+
+		<!-- 使用Velocity 模板引擎快速生成代码 -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+		</dependency>
+
+		<!-- mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
 		</dependency>
 	</dependencies>
 
