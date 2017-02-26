@@ -1,7 +1,7 @@
 package com.pussinboots.morning.os.modules.content.service;
 
-import com.pussinboots.morning.os.modules.content.entity.Advert;
 import com.baomidou.mybatisplus.service.IService;
+import com.pussinboots.morning.os.modules.content.entity.Advert;
 
 /**
  * 
@@ -13,5 +13,12 @@ import com.baomidou.mybatisplus.service.IService;
 *
  */
 public interface IAdvertService extends IService<Advert> {
+	
+	/**
+	 * 根据广告位代码查找广告位
+	 * @param code 代码简称
+	 * @return Advert 
+	 */
+	Advert selectAdvertByCode(String code);
 	
 }

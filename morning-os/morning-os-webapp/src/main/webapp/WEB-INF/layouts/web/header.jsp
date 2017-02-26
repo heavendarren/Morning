@@ -14,7 +14,7 @@
             <div class="loading"> <span>这里神马都没有！~</span> </div>
           </div>
         </div>
-        <div class="topbar-info"> <a class="link" data-toggle="modal" data-target="#myModal" href="#">登录</a><span class="sep">|</span> <a class="link" data-toggle="modal" data-target="#myModal2" href="#">注册</a> </div>
+        <div class="topbar-info"> <a class="link" href="${ctx }/pass/login">登录</a><span class="sep">|</span> <a class="link" href="${ctx}/pass/register">注册</a> </div>
       </div>
     </div>
   </div>

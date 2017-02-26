@@ -1,6 +1,7 @@
 package com.pussinboots.morning.os.modules.content.entity;
 
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
@@ -41,9 +42,18 @@ public class Advert extends Model<Advert> {
      */
 	private String description;
     /**
+     * 代码简称
+     */
+	private String code;
+    /**
      * 模版内容
      */
 	private String template;
+    /**
+     * 默认显示个数
+     */
+	@TableField("defult_number")
+	private Integer defultNumber;
 
 
 	public Long getAdvertId() {
@@ -86,12 +96,28 @@ public class Advert extends Model<Advert> {
 		this.description = description;
 	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public String getTemplate() {
 		return template;
 	}
 
 	public void setTemplate(String template) {
 		this.template = template;
+	}
+
+	public Integer getDefultNumber() {
+		return defultNumber;
+	}
+
+	public void setDefultNumber(Integer defultNumber) {
+		this.defultNumber = defultNumber;
 	}
 
 	@Override

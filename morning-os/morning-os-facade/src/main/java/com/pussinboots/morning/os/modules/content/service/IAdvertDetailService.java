@@ -1,6 +1,9 @@
 package com.pussinboots.morning.os.modules.content.service;
 
 import com.pussinboots.morning.os.modules.content.entity.AdvertDetail;
+
+import java.util.List;
+
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -13,5 +16,13 @@ import com.baomidou.mybatisplus.service.IService;
 *
  */
 public interface IAdvertDetailService extends IService<AdvertDetail> {
+	
+	/**
+	 * 根据广告位代码标记和广告状态查找广告列表
+	 * @param code 广告位代码标记
+	 * @param status 广告状态
+	 * @return List<AdvertDetail>
+	 */
+	List<AdvertDetail> selectByAdvertCode(String code, Integer status);
 	
 }

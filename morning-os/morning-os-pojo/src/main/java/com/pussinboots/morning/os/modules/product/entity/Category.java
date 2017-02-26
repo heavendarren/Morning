@@ -40,9 +40,18 @@ public class Category extends Model<Category> {
      */
 	private Integer sort;
     /**
+     * 目录类型:0,总目录；1,一级目录；2,二级目录
+     */
+	private Integer type;
+    /**
      * 状态：1.显示；0.隐藏
      */
 	private Integer status;
+    /**
+     * 显示首页导航条上：1.显示；0.隐藏
+     */
+	@TableField("show_in_nav")
+	private Integer showInNav;
     /**
      * 创建时间
      */
@@ -116,12 +125,28 @@ public class Category extends Model<Category> {
 		this.sort = sort;
 	}
 
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
 	public Integer getStatus() {
 		return status;
 	}
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Integer getShowInNav() {
+		return showInNav;
+	}
+
+	public void setShowInNav(Integer showInNav) {
+		this.showInNav = showInNav;
 	}
 
 	public Date getCreateTime() {

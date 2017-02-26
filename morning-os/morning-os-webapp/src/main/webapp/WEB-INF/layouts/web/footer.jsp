@@ -68,11 +68,12 @@
       <p class="sites">
         <c:forEach items="${indexBottom }" var="indexBottom"> <a href="${indexBottom.href }" target="${indexBottom.target}">${indexBottom.name}</a><span class="sep indexBottom">|</span> </c:forEach>
       </p>
+      <p> © 2016<a href="https://git.oschina.net/Morning_/Morning" target="_blank"> 穿鞋子的猫 </a>/ <span id="showsectime"></span> / <span id="TimeShow"></span> <p>
       <p> © <a href="#">mi.com</a> 京ICP证110507号 京ICP备10046444号 京公网安备1101080212535号 <a href="#">京网文[2014]0059-0009号</a> 违法和不良信息举报电话：185-0130-1238 </p>
     </div>
     <div class="info-links"> <a href="#"><img src="${ctxsta}/web/img/v-logo-2.png" alt="诚信网站"></a> <a href="#"><img src="${ctxsta}/web/img/v-logo-1.png" alt="可信网站"></a> <a href="#"><img src="${ctxsta}/web/img/v-logo-3.png" alt="网上交易保障中心"></a> </div>
   </div>
-  <div class="word">探索黑科技，小米为发烧而生</div>
+  <div class="word">但知行好事，莫要问前程</div>
 </div>
 <!--     公司链接end       --> 
 

@@ -1,6 +1,7 @@
 package com.pussinboots.morning.os.modules.user.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
@@ -30,6 +31,10 @@ import com.pussinboots.morning.common.util.RegexUtils;
 import com.pussinboots.morning.common.util.ServletUtils;
 import com.pussinboots.morning.common.util.StringUtils;
 import com.pussinboots.morning.os.common.util.SingletonLoginUtils;
+import com.pussinboots.morning.os.modules.content.entity.NavigationBar;
+import com.pussinboots.morning.os.modules.content.enums.NavigationBarStatusEnum;
+import com.pussinboots.morning.os.modules.content.enums.NavigationBarTypeEnum;
+import com.pussinboots.morning.os.modules.content.service.INavigationBarService;
 import com.pussinboots.morning.os.modules.email.entity.Email;
 import com.pussinboots.morning.os.modules.email.enums.EmailStatusEnum;
 import com.pussinboots.morning.os.modules.email.service.IEmailService;
@@ -64,6 +69,8 @@ public class UserLoginController extends BaseController {
 	private IUserService userService;
 	@Autowired
 	private IEmailService emailService;
+	@Autowired
+	private INavigationBarService navigationBarService;	
 	
 	/**
 	 * GET 登录
@@ -75,6 +82,10 @@ public class UserLoginController extends BaseController {
 		// 将公钥的 modulus 和 exponent 传给页面
 		Map<String, Object> publicKeyMap = RSAUtils.getPublicKeyMap();
 		model.addAttribute("publicKeyMap", publicKeyMap);
+		// 顶部导航栏
+		List<NavigationBar> loginTop = navigationBarService.selectNavigationBarByType(
+				NavigationBarTypeEnum.LOGIN_TOP.getType(), NavigationBarStatusEnum.SHOW.getStatus());
+		model.addAttribute(NavigationBarTypeEnum.LOGIN_TOP.getCode(), loginTop);
 		return USER_LOGIN;
 	}
 	
@@ -125,7 +136,11 @@ public class UserLoginController extends BaseController {
 	 * @return
 	 */
 	@GetMapping(value = "/register")
-	public String register() {
+	public String register(Model model) {
+		// 顶部导航栏
+		List<NavigationBar> loginTop = navigationBarService.selectNavigationBarByType(
+				NavigationBarTypeEnum.LOGIN_TOP.getType(), NavigationBarStatusEnum.SHOW.getStatus());
+		model.addAttribute(NavigationBarTypeEnum.LOGIN_TOP.getCode(), loginTop);
 		return USER_REGISTER;
 	}
 	
@@ -207,7 +222,11 @@ public class UserLoginController extends BaseController {
 	 * @return
 	 */
 	@GetMapping(value = "/forgetPassword")
-	public String getPorgetPassword() {
+	public String getPorgetPassword(Model model) {
+		// 顶部导航栏
+		List<NavigationBar> loginTop = navigationBarService.selectNavigationBarByType(
+				NavigationBarTypeEnum.LOGIN_TOP.getType(), NavigationBarStatusEnum.SHOW.getStatus());
+		model.addAttribute(NavigationBarTypeEnum.LOGIN_TOP.getCode(), loginTop);
 		return USER_FORGET_PASSWORD;
 	}
 	

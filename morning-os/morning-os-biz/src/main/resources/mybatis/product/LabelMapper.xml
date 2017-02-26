@@ -19,4 +19,5 @@
     <sql id="Base_Column_List">
         label_id AS labelId, label_name AS labelName, status, sort, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, remarks
     </sql>
+    
 </mapper>

@@ -18,10 +18,9 @@
 <div class="login-box">
   <div class="container-nav"> <a class="navbar-brand">但行好事,莫问前程.</a>
     <ul class="navbar-nav-right">
-      <li><a href="${ctx}">猫宁商城</a></li>
-      <li><a href="#">公益频道</a></li>
-      <li><a href="#">益行者</a></li>
-      <li><a href="#">猫粉社区</a></li>
+    <c:forEach items="#{loginTop }" var="loginTop">
+       <li><a href="${loginTop.href}" target="${loginTop.target }">${loginTop.name }</a></li>   
+    </c:forEach>
       <li class="link-line">|</li>
       <li><a href="${ctx}/pass/login">登录</a></li>
       <li><a href="${ctx}/pass/register">注册</a></li>
@@ -70,7 +69,7 @@
 <footer class="footer clear">
   <div class="footer_copyright"> © 2016<a href="https://git.oschina.net/Morning_/Morning" target="_blank"> 穿鞋子的猫 </a>/ <span id="showsectime"></span> / <span id="TimeShow"></span> </div>
 </footer>
-<script src="${ctxsta}/common/jquery-2.2.3.min.js"></script> 
+<script src="${ctxsta}/common/jquery/jquery-2.2.3.min.js"></script>
 <script src="${ctxsta}/common/bootstrap/js/bootstrap.min.js"></script> 
 <script src="${ctxsta}/common/security/security.js"></script> 
 <script src="${ctxsta}/web/user/js/register.js"></script> 

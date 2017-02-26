@@ -74,10 +74,11 @@
 		<!-- /**所有文件夹及里面的子文件夹;/*是所有文件夹，不含子文件夹 -->
 		<!-- 网站配置拦截器配置-->
 		<mvc:interceptor>
-			<mvc:mapping path="/"/>
 		    <mvc:mapping path="/**"/>
+		    <mvc:exclude-mapping path="/"/>
 		    <mvc:exclude-mapping path="/pass/**"/>
 		    <mvc:exclude-mapping path="/static/**"/>
+		    <mvc:exclude-mapping path="/uploads/**"/>		    
 		    <mvc:exclude-mapping path="/common/**"/>
 		    <bean class="com.pussinboots.morning.os.common.intercepter.LimitIntercepterForWebsite">
 		    </bean>

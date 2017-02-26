@@ -37,6 +37,8 @@ public class LimitIntercepterForWebsite extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		String url = request.getRequestURI();
+		System.out.println(url);
 		// 网站导航配置
 		List<NavigationBar> indexTop = navigationBarService.selectNavigationBarByType(
 				NavigationBarTypeEnum.INDEX_TOP.getType(), NavigationBarStatusEnum.SHOW.getStatus());

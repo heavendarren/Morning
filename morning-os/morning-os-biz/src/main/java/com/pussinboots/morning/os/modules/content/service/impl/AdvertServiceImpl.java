@@ -4,6 +4,8 @@ import com.pussinboots.morning.os.modules.content.entity.Advert;
 import com.pussinboots.morning.os.modules.content.mapper.AdvertMapper;
 import com.pussinboots.morning.os.modules.content.service.IAdvertService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,5 +19,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AdvertServiceImpl extends ServiceImpl<AdvertMapper, Advert> implements IAdvertService {
+
+	@Autowired
+	private AdvertMapper advertMapper;
+	
+	@Override
+	public Advert selectAdvertByCode(String code) {
+		Advert advert = new Advert();
+		advert.setCode(code);
+		return advertMapper.selectOne(advert);
+	}
 	
 }

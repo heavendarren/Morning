@@ -1,9 +1,14 @@
 package com.pussinboots.morning.os.modules.product.service.impl;
 
 import com.pussinboots.morning.os.modules.product.entity.Product;
+import com.pussinboots.morning.os.modules.product.enums.ProductStatusEnum;
 import com.pussinboots.morning.os.modules.product.mapper.ProductMapper;
 import com.pussinboots.morning.os.modules.product.service.IProductService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,5 +22,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
+	
+	@Autowired
+	private ProductMapper productMapper;
+
+	@Override
+	public List<Product> selectProductsByStar(Integer starProduct, Integer showNumber) {
+		return productMapper.selectProductsByStar(starProduct, showNumber, ProductStatusEnum.SHELVE.getStatus());
+	}
 	
 }

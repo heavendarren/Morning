@@ -1,7 +1,11 @@
 package com.pussinboots.morning.os.modules.product.mapper;
 
-import com.pussinboots.morning.os.modules.product.entity.Product;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.pussinboots.morning.os.modules.product.entity.Product;
 
 /**
  * 
@@ -13,5 +17,14 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 *
  */
 public interface ProductMapper extends BaseMapper<Product> {
-
+	
+	/**
+	 * 根据明星产品查找产品列表
+	 * @param starProduct 明星产品 1:是/0:否
+	 * @param showNumber 显示数量
+	 * @param status 产品状态
+	 * @return
+	 */
+	List<Product> selectProductsByStar(@Param("starProduct") Integer starProduct,
+			@Param("showNumber") Integer showNumber, @Param("status") Integer status);
 }

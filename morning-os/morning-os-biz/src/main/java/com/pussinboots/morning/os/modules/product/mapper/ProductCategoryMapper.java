@@ -1,6 +1,12 @@
 package com.pussinboots.morning.os.modules.product.mapper;
 
+import com.pussinboots.morning.os.modules.product.entity.Product;
 import com.pussinboots.morning.os.modules.product.entity.ProductCategory;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
@@ -13,5 +19,12 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 *
  */
 public interface ProductCategoryMapper extends BaseMapper<ProductCategory> {
-
+	
+	/**
+	 * 通过目录ID查找产品列表
+	 * @param categoryIds 目录ID
+	 * @return List<Product> 
+	 */
+	List<Product> selectProductByCategoryIds(@Param("categoryIds") List<Long> categoryIds,
+			@Param("status") Integer status, @Param("showInNav") Integer showInNav);
 }

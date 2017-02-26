@@ -15,4 +15,24 @@
     <sql id="Base_Column_List">
         product_category_id AS productCategoryId, product_id AS productId, category_id AS categoryId, create_time AS createTime, create_by AS createBy
     </sql>
+    
+    <!-- 通过目录ID查找产品列表 -->
+    <select id="selectProductByCategoryIds" resultType="com.pussinboots.morning.os.modules.product.entity.Product">
+    	SELECT
+    		p.product_id AS productId, 
+    		product_number AS productNumber, 
+    		name, 
+    		pic_img AS picImg
+    	FROM
+    		os_product p
+    	LEFT JOIN os_product_category c ON p.product_id = c.product_id
+    	WHERE
+    		 status = #{status}
+    	AND show_in_nav = #{showInNav}
+    	AND c.category_id IN
+	    	<foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+				#{categoryId}
+			</foreach>
+    </select>
+    
 </mapper>

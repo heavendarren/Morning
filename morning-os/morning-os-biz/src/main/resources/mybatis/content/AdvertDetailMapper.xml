@@ -22,4 +22,21 @@
     <sql id="Base_Column_List">
         advert_detail_id AS advertDetailId, title, advert_id AS advertId, sort, href, status, pic_img AS picImg, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, remarks
     </sql>
+    
+    <!-- 根据广告默认数量和广告状态查找广告列表-->
+    <select id="selectByStatus" resultType="com.pussinboots.morning.os.modules.content.entity.AdvertDetail">
+    	SELECT
+    		title, 
+    		sort, 
+    		href, 
+    		pic_img AS picImg
+    	FROM
+    		os_advert_detail 
+    	WHERE
+    		status = #{status}
+    	AND advert_id = #{advertId}
+		ORDER BY
+			sort ASC
+		LIMIT #{defultNumber}
+    </select>
 </mapper>

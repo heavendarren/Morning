@@ -1,7 +1,9 @@
 package com.pussinboots.morning.os.modules.product.service;
 
-import com.pussinboots.morning.os.modules.product.entity.Product;
+import java.util.List;
+
 import com.baomidou.mybatisplus.service.IService;
+import com.pussinboots.morning.os.modules.product.entity.Product;
 
 /**
  * 
@@ -13,5 +15,13 @@ import com.baomidou.mybatisplus.service.IService;
 *
  */
 public interface IProductService extends IService<Product> {
+	
+	/**
+	 * 根据是否是明星产品查询产品列表
+	 * @param starProduct 明星产品 1:是/0:否
+	 * @param showNumber 显示数量
+	 * @return
+	 */
+	List<Product> selectProductsByStar(Integer starProduct, Integer showNumber);
 	
 }

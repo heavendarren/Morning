@@ -14,6 +14,9 @@ a:hover {
 	text-decoration: none;
 	color: #ff6700;
 }
+a:link,a:visited{
+ text-decoration:none;  /*超链接无下划线*/
+}
 li {
 	list-style: none;
 }
@@ -49,9 +52,6 @@ h6 {
 	margin-left: auto;
 	width: 1226px;
 }
-a:active, a:focus, a:hover {
-	text-decoration: none;
-}
 /*-------------导航栏-----------------*/
 .site-topbar {
 	width: 100%;
@@ -80,6 +80,7 @@ a:active, a:focus, a:hover {
 .topbar-cart, .topbar-info {
 	float: right;
 	color: #b0b0b0;
+	margin: 0 .5em;
 	color: #424242;
 	line-height: 40px;
 	height: 40px;
@@ -87,12 +88,6 @@ a:active, a:focus, a:hover {
 .site-header .nav-item .link:hover {
 	color: #ff6700;
 	text-decoration: none;
-}
-.indexTop:nth-last-of-type(1) {
-	color:#333;
-}
-.indexBottom:nth-last-of-type(1) {
-	color:#ffffff;
 }
 /*********************购物车**********************************/
 .site-topbar .topbar-cart {
@@ -410,21 +405,27 @@ margin-le ft:16px;
 	line-height: 16px;
 	color: #ccc;
 }
+.site-category-list .children-col-2 {
+	width: 531px;
+}
 .site-category-list .children-col-3 {
-	width: 795px;
+	width: 796px;
+}
+.site-category-list .children-col-4 {
+	width: 993px;
 }
 .site-category-list .children {
 	display: none;
 	position: absolute;
 	left: 234px;
 	top: 0;
-	z-index: 6;
-	height: 462px;
+	z-index: 24;
+	height: 460px;
 	border: 1px solid #e0e0e0;
 	border-left: 0;
 	background: #fff;
 	-webkit-box-shadow: 0 8px 16px rgba(0,0,0,0.18);
-	box-shadow: 0 8px 16px rgba(0,0,0,0.18);
+	box-shadow: 0 8px 16px rgba(0,0,0,0.18)
 }
 .site-category-list .children-list-col {
 	float: left;

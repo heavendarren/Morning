@@ -8,7 +8,9 @@
 		<result column="parent_id" property="parentId" />
 		<result column="name" property="name" />
 		<result column="sort" property="sort" />
+		<result column="type" property="type" />
 		<result column="status" property="status" />
+		<result column="show_in_nav" property="showInNav" />
 		<result column="create_time" property="createTime" />
 		<result column="create_by" property="createBy" />
 		<result column="update_time" property="updateTime" />
@@ -21,6 +23,23 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        category_id AS categoryId, parent_id AS parentId, name, sort, status, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, page_title AS pageTitle, page_description AS pageDescription, page_keyword AS pageKeyword, remarks
+        category_id AS categoryId, parent_id AS parentId, name, sort, type, status, show_in_nav AS showInNav, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, page_title AS pageTitle, page_description AS pageDescription, page_keyword AS pageKeyword, remarks
     </sql>
+    
+    <!-- 根据分类导航状态和分类状态查找分类列表 -->
+    <select id="selectCategorysByStatus" resultType="com.pussinboots.morning.os.modules.product.entity.Category">
+    	SELECT
+        	category_id AS categoryId, 
+        	parent_id AS parentId, 
+        	name, 
+        	type
+        FROM
+        	os_category
+        WHERE
+        	status = #{status}
+        AND show_in_nav = #{showInNav}
+        ORDER BY
+        	sort ASC
+    </select>
+    
 </mapper>

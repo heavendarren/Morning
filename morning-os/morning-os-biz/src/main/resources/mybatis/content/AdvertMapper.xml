@@ -9,11 +9,13 @@
 		<result column="width" property="width" />
 		<result column="height" property="height" />
 		<result column="description" property="description" />
+		<result column="code" property="code" />
 		<result column="template" property="template" />
+		<result column="defult_number" property="defultNumber" />		
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        advert_id AS advertId, name, width, height, description, template
+        advert_id AS advertId, name, width, height, description, code, template, defult_number AS defultNumber
     </sql>
 </mapper>

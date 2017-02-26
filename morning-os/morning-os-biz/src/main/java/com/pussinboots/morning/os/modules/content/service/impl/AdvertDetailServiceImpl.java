@@ -1,10 +1,16 @@
 package com.pussinboots.morning.os.modules.content.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.pussinboots.morning.os.modules.content.entity.Advert;
 import com.pussinboots.morning.os.modules.content.entity.AdvertDetail;
 import com.pussinboots.morning.os.modules.content.mapper.AdvertDetailMapper;
+import com.pussinboots.morning.os.modules.content.mapper.AdvertMapper;
 import com.pussinboots.morning.os.modules.content.service.IAdvertDetailService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 
 /**
  * 
@@ -18,4 +24,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdvertDetailServiceImpl extends ServiceImpl<AdvertDetailMapper, AdvertDetail> implements IAdvertDetailService {
 	
+	@Autowired
+	private AdvertDetailMapper advertDetailMapper;
+	@Autowired
+	private AdvertMapper advertMapper;
+
+	@Override
+	public List<AdvertDetail> selectByAdvertCode(String code, Integer status) {
+		Advert queryadvert = new Advert();
+		queryadvert.setCode(code);
+		Advert advert = advertMapper.selectOne(queryadvert);
+		return advertDetailMapper.selectByStatus(advert.getAdvertId(), advert.getDefultNumber(), status);
+	}
 }

@@ -5,7 +5,9 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 
 /**
@@ -42,6 +44,11 @@ public class Product extends Model<Product> {
      */
 	private String name;
     /**
+     * 显示价格
+     */
+	@TableField("show_price")
+	private BigDecimal showPrice;
+    /**
      * 商品简介
      */
 	private String introduce;
@@ -55,6 +62,16 @@ public class Product extends Model<Product> {
      */
 	@TableField("pic_img")
 	private String picImg;
+    /**
+     * 显示首页导航条上：1.显示；0.隐藏
+     */
+	@TableField("show_in_nav")
+	private Integer showInNav;
+    /**
+     * 是否是明星产品：0,否；1.是
+     */
+	@TableField("star_product")
+	private Integer starProduct;
     /**
      * 商品状态：0,新增；1,上架；2,下架
      */
@@ -132,6 +149,14 @@ public class Product extends Model<Product> {
 		this.name = name;
 	}
 
+	public BigDecimal getShowPrice() {
+		return showPrice;
+	}
+
+	public void setShowPrice(BigDecimal showPrice) {
+		this.showPrice = showPrice;
+	}
+
 	public String getIntroduce() {
 		return introduce;
 	}
@@ -154,6 +179,22 @@ public class Product extends Model<Product> {
 
 	public void setPicImg(String picImg) {
 		this.picImg = picImg;
+	}
+
+	public Integer getShowInNav() {
+		return showInNav;
+	}
+
+	public void setShowInNav(Integer showInNav) {
+		this.showInNav = showInNav;
+	}
+
+	public Integer getStarProduct() {
+		return starProduct;
+	}
+
+	public void setStarProduct(Integer starProduct) {
+		this.starProduct = starProduct;
 	}
 
 	public Integer getStatus() {

@@ -1,7 +1,11 @@
 package com.pussinboots.morning.os.modules.product.mapper;
 
-import com.pussinboots.morning.os.modules.product.entity.Category;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.pussinboots.morning.os.modules.product.entity.Category;
 
 /**
  * 
@@ -13,5 +17,13 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 *
  */
 public interface CategoryMapper extends BaseMapper<Category> {
+	
+	/**
+	 * 根据分类导航状态和分类状态查找分类列表
+	 * @param status 分类状态
+	 * @param showInNav 分类导航状态
+	 * @return
+	 */
+	List<Category> selectCategorysByStatus(@Param("status") Integer status,@Param("showInNav") Integer showInNav);
 
 }

@@ -1,6 +1,10 @@
 package com.pussinboots.morning.os.modules.product.service;
 
 import com.pussinboots.morning.os.modules.product.entity.Category;
+import com.pussinboots.morning.os.modules.product.vo.CategoryInNavVO;
+
+import java.util.List;
+
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -13,5 +17,11 @@ import com.baomidou.mybatisplus.service.IService;
 *
  */
 public interface ICategoryService extends IService<Category> {
+	
+	/**
+	 * 查找首页导航栏商品列表
+	 * @return
+	 */
+	List<CategoryInNavVO> selectCategorysByStatus();
 	
 }
