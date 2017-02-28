@@ -10,10 +10,10 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pussinboots.morning.cms.modules.administrator.mapper.RoleMenuMapper;
 import com.pussinboots.morning.cms.modules.system.entity.Menu;
-import com.pussinboots.morning.cms.modules.system.enums.MenuStatusEnum;
 import com.pussinboots.morning.cms.modules.system.enums.MenuTypeEnum;
 import com.pussinboots.morning.cms.modules.system.mapper.MenuMapper;
 import com.pussinboots.morning.cms.modules.system.service.IMenuService;
+import com.pussinboots.morning.common.enums.StatusEnum;
 
 /**
  * 
@@ -71,18 +71,18 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 
 	@Override
 	public void updateMenuStatus(Long menuId, Integer status) {
-		if(status.equals(MenuStatusEnum.SHOW.getStatus())){
-			//显示该目录
+		if (status.equals(StatusEnum.SHOW.getStatus())) {
+			// 显示该目录
 			Menu menu = new Menu();
 			menu.setMenuId(menuId);
 			menu.setStatus(status);
 			menuMapper.updateById(menu);
-		}else if(status.equals(MenuStatusEnum.HIDDEN.getStatus())){
-			//冻结该目录及其及目录
+		} else if (status.equals(StatusEnum.HIDDEN.getStatus())) {
+			// 冻结该目录及其及目录
 			List<Long> menuIds = new ArrayList<>();
 			menuIds.add(menuId);
-			getMenuIds(menuIds,menuId);
-			menuMapper.updateStatusByIds(menuIds,status);
+			getMenuIds(menuIds, menuId);
+			menuMapper.updateStatusByIds(menuIds, status);
 		}
 	}
 	
@@ -95,9 +95,9 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 	public void deleteMenu(Long menuId) {
 		List<Long> menuIds = new ArrayList<>();
 		menuIds.add(menuId);
-		getMenuIds(menuIds,menuId);
-		menuMapper.deleteBatchIds(menuIds);//删除目录及子目录
-		roleMenuMapper.deleteMenus(menuIds);//删除角色授权表中记录
+		getMenuIds(menuIds, menuId);
+		menuMapper.deleteBatchIds(menuIds);// 删除目录及子目录
+		roleMenuMapper.deleteMenus(menuIds);// 删除角色授权表中记录
 	}
 	
 	/**
@@ -120,5 +120,4 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 		}
 		return menuIds;
 	}
-
 }

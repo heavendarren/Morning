@@ -51,7 +51,7 @@
               </div>
               <label class="col-sm-2 control-label">排序：</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control" name="sort" value="${menu.sort }">
+                <input type="text" class="form-control" name="sort" value="${menu.sort}">
               </div>
             </div>
             <div class="hr-line-dashed"></div>
@@ -59,10 +59,10 @@
               <label class="col-sm-2 control-label">是否显示：</label>
               <div class="col-sm-10">
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="status" value="1" <c:if test="${menu.status==1 }">checked="checked"</c:if> >
+                  <input type="radio" name="status" value="1" ${menu.status eq '1'?'checked="checked"':''}>
                   开启</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="status" value="0" <c:if test="${menu.status==0 }">checked="checked"</c:if> >
+                  <input type="radio" name="status" value="0" ${menu.status eq '0'?'checked="checked"':''}>
                   冻结</label>
                 <label class="radio-inline add-radio"><strong>状态：</strong> “开启”代表此数据显示，“冻结”代表此数据隐藏</label>
               </div>

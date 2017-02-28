@@ -45,22 +45,22 @@
               <label class="col-sm-2 control-label">性别：</label>
               <div class="col-sm-4">
                 <label class="radio-inline add-radio">
-                  <input type="radio"  name="sex" value="1" <c:if test="${user.sex==1 }">checked="checked"</c:if> >
+                  <input type="radio"  name="sex" value="1" ${user.sex eq '1'?'checked="checked"':''}>
                   男</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="sex" value="2" <c:if test="${user.sex==2 }">checked="checked"</c:if> >
+                  <input type="radio" name="sex" value="2" ${user.sex eq '2'?'checked="checked"':''}>
                   女</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="sex" value="0" <c:if test="${user.sex==0 }">checked="checked"</c:if> >
+                  <input type="radio" name="sex" value="0" ${user.sex eq '0'?'checked="checked"':''}>
                   保密</label>
               </div>
               <label class="col-sm-2 control-label">状态：</label>
               <div class="col-sm-4">
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="status" value="1" <c:if test="${user.status==1 }">checked="checked"</c:if> >
+                  <input type="radio" name="status" value="1" ${user.status eq '1'?'checked="checked"':''}>
                   开启</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="status" value="0" <c:if test="${user.status==0 }">checked="checked"</c:if> >
+                  <input type="radio" name="status" value="0" ${user.status eq '0'?'checked="checked"':''}>
                   关闭</label>
               </div>
             </div>
@@ -71,7 +71,7 @@
                 <c:forEach items="${roles }" var="role">
                   <div class="checkbox col-sm-3">
                     <label>
-                      <input type="checkbox" name="roleId" value="${role.roleId }" <c:forEach items="${userRoles}" var="userRole"> <c:if test="${role.roleId==userRole.roleId }">checked="checked"</c:if></c:forEach>/>
+                      <input type="checkbox" name="roleId" value="${role.roleId }" <c:forEach items="${userRoles}" var="userRole"> ${role.roleId eq userRole.roleId ?'checked="checked"':''}</c:forEach>/>
                       &nbsp;&nbsp;${role.roleName} </label>
                   </div>
                 </c:forEach>
@@ -82,13 +82,13 @@
               <label class="col-sm-2 control-label">归属部门：</label>
               <div class="col-sm-4">
                 <select class="form-control" name="organizationId">
-                <option value="">--请选择--</option> 
-                <c:forEach items="${organizations }" var="organization">
-                  <option value="${organization.organizationId }" <c:if test="${user.organizationId == organization.organizationId }">selected="selected"</c:if> >${organization.organizationName }</option>
-                </c:forEach>
+                  <option value="">--请选择--</option>
+                  <c:forEach items="${organizations }" var="organization">
+                    <option value="${organization.organizationId }" ${user.organizationId eq organization.organizationId ?'selected="selected"':''}>${organization.organizationName }</option>
+                  </c:forEach>
                 </select>
               </div>
-            </div>            
+            </div>
             <div class="hr-line-dashed"></div>
             <div class="form-group">
               <div class="col-sm-4 col-sm-offset-4 add-submit">

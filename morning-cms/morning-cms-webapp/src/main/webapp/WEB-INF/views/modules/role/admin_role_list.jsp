@@ -56,27 +56,26 @@
                     <tr>
                       <td>${role.roleName}</td>
                       <td>${role.roleSign}</td>
-                      <td><c:if test="${role.isSystem==1}"><span class="label label-danger">是</span></c:if>
-                        <c:if test="${role.isSystem==0}"><span class="label label-primary">否</span></c:if></td>
+                      <td><span class="label ${role.isSystem eq '1' ? 'label-danger':'label-primary'}">${role.isSystem eq '1'?'是':'否'}</span></td>
                       <td>${role.remarks}</td>
-                      <td class="td-status"><c:if test="${role.status==1}"><span class="label label-primary">正常</span></c:if>
-                        <c:if test="${role.status==0}"><span class="label label-danger">冻结</span></c:if></td>
+                      <td class="td-status"><span class="label ${role.status eq '1'?'label-primary':'label-danger'}">${role.status eq '1'?'正常':'冻结'}</span></td>
                       <td>${role.updateBy}</td>
                       <td><fmt:formatDate value="${role.updateTime}" pattern="yyyy/MM/dd HH:mm" /></td>
-                      <td class="td-manage"><c:if test="${role.isSystem==1}">
+                      <td class="td-manage">
+                      	<c:if test="${role.isSystem eq '1'}">
                           <shiro:hasRole name="admin">
                             <shiro:hasPermission name="administrator:role:audit">
-                              <c:if test="${role.status==1}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,'${ctx}/administrator/role/${role.roleId}/audit')" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
-                              <c:if test="${role.status==0}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,'${ctx}/administrator/role/${role.roleId}/audit')" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
+                              <c:if test="${role.status eq '1'}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,'${ctx}/administrator/role/${role.roleId}/audit')" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
+                              <c:if test="${role.status eq '0'}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,'${ctx}/administrator/role/${role.roleId}/audit')" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
                             </shiro:hasPermission>
                             <shiro:hasPermission name="administrator:role:edit"> <a class="edit m-l-sm text-warning" href="javascript:void(0)" onclick="member_show('${role.roleName }','${ctx}/administrator/role','${role.roleId}','edit','1000',null)" title="编辑"> <i class="glyphicon glyphicon-edit"></i> </a> </shiro:hasPermission>
                             <shiro:hasPermission name="administrator:role:delete"> <a class="remove m-l-sm text-danger" href="javascript:void(0)" onclick="member_delete(this,'${ctx}/administrator/role/'+${role.roleId}+'/delete','确认要删除该用户吗?')" title="删除"> <i class="glyphicon glyphicon-remove"></i> </a> </shiro:hasPermission>
                           </shiro:hasRole>
                         </c:if>
-                        <c:if test="${role.isSystem==0}">
+                        <c:if test="${role.isSystem eq '0'}">
                           <shiro:hasPermission name="administrator:role:audit">
-                            <c:if test="${role.status==1}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,'${ctx}/administrator/role/${role.roleId}/audit')" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
-                            <c:if test="${role.status==0}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,'${ctx}/administrator/role/${role.roleId}/audit')" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
+                            <c:if test="${role.status eq '1'}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,'${ctx}/administrator/role/${role.roleId}/audit')" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
+                            <c:if test="${role.status eq '0'}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,'${ctx}/administrator/role/${role.roleId}/audit')" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
                           </shiro:hasPermission>
                           <shiro:hasPermission name="administrator:role:edit"> <a class="edit m-l-sm text-warning" href="javascript:void(0)" onclick="member_show('${role.roleName }','${ctx}/administrator/role','${role.roleId}','edit','1000',null)" title="编辑"> <i class="glyphicon glyphicon-edit"></i> </a> </shiro:hasPermission>
                           <shiro:hasPermission name="administrator:role:delete"> <a class="remove m-l-sm text-danger" href="javascript:void(0)" onclick="member_delete(this,'${ctx}/administrator/role/'+${role.roleId}+'/delete','确认要删除该用户吗?')" title="删除"> <i class="glyphicon glyphicon-remove"></i> </a> </shiro:hasPermission>

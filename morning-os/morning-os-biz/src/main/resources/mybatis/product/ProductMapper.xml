@@ -45,4 +45,21 @@
     	AND	star_product = #{starProduct}	
     	LIMIT #{showNumber}
     </select>
+    
+    <!-- 根据商品ID查找优质评论（随机抽取一条）  -->
+    <select id="selectHighGualityByProductId" resultType="com.pussinboots.morning.os.modules.product.dto.ProductCommentDTO">
+    	SELECT
+    		user_name AS userName,
+    		content
+    	FROM
+    		os_comment c
+    	LEFT JOIN os_product p ON p.product_id = c.product_id
+    	WHERE
+    		c.status = #{status}
+    	AND c.type = #{type} 
+    	AND p.product_id = #{productId}
+    	ORDER BY 
+    		RAND()  
+		LIMIT 1
+    </select>
 </mapper>

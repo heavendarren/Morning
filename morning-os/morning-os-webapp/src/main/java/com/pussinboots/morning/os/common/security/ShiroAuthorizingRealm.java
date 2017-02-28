@@ -14,9 +14,8 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.pussinboots.morning.common.enums.StatusEnum;
 import com.pussinboots.morning.os.modules.user.entity.User;
-import com.pussinboots.morning.os.modules.user.enums.EmailActiveEnum;
-import com.pussinboots.morning.os.modules.user.enums.UserStatusEnum;
 import com.pussinboots.morning.os.modules.user.service.IUserService;
 
 /**
@@ -46,11 +45,11 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
 		
 		User user = userService.selectByLoginName(token.getUsername());
 		
-		if (user == null || user.getEmailIsActive().equals(EmailActiveEnum.NONACTIVATED.getStatus())) {
+		if (user == null || user.getEmailIsActive().equals(StatusEnum.NONACTIVATED.getStatus())) {
 			throw new UnknownAccountException();// 没找到帐号或者邮箱未被激活
 		}
 		
-		if (UserStatusEnum.FREEZE.getStatus().equals(user.getStatus())) {
+		if (StatusEnum.FREEZE.getStatus().equals(user.getStatus())) {
 			throw new DisabledAccountException();// 校验用户状态
 		}
 		

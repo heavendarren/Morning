@@ -21,8 +21,6 @@ import com.pussinboots.morning.cms.modules.administrator.entity.Organization;
 import com.pussinboots.morning.cms.modules.administrator.entity.Role;
 import com.pussinboots.morning.cms.modules.administrator.entity.User;
 import com.pussinboots.morning.cms.modules.administrator.entity.UserLoginLog;
-import com.pussinboots.morning.cms.modules.administrator.enums.OrganizationStatusEnum;
-import com.pussinboots.morning.cms.modules.administrator.enums.RoleStatusEnum;
 import com.pussinboots.morning.cms.modules.administrator.service.IOrganizationService;
 import com.pussinboots.morning.cms.modules.administrator.service.IRoleService;
 import com.pussinboots.morning.cms.modules.administrator.service.IUserLoginLogService;
@@ -30,6 +28,7 @@ import com.pussinboots.morning.cms.modules.administrator.service.IUserRoleServic
 import com.pussinboots.morning.cms.modules.administrator.service.IUserService;
 import com.pussinboots.morning.cms.modules.administrator.vo.UserVO;
 import com.pussinboots.morning.common.controller.BaseController;
+import com.pussinboots.morning.common.enums.StatusEnum;
 import com.pussinboots.morning.common.exception.ValidateException;
 import com.pussinboots.morning.common.result.ResponseResult;
 import com.pussinboots.morning.common.util.RegexUtils;
@@ -167,15 +166,15 @@ public class AdministratorListController extends BaseController{
 		model.addAttribute("user", user);
 		
 		// 用户权限
-		List<Role> roles = roleService.selectRoles(RoleStatusEnum.NORMAL.getStatus());
+		List<Role> roles = roleService.selectRoles(StatusEnum.NORMAL.getStatus());
 		model.addAttribute("roles", roles);
 		
 		//分配角色
-		List<Role> userRoles = userRoleService.selectRolesByUserId(user.getUserId(),RoleStatusEnum.NORMAL.getStatus());
+		List<Role> userRoles = userRoleService.selectRolesByUserId(user.getUserId(),StatusEnum.NORMAL.getStatus());
 		model.addAttribute("userRoles", userRoles);
 		
 		// 组织列表
-		List<Organization> organizations = organizationService.selectOrganizations(OrganizationStatusEnum.NORMAL.getStatus());
+		List<Organization> organizations = organizationService.selectOrganizations(StatusEnum.NORMAL.getStatus());
 		model.addAttribute("organizations", organizations);
 		
 		return ADMIN_USER_UPDATE;
@@ -189,11 +188,11 @@ public class AdministratorListController extends BaseController{
 	@GetMapping(value = "/create")
 	public String create(Model model) {
 		// 用户权限
-		List<Role> roles = roleService.selectRoles(RoleStatusEnum.NORMAL.getStatus());
+		List<Role> roles = roleService.selectRoles(StatusEnum.NORMAL.getStatus());
 		model.addAttribute("roles", roles);
 		
 		// 组织列表
-		List<Organization> organizations = organizationService.selectOrganizations(OrganizationStatusEnum.NORMAL.getStatus());
+		List<Organization> organizations = organizationService.selectOrganizations(StatusEnum.NORMAL.getStatus());
 		model.addAttribute("organizations", organizations);
 		
 		return ADMIN_USER_CREATE;

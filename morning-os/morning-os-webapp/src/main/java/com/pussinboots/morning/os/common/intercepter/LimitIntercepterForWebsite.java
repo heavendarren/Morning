@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.pussinboots.morning.common.enums.StatusEnum;
 import com.pussinboots.morning.os.modules.content.entity.NavigationBar;
-import com.pussinboots.morning.os.modules.content.enums.NavigationBarStatusEnum;
 import com.pussinboots.morning.os.modules.content.enums.NavigationBarTypeEnum;
 import com.pussinboots.morning.os.modules.content.service.INavigationBarService;
 
@@ -41,11 +41,14 @@ public class LimitIntercepterForWebsite extends HandlerInterceptorAdapter {
 		System.out.println(url);
 		// 网站导航配置
 		List<NavigationBar> indexTop = navigationBarService.selectNavigationBarByType(
-				NavigationBarTypeEnum.INDEX_TOP.getType(), NavigationBarStatusEnum.SHOW.getStatus());
+				NavigationBarTypeEnum.INDEX_TOP.getType(), StatusEnum.SHOW.getStatus());
 		request.setAttribute(NavigationBarTypeEnum.INDEX_TOP.getCode(), indexTop);// 首页顶部导航栏
 		List<NavigationBar> indexBottom = navigationBarService.selectNavigationBarByType(
-				NavigationBarTypeEnum.INDEX_BOTTOM.getType(), NavigationBarStatusEnum.SHOW.getStatus());
-		request.setAttribute(NavigationBarTypeEnum.INDEX_BOTTOM.getCode(), indexBottom);// 首页底部导航栏		
+				NavigationBarTypeEnum.INDEX_BOTTOM.getType(), StatusEnum.SHOW.getStatus());
+		request.setAttribute(NavigationBarTypeEnum.INDEX_BOTTOM.getCode(), indexBottom);// 首页底部导航栏	
+		List<NavigationBar> indexClassify = navigationBarService.selectNavigationBarByType(
+				NavigationBarTypeEnum.INDEX_CLASSIFY.getType(), StatusEnum.SHOW.getStatus());
+		request.setAttribute(NavigationBarTypeEnum.INDEX_CLASSIFY.getCode(), indexClassify);// 首页顶部导航栏
 		return super.preHandle(request, response, handler);
 	}
 	

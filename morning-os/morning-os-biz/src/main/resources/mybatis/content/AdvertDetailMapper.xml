@@ -7,6 +7,7 @@
 		<id column="advert_detail_id" property="advertDetailId" />
 		<result column="title" property="title" />
 		<result column="advert_id" property="advertId" />
+		<result column="category_id" property="categoryId" />
 		<result column="sort" property="sort" />
 		<result column="href" property="href" />
 		<result column="status" property="status" />
@@ -20,7 +21,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        advert_detail_id AS advertDetailId, title, advert_id AS advertId, sort, href, status, pic_img AS picImg, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, remarks
+        advert_detail_id AS advertDetailId, title, advert_id AS advertId, category_id AS categoryId, sort, href, status, pic_img AS picImg, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, remarks
     </sql>
     
     <!-- 根据广告默认数量和广告状态查找广告列表-->

@@ -35,4 +35,81 @@
 			</foreach>
     </select>
     
+    <!-- 通过目录ID查找产品列表及标签（随机查询showNumber个） -->
+    <select id="selectProductVOsByCategoryIds" resultType="com.pussinboots.morning.os.modules.product.vo.ProductVO">
+    	SELECT
+    		p.product_id AS productId, 
+    		product_number AS productNumber, 
+    		name, 
+    		show_price AS showPrice, 
+    		pic_img AS picImg,
+    		introduce,	
+    		p.label_id AS labelId,
+    		label_name AS labelName
+    	FROM
+    		os_product p
+    	LEFT JOIN os_product_category c ON p.product_id = c.product_id
+    	LEFT JOIN os_label l ON p.label_id = l.label_id
+    	WHERE
+    		 p.status = #{status}
+    	AND c.category_id IN
+	    	<foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+				#{categoryId}
+			</foreach>
+		ORDER BY 
+			RAND()  
+		LIMIT #{showNumber}
+    </select>
+    
+    <!-- 通过目录ID查找产品列表及标签（热门产品前showNumber个） -->
+    <select id="selectHotProductVOsByCategoryIds" resultType="com.pussinboots.morning.os.modules.product.vo.ProductVO">
+    	SELECT
+    		p.product_id AS productId, 
+    		product_number AS productNumber, 
+    		name, 
+    		show_price AS showPrice, 
+    		pic_img AS picImg,
+    		introduce,	
+    		p.label_id AS labelId,
+    		a.comment_number AS commentNumber,
+    		label_name AS labelName
+    	FROM
+    		os_product p
+    	LEFT JOIN os_product_category c ON c.product_id = p.product_id
+    	LEFT JOIN os_label l ON l.label_id = p.label_id
+    	LEFT JOIN os_product_attribute a ON a.product_id = p.product_id
+    	WHERE
+    		 p.status = #{status}
+    	AND c.category_id IN
+	    	<foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+				#{categoryId}
+			</foreach>
+		ORDER BY 
+			a.sales_volume DESC
+		LIMIT #{showNumber}
+    </select>
+    
+    <!-- 通过目录ID查找产品列表及标签  -->
+    <select id="selectProductVOs" resultType="com.pussinboots.morning.os.modules.product.vo.ProductVO">
+    	SELECT
+    		p.product_id AS productId, 
+    		product_number AS productNumber, 
+    		name, 
+    		show_price AS showPrice, 
+    		pic_img AS picImg,
+    		introduce,	
+    		p.label_id AS labelId,
+    		label_name AS labelName
+    	FROM
+    		os_product p
+    	LEFT JOIN os_product_category c ON c.product_id = p.product_id
+    	LEFT JOIN os_label l ON l.label_id = p.label_id
+    	WHERE
+    		 p.status = #{status}
+    	AND c.category_id = #{categoryId}
+		ORDER BY 
+			RAND()  
+		LIMIT #{showNumber}
+    </select>
+    
 </mapper>

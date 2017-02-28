@@ -37,13 +37,12 @@
             </thead>
             <tbody>
               <c:forEach items="${menus}" var="menu">
-                <tr id="${menu.menuId}" pId="${menu.parentId ne '1'?menu.parentId:'0'}">
-                  <td class="<c:if test="${menu.parentId==1}">menuName</c:if>"><i class="fa fa-${not empty menu.icon?menu.icon:' hide'} m-l-xs m-r-xs"></i>${menu.menuName}</td>
+                <tr id="${menu.menuId}" pId="${menu.parentId ne '1' ? menu.parentId:'0'}">
+                  <td class="${menu.parentId eq '1'?'menuName':''}"><i class="fa fa-${not empty menu.icon ? menu.icon:' hide'} m-l-xs m-r-xs"></i>${menu.menuName}</td>
                   <td>${menu.menuCode}</td>
                   <td>${menu.href}</td>
                   <td style="text-align:center;">${menu.sort}</td>
-                  <td class="td-status" style="text-align:center;"><c:if test="${menu.status==1}"><span class="label label-primary">正常</span></c:if>
-                    <c:if test="${menu.status==0}"><span class="label label-danger">冻结</span></c:if></td>
+                  <td class="td-status" style="text-align:center;"><span class="label ${menu.status eq '1'?'label-primary':'label-danger'}">${menu.status eq '1'?'正常':'冻结'}</span></td>
                   <td class="text-center">${menu.permission}</td>
                   <td class="td-manage text-center"><shiro:hasPermission name="system:menu:audit">
                       <c:if test="${menu.status==1}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,'${ctx}/system/menu/${menu.menuId}/audit')" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
@@ -52,7 +51,7 @@
                     <shiro:hasPermission name="system:menu:edit"> <a class="edit m-l-sm text-warning" href="javascript:void(0)" onclick="member_show('${menu.menuName}','${ctx}/system/menu/${menu.menuId}/edit',null,null,'1000',null)" title="编辑"> <i class="glyphicon glyphicon-edit"></i> </a> </shiro:hasPermission>
                     <shiro:hasPermission name="system:menu:delete"> <a class="remove m-l-sm text-danger" href="javascript:void(0)" onclick="member_delete(this,'${ctx}/system/menu/${menu.menuId}/delete','确认要删除该目录?')" title="删除"> <i class="glyphicon glyphicon-remove"></i> </a> </shiro:hasPermission>
                     <shiro:hasPermission name="system:menu:create">
-                      <c:if test="${menu.menuType!=0 }"> <a class="remove m-l-sm text-primary" href="javascript:void(0)" onclick="member_show('创建菜单','${ctx}/system/menu/${menu.menuId}/create',null,null,'1000',null)" title="添加下级菜单"> <i class="glyphicon glyphicon-sort-by-attributes-alt"></i> </a> </c:if>
+                      <c:if test="${menu.menuType != 0}"> <a class="remove m-l-sm text-primary" href="javascript:void(0)" onclick="member_show('创建菜单','${ctx}/system/menu/${menu.menuId}/create',null,null,'1000',null)" title="添加下级菜单"> <i class="glyphicon glyphicon-sort-by-attributes-alt"></i> </a></c:if>
                     </shiro:hasPermission></td>
                 </tr>
               </c:forEach>

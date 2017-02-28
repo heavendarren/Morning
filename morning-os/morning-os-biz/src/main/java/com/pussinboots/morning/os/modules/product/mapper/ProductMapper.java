@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.pussinboots.morning.os.modules.product.dto.ProductCommentDTO;
 import com.pussinboots.morning.os.modules.product.entity.Product;
 
 /**
@@ -27,4 +28,14 @@ public interface ProductMapper extends BaseMapper<Product> {
 	 */
 	List<Product> selectProductsByStar(@Param("starProduct") Integer starProduct,
 			@Param("showNumber") Integer showNumber, @Param("status") Integer status);
+	
+	/**
+	 * 根据商品ID查找优质评论（随机抽取一条）
+	 * @param productId 商品ID
+	 * @param type 评论类型
+	 * @param status 评论状态
+	 * @return
+	 */
+	ProductCommentDTO selectHighGualityByProductId(@Param("productId") Long productId,
+			@Param("type") Integer type, @Param("status") Integer status);
 }

@@ -43,13 +43,13 @@
               <div class="col-sm-6">
                 <input id="sex"  type="text" class="form-control" disabled="disabled" value="<c:if test="${user.sex==1 }">男</c:if><c:if test="${user.sex==2 }">女</c:if><c:if test="${user.sex==0 }">保密</c:if>">
                 <label class="radio-inline add-radio" >
-                  <input type="radio"  name="sex" value="1" <c:if test="${user.sex==1 }">checked="checked"</c:if> >
+                  <input type="radio"  name="sex" value="1" ${user.sex eq '1'?'checked="checked"':''}>
                   男</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="sex" value="2" <c:if test="${user.sex==2 }">checked="checked"</c:if> >
+                  <input type="radio" name="sex" value="2" ${user.sex eq '2'?'checked="checked"':''}>
                   女</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="sex" value="0" <c:if test="${user.sex==0 }">checked="checked"</c:if> >
+                  <input type="radio" name="sex" value="0" ${user.sex eq '0'?'checked="checked"':''}>
                   保密</label>
               </div>
             </div>

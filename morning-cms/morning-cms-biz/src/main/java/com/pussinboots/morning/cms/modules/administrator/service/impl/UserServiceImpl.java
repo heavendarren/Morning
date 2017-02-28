@@ -12,16 +12,17 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pussinboots.morning.cms.common.security.AuthorizingUser;
 import com.pussinboots.morning.cms.common.util.PasswordUtils;
+import com.pussinboots.morning.cms.common.util.UserUtils;
 import com.pussinboots.morning.cms.modules.administrator.entity.Role;
 import com.pussinboots.morning.cms.modules.administrator.entity.User;
 import com.pussinboots.morning.cms.modules.administrator.entity.UserLoginLog;
 import com.pussinboots.morning.cms.modules.administrator.entity.UserRole;
-import com.pussinboots.morning.cms.modules.administrator.enums.RoleStatusEnum;
 import com.pussinboots.morning.cms.modules.administrator.mapper.UserLoginLogMapper;
 import com.pussinboots.morning.cms.modules.administrator.mapper.UserMapper;
 import com.pussinboots.morning.cms.modules.administrator.mapper.UserRoleMapper;
 import com.pussinboots.morning.cms.modules.administrator.service.IUserService;
 import com.pussinboots.morning.cms.modules.administrator.vo.UserVO;
+import com.pussinboots.morning.common.enums.StatusEnum;
 import com.pussinboots.morning.common.exception.ValidateException;
 
 /**
@@ -52,6 +53,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		// 插入该管理员
 		user.setSalt(PasswordUtils.getSalt());
 		user.setLoginPassword(PasswordUtils.getMd5(user.getLoginPassword(), user.getLoginName(), user.getSalt()));
+		user.setPicImg(UserUtils.getPicImg());
 		user.setCreateBy(authorizingUser.getUserName());
 		user.setCreateTime(new Date());
 		user.setUpdateBy(authorizingUser.getUserName());
@@ -119,7 +121,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		
 		// 对管理员列表进行遍历,获取角色信息
 		for(UserVO vo : userVOs){  // TODO 按理说,foreach循环不能对其中的元素进行修改. 但是这里,userVOs中重置了角色信息?
-			List<Role> roles = userRoleMapper.selectRolesByUserId(vo.getUserId(), RoleStatusEnum.NORMAL.getStatus());
+			List<Role> roles = userRoleMapper.selectRolesByUserId(vo.getUserId(), StatusEnum.NORMAL.getStatus());
 			vo.setRoles(roles);
 		}
 		return userVOs;

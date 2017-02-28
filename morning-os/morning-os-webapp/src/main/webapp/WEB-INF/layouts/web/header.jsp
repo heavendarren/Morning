@@ -25,15 +25,9 @@
 <div class="mainbav">
   <div class="LOGO"> <img src="${ctxsta}/web/img/logo.png"><img src="${ctxsta}/web/img/donghua.gif"> </div>
   <ul>
-    <li><a href="#">小米盒子</a></li>
-    <li><a href="#">红米</a></li>
-    <li><a href="#">平板</a></li>
-    <li><a href="#">电视</a></li>
-    <li><a href="#">盒子</a></li>
-    <li><a href="#">路由器</a></li>
-    <li><a href="#">智能硬件</a></li>
-    <li><a href="#">服务</a></li>
-    <li><a href="#">社区</a></li>
+    <c:forEach items="${indexClassify }" var="indexClassify">
+      <li><a href="${indexClassify.href }" target="${indexClassify.target }">${indexClassify.name }</a></li>
+    </c:forEach>
   </ul>
   <div class="search">
     <div class="search_box"> <img src=""> </div>

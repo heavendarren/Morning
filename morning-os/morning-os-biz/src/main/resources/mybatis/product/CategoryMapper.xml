@@ -11,6 +11,7 @@
 		<result column="type" property="type" />
 		<result column="status" property="status" />
 		<result column="show_in_nav" property="showInNav" />
+		<result column="show_in_index" property="showInIndex" />
 		<result column="create_time" property="createTime" />
 		<result column="create_by" property="createBy" />
 		<result column="update_time" property="updateTime" />
@@ -23,7 +24,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        category_id AS categoryId, parent_id AS parentId, name, sort, type, status, show_in_nav AS showInNav, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, page_title AS pageTitle, page_description AS pageDescription, page_keyword AS pageKeyword, remarks
+        category_id AS categoryId, parent_id AS parentId, name, sort, type, status, show_in_nav AS showInNav, show_in_index AS showInIndex, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, page_title AS pageTitle, page_description AS pageDescription, page_keyword AS pageKeyword, remarks
     </sql>
     
     <!-- 根据分类导航状态和分类状态查找分类列表 -->
@@ -42,4 +43,33 @@
         	sort ASC
     </select>
     
+    <!-- 通过父目录ID查找子目录ID及该目录ID -->
+    <select id="selectCategoryIds" resultType="java.lang.Long">
+    	SELECT
+    		category_id AS categoryId
+		FROM
+			os_category
+		WHERE
+			status = #{status}
+		AND parent_id = #{categoryId}
+		OR category_id = #{categoryId}
+    </select>
+    
+    <!-- 根据类目ID查找类目广告 -->
+    <select id="selectCategoryAdvert" resultType="com.pussinboots.morning.os.modules.product.dto.CategoryAdvertDTO">
+    	SELECT
+    		title, 
+    		href, 
+    		pic_img AS picImg
+    	FROM
+    		os_advert_detail d
+    	LEFT JOIN os_category a ON d.category_id = a.category_id
+    	WHERE 
+    		d.status = #{status}
+    	AND d.category_id = #{categoryId}
+        ORDER BY
+        	d.sort ASC
+        LIMIT 
+        	#{showNumber}
+    </select>
 </mapper>

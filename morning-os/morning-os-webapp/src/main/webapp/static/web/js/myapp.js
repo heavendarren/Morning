@@ -161,38 +161,25 @@ $(function(){
     $(".head_hot_goods_content").children().children().eq(9).css("border-color","#6a5acd");
 })
 
-
 /**
  * TAB-list
  */
 $(function() {
-	$('#match-content .brick-list').eq(0).show().siblings().hide();
-	$('#accessories .sat-list').eq(0).show().siblings().hide();
-	$('#around .sat-list').eq(0).show().siblings().hide();
-	$('.tab-list li').eq(0).show();
-	$('.tab-list li').eq(0).addClass('tab-active');
-	$('.sat li').eq(0).show();
-	$('.sat li').eq(0).addClass('tab-active');
-	$('.sat2 li').eq(0).show();
-	$('.sat2 li').eq(0).addClass('tab-active');
+	var number  = $(".page-main").attr("data-category-number");
+	for (var i = 0; i < number; i++) {
+		$('#category-' + i + '-content .brick-list').eq(0).show().siblings().hide();
+		$('#category-' + i + ' .tab-list li').eq(0).show();
+		$('#category-' + i + ' .tab-list li').eq(0).addClass('tab-active');
 
-	$('.tab-list li').mouseover(function() {
-		$(this).addClass('tab-active').siblings().removeClass('tab-active');
-		var index = $(this).index();
-		$('#match-content .brick-list').eq(index).show().siblings().hide();
-	})
-
-	$('.sat li').mouseover(function() {
-		$(this).addClass('tab-active').siblings().removeClass('tab-active');
-		var index = $(this).index();
-		$('#db .sat-list').eq(index).show().siblings().hide();
-	})
-	$('.sat2 li').mouseover(function() {
-		$(this).addClass('tab-active').siblings().removeClass('tab-active');
-		var index = $(this).index();
-		$('#db2 .sat-list').eq(index).show().siblings().hide();
-	})
+		$('#category-' + i + ' .tab-list li').mouseover(function(e) {
+			var that = $(this).parents('.home-brick-box').attr('id');
+			$(this).addClass('tab-active').siblings().removeClass('tab-active');
+			var index = $(this).index();
+			$('#' + that + ' .brick-list').eq(index).show().siblings().hide();
+		})
+	}
 })
+
 
 
 /**
@@ -239,5 +226,32 @@ $(function() {
 			"width": "296px",
 			"height": "220px"
 		}, 500);
+	});
+})
+
+/**
+ * 随机分配产品标签颜色
+ */
+$(function() {
+	var $elements = $('.flag');
+	var len = $elements.length;
+	// alert('有 ' + len + ' 个相同class');
+	$elements.each(function() {
+		var $this = $(this);
+		var num = (Math.floor(Math.random() * 4) + 1); //输出1-4的随机数搜索
+		switch (num) { //然后判断
+		case 1:
+			$this.addClass("flag-new");
+			break;
+		case 2:
+			$this.addClass("flag-saleoff");
+			break;
+		case 2:
+			$this.addClass("flag-postfree");
+			break;				
+		default:
+			$this.addClass("flag-saleoff2");
+			break;
+		}
 	});
 })

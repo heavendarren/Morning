@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pussinboots.morning.common.controller.BaseController;
+import com.pussinboots.morning.common.enums.StatusEnum;
 import com.pussinboots.morning.common.exception.ValidateException;
 import com.pussinboots.morning.common.result.ResponseResult;
 import com.pussinboots.morning.common.util.RSAUtils;
@@ -32,11 +33,9 @@ import com.pussinboots.morning.common.util.ServletUtils;
 import com.pussinboots.morning.common.util.StringUtils;
 import com.pussinboots.morning.os.common.util.SingletonLoginUtils;
 import com.pussinboots.morning.os.modules.content.entity.NavigationBar;
-import com.pussinboots.morning.os.modules.content.enums.NavigationBarStatusEnum;
 import com.pussinboots.morning.os.modules.content.enums.NavigationBarTypeEnum;
 import com.pussinboots.morning.os.modules.content.service.INavigationBarService;
 import com.pussinboots.morning.os.modules.email.entity.Email;
-import com.pussinboots.morning.os.modules.email.enums.EmailStatusEnum;
 import com.pussinboots.morning.os.modules.email.service.IEmailService;
 import com.pussinboots.morning.os.modules.user.entity.User;
 import com.pussinboots.morning.os.modules.user.entity.UserLoginLog;
@@ -84,7 +83,7 @@ public class UserLoginController extends BaseController {
 		model.addAttribute("publicKeyMap", publicKeyMap);
 		// 顶部导航栏
 		List<NavigationBar> loginTop = navigationBarService.selectNavigationBarByType(
-				NavigationBarTypeEnum.LOGIN_TOP.getType(), NavigationBarStatusEnum.SHOW.getStatus());
+				NavigationBarTypeEnum.LOGIN_TOP.getType(), StatusEnum.SHOW.getStatus());
 		model.addAttribute(NavigationBarTypeEnum.LOGIN_TOP.getCode(), loginTop);
 		return USER_LOGIN;
 	}
@@ -139,7 +138,7 @@ public class UserLoginController extends BaseController {
 	public String register(Model model) {
 		// 顶部导航栏
 		List<NavigationBar> loginTop = navigationBarService.selectNavigationBarByType(
-				NavigationBarTypeEnum.LOGIN_TOP.getType(), NavigationBarStatusEnum.SHOW.getStatus());
+				NavigationBarTypeEnum.LOGIN_TOP.getType(), StatusEnum.SHOW.getStatus());
 		model.addAttribute(NavigationBarTypeEnum.LOGIN_TOP.getCode(), loginTop);
 		return USER_REGISTER;
 	}
@@ -187,7 +186,7 @@ public class UserLoginController extends BaseController {
 		if (!result) {
 			return fail(false, "验证码错误,请重新输入!");
 		}
-		if(!EmailStatusEnum.VALID.getStatus().equals(queryEmail.getStatus())) {
+		if(!StatusEnum.VALID.getStatus().equals(queryEmail.getStatus())) {
 			return fail(false, "该验证码已失效,请重新发送邮件!");
 		}
 		userService.updateEmailActive(email);// 激活该账号
@@ -225,7 +224,7 @@ public class UserLoginController extends BaseController {
 	public String getPorgetPassword(Model model) {
 		// 顶部导航栏
 		List<NavigationBar> loginTop = navigationBarService.selectNavigationBarByType(
-				NavigationBarTypeEnum.LOGIN_TOP.getType(), NavigationBarStatusEnum.SHOW.getStatus());
+				NavigationBarTypeEnum.LOGIN_TOP.getType(), StatusEnum.SHOW.getStatus());
 		model.addAttribute(NavigationBarTypeEnum.LOGIN_TOP.getCode(), loginTop);
 		return USER_FORGET_PASSWORD;
 	}
@@ -270,7 +269,7 @@ public class UserLoginController extends BaseController {
 		if (!result) {
 			return fail(false, "验证码错误,请重新输入!");
 		}
-		if(!EmailStatusEnum.VALID.getStatus().equals(queryEmail.getStatus())) {
+		if(!StatusEnum.VALID.getStatus().equals(queryEmail.getStatus())) {
 			return fail(false, "该验证码已失效,请重新发送邮件!");
 		}
 		if (!RegexUtils.isPassword(loginPassword)) {

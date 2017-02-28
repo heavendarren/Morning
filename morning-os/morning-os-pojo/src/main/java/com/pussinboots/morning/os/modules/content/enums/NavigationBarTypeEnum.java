@@ -14,7 +14,8 @@ public enum NavigationBarTypeEnum {
 	INDEX_TOP(1, "首页-顶部", "indexTop"), 
 	INDEX_ADVERT_LEFT(2, "首页-广告栏-左部", "indexAdvertLeft"), 
 	INDEX_BOTTOM(3, "首页-底部","indexBottom"), 
-	LOGIN_TOP(4, "登录-顶部", "loginTop");
+	LOGIN_TOP(4, "登录-顶部", "loginTop"),
+	INDEX_CLASSIFY(5, "首页-分类", "indexClassify");
 
 	private Integer type;
 

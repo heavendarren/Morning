@@ -36,6 +36,11 @@ public class AdvertDetail extends Model<AdvertDetail> {
 	@TableField("advert_id")
 	private Long advertId;
     /**
+     * 分类ID
+     */
+	@TableField("category_id")
+	private Long categoryId;
+    /**
      * 排序
      */
 	private Integer sort;
@@ -100,6 +105,14 @@ public class AdvertDetail extends Model<AdvertDetail> {
 
 	public void setAdvertId(Long advertId) {
 		this.advertId = advertId;
+	}
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public Integer getSort() {

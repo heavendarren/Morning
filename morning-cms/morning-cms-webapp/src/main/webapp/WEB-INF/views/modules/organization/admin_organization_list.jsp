@@ -57,29 +57,27 @@
                   <c:forEach items="${organizations}" var="organization">
                     <tr>
                       <td>${organization.organizationName}</td>
-                      <td><c:if test="${organization.isSystem==1}"><span class="label label-danger">是</span></c:if>
-                        <c:if test="${organization.isSystem==0}"><span class="label label-primary">否</span></c:if></td>
-                      <td class="td-status"><c:if test="${organization.status==1}"><span class="label label-primary">正常</span></c:if>
-                        <c:if test="${organization.status==0}"><span class="label label-danger">冻结</span></c:if></td>
+                      <td><span class="label ${organization.isSystem eq '1'?'label-danger':'label-primary'}">${organization.isSystem eq '1'?'是':'否'}</span></td>
+                      <td class="td-status"><span class="label ${organization.status eq '1'?'label-primary':'label-danger'}">${organization.status eq '1'?'正常':'冻结'}</span></td>
                       <td>${organization.createBy}</td>
                       <td><fmt:formatDate value="${organization.createTime}" pattern="yyyy/MM/dd HH:mm" /></td>                      
                       <td>${organization.updateBy}</td>
                       <td><fmt:formatDate value="${organization.updateTime}" pattern="yyyy/MM/dd HH:mm" /></td>
                       <td>${organization.remarks}</td>
-                      <td class="td-manage"><c:if test="${organization.isSystem==1}">
+                      <td class="td-manage"><c:if test="${organization.isSystem eq '1'}">
                           <shiro:hasRole name="admin">
                             <shiro:hasPermission name="administrator:organization:audit">
-                              <c:if test="${organization.status==1}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,'${ctx}/administrator/organization/${organization.organizationId}/audit')" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
-                              <c:if test="${organization.status==0}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,'${ctx}/administrator/organization/${organization.organizationId}/audit')" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
+                              <c:if test="${organization.status eq '1'}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,'${ctx}/administrator/organization/${organization.organizationId}/audit')" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
+                              <c:if test="${organization.status eq '0'}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,'${ctx}/administrator/organization/${organization.organizationId}/audit')" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
                             </shiro:hasPermission>
                             <shiro:hasPermission name="administrator:organization:edit"> <a class="edit m-l-sm text-warning" href="javascript:void(0)" onclick="member_show('${organization.organizationName }','${ctx}/administrator/organization','${organization.organizationId}','edit','1000','600')" title="编辑"> <i class="glyphicon glyphicon-edit"></i> </a> </shiro:hasPermission>
                             <shiro:hasPermission name="administrator:organization:delete"> <a class="remove m-l-sm text-danger" href="javascript:void(0)" onclick="member_delete(this,'${ctx}/administrator/organization/'+${organization.organizationId}+'/delete','确认要删除该用户吗?')" title="删除"> <i class="glyphicon glyphicon-remove"></i> </a> </shiro:hasPermission>
                           </shiro:hasRole>
                         </c:if>
-                        <c:if test="${organization.isSystem==0}">
+                        <c:if test="${organization.isSystem eq '0'}">
                             <shiro:hasPermission name="administrator:organization:audit">
-                              <c:if test="${organization.status==1}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,'${ctx}/administrator/organization/${organization.organizationId}/audit')" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
-                              <c:if test="${organization.status==0}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,'${ctx}/administrator/organization/${organization.organizationId}/audit')" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
+                              <c:if test="${organization.status eq '1'}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,'${ctx}/administrator/organization/${organization.organizationId}/audit')" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
+                              <c:if test="${organization.status eq '0'}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,'${ctx}/administrator/organization/${organization.organizationId}/audit')" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>
                             </shiro:hasPermission>
                             <shiro:hasPermission name="administrator:organization:edit"> <a class="edit m-l-sm text-warning" href="javascript:void(0)" onclick="member_show('${organization.organizationName }','${ctx}/administrator/organization','${organization.organizationId}','edit','1000','600')" title="编辑"> <i class="glyphicon glyphicon-edit"></i> </a> </shiro:hasPermission>
                             <shiro:hasPermission name="administrator:organization:delete"> <a class="remove m-l-sm text-danger" href="javascript:void(0)" onclick="member_delete(this,'${ctx}/administrator/organization/'+${organization.organizationId}+'/delete','确认要删除该用户吗?')" title="删除"> <i class="glyphicon glyphicon-remove"></i> </a> </shiro:hasPermission>

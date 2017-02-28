@@ -57,8 +57,7 @@
                       <td><fmt:formatDate value="${users.createTime}" pattern="yyyy/MM/dd" /></td>
                       <td><fmt:formatDate value="${users.lastLoginTime}" pattern="yyyy/MM/dd HH:mm" /></td>
                       <td>${users.lastLoginIp}</td>
-                      <td class="td-status"><c:if test="${users.status==1}"><span class="label label-primary">正常</span></c:if>
-                        <c:if test="${users.status==0}"><span class="label label-danger">冻结</span></c:if></td>
+                      <td class="td-status"><span class="label ${user.status eq '1'?'label-primary':'label-danger'}">${user.status eq '1'?'正常':'冻结'}</span></td>
                     </tr>
                   </c:forEach>
                 </tbody>

@@ -7,21 +7,20 @@ import java.util.Map;
 
 /**
  * 
- * 项目名称：morning-common-base 类名称：ArrayUtil 类描述：工具类：提供一些数组工具的方法 创建人：陈星星
- * 创建时间：2017年1月18日 下午2:31:16
- * 
- * @version
+* 项目名称：morning-common-base   
+* 类名称：ArrayUtils   
+* 类描述：工具类：提供一些数组工具的方法   
+* 创建人：陈星星   
+* 创建时间：2017年2月28日 上午2:33:52   
+*
  */
 public class ArrayUtils {
 
-	private ArrayUtils() {
-	}
+	private ArrayUtils() { }
 
 	/**
 	 * 数组是否为空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为空
 	 */
 	public static <T> boolean isEmpty(final T[] array) {
@@ -30,9 +29,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为空
 	 */
 	public static boolean isEmpty(final long[] array) {
@@ -41,9 +38,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为空
 	 */
 	public static boolean isEmpty(final short[] array) {
@@ -52,9 +47,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为空
 	 */
 	public static boolean isEmpty(final char[] array) {
@@ -63,9 +56,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为空
 	 */
 	public static boolean isEmpty(final byte[] array) {
@@ -74,9 +65,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为空
 	 */
 	public static boolean isEmpty(final double[] array) {
@@ -85,9 +74,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为空
 	 */
 	public static boolean isEmpty(final float[] array) {
@@ -96,9 +83,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为空
 	 */
 	public static boolean isEmpty(final boolean[] array) {
@@ -107,9 +92,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为非空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为非空
 	 */
 	public static <T> boolean isNotEmpty(final T[] array) {
@@ -118,9 +101,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为非空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final long[] array) {
@@ -129,9 +110,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为非空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final int[] array) {
@@ -140,9 +119,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为非空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final short[] array) {
@@ -151,9 +128,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为非空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final char[] array) {
@@ -162,9 +137,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为非空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final byte[] array) {
@@ -173,9 +146,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为非空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final double[] array) {
@@ -184,9 +155,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为非空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final float[] array) {
@@ -195,9 +164,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组是否为非空
-	 * 
-	 * @param array
-	 *            数组
+	 * @param array 数组
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(final boolean[] array) {
@@ -206,11 +173,8 @@ public class ArrayUtils {
 
 	/**
 	 * 新建一个空数组
-	 * 
-	 * @param componentType
-	 *            元素类型
-	 * @param newSize
-	 *            大小
+	 * @param componentType 元素类型
+	 * @param newSize 大小
 	 * @return 空数组
 	 */
 	@SuppressWarnings("unchecked")
@@ -220,11 +184,8 @@ public class ArrayUtils {
 
 	/**
 	 * 将新元素添加到已有数组中 添加新元素会生成一个新的数组，不影响原数组
-	 * 
-	 * @param buffer
-	 *            已有数组
-	 * @param newElements
-	 *            新元素
+	 * @param buffer 已有数组
+	 * @param newElements 新元素
 	 * @return 新数组
 	 */
 	@SafeVarargs
@@ -239,13 +200,9 @@ public class ArrayUtils {
 
 	/**
 	 * 生成一个新的重新设置大小的数组
-	 * 
-	 * @param buffer
-	 *            原数组
-	 * @param newSize
-	 *            新的数组大小
-	 * @param componentType
-	 *            数组元素类型
+	 * @param buffer 原数组
+	 * @param newSize 新的数组大小
+	 * @param componentType 数组元素类型
 	 * @return 调整后的新数组
 	 */
 	public static <T> T[] resize(T[] buffer, int newSize, Class<?> componentType) {
@@ -258,11 +215,8 @@ public class ArrayUtils {
 
 	/**
 	 * 生成一个新的重新设置大小的数组 新数组的类型为原数组的类型
-	 * 
-	 * @param buffer
-	 *            原数组
-	 * @param newSize
-	 *            新的数组大小
+	 * @param buffer 原数组
+	 * @param newSize 新的数组大小
 	 * @return 调整后的新数组
 	 */
 	public static <T> T[] resize(T[] buffer, int newSize) {
@@ -272,9 +226,7 @@ public class ArrayUtils {
 	/**
 	 * 将多个数组合并在一起<br>
 	 * 忽略null的数组
-	 * 
-	 * @param arrays
-	 *            数组集合
+	 * @param arrays 数组集合
 	 * @return 合并后的数组
 	 */
 	@SafeVarargs
@@ -305,9 +257,7 @@ public class ArrayUtils {
 
 	/**
 	 * 克隆数组
-	 * 
-	 * @param array
-	 *            被克隆的数组
+	 * @param array 被克隆的数组
 	 * @return 新数组
 	 */
 	public static <T> T[] clone(T[] array) {
@@ -319,9 +269,7 @@ public class ArrayUtils {
 
 	/**
 	 * 生成一个数字列表 自动判定正序反序
-	 * 
-	 * @param excludedEnd
-	 *            结束的数字（不包含）
+	 * @param excludedEnd 结束的数字（不包含）
 	 * @return 数字列表
 	 */
 	public static int[] range(int excludedEnd) {
@@ -330,11 +278,8 @@ public class ArrayUtils {
 
 	/**
 	 * 生成一个数字列表 自动判定正序反序
-	 * 
-	 * @param includedStart
-	 *            开始的数字（包含）
-	 * @param excludedEnd
-	 *            结束的数字（不包含）
+	 * @param includedStart 开始的数字（包含）
+	 * @param excludedEnd 结束的数字（不包含）
 	 * @return 数字列表
 	 */
 	public static int[] range(int includedStart, int excludedEnd) {
@@ -343,13 +288,9 @@ public class ArrayUtils {
 
 	/**
 	 * 生成一个数字列表 自动判定正序反序
-	 * 
-	 * @param includedStart
-	 *            开始的数字（包含）
-	 * @param excludedEnd
-	 *            结束的数字（不包含）
-	 * @param step
-	 *            步进
+	 * @param includedStart 开始的数字（包含）
+	 * @param excludedEnd 结束的数字（不包含）
+	 * @param step 步进
 	 * @return 数字列表
 	 */
 	public static int[] range(int includedStart, int excludedEnd, int step) {
@@ -378,11 +319,8 @@ public class ArrayUtils {
 
 	/**
 	 * 拆分byte数组
-	 * 
-	 * @param array
-	 *            数组
-	 * @param len
-	 *            每个小节的长度
+	 * @param array 数组
+	 * @param len 每个小节的长度
 	 * @return 拆分后的数组
 	 */
 	public static byte[][] split(byte[] array, int len) {
@@ -410,11 +348,8 @@ public class ArrayUtils {
 	 * 映射键值（参考Python的zip()函数） 例如：keys = [a,b,c,d] values = [1,2,3,4] 则得到的Map是
 	 * {a=1, b=2, c=3, d=4}<br>
 	 * 如果两个数组长度不同，则只对应最短部分
-	 * 
-	 * @param keys
-	 *            键列表
-	 * @param values
-	 *            值列表
+	 * @param keys 键列表
+	 * @param values 值列表
 	 * @return Map
 	 */
 	public static <T, K> Map<T, K> zip(T[] keys, K[] values) {
@@ -433,11 +368,8 @@ public class ArrayUtils {
 
 	/**
 	 * 数组中是否包含元素
-	 * 
-	 * @param array
-	 *            数组
-	 * @param value
-	 *            被检查的元素
+	 * @param array 数组
+	 * @param value 被检查的元素
 	 * @return 是否包含
 	 */
 	public static <T> boolean contains(T[] array, T value) {
@@ -458,9 +390,7 @@ public class ArrayUtils {
 
 	/**
 	 * 将原始类型数组包装为包装类型
-	 * 
-	 * @param values
-	 *            原始类型数组
+	 * @param values 原始类型数组
 	 * @return 包装类型数组
 	 */
 	public static Integer[] wrap(int... values) {
@@ -474,9 +404,7 @@ public class ArrayUtils {
 
 	/**
 	 * 包装类数组转为原始类型数组
-	 * 
-	 * @param values
-	 *            包装类型数组
+	 * @param values 包装类型数组
 	 * @return 原始类型数组
 	 */
 	public static int[] unWrap(Integer... values) {
@@ -490,9 +418,7 @@ public class ArrayUtils {
 
 	/**
 	 * 将原始类型数组包装为包装类型
-	 * 
-	 * @param values
-	 *            原始类型数组
+	 * @param values 原始类型数组
 	 * @return 包装类型数组
 	 */
 	public static Long[] wrap(long... values) {
@@ -506,9 +432,7 @@ public class ArrayUtils {
 
 	/**
 	 * 包装类数组转为原始类型数组
-	 * 
-	 * @param values
-	 *            包装类型数组
+	 * @param values 包装类型数组
 	 * @return 原始类型数组
 	 */
 	public static long[] unWrap(Long... values) {
@@ -522,9 +446,7 @@ public class ArrayUtils {
 
 	/**
 	 * 将原始类型数组包装为包装类型
-	 * 
-	 * @param values
-	 *            原始类型数组
+	 * @param values 原始类型数组
 	 * @return 包装类型数组
 	 */
 	public static Character[] wrap(char... values) {
@@ -538,9 +460,7 @@ public class ArrayUtils {
 
 	/**
 	 * 包装类数组转为原始类型数组
-	 * 
-	 * @param values
-	 *            包装类型数组
+	 * @param values 包装类型数组
 	 * @return 原始类型数组
 	 */
 	public static char[] unWrap(Character... values) {
@@ -554,9 +474,7 @@ public class ArrayUtils {
 
 	/**
 	 * 将原始类型数组包装为包装类型
-	 * 
-	 * @param values
-	 *            原始类型数组
+	 * @param values 原始类型数组
 	 * @return 包装类型数组
 	 */
 	public static Byte[] wrap(byte... values) {
@@ -570,9 +488,7 @@ public class ArrayUtils {
 
 	/**
 	 * 包装类数组转为原始类型数组
-	 * 
-	 * @param values
-	 *            包装类型数组
+	 * @param values 包装类型数组
 	 * @return 原始类型数组
 	 */
 	public static byte[] unWrap(Byte... values) {
@@ -586,9 +502,7 @@ public class ArrayUtils {
 
 	/**
 	 * 将原始类型数组包装为包装类型
-	 * 
-	 * @param values
-	 *            原始类型数组
+	 * @param values 原始类型数组
 	 * @return 包装类型数组
 	 */
 	public static Short[] wrap(short... values) {
@@ -602,9 +516,7 @@ public class ArrayUtils {
 
 	/**
 	 * 包装类数组转为原始类型数组
-	 * 
-	 * @param values
-	 *            包装类型数组
+	 * @param values 包装类型数组
 	 * @return 原始类型数组
 	 */
 	public static short[] unWrap(Short... values) {
@@ -618,9 +530,7 @@ public class ArrayUtils {
 
 	/**
 	 * 将原始类型数组包装为包装类型
-	 * 
-	 * @param values
-	 *            原始类型数组
+	 * @param values 原始类型数组
 	 * @return 包装类型数组
 	 */
 	public static Float[] wrap(float... values) {
@@ -634,9 +544,7 @@ public class ArrayUtils {
 
 	/**
 	 * 包装类数组转为原始类型数组
-	 * 
-	 * @param values
-	 *            包装类型数组
+	 * @param values 包装类型数组
 	 * @return 原始类型数组
 	 */
 	public static float[] unWrap(Float... values) {
@@ -650,9 +558,7 @@ public class ArrayUtils {
 
 	/**
 	 * 将原始类型数组包装为包装类型
-	 * 
-	 * @param values
-	 *            原始类型数组
+	 * @param values 原始类型数组
 	 * @return 包装类型数组
 	 */
 	public static Double[] wrap(double... values) {
@@ -666,9 +572,7 @@ public class ArrayUtils {
 
 	/**
 	 * 包装类数组转为原始类型数组
-	 * 
-	 * @param values
-	 *            包装类型数组
+	 * @param values 包装类型数组
 	 * @return 原始类型数组
 	 */
 	public static double[] unWrap(Double... values) {
@@ -682,9 +586,7 @@ public class ArrayUtils {
 
 	/**
 	 * 将原始类型数组包装为包装类型
-	 * 
-	 * @param values
-	 *            原始类型数组
+	 * @param values 原始类型数组
 	 * @return 包装类型数组
 	 */
 	public static Boolean[] wrap(boolean... values) {
@@ -698,9 +600,7 @@ public class ArrayUtils {
 
 	/**
 	 * 包装类数组转为原始类型数组
-	 * 
-	 * @param values
-	 *            包装类型数组
+	 * @param values 包装类型数组
 	 * @return 原始类型数组
 	 */
 	public static boolean[] unWrap(Boolean... values) {
@@ -714,9 +614,7 @@ public class ArrayUtils {
 
 	/**
 	 * 对象是否为数组对象
-	 * 
-	 * @param obj
-	 *            对象
+	 * @param obj 对象
 	 * @return 是否为数组对象
 	 */
 	public static boolean isArray(Object obj) {
@@ -728,9 +626,7 @@ public class ArrayUtils {
 
 	/**
 	 * 数组或集合转String
-	 * 
-	 * @param obj
-	 *            集合或数组对象
+	 * @param obj 集合或数组对象
 	 * @return 数组字符串，与集合转字符串格式相同
 	 */
 	public static String toString(Object obj) {

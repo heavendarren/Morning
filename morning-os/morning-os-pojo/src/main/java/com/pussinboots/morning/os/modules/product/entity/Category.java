@@ -53,6 +53,11 @@ public class Category extends Model<Category> {
 	@TableField("show_in_nav")
 	private Integer showInNav;
     /**
+     * 显示首页主产品区：0,不显示；1,不分类主产品区；2,分类主产品区
+     */
+	@TableField("show_in_index")
+	private Integer showInIndex;
+    /**
      * 创建时间
      */
 	@TableField("create_time")
@@ -147,6 +152,14 @@ public class Category extends Model<Category> {
 
 	public void setShowInNav(Integer showInNav) {
 		this.showInNav = showInNav;
+	}
+
+	public Integer getShowInIndex() {
+		return showInIndex;
+	}
+
+	public void setShowInIndex(Integer showInIndex) {
+		this.showInIndex = showInIndex;
 	}
 
 	public Date getCreateTime() {

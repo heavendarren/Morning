@@ -1,7 +1,10 @@
 package com.pussinboots.morning.os.modules.product.service;
 
-import com.pussinboots.morning.os.modules.product.entity.ProductCategory;
+import java.util.List;
+
 import com.baomidou.mybatisplus.service.IService;
+import com.pussinboots.morning.os.modules.product.entity.ProductCategory;
+import com.pussinboots.morning.os.modules.product.vo.CategoryVO;
 
 /**
  * 
@@ -13,5 +16,13 @@ import com.baomidou.mybatisplus.service.IService;
 *
  */
 public interface IProductCategoryService extends IService<ProductCategory> {
+	
+	/**
+	 * 根据产品显示数量和广告数量查找产品列表（首页主产品区）
+	 * @param showNumber 产品显示数量
+	 * @param advertNumber 广告数量
+	 * @return
+	 */
+	List<CategoryVO> selectProductArea(Integer showNumber, Integer advertNumber);
 	
 }

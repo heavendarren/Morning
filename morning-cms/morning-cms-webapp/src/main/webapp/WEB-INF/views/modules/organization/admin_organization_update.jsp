@@ -29,10 +29,10 @@
               <label class="col-sm-2 control-label">是否系统数据：</label>
               <div class="col-sm-10">
                 <label class="radio-inline add-radio">
-                  <input type="radio"  name="isSystem" value="1" <c:if test="${organization.isSystem==1 }">checked="checked"</c:if> >
+                  <input type="radio"  name="isSystem" value="1" ${organization.isSystem eq '1'?'checked="checked"':''}>
                   是</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="isSystem" value="0" <c:if test="${organization.isSystem==0 }">checked="checked"</c:if> >
+                  <input type="radio" name="isSystem" value="0" ${organization.isSystem eq '0'?'checked="checked"':''}>
                   否</label>
                 <label class="radio-inline add-radio"><strong>系统数据：</strong> “是”代表只有超级管理员能进行修改，“否”代表拥有角色修改人权限的人员能进行修改</label>
               </div>
@@ -42,10 +42,10 @@
               <label class="col-sm-2 control-label">是否可用：</label>
               <div class="col-sm-10">
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="status" value="1" <c:if test="${organization.status==1 }">checked="checked"</c:if> >
+                  <input type="radio" name="status" value="1" ${organization.status eq '1'?'checked="checked"':''}>
                   开启</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="status" value="0" <c:if test="${organization.status==0 }">checked="checked"</c:if> >
+                  <input type="radio" name="status" value="0" ${organization.status eq '0'?'checked="checked"':''}>
                   冻结</label>
                 <label class="radio-inline add-radio"><strong>状态：</strong> “开启”代表此数据可用，“冻结”代表此数据不可用</label>
               </div>

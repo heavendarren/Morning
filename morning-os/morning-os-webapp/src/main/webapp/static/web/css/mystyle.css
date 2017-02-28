@@ -89,6 +89,12 @@ h6 {
 	color: #ff6700;
 	text-decoration: none;
 }
+.indexTop:last-child { 
+	color: #333;
+}
+.indexBottom:last-child { 
+	color: #ffffff;
+}
 /*********************购物车**********************************/
 .site-topbar .topbar-cart {
 	width: 120px;
@@ -676,6 +682,7 @@ margin-le ft:16px;
 	overflow: hidden;
 	_zoom: 1;
 	color: #b0b0b0;
+	text-align: center;
 }
 .home-main {
 	padding: 0px 0;
@@ -701,6 +708,7 @@ margin-le ft:16px;
 .span16 {
 	width: 978px;
 	float: right;
+	height: 628px;
 }
 .span4 {
 	float: left;
@@ -776,9 +784,6 @@ margin-le ft:16px;
 .brick-item-m .figure-img a {
 	display: block;
 }
-.brick-item-m-2 .title {
-	margin: 0 10px 2px;
-}
 .brick-item-m .title, .brick-item-m .title a {
 	color: #333;
 }
@@ -787,6 +792,9 @@ margin-le ft:16px;
 	font-size: 14px;
 	font-weight: 400;
 	text-align: center;
+}
+.brick-item-m-2 .title {
+	margin: 0 10px 2px;
 }
 .brick-item-s {
 	padding-top: 50px;
@@ -985,6 +993,12 @@ Inherited from ul.brick-promo-list.clearfix .brick-list, .brick-promo-list {
 }
 .brick-item .flag-saleoff2 {
 	background-color: #2196f3;
+}
+.brick-item .flag-new {
+	background-color: #83c44e;
+}
+.brick-item .flag-postfree {
+	background-color: #ffac13;
 }
 .brick-item .flag {
 	position: absolute;

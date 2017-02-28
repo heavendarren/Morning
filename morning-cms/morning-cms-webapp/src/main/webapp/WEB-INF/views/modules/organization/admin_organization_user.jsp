@@ -15,7 +15,7 @@
                 <div class="contact-box">
                         <div class="col-sm-4">
                             <div class="text-center">
-                                <img alt="头像加载中..." class="img-circle m-t-xs img-responsive" src="${ctx}/upload/icon/icon.jpg">
+                            	<img src="${ctximg}/${userVO.picImg}" alt="头像加载中..." class="img-circle m-t-xs img-responsive">
                                 <div class="m-t-xs font-bold">${userVO.userName }</div>
                             </div>
                         </div>
@@ -23,7 +23,7 @@
                             <h3><strong>${userVO.realName }</strong></h3>
                             <p><i class="fa fa-map-marker"></i> <c:forEach items="${userVO.roles}" var="role">${role.roleName}&nbsp;&nbsp;</c:forEach></p>
                             <address>
-                            <strong><c:if test="${userVO.sex==0}">保密</c:if><c:if test="${userVO.sex==1}">男</c:if><c:if test="${userVO.sex==2}">女</c:if>&nbsp; ${userVO.age }</strong><br>
+                            <strong>${userVO.sex eq '0'?'保密':''}${userVO.sex eq '1'?'男':''}${userVO.sex eq '2'?'女':''}&nbsp; ${userVO.age }</strong><br>
                             E-mail:${userVO.email }<br>
                             <abbr title="Phone">Tel:</abbr> ${userVO.telephone }<br>
                                                                            上次登录时间:<fmt:formatDate value="${userVO.lastLoginTime}" pattern="yyyy/MM/dd HH:mm" /><br>

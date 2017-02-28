@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.pussinboots.morning.os.modules.product.dto.CategoryAdvertDTO;
 import com.pussinboots.morning.os.modules.product.entity.Category;
 
 /**
@@ -25,5 +26,23 @@ public interface CategoryMapper extends BaseMapper<Category> {
 	 * @return
 	 */
 	List<Category> selectCategorysByStatus(@Param("status") Integer status,@Param("showInNav") Integer showInNav);
-
+	
+	/**
+	 * 根据父类目ID查找子类目ID
+	 * @param categoryId 父类目ID
+	 * @param status 类目状态
+	 * @return List<Long> 
+	 */
+	List<Long> selectCategoryIds(@Param("categoryId") Long categoryId, @Param("status") Integer status);
+	
+	/**
+	 * 根据类目ID查找类目广告
+	 * @param categoryId 类目ID
+	 * @param status 广告显示状态
+	 * @param showNumber 广告显示数量
+	 * @return
+	 */
+	List<CategoryAdvertDTO> selectCategoryAdvert(@Param("categoryId") Long categoryId, @Param("status") Integer status,
+			@Param("showNumber") Integer showNumber);
+	
 }

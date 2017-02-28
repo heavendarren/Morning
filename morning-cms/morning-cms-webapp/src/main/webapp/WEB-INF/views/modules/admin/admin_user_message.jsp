@@ -10,10 +10,7 @@
 <div class="middle-box text-center lockscreen animated fadeInDown">
   <div>
     <div class="m-b-md">
-      <c:choose>
-        <c:when test="${user.picImg!=null && user.picImg!=''}"> <img src="${ctx}/${user.picImg}" alt="头像加载中..." class="img-circle circle-border"> </c:when>
-        <c:otherwise> <img src="${ctx}/upload/icon/icon.jpg" alt="头像加载中..." class="img-circle circle-border"> </c:otherwise>
-      </c:choose>
+    	<img src="${ctximg}/${user.picImg}" alt="头像加载中..." class="img-circle circle-border"> 
     </div>
     <h3>${user.userName}</h3>
     <div class="hr-line-dashed"></div>
@@ -27,11 +24,7 @@
           <span class="name">${user.age}</span></li>
         <li>
           <label class="label_name">性别：</label>
-          <span class="name">
-          <c:if test="${user.sex==0}">保密</c:if>
-          <c:if test="${user.sex==1}">男</c:if>
-          <c:if test="${user.sex==2}">女</c:if>
-          </span></li>
+          <span class="name">${user.sex eq '0'?'保密':''}${user.sex eq '1'?'男':''}${user.sex eq '2'?'女':''}</span></li>
         <li>
           <label class="label_name">手机：</label>
           <span class="name">${user.telephone}</span></li>
@@ -61,7 +54,7 @@
           </span></li>
         <li>
           <label class="label_name">所属组织：</label>
-          <span class="name">${user.organizationName}</span></li>          
+          <span class="name">${user.organizationName}</span></li>
       </ul>
     </div>
   </div>

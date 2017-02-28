@@ -17,25 +17,18 @@
                     <li class="nav-header">
                         <div class="dropdown profile-element">
                             <span>
-                            <c:choose>
-                                 <c:when test="${systemUser.picImg!=null && systemUser.picImg!=''}">
-                                     <img src="${ctx}/${systemUser.picImg}" alt="头像加载中..." class="img-circle circle-size">
-                                 </c:when>
-                                 <c:otherwise>
-                                     <img src="${ctx}/upload/icon/icon.jpg" alt="头像加载中..." class="img-circle  circle-size">
-                                 </c:otherwise>
-                             </c:choose>	
+                            	<img src="${ctximg}/${user.picImg}" alt="头像加载中..." class="img-circle circle-size">	
 							</span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="">
                                 <span class="clear">
-                                <span class="block m-t-xs"><strong class="font-bold">${systemUser.userName }</strong></span>
-                                <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                                <span class="block m-t-xs"><strong class="font-bold">${user.userName}</strong></span>
+                                <span class="text-muted text-xs block">${user.organizationName }<b class="caret"></b></span>
                                 </span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
                                 </li>
-                                <li><a class="J_menuItem" href="${ctx}/system/sysuser/info">个人资料</a>
+                                <li><a class="J_menuItem" href="${ctx}/administrator/info">个人资料</a>
                                 </li>
                                 <li><a class="J_menuItem" href="contacts.html">联系我们</a>
                                 </li>

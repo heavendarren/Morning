@@ -22,11 +22,11 @@
             <div class="form-group m-t">
               <label class="col-sm-2 control-label">角色名称：</label>
               <div class="col-sm-4">
-                <input type="text" maxlength="10" class="form-control" name="roleName" value="${role.roleName }">
+                <input type="text" maxlength="10" class="form-control" name="roleName">
               </div>
               <label class="col-sm-2 control-label">角色标志：</label>
               <div class="col-sm-4">
-                <input type="text" maxlength="10" class="form-control" name="roleSign" value="${role.roleSign }">
+                <input type="text" maxlength="10" class="form-control" name="roleSign">
               </div>
             </div>
             <div class="hr-line-dashed"></div>
@@ -37,7 +37,7 @@
                   <input type="radio" name="isSystem" value="1" checked="checked">
                   是</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="isSystem" value="0" <c:if test="${role.isSystem==0 }">checked="checked"</c:if> >
+                  <input type="radio" name="isSystem" value="0">
                   否</label>
                 <label class="radio-inline add-radio"><strong>系统数据：</strong> “是”代表只有超级管理员能进行修改，“否”代表拥有角色修改人权限的人员能进行修改</label>
               </div>
@@ -50,7 +50,7 @@
                   <input type="radio" name="status" value="1" checked="checked">
                   开启</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="status" value="0" <c:if test="${role.status==0 }">checked="checked"</c:if> >
+                  <input type="radio" name="status" value="0">
                   冻结</label>
                 <label class="radio-inline add-radio"><strong>状态：</strong> “开启”代表此数据可用，“冻结”代表此数据不可用</label>
               </div>
@@ -66,7 +66,7 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">角色备注：</label>
               <div class="col-sm-10">
-                <textarea class="form-control" rows="2" name="remarks" placeholder="请输入消息..." style="margin: 0px -17.675px 0px 0px; height: 50px; width: 600px;">${ role.remarks}</textarea>
+                <textarea class="form-control" rows="2" name="remarks" placeholder="请输入消息..." style="margin: 0px -17.675px 0px 0px; height: 50px; width: 600px;"></textarea>
               </div>
             </div>
             <div class="hr-line-dashed"></div>

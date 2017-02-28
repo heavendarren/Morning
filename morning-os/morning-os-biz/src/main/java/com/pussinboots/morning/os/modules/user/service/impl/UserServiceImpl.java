@@ -1,21 +1,21 @@
 package com.pussinboots.morning.os.modules.user.service.impl;
 
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.pussinboots.morning.common.enums.StatusEnum;
 import com.pussinboots.morning.common.exception.ValidateException;
 import com.pussinboots.morning.os.common.util.PasswordUtils;
 import com.pussinboots.morning.os.common.util.UserUtils;
 import com.pussinboots.morning.os.modules.user.entity.User;
 import com.pussinboots.morning.os.modules.user.entity.UserLoginLog;
-import com.pussinboots.morning.os.modules.user.enums.EmailActiveEnum;
 import com.pussinboots.morning.os.modules.user.mapper.UserLoginLogMapper;
 import com.pussinboots.morning.os.modules.user.mapper.UserMapper;
 import com.pussinboots.morning.os.modules.user.service.IUserService;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * 
@@ -38,10 +38,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	public void insertUser(User user) throws ValidateException {
 		// 邮箱唯一性验证（邮箱存在且已经被激活）
 		User emailUser = userMapper.selectOne(new User(user.getEmail()));
-		if (emailUser != null && EmailActiveEnum.ACTIVATED.getStatus().equals(emailUser.getEmailIsActive())) {
+		if (emailUser != null && StatusEnum.ACTIVATED.getStatus().equals(emailUser.getEmailIsActive())) {
 			throw new ValidateException("该电子邮箱已被注册了");
 		}
-		if (emailUser != null && EmailActiveEnum.NONACTIVATED.getStatus().equals(emailUser.getEmailIsActive())) {
+		if (emailUser != null && StatusEnum.NONACTIVATED.getStatus().equals(emailUser.getEmailIsActive())) {
 			userMapper.deleteById(emailUser.getUserId()); // 如果未被激活则删除用户
 		}
 		user.setUserNumber(UserUtils.getUserNumber());
@@ -102,7 +102,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	@Override
 	public void updateEmailActive(String email) {
 		User user = new User();
-		user.setEmailIsActive(EmailActiveEnum.ACTIVATED.getStatus());
+		user.setEmailIsActive(StatusEnum.ACTIVATED.getStatus());
 		userMapper.update(user, new EntityWrapper<User>(new User(email)));
 	}
 

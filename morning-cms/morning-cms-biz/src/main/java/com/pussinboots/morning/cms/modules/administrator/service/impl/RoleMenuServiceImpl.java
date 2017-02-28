@@ -18,10 +18,10 @@ import com.pussinboots.morning.cms.modules.administrator.mapper.RoleMenuMapper;
 import com.pussinboots.morning.cms.modules.administrator.mapper.UserRoleMapper;
 import com.pussinboots.morning.cms.modules.administrator.service.IRoleMenuService;
 import com.pussinboots.morning.cms.modules.system.entity.Menu;
-import com.pussinboots.morning.cms.modules.system.enums.MenuStatusEnum;
 import com.pussinboots.morning.cms.modules.system.enums.MenuTypeEnum;
 import com.pussinboots.morning.cms.modules.system.mapper.MenuMapper;
 import com.pussinboots.morning.cms.modules.system.vo.MenuVO;
+import com.pussinboots.morning.common.enums.StatusEnum;
 
 /**
  * 
@@ -64,9 +64,9 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
 		List<Long> roleIds = userRoleMapper.selectRoleIdsByUserId(authorizingUser.getUserId());
 		
 		// 查询一级目录
-		List<Menu> parentMenus = roleMenuMapper.selectMenusByRolesIdAndStatus(roleIds, MenuStatusEnum.SHOW.getStatus(),MenuTypeEnum.FIRST_MENU.getType());
+		List<Menu> parentMenus = roleMenuMapper.selectMenusByRolesIdAndStatus(roleIds, StatusEnum.SHOW.getStatus(),MenuTypeEnum.FIRST_MENU.getType());
 		// 查询一级目录
-		List<Menu> childMenus = roleMenuMapper.selectMenusByRolesIdAndStatus(roleIds, MenuStatusEnum.SHOW.getStatus(),MenuTypeEnum.SECOND_MENU.getType());
+		List<Menu> childMenus = roleMenuMapper.selectMenusByRolesIdAndStatus(roleIds, StatusEnum.SHOW.getStatus(),MenuTypeEnum.SECOND_MENU.getType());
 		// 获取根级权限的子级权限
 		for (Menu parentMenu : parentMenus) {
 			recursionMenu(menus, childMenus, parentMenu);

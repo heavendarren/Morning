@@ -1,5 +1,6 @@
 package com.pussinboots.morning.cms.modules.system.controller;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +49,7 @@ public class SystemVersionLogControlller extends BaseController {
 	 * @param pageInfo 分页条件
 	 * @return
 	 */
+	@RequiresPermissions("system:version:view")
 	@PostMapping(value = {"/view" })
 	public String list(Model model, PageInfo pageInfo) {
 		VersionLogDTO versionLogDTO = versionLogService.selectByPullPage(pageInfo);
@@ -55,5 +57,4 @@ public class SystemVersionLogControlller extends BaseController {
 		model.addAttribute("pageInfo", versionLogDTO.getPageInfo());
 		return SYSTEM_VERSION_PAGE;
 	}
-
 }

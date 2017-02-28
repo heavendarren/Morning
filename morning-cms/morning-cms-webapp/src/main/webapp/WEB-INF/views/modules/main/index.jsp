@@ -127,14 +127,13 @@
     <script src="${ctxsta}/common/echarts/echarts.min.js"></script>
     <script src="${ctxsta}/common/echarts/theme/macarons.js"></script>
     <script>
-    $(function() {
-	//近7天订单数量
+    /*$(function() {
 		drawCartogramOrder(7);
 		$(".btn-group > .btn-white").click(function(){
 			$(".btn-group > .btn-white").removeClass('active');
 			$(this).addClass('active');
 		});
-	});
+	});*/
     
     //订单数按天数
     function drawCartogramOrder(days){

@@ -129,8 +129,8 @@
                           <td><fmt:formatDate value="${user.createTime}" pattern="yyyy/MM/dd" /></td>
                           <td><fmt:formatDate value="${user.lastLoginTime}" pattern="yyyy/MM/dd HH:mm" /></td>
                           <td>${user.lastLoginIp}</td>
-                          <td class="td-status"><c:if test="${user.status==1}"><span class="label label-primary">正常</span></c:if>
-                            <c:if test="${user.status==0}"><span class="label label-danger">冻结</span></c:if></td>
+                          <td class="td-status">
+                          <span class="label ${user.status eq '1'?'label-primary':'label-danger'}">${user.status eq '1'?'正常':'冻结'}</span></td>
                           <td class="td-manage"><shiro:hasPermission name="administrator:list:audit">
                               <c:if test="${user.status==1}"><a class="like text-info" href="javascript:void(0)" onClick="member_stop(this,'${ctx}/administrator/list/${user.userId}/audit')" title="冻结"><i class="glyphicon glyphicon-pause"></i></a></c:if>
                               <c:if test="${user.status==0}"><a class="like text-info" href="javascript:void(0)" onClick="member_start(this,'${ctx}/administrator/list/${user.userId}/audit')" title="启用"><i class="glyphicon glyphicon-play"></i></a></c:if>

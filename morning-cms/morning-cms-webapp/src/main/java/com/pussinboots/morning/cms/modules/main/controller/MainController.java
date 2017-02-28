@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.pussinboots.morning.cms.common.security.AuthorizingUser;
 import com.pussinboots.morning.cms.common.util.SingletonLoginUtils;
 import com.pussinboots.morning.cms.modules.administrator.service.IRoleMenuService;
+import com.pussinboots.morning.cms.modules.administrator.service.IUserService;
+import com.pussinboots.morning.cms.modules.administrator.vo.UserVO;
 import com.pussinboots.morning.cms.modules.system.vo.MenuVO;
 import com.pussinboots.morning.common.controller.BaseController;
 
@@ -32,6 +35,8 @@ public class MainController extends BaseController {
 	
 	@Autowired
 	private IRoleMenuService roleMenuService;
+	@Autowired
+	private IUserService userService;
 	
 	/**
 	 * GET 首页
@@ -48,18 +53,13 @@ public class MainController extends BaseController {
 	 */
 	@GetMapping(value="/index")
 	public String main(Model model) {
-//		// 未处理订单数
-//		int undisposedOrder = orderService.queryOrderCountBySystem(2);
-//		mainCountMap.put("undisposedOrder", undisposedOrder);
-//		if (undisposedOrder != 0) {
-//			String undisposedOrderTime = DateUtil.dateDiff(
-//					orderService.queryOrderTime(2), new Date());
-//			mainCountMap.put("undisposedOrderTime", undisposedOrderTime);
-//		}
+		AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
+		// 管理员信息
+		UserVO user = userService.selectByUserId(authorizingUser.getUserId());
+		model.addAttribute("user", user);
 		// 系统目录
 		List<MenuVO> menus = roleMenuService.selectMenusByAdmin(SingletonLoginUtils.getUser());
 		model.addAttribute("menus", menus);
-//		model.addAttribute("mainCountMap", mainCountMap);
 		return MAIN;
 	}
 	

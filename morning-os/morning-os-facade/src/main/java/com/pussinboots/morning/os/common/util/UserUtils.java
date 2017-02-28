@@ -13,10 +13,9 @@ public class UserUtils {
 
 	/** 系统默认头像 */
 	private static String[] defaultAvatar = { "avatar_1.jpg", "avatar_2.jpg", "avatar_3.jpg", "avatar_4.jpg",
-			"avatar_5.jpg", "avatar_6.jpg", "avatar_7.jpg", "avatar_8.jpg", "avatar_9.jpg" };
+			"avatar_5.jpg", "avatar_6.jpg", "avatar_7.jpg", "avatar_8.jpg" };
 
-	private UserUtils() {
-	}
+	private UserUtils() { }
 
 	/** 获得用户编号 */
 	public static Long getUserNumber() {
@@ -43,5 +42,4 @@ public class UserUtils {
 
 		return savaFilePath;
 	}
-
 }

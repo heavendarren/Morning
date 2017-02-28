@@ -21,7 +21,7 @@
             <div class="form-group m-t">
               <label class="col-sm-2 control-label">菜单名称：</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control" name="menuName" value="${menu.menuName }">
+                <input type="text" class="form-control" name="menuName">
               </div>
               <label class="col-sm-2 control-label">上级菜单：</label>
               <div class="col-sm-4">
@@ -32,11 +32,11 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">权限代码：</label>
               <div class="col-sm-4">
-                <input type="text"  class="form-control" name="menuCode" value="${menu.menuCode }">
+                <input type="text"  class="form-control" name="menuCode">
               </div>
               <label class="col-sm-2 control-label">链接：</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control" name="href" value="${menu.href }">
+                <input type="text" class="form-control" name="href">
               </div>
             </div>
             <div class="hr-line-dashed"></div>
@@ -46,12 +46,12 @@
                 <div class="input-group m-b"> <span class="input-group-btn">
                   <button type="button" class="btn btn-primary" onclick="member_show('菜单图标','${ctx}/system/menu/icon',null,null,'800',null)" title="图标">选择</button>
                   </span>
-                  <input type="text" class="form-control" name="icon" value="${menu.icon }">
+                  <input type="text" class="form-control" name="icon">
                 </div>
               </div>
               <label class="col-sm-2 control-label">排序：</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control" name="sort" value="${menu.sort }">
+                <input type="text" class="form-control" name="sort">
               </div>
             </div>
             <div class="hr-line-dashed"></div>
@@ -59,20 +59,18 @@
               <label class="col-sm-2 control-label">是否显示：</label>
               <div class="col-sm-10">
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="status" value="1" checked="checked">
-                  开启</label>
+                  <input type="radio" name="status" value="1" checked="checked">开启</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="status" value="0" <c:if test="${menu.status==0 }">checked="checked"</c:if> >
-                  冻结</label>
+                  <input type="radio" name="status" value="0">冻结</label>
                 <label class="radio-inline add-radio"><strong>状态：</strong> “开启”代表此数据显示，“冻结”代表此数据隐藏</label>
               </div>
             </div>
             <div class="hr-line-dashed"></div>
-            <c:if test="${menu.menuType==0 ||parentMenu.menuType==2}">
+            <c:if test="${menu.menuType==0 || parentMenu.menuType==2}">
               <div class="form-group">
                 <label class="col-sm-2 control-label">权限标识：</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" name="permission" value="${menu.permission}">
+                  <input type="text" class="form-control" name="permission">
                 </div>
                 <label class="radio-inline add-radio"><strong>说明：</strong>控制器中定义的权限标识，如：@RequiresPermissions("权限标识")</label>
               </div>
@@ -81,7 +79,7 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">备注信息：</label>
               <div class="col-sm-10">
-                <textarea class="form-control" rows="2" name="remarks" placeholder="请输入消息..." style="margin: 0px -17.675px 0px 0px; height: 50px; width: 600px;">${menu.remarks}</textarea>
+                <textarea class="form-control" rows="2" name="remarks" placeholder="请输入消息..." style="margin: 0px -17.675px 0px 0px; height: 50px; width: 600px;"></textarea>
               </div>
             </div>
             <div class="hr-line-dashed"></div>

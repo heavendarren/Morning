@@ -18,12 +18,12 @@ import com.pussinboots.morning.cms.common.util.SingletonLoginUtils;
 import com.pussinboots.morning.cms.modules.administrator.entity.Role;
 import com.pussinboots.morning.cms.modules.administrator.entity.User;
 import com.pussinboots.morning.cms.modules.administrator.entity.UserLoginLog;
-import com.pussinboots.morning.cms.modules.administrator.enums.RoleStatusEnum;
 import com.pussinboots.morning.cms.modules.administrator.service.IUserLoginLogService;
 import com.pussinboots.morning.cms.modules.administrator.service.IUserRoleService;
 import com.pussinboots.morning.cms.modules.administrator.service.IUserService;
 import com.pussinboots.morning.cms.modules.administrator.vo.UserVO;
 import com.pussinboots.morning.common.controller.BaseController;
+import com.pussinboots.morning.common.enums.StatusEnum;
 import com.pussinboots.morning.common.exception.ValidateException;
 import com.pussinboots.morning.common.result.ResponseResult;
 import com.pussinboots.morning.common.util.RegexUtils;
@@ -60,14 +60,18 @@ public class AdministratorInfoController extends BaseController {
 	@GetMapping(value = { "", "/view" })
 	public String view(Model model) {
 		AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
+		
+		// 用户信息
 		UserVO userVO = userService.selectByUserId(authorizingUser.getUserId());
-		model.addAttribute("user", userVO);// 用户信息
-
+		model.addAttribute("user", userVO);
+		
+		// 用户日志
 		List<UserLoginLog> userLoginLogs = userLoginLogService.selectUserLoginLog(userVO.getUserId());
-		model.addAttribute("userLoginLogs", userLoginLogs);// 用户日志
-
-		List<Role> roles = userRoleService.selectRolesByUserId(userVO.getUserId(),RoleStatusEnum.NORMAL.getStatus());
-		model.addAttribute("roles", roles);// 用户权限
+		model.addAttribute("userLoginLogs", userLoginLogs);
+		
+		// 用户权限
+		List<Role> roles = userRoleService.selectRolesByUserId(userVO.getUserId(), StatusEnum.NORMAL.getStatus());
+		model.addAttribute("roles", roles);
 		
 		return ADMIN_USER_INFO;
 	}
@@ -80,13 +84,13 @@ public class AdministratorInfoController extends BaseController {
 	@RequiresPermissions("administrator:info:edit")
 	@PostMapping(value = "/edit")
 	@ResponseBody
-	public ResponseResult edit(User user){
+	public ResponseResult edit(User user) {
 		AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
 		if (authorizingUser != null) {
 			user.setUserId(authorizingUser.getUserId());
 			userService.updateUserInfo(user, authorizingUser);
 			return success(true);
-		}else{
+		} else {
 			return fail(false, "您未登录或者登录已超时,请先登录!");
 		}
 	}
@@ -98,18 +102,18 @@ public class AdministratorInfoController extends BaseController {
 	@RequiresPermissions("administrator:info:edit")
 	@PostMapping(value = "/edit/psw")
 	@ResponseBody
-	public ResponseResult editPwd( ){
+	public ResponseResult editPwd() {
 		String nowPassword = getParameter("nowPassword");// 原密码
 		String newPassword = getParameter("newPassword");// 新密码
 		String confirmPwd = getParameter("confirmPwd");// 确认密码
-		
+
 		if (!RegexUtils.isPassword(newPassword)) {
 			return fail(false, "密码长度8~16位，其中数字，字母和符号至少包含两种!");
 		}
 		if (!newPassword.equals(confirmPwd)) {
 			return fail(false, "两次输入的新密码不一致!");
 		}
-		
+
 		AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
 		if (authorizingUser != null) {
 			try {
@@ -119,7 +123,7 @@ public class AdministratorInfoController extends BaseController {
 				return fail(false, e.getMessage());
 			}
 			return success(true, "修改成功!");
-		}else{
+		} else {
 			return fail(false, "您未登录或者登录已超时,请先登录!");
 		}
 	}

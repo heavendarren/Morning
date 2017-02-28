@@ -21,33 +21,33 @@
             <div class="form-group m-t">
               <label class="col-sm-2 control-label">用户名：</label>
               <div class="col-sm-4">
-                <input type="text" maxlength="10" class="form-control" name="loginName" value="">
+                <input type="text" maxlength="10" class="form-control" name="loginName">
               </div>
               <label class="col-sm-2 control-label">密码：</label>
               <div class="col-sm-4">
-                <input type="password" maxlength="18" class="form-control" name="loginPassword" value="">
+                <input type="password" maxlength="18" class="form-control" name="loginPassword">
               </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="form-group">
               <label class="col-sm-2 control-label">昵称：</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control" name="userName" value="${user.userName}">
+                <input type="text" class="form-control" name="userName">
               </div>
               <label class="col-sm-2 control-label">真实姓名：</label>
               <div class="col-sm-4">
-                <input type="text" maxlength="11" class="form-control" name="realName" value="${user.realName}">
+                <input type="text" maxlength="11" class="form-control" name="realName">
               </div>
             </div>
             <div class="hr-line-dashed"></div>
             <div class="form-group">
               <label class="col-sm-2 control-label">电子邮箱：</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control" name="email" value="${user.email}">
+                <input type="text" class="form-control" name="email">
               </div>
               <label class="col-sm-2 control-label">移动电话：</label>
               <div class="col-sm-4">
-                <input type="text" maxlength="11" class="form-control" name="telephone" value="${user.telephone}">
+                <input type="text" maxlength="11" class="form-control" name="telephone">
               </div>
             </div>
             <div class="hr-line-dashed"></div>
@@ -55,23 +55,18 @@
               <label class="col-sm-2 control-label">性别：</label>
               <div class="col-sm-4">
                 <label class="radio-inline add-radio">
-                  <input type="radio"  name="sex" value="1" <c:if test="${user.sex==1 }">checked="checked"</c:if> >
-                  男</label>
+                  <input type="radio"  name="sex" value="1">男</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="sex" value="2" <c:if test="${user.sex==2 }">checked="checked"</c:if> >
-                  女</label>
+                  <input type="radio" name="sex" value="2">女</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="sex" value="0" checked="checked">
-                  保密</label>
+                  <input type="radio" name="sex" value="0" checked="checked">保密</label>
               </div>
               <label class="col-sm-2 control-label">状态：</label>
               <div class="col-sm-4">
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="status" value="1" checked="checked">
-                  开启</label>
+                  <input type="radio" name="status" value="1" checked="checked"> 开启</label>
                 <label class="radio-inline add-radio">
-                  <input type="radio" name="status" value="0" <c:if test="${user.status==0 }">checked="checked"</c:if> >
-                  关闭</label>
+                  <input type="radio" name="status" value="0">关闭</label>
               </div>
             </div>
             <div class="hr-line-dashed"></div>
@@ -81,7 +76,7 @@
                 <c:forEach items="${roles }" var="role">
                   <div class="checkbox col-sm-3">
                     <label>
-                      <input type="checkbox" name="roleId" value="${role.roleId }" <c:forEach items="${userRoles}" var="userRole"> <c:if test="${role.roleId==userRole.roleId }">checked="checked"</c:if></c:forEach>/>
+                      <input type="checkbox" name="roleId" value="${role.roleId }" <c:forEach items="${userRoles}" var="userRole"></c:forEach>/>
                       &nbsp;&nbsp;${role.roleName} </label>
                   </div>
                 </c:forEach>

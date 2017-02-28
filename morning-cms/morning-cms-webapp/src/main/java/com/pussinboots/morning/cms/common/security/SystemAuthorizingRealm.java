@@ -19,10 +19,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pussinboots.morning.cms.modules.administrator.entity.User;
-import com.pussinboots.morning.cms.modules.administrator.enums.UserStatusEnum;
 import com.pussinboots.morning.cms.modules.administrator.service.IRoleMenuService;
 import com.pussinboots.morning.cms.modules.administrator.service.IUserRoleService;
 import com.pussinboots.morning.cms.modules.administrator.service.IUserService;
+import com.pussinboots.morning.common.enums.StatusEnum;
 
 /**
  * 
@@ -59,7 +59,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			throw new UnknownAccountException();// 没找到帐号
 		}
 		
-		if (UserStatusEnum.FREEZE.getStatus().equals(user.getStatus())) {
+		if (StatusEnum.FREEZE.getStatus().equals(user.getStatus())) {
 			throw new DisabledAccountException();// 校验用户状态
 		}
 		

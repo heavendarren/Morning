@@ -1,11 +1,11 @@
 package com.pussinboots.morning.os.modules.product.service;
 
-import com.pussinboots.morning.os.modules.product.entity.Category;
-import com.pussinboots.morning.os.modules.product.vo.CategoryInNavVO;
-
 import java.util.List;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.pussinboots.morning.os.modules.product.entity.Category;
+import com.pussinboots.morning.os.modules.product.vo.CategoryVO;
+import com.pussinboots.morning.os.modules.product.vo.IndexProductCategoryVO;
 
 /**
  * 
@@ -22,6 +22,14 @@ public interface ICategoryService extends IService<Category> {
 	 * 查找首页导航栏商品列表
 	 * @return
 	 */
-	List<CategoryInNavVO> selectCategorysByStatus();
+	List<CategoryVO> selectCategorysByStatus();
+	
+	/**
+	 * 根据产品显示数量和广告数量查找产品列表（首页分栏产品区）
+	 * @param showNumber 产品显示数量
+	 * @param advertNumber 广告数量
+	 * @return
+	 */
+	List<IndexProductCategoryVO> selectProductCategoryArea(Integer showNumber, Integer advertNumber);
 	
 }
