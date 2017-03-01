@@ -47,11 +47,6 @@
 			                        <a href="${ctx}${menu.href}">
 			                            <i class="fa fa-${menu.icon}"></i>
 			                            <span class="nav-label">${menu.menuName}</span>
-										<c:choose>
-											<c:when test="${menu.menuCode == 'order'}"><span class="label label-warning pull-right">16</span></c:when>
-				                            <c:when test="${menu.menuCode == 'message'}"><span class="label label-danger pull-right">16</span></c:when>
-				                            <c:otherwise><span class="fa arrow"></span></c:otherwise>
-										</c:choose>
 			                        </a>
 			                        <ul class="nav nav-second-level">
 			                        <c:forEach items="${menu.childMenus}" var="childMenu">

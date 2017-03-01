@@ -101,6 +101,4 @@ public class OrganizationServiceImpl extends ServiceImpl<OrganizationMapper, Org
 		// 重置管理员组织记录
 		userMapper.updateOrganization(organizationId);
 	}
-
-
 }

@@ -45,4 +45,18 @@ public interface CategoryMapper extends BaseMapper<Category> {
 	List<CategoryAdvertDTO> selectCategoryAdvert(@Param("categoryId") Long categoryId, @Param("status") Integer status,
 			@Param("showNumber") Integer showNumber);
 	
+	/**
+	 * 根据父类目ID查找子类目列表
+	 * @param categoryId 父类目ID
+	 * @param status 子类目状态
+	 * @return
+	 */
+	List<Category> selectLowerCategories(@Param("categoryId") Long categoryId, @Param("status") Integer status);
+	
+	/**
+	 * 根据子类目ID查找父目录
+	 * @param categoryId 子类目ID
+	 * @return
+	 */
+	Category selectUpperByLowerCategoryId(@Param("categoryId") Long categoryId);
 }

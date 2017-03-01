@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.pussinboots.morning.cms.common.security.AuthorizingUser;
 import com.pussinboots.morning.cms.common.util.SingletonLoginUtils;
+import com.pussinboots.morning.cms.modules.administrator.dto.RoleMenuDTO;
 import com.pussinboots.morning.cms.modules.administrator.entity.Role;
 import com.pussinboots.morning.cms.modules.administrator.entity.User;
 import com.pussinboots.morning.cms.modules.administrator.service.IRoleMenuService;
 import com.pussinboots.morning.cms.modules.administrator.service.IRoleService;
 import com.pussinboots.morning.cms.modules.administrator.service.IUserRoleService;
-import com.pussinboots.morning.cms.modules.system.vo.MenuVO;
+import com.pussinboots.morning.cms.modules.administrator.vo.RoleMenuVO;
 import com.pussinboots.morning.common.controller.BaseController;
 import com.pussinboots.morning.common.enums.StatusEnum;
 import com.pussinboots.morning.common.result.ResponseResult;
@@ -87,7 +88,7 @@ public class AdministratorRoleController extends BaseController{
 	@RequiresPermissions("administrator:role:create")
 	@GetMapping(value = "/create")
 	public String create(Model model) {
-		List<MenuVO> menus = roleMenuService.selectMenus(StatusEnum.SHOW.getStatus());
+		List<RoleMenuDTO> menus = roleMenuService.selectRoleMenus(StatusEnum.SHOW.getStatus());
 		model.addAttribute("menus", JSON.toJSON(menus));
 		return ADMIN_ROLE_CREATE;
 	}
@@ -100,7 +101,7 @@ public class AdministratorRoleController extends BaseController{
 	@RequiresPermissions("administrator:role:edit")
 	@GetMapping(value = "/{roleId}/edit")
 	public String edit(Model model, @PathVariable("roleId") Long roleId) {
-		List<MenuVO> menus = roleMenuService.selectCheckedMenus(roleId, StatusEnum.SHOW.getStatus());
+		List<RoleMenuVO> menus = roleMenuService.selectCheckedMenus(roleId, StatusEnum.SHOW.getStatus());
 		model.addAttribute("menus", JSON.toJSON(menus));
 		Role role = roleService.selectById(roleId);
 		model.addAttribute("role", role);

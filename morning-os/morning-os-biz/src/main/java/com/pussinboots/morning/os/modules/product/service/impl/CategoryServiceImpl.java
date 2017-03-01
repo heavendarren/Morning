@@ -1,6 +1,7 @@
 package com.pussinboots.morning.os.modules.product.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -44,6 +45,34 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 	private ProductCategoryMapper productCategoryMapper;
 	@Autowired
 	private ProductMapper productMapper;
+	
+	@Override
+	public List<Category> selectLowerCategories(Long categoryId, Integer status) {
+		// 查找子级分类
+		List<Category> lowerCategories = categoryMapper.selectLowerCategories(categoryId, status);
+		if (lowerCategories == null) {
+			Category upperCategory = categoryMapper.selectUpperByLowerCategoryId(categoryId);
+			lowerCategories = categoryMapper.selectLowerCategories(upperCategory.getCategoryId(), status);
+		}
+		return lowerCategories;
+	}
+	
+	@Override
+	public List<Category> selectUpperCategories(Long categoryId, Integer status) {
+		List<Category> categories = new ArrayList<>();
+
+		// 将当前类目添加类目列表中
+		Category category = categoryMapper.selectById(categoryId);
+		categories.add(category);
+
+		// 查找当前类目父类目
+		getUpperCategory(categories, categoryId);
+		
+		// 对类目列表进行反转
+		Collections.reverse(categories);
+
+		return categories;
+	}
 
 	@Override
 	public List<CategoryVO> selectCategorysByStatus() {
@@ -203,4 +232,18 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 			}
 		}
 	}
+	
+	/**
+	 * 查找类目ID的所有父类目
+	 * @param categories 父类目列表
+	 * @param categoryId 类目ID
+	 */
+	private void getUpperCategory(List<Category> categories, Long categoryId) {
+		Category upperCategory = categoryMapper.selectUpperByLowerCategoryId(categoryId);
+		if (upperCategory != null) {
+			categories.add(upperCategory);
+			getUpperCategory(categories, upperCategory.getCategoryId());
+		}
+	}
+
 }

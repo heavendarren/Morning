@@ -21,18 +21,4 @@
 </div>
 <!--     bar栏end       --> 
 
-<!--     主导航begin       -->
-<div class="mainbav">
-  <div class="LOGO"> <img src="${ctxsta}/web/img/logo.png"><img src="${ctxsta}/web/img/donghua.gif"> </div>
-  <ul>
-    <c:forEach items="${indexClassify }" var="indexClassify">
-      <li><a href="${indexClassify.href }" target="${indexClassify.target }">${indexClassify.name }</a></li>
-    </c:forEach>
-  </ul>
-  <div class="search">
-    <div class="search_box"> <img src=""> </div>
-    <span>平衡车</span> <span>小米手机4c</span> </div>
-  <div class="clearfix"> </div>
-</div>
-<!--     主导航end       --> 
 <!-- 顶部页眉栏结束 -->

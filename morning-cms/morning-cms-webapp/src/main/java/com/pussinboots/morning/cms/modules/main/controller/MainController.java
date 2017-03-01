@@ -13,8 +13,8 @@ import com.pussinboots.morning.cms.common.security.AuthorizingUser;
 import com.pussinboots.morning.cms.common.util.SingletonLoginUtils;
 import com.pussinboots.morning.cms.modules.administrator.service.IRoleMenuService;
 import com.pussinboots.morning.cms.modules.administrator.service.IUserService;
+import com.pussinboots.morning.cms.modules.administrator.vo.RoleMenuVO;
 import com.pussinboots.morning.cms.modules.administrator.vo.UserVO;
-import com.pussinboots.morning.cms.modules.system.vo.MenuVO;
 import com.pussinboots.morning.common.controller.BaseController;
 
 /**
@@ -58,7 +58,7 @@ public class MainController extends BaseController {
 		UserVO user = userService.selectByUserId(authorizingUser.getUserId());
 		model.addAttribute("user", user);
 		// 系统目录
-		List<MenuVO> menus = roleMenuService.selectMenusByAdmin(SingletonLoginUtils.getUser());
+		List<RoleMenuVO> menus = roleMenuService.selectMenusByAdmin(SingletonLoginUtils.getUser());
 		model.addAttribute("menus", menus);
 		return MAIN;
 	}

@@ -45,7 +45,7 @@
     </select>
     
     <!-- 根据管理员ID和角色状态查找角色列表 -->
-    <select id="selectRolesByUserId" resultType="Role">
+    <select id="selectRolesByUserId" resultType="com.pussinboots.morning.cms.modules.administrator.entity.Role">
     	SELECT
         	r.role_id AS roleId, 
         	role_name AS roleName, 
@@ -66,7 +66,7 @@
     </select>
     
     <!-- 根据角色ID查找用户列表 -->
-    <select id="selectUsersByRoleId" resultType="User">
+    <select id="selectUsersByRoleId" resultType="com.pussinboots.morning.cms.modules.administrator.entity.User">
 		SELECT 
 			u.user_id AS userId,
 			login_name AS loginName,

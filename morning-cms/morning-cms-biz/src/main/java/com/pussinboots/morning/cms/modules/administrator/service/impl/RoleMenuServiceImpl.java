@@ -13,14 +13,13 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pussinboots.morning.cms.common.security.AuthorizingUser;
+import com.pussinboots.morning.cms.modules.administrator.dto.RoleMenuDTO;
 import com.pussinboots.morning.cms.modules.administrator.entity.RoleMenu;
 import com.pussinboots.morning.cms.modules.administrator.mapper.RoleMenuMapper;
 import com.pussinboots.morning.cms.modules.administrator.mapper.UserRoleMapper;
 import com.pussinboots.morning.cms.modules.administrator.service.IRoleMenuService;
-import com.pussinboots.morning.cms.modules.system.entity.Menu;
+import com.pussinboots.morning.cms.modules.administrator.vo.RoleMenuVO;
 import com.pussinboots.morning.cms.modules.system.enums.MenuTypeEnum;
-import com.pussinboots.morning.cms.modules.system.mapper.MenuMapper;
-import com.pussinboots.morning.cms.modules.system.vo.MenuVO;
 import com.pussinboots.morning.common.enums.StatusEnum;
 
 /**
@@ -38,17 +37,15 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
 	private RoleMenuMapper roleMenuMapper;
 	@Autowired
 	private UserRoleMapper userRoleMapper;
-	@Autowired
-	private MenuMapper menuMapper;
 	
 	@Override
 	public Set<String> selectMenusByRolesId(Set<String> roleIds) {
 		Set<String> roleMenus = new HashSet<>();
-		
-		Set<Menu> menus = roleMenuMapper.selectMenusByRolesId(roleIds);
-		
-		for(Menu menu : menus){
-			if(StringUtils.isNotBlank(menu.getPermission())){
+
+		Set<RoleMenuDTO> menus = roleMenuMapper.selectMenusByRolesId(roleIds);
+
+		for (RoleMenuDTO menu : menus) {
+			if (StringUtils.isNotBlank(menu.getPermission())) {
 				// 添加基于Permission的权限信息
 				roleMenus.add(menu.getPermission());
 			}
@@ -57,18 +54,21 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
 	}
 
 	@Override
-	public List<MenuVO> selectMenusByAdmin(AuthorizingUser authorizingUser) {
+	public List<RoleMenuVO> selectMenusByAdmin(AuthorizingUser authorizingUser) {
 		
-		List<MenuVO> menus = new ArrayList<>();
-		
+		List<RoleMenuVO> menus = new ArrayList<>();
+		// 根据用户ID查找角色列表ID
 		List<Long> roleIds = userRoleMapper.selectRoleIdsByUserId(authorizingUser.getUserId());
 		
 		// 查询一级目录
-		List<Menu> parentMenus = roleMenuMapper.selectMenusByRolesIdAndStatus(roleIds, StatusEnum.SHOW.getStatus(),MenuTypeEnum.FIRST_MENU.getType());
+		List<RoleMenuDTO> parentAllMenus = roleMenuMapper.selectMenusByRolesIdAndStatus(roleIds, StatusEnum.SHOW.getStatus(),MenuTypeEnum.FIRST_MENU.getType());
+		List<RoleMenuDTO> parentMenus = menuDereplication(parentAllMenus);// 去重
 		// 查询一级目录
-		List<Menu> childMenus = roleMenuMapper.selectMenusByRolesIdAndStatus(roleIds, StatusEnum.SHOW.getStatus(),MenuTypeEnum.SECOND_MENU.getType());
+		List<RoleMenuDTO> childAllMenus = roleMenuMapper.selectMenusByRolesIdAndStatus(roleIds, StatusEnum.SHOW.getStatus(),MenuTypeEnum.SECOND_MENU.getType());
+		List<RoleMenuDTO> childMenus = menuDereplication(childAllMenus);// 去重
+		
 		// 获取根级权限的子级权限
-		for (Menu parentMenu : parentMenus) {
+		for (RoleMenuDTO parentMenu : parentMenus) {
 			recursionMenu(menus, childMenus, parentMenu);
 		}
 		
@@ -76,27 +76,35 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
 	}
 	
 	@Override
-	public List<MenuVO> selectMenus(Integer status) {
-		return menuMapper.selectMenusByStatus(status);
+	public List<RoleMenuDTO> selectRoleMenus(Integer status) {
+		return roleMenuMapper.selectRoleMenusByStatus(status);
 	}
 
 	@Override
-	public List<MenuVO> selectCheckedMenus(Long roleId, Integer status) {
+	public List<RoleMenuVO> selectCheckedMenus(Long roleId, Integer status) {
 		// 查询所有目录根据状态
-		List<MenuVO> menus = menuMapper.selectMenusByStatus(status);
+		List<RoleMenuDTO> menus = roleMenuMapper.selectRoleMenusByStatus(status);
+
 		// 查找该角色拥有的权限
 		RoleMenu queryRoleMenu = new RoleMenu();
 		queryRoleMenu.setRoleId(roleId);
 		List<RoleMenu> roleMenus = roleMenuMapper.selectList(new EntityWrapper<RoleMenu>(queryRoleMenu));
-		//遍历目录，设置该角色是否选中该目录
-		for (MenuVO menu : menus) {
+
+		List<RoleMenuVO> roleMenuVOs = new ArrayList<>();
+
+		// 遍历目录，设置该角色是否选中该目录
+		for (RoleMenuDTO menu : menus) {
+			RoleMenuVO roleMenuVO = new RoleMenuVO();
+			BeanUtils.copyProperties(menu, roleMenuVO);
+
 			for (RoleMenu roleMenu : roleMenus) {
-				if (menu.getMenuId().equals(roleMenu.getMenuId())) {
-					menu.setChecked(true);
+				if (roleMenuVO.getMenuId().equals(roleMenu.getMenuId())) {
+					roleMenuVO.setChecked(true);
 				}
 			}
+			roleMenuVOs.add(roleMenuVO);
 		}
-		return menus;
+		return roleMenuVOs;
 	}
 	
 	/**
@@ -105,16 +113,31 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
 	 * @param childMenus  二级目录列表
 	 * @param parentMenu 当前一级目录
 	 */
-	private void recursionMenu(List<MenuVO> menus, List<Menu> childMenus, Menu parentMenu){
-		List<Menu> childMenuList = new ArrayList<>();
-		for(Menu menu : childMenus){
+	private void recursionMenu(List<RoleMenuVO> menus, List<RoleMenuDTO> childMenus, RoleMenuDTO parentMenu){
+		List<RoleMenuDTO> childMenuList = new ArrayList<>();
+		for(RoleMenuDTO menu : childMenus){
 			if(parentMenu.getMenuId() == menu.getParentId()){
 				childMenuList.add(menu);
 			}
 		}
-		MenuVO parentMenuVo = new MenuVO();
+		RoleMenuVO parentMenuVo = new RoleMenuVO();
 		BeanUtils.copyProperties(parentMenu, parentMenuVo);
 		parentMenuVo.setChildMenus(childMenuList);
 		menus.add(parentMenuVo);
+	}
+	
+	/**
+	 * 权限去重 （由于数据库中DISTINCT关键词版本报错）
+	 * @param sourceRoleMenuVOs 原权限
+	 * @return
+	 */
+	private List<RoleMenuDTO> menuDereplication(List<RoleMenuDTO> sourceRoleMenuVOs) {
+		List<RoleMenuDTO> roleMenuDTOs = new ArrayList<>();
+		for (RoleMenuDTO roleMenuDTO : sourceRoleMenuVOs) {
+			if (!roleMenuDTOs.contains(roleMenuDTO)) {
+				roleMenuDTOs.add(roleMenuDTO);
+			}
+		}
+		return roleMenuDTOs;
 	}
 }

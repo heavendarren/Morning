@@ -35,38 +35,29 @@
     </insert>
     
     <!-- 通过角色ID/目录状态/目录等级查找目录列表 -->
-    <select id="selectMenusByRolesIdAndStatus" resultType="Menu">
-    	SELECT 
-    		menuId, 
-    		parentId,
-    		menuName, 
+    <select id="selectMenusByRolesIdAndStatus" resultType="com.pussinboots.morning.cms.modules.administrator.dto.RoleMenuDTO">
+     	SELECT 
+    		m.menu_id AS menuId, 
+    		parent_id AS parentId, 
+    		menu_name AS menuName, 
     		href, 
     		icon
     	FROM
-    		(
-	     	SELECT DISTINCT
-	    		m.menu_id AS menuId, 
-	    		parent_id AS parentId, 
-	    		menu_name AS menuName, 
-	    		href, 
-	    		icon
-	    	FROM
-	    		cms_menu m
-			LEFT JOIN cms_role_menu r ON r.menu_id = m.menu_id
-	        WHERE
-	        	status = #{status} 
-	        AND menu_type = #{menuType}
-	        AND r.role_id IN
-		        <foreach collection="roleIds" item="roleId" open="(" close=")" separator=",">
-		    		#{roleId}
-		    	</foreach>    
-		    ORDER BY 
-		    	sort ASC      		
-    		) AS t;
+    		cms_menu m
+		LEFT JOIN cms_role_menu r ON r.menu_id = m.menu_id
+        WHERE
+        	status = #{status} 
+        AND menu_type = #{menuType}
+        AND r.role_id IN
+	        <foreach collection="roleIds" item="roleId" open="(" close=")" separator=",">
+	    		#{roleId}
+	    	</foreach>    
+	    ORDER BY 
+	    	sort ASC      		
     </select>    
     
     <!-- 通过角色ID查找权限列表 -->
-    <select id="selectMenusByRolesId" resultType="Menu">
+    <select id="selectMenusByRolesId" resultType="com.pussinboots.morning.cms.modules.administrator.dto.RoleMenuDTO">
     	SELECT
         	r.menu_id AS menuId,
         	m.permission
@@ -83,16 +74,19 @@
 	    	</foreach>        	
     </select>
     
-    <!-- 通过目录ID删除角色授权记录 -->
-    <delete id="deleteMenus">
-    	DELETE 
-    	FROM
-    		cms_role_menu
-    	WHERE
-    		menu_id IN
-	        <foreach collection="menuIds" item="menuId" open="(" close=")" separator=",">
-	    		#{menuId}
-	    	</foreach>    	    
-    </delete>
-  
+    <!-- 根据目录状态查询目录列表 -->
+    <select id="selectRoleMenusByStatus" resultType="com.pussinboots.morning.cms.modules.administrator.dto.RoleMenuDTO">
+		SELECT
+			menu_id AS menuId,
+			parent_id AS parentId,
+			menu_type AS menuType,
+			menu_name AS menuName,
+			permission
+		FROM
+			cms_menu
+		WHERE
+			status = #{status}
+		ORDER BY
+			sort ASC
+    </select>    
 </mapper>

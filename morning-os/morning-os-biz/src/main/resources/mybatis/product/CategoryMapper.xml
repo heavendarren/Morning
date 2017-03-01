@@ -72,4 +72,38 @@
         LIMIT 
         	#{showNumber}
     </select>
+    
+    <!-- 根据父类目ID查找子类目列表 -->
+    <select id="selectLowerCategories" resultType="com.pussinboots.morning.os.modules.product.entity.Category">
+		SELECT
+			category_id AS categoryId,
+			parent_id AS parentId,
+			name
+		FROM
+			os_category
+		WHERE
+			parent_id = ${categoryId}
+		AND status = ${status}
+		ORDER BY
+			sort ASC
+    </select>
+    
+    <!-- 根据子类目ID查找父目录 -->
+    <select id="selectUpperByLowerCategoryId" resultType="com.pussinboots.morning.os.modules.product.entity.Category">
+		SELECT
+			category_id AS categoryId,
+			parent_id AS parentId,
+			NAME
+		FROM
+			os_category
+		WHERE
+			category_id = (
+				SELECT
+					parent_id
+				FROM
+					os_category
+				WHERE
+					category_id = #{categoryId}
+			)	
+    </select>
 </mapper>

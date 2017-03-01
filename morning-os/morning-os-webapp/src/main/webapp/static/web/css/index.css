@@ -1,0 +1,46 @@
+.site-category {
+	display: block;
+	background: #333;
+	background: rgba(0, 0, 0, 0.6);
+}
+
+.site-category-list {
+	height: 420px;
+	border: 0;
+	color: #fff;
+	background: rgba(0, 0, 0, 0)
+}
+
+.site-category-list .title {
+	color: #fff
+}
+
+.site-category-list .title i {
+	color: #fff;
+	color: rgba(255, 255, 255, 0.5)
+}
+
+.list3 li {
+	border-top-width: 1px;
+	border-top-style: solid;
+}
+
+.list3 li:nth-child(5n) {
+	border-top-color: #ff7600;
+}
+
+.list3 li:nth-child(5n+1) {
+	border-top-color: red;
+}
+
+.list3 li:nth-child(5n+2) {
+	border-top-color: #adff2f;
+}
+
+.list3 li:nth-child(5n+3) {
+	border-top-color: #6495ed;
+}
+
+.list3 li:nth-child(5n+4) {
+	border-top-color: #6a5acd;
+}

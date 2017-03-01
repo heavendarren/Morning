@@ -66,10 +66,6 @@ public class WebFrontController extends BaseController {
 				.selectByAdvertCode(AdvertTypeEnum.INDEX_HOT_ADVERT.getCode(), StatusEnum.SHOW.getStatus());
 		model.addAttribute("indexHotAdvertImgs", indexHotAdvertImgs);// 首页轮播广告列表
 		
-		// 首页导航栏商品列表
-		List<CategoryVO> categoryInNavVOs = categoryService.selectCategorysByStatus();
-		model.addAttribute("categoryInNavVOs", categoryInNavVOs);
-		
 		// 明星单品
 		List<Product> products = productService.selectProductsByStar(ProductStarEnum.STAR_PRODUCT.getStatus(),
 				ProductVO.STAR_PRODUCT_NUMBER);

@@ -1,7 +1,8 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>
 <%@ include file="/WEB-INF/layouts/base.jsp"%>
 <!-- 底部页脚栏开始 -->
-<!--     底部信息begin       -->
+
+<!--     底部信息  begin       -->
 <div class="site-footer">
   <div class="container-fluid">
     <div class="footer-service">
@@ -58,9 +59,9 @@
     </div>
   </div>
 </div>
-<!--     底部信息end       --> 
+<!--     底部信息  end         --> 
 
-<!--     公司链接begin       -->
+<!--     公司链接 begin       -->
 <div class="site-info">
   <div class="container-fluid">
     <div class="logo2"> <img src="${ctxsta}/web/img/logo.png" alt=""> </div>
@@ -75,9 +76,14 @@
   </div>
   <div class="word">但知行好事，莫要问前程</div>
 </div>
-<!--     公司链接end       --> 
+<!--     公司链接end         --> 
 
 <!--     返回顶部begin    -->
-<p id="back-to-top"> <a href="#top"><span class="glyphicon glyphicon-menu-up" style="font-size:30px;color:#ff6700;"></span>回到顶部</a> </p>
+<div class="back-to-top">
+  <div class="container-fluid">
+    <p id="back-to-top"><a href="#top"><span class="glyphicon glyphicon-menu-up" style="font-size:30px;color:#ff6700;"></span>回到顶部</a></p>
+  </div>
+</div>
 <!--     返回顶部end    --> 
+
 <!-- 底部页脚栏结束 --> 

@@ -5,8 +5,9 @@ import java.util.Set;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.pussinboots.morning.cms.common.security.AuthorizingUser;
+import com.pussinboots.morning.cms.modules.administrator.dto.RoleMenuDTO;
 import com.pussinboots.morning.cms.modules.administrator.entity.RoleMenu;
-import com.pussinboots.morning.cms.modules.system.vo.MenuVO;
+import com.pussinboots.morning.cms.modules.administrator.vo.RoleMenuVO;
 
 /**
  * 
@@ -28,22 +29,22 @@ public interface IRoleMenuService extends IService<RoleMenu> {
 	/**
 	 * 根据管理员查找系统目录
 	 * @param authorizingUser 当前管理员信息
-	 * @return
+	 * @return List<RoleMenuVO>
 	 */
-	List<MenuVO> selectMenusByAdmin(AuthorizingUser authorizingUser);
+	List<RoleMenuVO> selectMenusByAdmin(AuthorizingUser authorizingUser);
 
 	/**
 	 * 根据目录状态查找系统目录
 	 * @param status 目录状态
 	 * @return List<MenuVo> 
 	 */
-	List<MenuVO> selectMenus(Integer status);
+	List<RoleMenuDTO> selectRoleMenus(Integer status);
 	
 	/**
 	 * 根据目录状态和角色ID查找目录及其是否选中
 	 * @param roleId 角色ID
 	 * @param status 目录状态
-	 * @return List<MenuVo>
+	 * @return List<RoleMenuVO>
 	 */
-	List<MenuVO> selectCheckedMenus(Long roleId, Integer status);
+	List<RoleMenuVO> selectCheckedMenus(Long roleId, Integer status);
 }

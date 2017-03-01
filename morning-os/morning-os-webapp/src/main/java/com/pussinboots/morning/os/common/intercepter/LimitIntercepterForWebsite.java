@@ -13,6 +13,8 @@ import com.pussinboots.morning.common.enums.StatusEnum;
 import com.pussinboots.morning.os.modules.content.entity.NavigationBar;
 import com.pussinboots.morning.os.modules.content.enums.NavigationBarTypeEnum;
 import com.pussinboots.morning.os.modules.content.service.INavigationBarService;
+import com.pussinboots.morning.os.modules.product.service.ICategoryService;
+import com.pussinboots.morning.os.modules.product.vo.CategoryVO;
 
 /**
  * 
@@ -27,6 +29,8 @@ public class LimitIntercepterForWebsite extends HandlerInterceptorAdapter {
 	
 	@Autowired
 	private INavigationBarService navigationBarService;
+	@Autowired
+	private ICategoryService categoryService;
 	
 	/**
 	 * 在业务处理器处理请求之前被调用 
@@ -39,6 +43,7 @@ public class LimitIntercepterForWebsite extends HandlerInterceptorAdapter {
 			throws Exception {
 		String url = request.getRequestURI();
 		System.out.println(url);
+		
 		// 网站导航配置
 		List<NavigationBar> indexTop = navigationBarService.selectNavigationBarByType(
 				NavigationBarTypeEnum.INDEX_TOP.getType(), StatusEnum.SHOW.getStatus());
@@ -49,6 +54,10 @@ public class LimitIntercepterForWebsite extends HandlerInterceptorAdapter {
 		List<NavigationBar> indexClassify = navigationBarService.selectNavigationBarByType(
 				NavigationBarTypeEnum.INDEX_CLASSIFY.getType(), StatusEnum.SHOW.getStatus());
 		request.setAttribute(NavigationBarTypeEnum.INDEX_CLASSIFY.getCode(), indexClassify);// 首页顶部导航栏
+		
+		// 导航栏商品列表
+		List<CategoryVO> categoryInNavVOs = categoryService.selectCategorysByStatus();
+		request.setAttribute("categoryInNavVOs", categoryInNavVOs);
 		return super.preHandle(request, response, handler);
 	}
 	

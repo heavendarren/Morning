@@ -32,4 +32,20 @@ public interface ICategoryService extends IService<Category> {
 	 */
 	List<IndexProductCategoryVO> selectProductCategoryArea(Integer showNumber, Integer advertNumber);
 	
+	/**
+	 * 根据类目ID查找子类目列表（如果沒有则返回当前目录列表）
+	 * @param categoryId 类目ID
+	 * @param status 子类目状态
+	 * @return
+	 */
+	List<Category> selectLowerCategories(Long categoryId, Integer status);
+
+	/**
+	 * 根据类目ID查找父类目列表（如果沒有则返回当前目录列表）
+	 * @param categoryId
+	 * @param status
+	 * @return
+	 */
+	List<Category> selectUpperCategories(Long categoryId, Integer status);
+	
 }

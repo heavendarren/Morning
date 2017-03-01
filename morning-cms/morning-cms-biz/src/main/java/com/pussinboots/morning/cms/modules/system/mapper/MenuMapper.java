@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.pussinboots.morning.cms.modules.system.entity.Menu;
-import com.pussinboots.morning.cms.modules.system.vo.MenuVO;
 
 /**
  * 
@@ -26,16 +25,16 @@ public interface MenuMapper extends BaseMapper<Menu> {
 	List<Menu> selectMenus(@Param("menuType") Integer menuType);
 	
 	/**
-	 * 根据目录状态查找目录列表
-	 * @param status目录状态
-	 * @return List<MenuVO>
-	 */
-	List<MenuVO> selectMenusByStatus(@Param("status") Integer status);
-	
-	/**
 	 * 更新目录状态，冻结目录及其及目录
 	 * @param menuIds 目录ID列表
 	 * @param status 目录状态
 	 */
 	void updateStatusByIds(@Param("menuIds") List<Long> menuIds, @Param("status") Integer status);
+	
+	
+	/**
+	 * 通过目录ID删除角色授权记录
+	 * @param menuIds 目录ID列表
+	 */
+	void deleteRoleMenus(@Param("menuIds") List<Long> menuIds);
 }

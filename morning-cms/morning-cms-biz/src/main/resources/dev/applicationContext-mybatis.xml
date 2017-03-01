@@ -10,12 +10,12 @@
 
 	<description>mybatis Configuration</description>
 	
-		<!-- 加载配置文件 -->
+	<!-- 加载配置文件 -->
 	<context:property-placeholder  ignore-resource-not-found="true"
 								   location="classpath:properties/*.properties" />
                                   
 	<!-- 使用Annotation自动注册Bean，解决事物失效问题：在主容器中不扫描@Controller注解，在SpringMvc中只扫描@Controller注解。  -->
-	<context:component-scan base-package="com.pussinboots.morning.os.modules"><!-- base-package 如果多个，用“,”分隔 -->
+	<context:component-scan base-package="com.pussinboots.morning.cms.modules"><!-- base-package 如果多个，用“,”分隔 -->
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/><!-- 过滤其中这四个注解中的一个 -->
 	</context:component-scan>
 
@@ -82,7 +82,7 @@
 		<!-- 配置Mybatis配置文件 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
 		<!-- 配置别名包路径 -->
-		<property name="typeAliasesPackage" value="com.pussinboots.morning.os.modules" />
+		<property name="typeAliasesPackage" value="com.pussinboots.morning.cms.modules" />
 		<!-- 配置Mapper扫描路径（IDEA系列编辑器需要特别注意，因为IDEA的设置问题，src中的xml文件是不会被编译的，如果放在src中可能会报错，解决办法详见 
 			常用问题-Invalid bound statement (not found) 错误如何解决?） -->
 		<property name="mapperLocations" value="classpath:/mybatis/**/*Mapper.xml" />
@@ -115,7 +115,7 @@
 	<!-- MyBatis 动态实现:DAO接口所在包名，Spring会自动查找其下的类 -->
 	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 对Dao 接口动态实现，需要知道接口在哪 -->
-		<property name="basePackage" value="com.pussinboots.morning.os.modules.*.mapper" />
+		<property name="basePackage" value="com.pussinboots.morning.cms.modules.*.mapper" />
 	</bean>
 
 </beans>

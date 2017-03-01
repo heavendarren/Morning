@@ -6,16 +6,16 @@ $(function() {
 
 		$('.site-topbar .cart-menu').css('display', 'block');
 		$('.site-topbar .cart-mini').css({
-			display: 'block',
-			background: '#fff',
-			color: '#ff6700'
+			display : 'block',
+			background : '#fff',
+			color : '#ff6700'
 		});
 	})
 	$('.topbar-cart').mouseout(function() {
 		$('.site-topbar .cart-menu').css('display', 'none');
 		$('.site-topbar .cart-mini').css({
-			background: '#424242',
-			color: '#b0b0b0'
+			background : '#424242',
+			color : '#b0b0b0'
 		});
 	})
 });
@@ -47,7 +47,8 @@ $(function() {
 	for (var i = 1; i <= size; i++) {
 		var li = "<li></li>";
 		$('.oll').append(li);
-	};
+	}
+	;
 	//手动控制轮播图
 	$('.ull li').eq(0).show();
 	$('.oll li').eq(0).addClass('active');
@@ -110,14 +111,14 @@ $(function() {
 	$('.pagination li').click(function() {
 
 		$('.list3').css({
-			marginLeft: '-1233px'
+			marginLeft : '-1233px'
 		});
 		$('.pagination li').eq(1).addClass('active2').siblings().removeClass('active2');
 
 	});
 	$('.pagination li').eq(0).click(function() {
 		$('.list3').css({
-			marginLeft: '0'
+			marginLeft : '0'
 		});
 		$('.pagination li').eq(0).addClass('active2').siblings().removeClass('active2');
 	});
@@ -126,13 +127,13 @@ $(function() {
 
 	function active() {
 		$('.list3').css({
-			marginLeft: '-1233px'
+			marginLeft : '-1233px'
 		});
 		$('.pagination li').eq(0).addClass('active2').siblings().removeClass('active2');
 		var num = parseInt($('.list3').css('marginLeft'));
 		if (num == -1233) {
 			$('.list3').css({
-				marginLeft: '0'
+				marginLeft : '0'
 			});
 			$('.pagination li').eq(1).addClass('active2').siblings().removeClass('active2');
 		}
@@ -147,25 +148,12 @@ $(function() {
 
 });
 
-//小米明星border-top color设置
-$(function(){
-    $(".head_hot_goods_content").children().children().eq(0).css("border-color","#ff7600");
-    $(".head_hot_goods_content").children().children().eq(1).css("border-color","red");
-    $(".head_hot_goods_content").children().children().eq(2).css("border-color","#adff2f");
-    $(".head_hot_goods_content").children().children().eq(3).css("border-color","#6495ed");
-    $(".head_hot_goods_content").children().children().eq(4).css("border-color","#6a5acd");
-    $(".head_hot_goods_content").children().children().eq(5).css("border-color","#ff7600");
-    $(".head_hot_goods_content").children().children().eq(6).css("border-color","red");
-    $(".head_hot_goods_content").children().children().eq(7).css("border-color","#adff2f");
-    $(".head_hot_goods_content").children().children().eq(8).css("border-color","#6495ed");
-    $(".head_hot_goods_content").children().children().eq(9).css("border-color","#6a5acd");
-})
 
 /**
  * TAB-list
  */
 $(function() {
-	var number  = $(".page-main").attr("data-category-number");
+	var number = $(".page-main").attr("data-category-number");
 	for (var i = 0; i < number; i++) {
 		$('#category-' + i + '-content .brick-list').eq(0).show().siblings().hide();
 		$('#category-' + i + ' .tab-list li').eq(0).show();
@@ -199,7 +187,7 @@ $(function() {
 
 	$("#back-to-top").click(function() {
 		$('body,html').animate({
-			scrollTop: 0
+			scrollTop : 0
 		}, 1000);
 		return false;
 	});
@@ -213,18 +201,18 @@ $(function() {
 	$(".review-item").mouseenter(function() {
 		var i = $(this).index();
 		$('.review-item .figure-img img').eq(i).stop().animate({
-			"top": "-25px",
-			"left": "-25px",
-			"width": "356px",
-			"height": "280px"
+			"top" : "-25px",
+			"left" : "-25px",
+			"width" : "356px",
+			"height" : "280px"
 		}, 500);
 	}).mouseleave(function() {
 		var i = $(this).index();
 		$('.review-item .figure-img img').eq(i).stop().animate({
-			"top": "0px",
-			"left": "0px",
-			"width": "296px",
-			"height": "220px"
+			"top" : "0px",
+			"left" : "0px",
+			"width" : "296px",
+			"height" : "220px"
 		}, 500);
 	});
 })
@@ -246,12 +234,129 @@ $(function() {
 		case 2:
 			$this.addClass("flag-saleoff");
 			break;
-		case 2:
+		case 3:
 			$this.addClass("flag-postfree");
-			break;				
+			break;
 		default:
 			$this.addClass("flag-saleoff2");
 			break;
 		}
 	});
 })
+
+/**
+ * 导航分类栏显示及颜色变换
+ */
+$(function() {
+	$('#J_navCategory').mouseover(function() {
+		$('.site-category').css('display', 'block');
+	})
+	$('#J_navCategory').mouseout(function() {
+		$('.site-category').css('display', 'none');
+	})
+
+	$("#J_categoryList").children().hover(function() {
+		$(this).children("a").css("color", "#fff");
+	}, function() {
+		$(this).children("a").css("color", "#424242");
+	})
+});
+
+/**
+ * 分类页面,对类目进行判断,点击打开更多类目
+ */
+$(function() {
+	// 对类目数量进行判断
+	var $elements = $('.filter-list');
+	var len = $elements.length;
+	// alert('有 ' + len + ' 个相同class');
+	$elements.each(function() {
+		var $this = $(this);
+		var length = $this.children().length;
+		var num;
+		if (length <= 5) {
+			num = 1;
+		} else if (length <= 11) {
+			num = 2;
+		} else if (length <= 17) {
+			num = 3;
+		} else if (length <= 23) {
+			num = 4;
+		} else if (length <= 29) {
+			num = 5;
+		}
+		switch (num) { //然后判断
+		case 1:
+			$this.addClass("filter-list-row-1");
+			break;
+		case 2:
+			$this.addClass("filter-list-row-2");
+			break;
+		case 3:
+			$this.addClass("filter-list-row-3");
+			break;
+		case 4:
+			$this.addClass("filter-list-row-4");
+			break;
+		default:
+			$this.addClass("filter-list-row-5");
+			break;
+		}
+	});
+})
+// 打开更多类目
+function showMornCategory(obj) {
+	$(obj).parent().toggleClass("filter-list-wrap-toggled");
+}
+
+
+/**
+ * 为你推荐
+ */
+$(function() {
+	//手动滚动
+	$('.xm-pagers li').hover(function() {
+		clearInterval(timer);
+	}, function() {
+		timer = setInterval(active, 5000);
+	})
+
+	$('.xm-pagers li').click(function() {
+
+		$('.list3').css({
+			marginLeft : '-1233px'
+		});
+		$('.xm-pagers li').eq(1).addClass('pager-active').siblings().removeClass('pager-active');
+
+	});
+	$('.xm-pagers li').eq(0).click(function() {
+		$('.list3').css({
+			marginLeft : '0'
+		});
+		$('.xm-pagers li').eq(0).addClass('pager-active').siblings().removeClass('pager-active');
+	});
+	//自动轮播
+	var timer = setInterval(active, 5000);
+
+	function active() {
+		$('.list3').css({
+			marginLeft : '-1233px'
+		});
+		$('.xm-pagers li').eq(0).addClass('pager-active').siblings().removeClass('pager-active');
+		var num = parseInt($('.list3').css('marginLeft'));
+		if (num == -1233) {
+			$('.list3').css({
+				marginLeft : '0'
+			});
+			$('.xm-pagers li').eq(1).addClass('pager-active').siblings().removeClass('pager-active');
+		}
+	}
+
+	//鼠标事件
+	$('.list3').hover(function() {
+		clearInterval(timer);
+	}, function() {
+		timer = setInterval(active, 5000);
+	})
+
+});

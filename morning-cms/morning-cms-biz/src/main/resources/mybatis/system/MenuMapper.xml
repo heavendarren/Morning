@@ -38,23 +38,6 @@
     		sort ASC
     </select>
     
-    <!-- 根据目录状态查询目录列表 -->
-    <select id="selectMenusByStatus" resultType="com.pussinboots.morning.cms.modules.system.vo.MenuVO">
-		SELECT
-			menu_id AS menuId,
-			parent_id AS parentId,
-			menu_type AS menuType,
-			menu_code AS menuCode,
-			menu_name AS menuName,
-			permission
-		FROM
-			cms_menu
-		WHERE
-			status = #{status}
-		ORDER BY
-			sort ASC
-    </select>
-    
     <!-- 更新目录状态，冻结目录及其及目录 -->
     <update id="updateStatusByIds">
     	UPDATE
@@ -66,5 +49,17 @@
     			#{menuId}
     		</foreach>
     </update>
+    
+    <!-- 通过目录ID删除角色授权记录 -->
+    <delete id="deleteRoleMenus">
+    	DELETE 
+    	FROM
+    		cms_role_menu
+    	WHERE
+    		menu_id IN
+	        <foreach collection="menuIds" item="menuId" open="(" close=")" separator=",">
+	    		#{menuId}
+	    	</foreach>    	    
+    </delete>
     
 </mapper>

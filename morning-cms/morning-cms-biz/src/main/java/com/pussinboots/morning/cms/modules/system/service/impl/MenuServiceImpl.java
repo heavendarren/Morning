@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.pussinboots.morning.cms.modules.administrator.mapper.RoleMenuMapper;
 import com.pussinboots.morning.cms.modules.system.entity.Menu;
 import com.pussinboots.morning.cms.modules.system.enums.MenuTypeEnum;
 import com.pussinboots.morning.cms.modules.system.mapper.MenuMapper;
@@ -28,8 +27,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 
 	@Autowired
 	private MenuMapper menuMapper;
-	@Autowired
-	private RoleMenuMapper roleMenuMapper;
 	
 	@Override
 	public void insertMenu(Menu menu) {
@@ -97,7 +94,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 		menuIds.add(menuId);
 		getMenuIds(menuIds, menuId);
 		menuMapper.deleteBatchIds(menuIds);// 删除目录及子目录
-		roleMenuMapper.deleteMenus(menuIds);// 删除角色授权表中记录
+		menuMapper.deleteRoleMenus(menuIds);// 删除角色授权表中记录
 	}
 	
 	/**
