@@ -64,7 +64,7 @@
 <!--     公司链接 begin       -->
 <div class="site-info">
   <div class="container-fluid">
-    <div class="logo2"> <img src="${ctxsta}/web/img/logo.png" alt=""> </div>
+    <div class="logo2"> <img src="${ctxsta}/web/img/logo.png"> </div>
     <div class="info-text">
       <p class="sites">
         <c:forEach items="${indexBottom }" var="indexBottom"> <a href="${indexBottom.href }" target="${indexBottom.target}">${indexBottom.name}</a><span class="sep indexBottom">|</span> </c:forEach>

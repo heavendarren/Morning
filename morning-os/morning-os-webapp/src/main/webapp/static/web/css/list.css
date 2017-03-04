@@ -72,7 +72,8 @@
 	top: 10px;
 	height: 24px;
 	line-height: 24px;
-	color: #757575
+	color: #757575;
+	display: none;
 }
 
 .filter-list-wrap .more i {
@@ -125,6 +126,10 @@
 }
 
 .filter-list a:hover {
+	color: #ff6700
+}
+
+.filter-list .active a {
 	color: #ff6700
 }
 
@@ -360,7 +365,7 @@
 }
 
 .goods-item .desc {
-	margin: 0 0 3px;
+	margin: 15px 0 3px;
 	height: 18px;
 	font-size: 12px;
 	text-overflow: ellipsis;
@@ -399,7 +404,7 @@
 
 .goods-item .thumbs {
 	width: 100%;
-	height: 36px;
+	height: 69px;
 	overflow: hidden;
 	_zoom: 1
 }
@@ -415,8 +420,8 @@
 	display: inline-block;
 	*zoom: 1;
 	*display: inline;
-	width: 34px;
-	height: 34px;
+	width: 36px;
+	height: 36px;
 	margin: 0 4px;
 	border: 1px solid #e0e0e0;
 	cursor: pointer;
@@ -426,11 +431,6 @@
 
 .goods-item .thumb-list li.active, .goods-item .thumb-list li:hover {
 	border-color: #ff6700
-}
-
-.goods-item .thumb-list img {
-	width: 34px;
-	height: 34px
 }
 
 .goods-item .xm-carousel-container {
@@ -555,6 +555,10 @@
 	background-color: #2196f3
 }
 
+.goods-item .flags .flag-saleoff2 {
+	background-color: #2196f3;
+}
+
 .goods-item .notice {
 	position: absolute;
 	top: 10px;
@@ -652,8 +656,78 @@
 	background-color: transparent
 }
 
+/*-------------∑÷“≥-----------------*/
 .xm-pagenavi {
+	height: 120px;
+	padding: 15px 0;
+	text-align: center
+}
+
+#pager {
+	display: table;
+	margin: auto;
 	height: 80px;
 	padding: 15px 0;
 	text-align: center
+}
+
+#pager ul.pages {
+	display: block;
+	border: none;
+	text-transform: uppercase;
+	font-size: 16px;
+	margin: 10px 0 50px;
+	padding: 0;
+	font: normal 16px "Microsoft YaHei";
+	font-family: "Microsoft YaHei", "Œ¢»Ì—≈∫⁄", "sans-serif";
+}
+
+#pager ul.pages li {
+	float: left;
+	padding: 4px 7px;
+	text-decoration: none;
+	border-left-width: 0;
+	list-style: none;
+	background-color: #eee;
+	color: #888;
+	margin: 0 5px 0 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#pager ul.pages li:hover {
+	color: #fff;
+	background-color: #3c4852;
+}
+
+#pager ul.pages li.pgEmpty {
+	display: none;
+}
+
+#pager ul.pages li.pgCurrent {
+	color: #fff;
+	font-weight: 700;
+	background-color: #29c06d;
+}
+
+/*-------------¥ÌŒÛÃ· æ-----------------*/
+.shop-global-error {
+	padding: 150px 0 200px 10%;
+	background: url(../img/server_busy.jpg)no-repeat 80% center
+}
+.shop-global-error h2 {
+	width: 50%;
+	line-height: 2.25;
+	padding-bottom: 30px
+}
+.shop-global-error-tips {
+	width: 50%;
+	line-height: 1.8
+}
+.shop-global-error-btn {
+	margin-top: 20px
+}
+.shop-global-error-btn a {
+	margin-right: 10px
 }

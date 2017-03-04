@@ -1,7 +1,11 @@
 package com.pussinboots.morning.os.modules.content.service;
 
-import com.pussinboots.morning.os.modules.content.entity.Comment;
+import java.util.List;
+
 import com.baomidou.mybatisplus.service.IService;
+import com.pussinboots.morning.common.model.PageInfo;
+import com.pussinboots.morning.os.modules.content.entity.Comment;
+import com.pussinboots.morning.os.modules.content.vo.CommentVO;
 
 /**
  * 
@@ -14,4 +18,24 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface ICommentService extends IService<Comment> {
 	
+	/**
+	 * 根据商品ID和评论类型查找最新评论列表
+	 * @param productId 商品ID
+	 * @param type 评论类型
+	 * @param type 评论状态
+	 * @param pageInfo 分页条件
+	 * @return List<Comment> 
+	 */
+	List<Comment> selectNewComments(Long productId, Integer type, Integer status, PageInfo pageInfo);
+	
+	/**
+	 * 根据商品ID和评论类型查找有帮助评论列表
+	 * @param productId 商品ID
+	 * @param type 评论类型
+	 * @param type 评论状态
+	 * @param pageInfo 分页条件
+	 * @return List<Comment> 
+	 */
+	List<CommentVO> selectHighComments(Long productId, Integer type, Integer status, PageInfo pageInfo);
+
 }

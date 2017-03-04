@@ -14,9 +14,6 @@ import java.io.Serializable;
 public class CategoryAdvertDTO implements Serializable{
 
     private static final long serialVersionUID = 1L;
-    
-	/** 类目广告显示数量 */
-	public static final Integer CATEGORY_ADVERT_NUMBER = 2;
 
     /** 标题 */
 	private String title;

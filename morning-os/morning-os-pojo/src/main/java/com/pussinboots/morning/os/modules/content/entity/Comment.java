@@ -42,6 +42,11 @@ public class Comment extends Model<Comment> {
 	@TableField("user_name")
 	private String userName;
     /**
+     * 用户头像
+     */
+	@TableField("pic_img")
+	private String picImg;
+    /**
      * 订单ID
      */
 	@TableField("order_id")
@@ -124,6 +129,14 @@ public class Comment extends Model<Comment> {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getPicImg() {
+		return picImg;
+	}
+
+	public void setPicImg(String picImg) {
+		this.picImg = picImg;
 	}
 
 	public Long getOrderId() {

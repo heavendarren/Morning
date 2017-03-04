@@ -50,7 +50,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 	public List<Category> selectLowerCategories(Long categoryId, Integer status) {
 		// 查找子级分类
 		List<Category> lowerCategories = categoryMapper.selectLowerCategories(categoryId, status);
-		if (lowerCategories == null) {
+		
+		// 判断是否为空,如果为空,则返回当前列表
+		if (lowerCategories == null || lowerCategories.isEmpty()) {
 			Category upperCategory = categoryMapper.selectUpperByLowerCategoryId(categoryId);
 			lowerCategories = categoryMapper.selectLowerCategories(upperCategory.getCategoryId(), status);
 		}
@@ -135,6 +137,20 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 			indexProductCategoryVOs.add(indexProductCategoryVO);
 		}
 		return indexProductCategoryVOs;
+	}
+	
+	
+	@Override
+	public Category selectCategoryById(Long categoryId, Integer status) {
+		Category category = new Category();
+		category.setCategoryId(categoryId);
+		category.setStatus(status);
+		return categoryMapper.selectOne(category);
+	}
+
+	@Override
+	public Category selectUpperCategoryById(Long categoryId) {
+		return categoryMapper.selectUpperByLowerCategoryId(categoryId);
 	}
 	
 	/**

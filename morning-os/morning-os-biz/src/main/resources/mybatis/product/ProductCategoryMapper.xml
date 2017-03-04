@@ -112,4 +112,30 @@
 		LIMIT #{showNumber}
     </select>
     
+    <!-- 根据类目ID列表、分类、排序查找产品列表及标签（分类查找） -->
+    <select id="selectProductVOsByPage" resultType="com.pussinboots.morning.os.modules.product.vo.ProductVO">
+    	SELECT
+    		p.product_id AS productId, 
+    		product_number AS productNumber, 
+    		name, 
+    		show_price AS showPrice, 
+    		pic_img AS picImg,
+    		introduce,	
+    		p.label_id AS labelId,
+    		a.comment_number AS commentNumber,
+    		label_name AS labelName
+    	FROM
+    		os_product p
+    	LEFT JOIN os_product_category c ON c.product_id = p.product_id
+    	LEFT JOIN os_label l ON l.label_id = p.label_id
+    	LEFT JOIN os_product_attribute a ON a.product_id = p.product_id
+    	WHERE
+    		 p.status = #{status}
+    	AND c.category_id IN
+	    	<foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+				#{categoryId}
+			</foreach>
+		ORDER BY 
+			${pageInfo.sort} ${pageInfo.order}
+    </select>
 </mapper>

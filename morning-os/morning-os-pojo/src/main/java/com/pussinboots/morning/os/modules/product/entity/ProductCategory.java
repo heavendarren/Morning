@@ -46,7 +46,16 @@ public class ProductCategory extends Model<ProductCategory> {
      */
 	@TableField("create_by")
 	private String createBy;
+	
 
+	public ProductCategory() {
+		super();
+	}
+
+	public ProductCategory(Long productId) {
+		super();
+		this.productId = productId;
+	}
 
 	public Long getProductCategoryId() {
 		return productCategoryId;

@@ -6,12 +6,6 @@ public class ProductVO extends Product {
 
 	private static final long serialVersionUID = 1L;
 	
-	/** 明星产品显示数量 */
-	public static final Integer STAR_PRODUCT_NUMBER = 10;
-
-	/** 首页默认显示产品数量 */
-	public static final Integer DEFAULT_PRODUCT_NUMBER = 8;
-	
 	/** 标签ID */
 	private Integer labelId;
 

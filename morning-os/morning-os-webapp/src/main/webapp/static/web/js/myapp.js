@@ -272,18 +272,21 @@ $(function() {
 	// alert('有 ' + len + ' 个相同class');
 	$elements.each(function() {
 		var $this = $(this);
-		var length = $this.children().length;
+		var length = $this.children('dd').length;
 		var num;
-		if (length <= 5) {
+		if (length <= 6) {
 			num = 1;
-		} else if (length <= 11) {
+		} else if (length <= 12) {
 			num = 2;
-		} else if (length <= 17) {
+		} else if (length <= 18) {
 			num = 3;
-		} else if (length <= 23) {
+		} else if (length <= 24) {
 			num = 4;
-		} else if (length <= 29) {
+		} else if (length <= 30) {
 			num = 5;
+		}
+		if (length > 6) {
+			$this.siblings().css('display', 'block');
 		}
 		switch (num) { //然后判断
 		case 1:
@@ -360,3 +363,113 @@ $(function() {
 	})
 
 });
+
+/**
+ * 设置分类导航排序样式 
+ */
+$(function() {
+	var url = window.document.location.pathname;
+	$("a[href$='" + url + "']").parent().addClass("active").siblings().removeClass('active');
+});
+
+
+
+/**
+ * 导航悬浮
+ */
+$(window).scroll(function() {
+	var $this = $(this);
+	var targetTop = $(this).scrollTop();
+	var height = $(window).height();
+
+	//document.title=targetTop;
+	//控制导航悬浮
+	if (targetTop > 800) {
+		$("#goodsSubBar").css('display', 'block');
+	} else {
+		$("#goodsSubBar").css('display', 'none');
+	}
+
+	//$("#goodsParam").offset().top
+
+	if (targetTop > $("#goodsDesc").offset().top - 100 && targetTop < $("#goodsParam").offset().top - 100) {
+		$(".goods-sub-bar .detail-list").find("li").removeClass("current");
+		$(".goods-sub-bar .detail-list").find("li").eq(0).addClass("current");
+	} else if (targetTop > $("#goodsParam").offset().top - 100 && targetTop < $("#goodsComment").offset().top - 100) {
+		$(".goods-sub-bar .detail-list").find("li").removeClass("current");
+		$(".goods-sub-bar .detail-list").find("li").eq(1).addClass("current");
+	} else if (targetTop > $("#goodsComment").offset().top - 100 && targetTop < $("#goodsFaq").offset().top - 100) {
+		$(".goods-sub-bar .detail-list").find("li").removeClass("current");
+		$(".goods-sub-bar .detail-list").find("li").eq(2).addClass("current");
+	} else if (targetTop > $("#goodsFaq").offset().top - 100) {
+		$(".goods-sub-bar .detail-list").find("li").removeClass("current");
+		$(".goods-sub-bar .detail-list").find("li").eq(3).addClass("current");
+	}
+});
+
+
+/**
+ * 导航悬浮点击事件
+ */
+/*-----------------优势页面点击子导航-----------------*/
+var subNav_active = $(".current");
+var subNav_scroll = function(target) {
+	subNav_active.removeClass("current");
+	target.parent().addClass("current");
+	subNav_active = target.parent();
+};
+$(".goods-sub-bar .detail-list a").click(function() {
+	subNav_scroll($(this));
+	if ($(this).parent().attr("id") != "join") {
+		var target = $(this).attr("href");
+		var targetScroll = $(target).offset().top - 40;
+		$("html,body").animate({
+			scrollTop : targetScroll
+		}, 300);
+		return false;
+	}
+});
+$(".goods-detail-nav .detail-list a").click(function() {
+	subNav_scroll($(this));
+	if ($(this).parent().attr("id") != "join") {
+		var target = $(this).attr("href");
+		var targetScroll = $(target).offset().top - 40;
+		$("html,body").animate({
+			scrollTop : targetScroll
+		}, 300);
+		return false;
+	}
+});
+
+/**
+* 图片介绍动画切换效果
+*/
+$(function() {
+	$("#goodsPicList").on('click', 'li', function() {
+
+		$("#goodsPicList li").removeClass("current");
+		$(this).addClass("current");
+		var largePath = $(this).children("img").attr("src");
+
+		$("#J_BigPic").attr({
+			src : largePath
+		})
+	});
+	$("#goodsPicList li:first").click(); //第一张图片
+})
+
+
+
+/**
+ * 随机分配评论颜色
+ */
+$(function() {
+	var $elements = $('.line-dot');
+	var len = $elements.length;
+	// alert('有 ' + len + ' 个相同class');
+	$elements.each(function() {
+		var $this = $(this);
+		var num = (Math.floor(Math.random() * 10) + 1); //输出1-10的随机数搜索
+		$this.addClass('item-rainbow-' + num);
+	});
+})

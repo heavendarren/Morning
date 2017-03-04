@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -30,7 +31,6 @@ import com.pussinboots.morning.common.result.ResponseResult;
 import com.pussinboots.morning.common.util.RSAUtils;
 import com.pussinboots.morning.common.util.RegexUtils;
 import com.pussinboots.morning.common.util.ServletUtils;
-import com.pussinboots.morning.common.util.StringUtils;
 import com.pussinboots.morning.os.common.util.SingletonLoginUtils;
 import com.pussinboots.morning.os.modules.content.entity.NavigationBar;
 import com.pussinboots.morning.os.modules.content.enums.NavigationBarTypeEnum;

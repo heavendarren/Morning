@@ -13,10 +13,11 @@
 		<result column="comment_total" property="commentTotal" />
 		<result column="comment_average" property="commentAverage" />
 		<result column="favorite_number" property="favoriteNumber" />
+		<result column="question_number" property="questionNumber" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        attribute_id AS attributeId, product_id AS productId, stock, sales_volume AS salesVolume, page_views AS pageViews, comment_number AS commentNumber, comment_total AS commentTotal, comment_average AS commentAverage, favorite_number AS favoriteNumber
+        attribute_id AS attributeId, product_id AS productId, stock, sales_volume AS salesVolume, page_views AS pageViews, comment_number AS commentNumber, comment_total AS commentTotal, comment_average AS commentAverage, favorite_number AS favoriteNumber, question_number AS questionNumber
     </sql>
 </mapper>

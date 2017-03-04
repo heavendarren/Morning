@@ -51,7 +51,16 @@
 			os_category
 		WHERE
 			status = #{status}
-		AND parent_id = #{categoryId}
+		AND parent_id IN (
+			SELECT
+				category_id AS categoryId
+			FROM
+				os_category
+			WHERE
+				STATUS = #{status}
+			AND parent_id = #{categoryId}
+		)
+		OR parent_id = #{categoryId}
 		OR category_id = #{categoryId}
     </select>
     
@@ -93,6 +102,7 @@
 		SELECT
 			category_id AS categoryId,
 			parent_id AS parentId,
+			status,
 			NAME
 		FROM
 			os_category

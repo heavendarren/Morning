@@ -16,6 +16,8 @@
 		<result column="status" property="status" />
 		<result column="create_time" property="createTime" />
 		<result column="create_by" property="createBy" />
+		<result column="shelve_time" property="shelveTime" />
+		<result column="shelve_by" property="shelveBy" />		
 		<result column="update_time" property="updateTime" />
 		<result column="update_by" property="updateBy" />
 		<result column="page_title" property="pageTitle" />
@@ -26,7 +28,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        product_id AS productId, product_number AS productNumber, label_id AS labelId, name, show_price AS showPrice, introduce, search_key AS searchKey, pic_img AS picImg, show_in_nav AS showInNav, star_product AS starProduct, status, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, page_title AS pageTitle, page_description AS pageDescription, page_keyword AS pageKeyword, remarks
+        product_id AS productId, product_number AS productNumber, label_id AS labelId, name, show_price AS showPrice, introduce, search_key AS searchKey, pic_img AS picImg, show_in_nav AS showInNav, star_product AS starProduct, status, create_time AS createTime, create_by AS createBy, shelve_time AS shelveTime, shelve_by AS shelveBy, update_time AS updateTime, update_by AS updateBy, page_title AS pageTitle, page_description AS pageDescription, page_keyword AS pageKeyword, remarks
     </sql>
     
     <!-- 根据明星产品查找产品列表 -->

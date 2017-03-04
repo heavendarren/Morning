@@ -1,6 +1,7 @@
 package com.pussinboots.morning.os.modules.product.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -8,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pussinboots.morning.common.enums.StatusEnum;
+import com.pussinboots.morning.common.model.PageInfo;
 import com.pussinboots.morning.os.modules.product.dto.CategoryAdvertDTO;
+import com.pussinboots.morning.os.modules.product.dto.ProductPageDTO;
 import com.pussinboots.morning.os.modules.product.entity.Category;
 import com.pussinboots.morning.os.modules.product.entity.ProductCategory;
 import com.pussinboots.morning.os.modules.product.enums.CategoryInIndexEnum;
@@ -71,5 +75,50 @@ public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMappe
 			categoryVOs.add(categoryVO);
 		}
 		return categoryVOs;
+	}
+
+	@Override
+	public ProductPageDTO selectProductVOs(Long categoryId, PageInfo pageInfo) {
+		
+		// 查询子目录信息ID
+		List<Long> categoryIds = categoryMapper.selectCategoryIds(categoryId, StatusEnum.SHOW.getStatus());
+		
+		// 查询该目录ID列表下商品列表
+		Page<ProductVO> page = new Page<>(pageInfo.getNowpage(), pageInfo.getPagesize());
+		List<ProductVO> productVOs = productCategoryMapper.selectProductVOsByPage(categoryIds, StatusEnum.SHOW.getStatus(), page, pageInfo);
+		pageInfo.setTotal(page.getTotal());
+		
+		return new ProductPageDTO(pageInfo, productVOs);
+	}
+
+	@Override
+	public List<Category> selectUpperCategories(Long productId) {
+		ProductCategory productCategory = productCategoryMapper.selectOne(new ProductCategory(productId));
+		
+		// 查找类目ID的所有父类目
+		List<Category> categories = new ArrayList<>();
+		if (productCategory != null) {
+			getUpperCategory(categories, productCategory.getCategoryId());
+			
+			// 对类目列表进行反转
+			Collections.reverse(categories);
+		}
+		
+		return categories;
+	}
+	
+	/**
+	 * 查找类目ID的所有父类目
+	 * @param categories 父类目列表
+	 * @param categoryId 类目ID
+	 */
+	private void getUpperCategory(List<Category> categories, Long categoryId) {
+		Category upperCategory = categoryMapper.selectUpperByLowerCategoryId(categoryId);
+		if (upperCategory != null) {
+			if (StatusEnum.NORMAL.getStatus().equals(upperCategory.getStatus())) {
+				categories.add(upperCategory);
+			}
+			getUpperCategory(categories, upperCategory.getCategoryId());
+		}
 	}
 }

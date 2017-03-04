@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.pussinboots.morning.common.controller.BaseController;
 import com.pussinboots.morning.common.enums.StatusEnum;
+import com.pussinboots.morning.os.common.enums.CommonConstantEnum;
 import com.pussinboots.morning.os.modules.content.entity.AdvertDetail;
 import com.pussinboots.morning.os.modules.content.entity.NavigationBar;
 import com.pussinboots.morning.os.modules.content.enums.AdvertTypeEnum;
 import com.pussinboots.morning.os.modules.content.enums.NavigationBarTypeEnum;
 import com.pussinboots.morning.os.modules.content.service.IAdvertDetailService;
 import com.pussinboots.morning.os.modules.content.service.INavigationBarService;
-import com.pussinboots.morning.os.modules.product.dto.CategoryAdvertDTO;
 import com.pussinboots.morning.os.modules.product.entity.Product;
 import com.pussinboots.morning.os.modules.product.enums.ProductStarEnum;
 import com.pussinboots.morning.os.modules.product.service.ICategoryService;
@@ -23,7 +23,6 @@ import com.pussinboots.morning.os.modules.product.service.IProductCategoryServic
 import com.pussinboots.morning.os.modules.product.service.IProductService;
 import com.pussinboots.morning.os.modules.product.vo.CategoryVO;
 import com.pussinboots.morning.os.modules.product.vo.IndexProductCategoryVO;
-import com.pussinboots.morning.os.modules.product.vo.ProductVO;
 
 /**
  * 
@@ -68,17 +67,19 @@ public class WebFrontController extends BaseController {
 		
 		// 明星单品
 		List<Product> products = productService.selectProductsByStar(ProductStarEnum.STAR_PRODUCT.getStatus(),
-				ProductVO.STAR_PRODUCT_NUMBER);
+				CommonConstantEnum.STAR_PRODUCT_NUMBER.getValue());
 		model.addAttribute("products", products);
-		
+
 		// 主产品--不分类显示产品列表
-		List<CategoryVO> categoryVOs = productCategoryService.selectProductArea(ProductVO.DEFAULT_PRODUCT_NUMBER,
-				CategoryAdvertDTO.CATEGORY_ADVERT_NUMBER);
+		List<CategoryVO> categoryVOs = productCategoryService.selectProductArea(
+				CommonConstantEnum.DEFAULT_PRODUCT_NUMBER.getValue(),
+				CommonConstantEnum.CATEGORY_ADVERT_NUMBER.getValue());
 		model.addAttribute("categoryVOs", categoryVOs);
-		
+
 		// 主产品--分类显示产品列表
-		List<IndexProductCategoryVO> indexProductCategoryVOs = categoryService.selectProductCategoryArea(ProductVO.DEFAULT_PRODUCT_NUMBER,
-				CategoryAdvertDTO.CATEGORY_ADVERT_NUMBER);
+		List<IndexProductCategoryVO> indexProductCategoryVOs = categoryService.selectProductCategoryArea(
+				CommonConstantEnum.DEFAULT_PRODUCT_NUMBER.getValue(),
+				CommonConstantEnum.CATEGORY_ADVERT_NUMBER.getValue());
 		model.addAttribute("indexProductCategoryVOs", indexProductCategoryVOs);
 		return INDEX;
 	}

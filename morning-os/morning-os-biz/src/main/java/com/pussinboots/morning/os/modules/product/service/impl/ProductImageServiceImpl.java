@@ -4,6 +4,10 @@ import com.pussinboots.morning.os.modules.product.entity.ProductImage;
 import com.pussinboots.morning.os.modules.product.mapper.ProductImageMapper;
 import com.pussinboots.morning.os.modules.product.service.IProductImageService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,5 +21,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProductImageServiceImpl extends ServiceImpl<ProductImageMapper, ProductImage> implements IProductImageService {
+	
+	@Autowired
+	private ProductImageMapper productImageMapper;
+
+	@Override
+	public List<ProductImage> selectByProductId(Long productId, Integer showNumber, Integer status) {
+		return productImageMapper.selectByProductId(productId, showNumber, status);
+	}
 	
 }

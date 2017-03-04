@@ -24,4 +24,12 @@ public interface IProductService extends IService<Product> {
 	 */
 	List<Product> selectProductsByStar(Integer starProduct, Integer showNumber);
 	
+	/**
+	 * 根据商品编号和状态查找商品
+	 * @param productNumber 商品编号
+	 * @param status 商品状态
+	 * @return Product
+	 */
+	Product selectProductByNumber(Long productNumber, Integer status);
+	
 }

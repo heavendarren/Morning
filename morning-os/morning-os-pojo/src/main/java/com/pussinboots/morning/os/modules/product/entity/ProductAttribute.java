@@ -65,7 +65,20 @@ public class ProductAttribute extends Model<ProductAttribute> {
      */
 	@TableField("favorite_number")
 	private Integer favoriteNumber;
+    /**
+     * 提问数
+     */
+	@TableField("question_number")
+	private Integer questionNumber;
 
+	public ProductAttribute() {
+		super();
+	}
+
+	public ProductAttribute(Long productId) {
+		super();
+		this.productId = productId;
+	}
 
 	public Long getAttributeId() {
 		return attributeId;
@@ -137,6 +150,14 @@ public class ProductAttribute extends Model<ProductAttribute> {
 
 	public void setFavoriteNumber(Integer favoriteNumber) {
 		this.favoriteNumber = favoriteNumber;
+	}
+
+	public Integer getQuestionNumber() {
+		return questionNumber;
+	}
+
+	public void setQuestionNumber(Integer questionNumber) {
+		this.questionNumber = questionNumber;
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package com.pussinboots.morning.common.exception;
 
-import com.pussinboots.morning.common.util.StringUtils;
-
 /**
  * 
 * 项目名称：morning-common-base 
@@ -24,10 +22,6 @@ public class StatefulException extends RuntimeException {
 
 	public StatefulException(String msg) {
 		super(msg);
-	}
-
-	public StatefulException(String messageTemplate, Object... params) {
-		super(StringUtils.format(messageTemplate, params));
 	}
 
 	public StatefulException(Throwable throwable) {

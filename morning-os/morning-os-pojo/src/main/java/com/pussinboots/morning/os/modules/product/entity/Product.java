@@ -87,6 +87,16 @@ public class Product extends Model<Product> {
 	@TableField("create_by")
 	private String createBy;
     /**
+     * 上架时间
+     */
+	@TableField("shelve_time")
+	private Date shelveTime;
+    /**
+     * 上架人
+     */
+	@TableField("shelve_by")
+	private String shelveBy;
+    /**
      * 更新时间
      */
 	@TableField("update_time")
@@ -219,6 +229,22 @@ public class Product extends Model<Product> {
 
 	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
+	}
+
+	public Date getShelveTime() {
+		return shelveTime;
+	}
+
+	public void setShelveTime(Date shelveTime) {
+		this.shelveTime = shelveTime;
+	}
+
+	public String getShelveBy() {
+		return shelveBy;
+	}
+
+	public void setShelveBy(String shelveBy) {
+		this.shelveBy = shelveBy;
 	}
 
 	public Date getUpdateTime() {

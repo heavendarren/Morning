@@ -33,6 +33,9 @@ public class PageInfo implements Serializable{
 	/** 每页显示的记录数 */
 	@JsonIgnore
 	private int pagesize;
+	/** 总页数 */
+	@JsonIgnore
+	private int totalPage;
 	/** 查询条件 */
 	@JsonIgnore
 	private Map<String, Object> condition;
@@ -46,6 +49,23 @@ public class PageInfo implements Serializable{
     public PageInfo() {
 		super();
 	}
+    
+	//构造方法
+    public PageInfo(int pagesize) {
+        //计算当前页  
+        if (nowpage <= 0) {
+            this.nowpage = 1;
+        }
+        //记录每页显示的记录数  
+        if (pagesize < 0) {
+            this.pagesize = PAGESIZE;
+        } else {
+            this.pagesize = pagesize;
+        }
+        //计算开始的记录和结束的记录  
+        this.from = (this.nowpage - 1) * this.pagesize;
+        this.size = this.pagesize;
+    }
 
 	//构造方法
     public PageInfo(int nowpage, int pagesize) {
@@ -96,6 +116,7 @@ public class PageInfo implements Serializable{
 
     public void setTotal(int total) {
         this.total = total;
+        this.count();
     }
 
     public int getFrom() {
@@ -130,7 +151,15 @@ public class PageInfo implements Serializable{
         this.pagesize = pagesize;
     }
 
-    public Map<String, Object> getCondition() {
+    public int getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public Map<String, Object> getCondition() {
         return condition;
     }
 
@@ -153,4 +182,15 @@ public class PageInfo implements Serializable{
     public void setOrder(String order) {
         this.order = order;
     }
+    
+	public void count() {
+		// 计算总页数
+		int totalPageTemp = this.total / this.pagesize;
+		int plus = (this.total % this.pagesize) == 0 ? 0 : 1;
+		totalPageTemp = totalPageTemp + plus;
+		if (totalPageTemp <= 0) {
+			totalPageTemp = 1;
+		}
+		this.totalPage = totalPageTemp;
+	}
 }

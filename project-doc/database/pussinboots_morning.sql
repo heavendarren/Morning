@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2017-03-01 01:28:06
+Date: 2017-03-05 02:24:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -169,8 +169,8 @@ CREATE TABLE `cms_role` (
 -- Records of cms_role
 -- ----------------------------
 INSERT INTO `cms_role` VALUES ('1', '超级管理员', 'admin', '1', '1', '2016-10-23 14:26:47', '猫宁管理员', '2017-02-28 15:54:18', '猫宁', '超级管理员，拥有系统所有的权力！');
-INSERT INTO `cms_role` VALUES ('3', '角色管理员', 'role', '1', '1', '2017-02-07 16:20:21', '猫宁', '2017-02-17 15:34:29', '猫宁', '角色管理员，只能修改、创建角色');
-INSERT INTO `cms_role` VALUES ('4', '研发测试员', 'test', '0', '1', '2017-02-17 15:43:46', '猫宁', '2017-02-17 15:43:46', '猫宁', '');
+INSERT INTO `cms_role` VALUES ('3', '角色管理员', 'role', '1', '1', '2017-02-07 16:20:21', '猫宁', '2017-03-01 19:13:44', '猫宁', '角色管理员，只能修改、创建角色');
+INSERT INTO `cms_role` VALUES ('4', '研发测试员', 'test', '0', '1', '2017-02-17 15:43:46', '猫宁', '2017-03-01 19:13:31', '猫宁', '');
 
 -- ----------------------------
 -- Table structure for cms_role_menu
@@ -183,51 +183,11 @@ CREATE TABLE `cms_role_menu` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建者',
   PRIMARY KEY (`role_menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2423 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2469 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_role_menu
 -- ----------------------------
-INSERT INTO `cms_role_menu` VALUES ('2289', '3', '1', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2290', '3', '2', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2291', '3', '8', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2292', '3', '9', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2293', '3', '10', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2294', '3', '3', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2295', '3', '4', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2296', '3', '5', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2297', '3', '6', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2298', '3', '7', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2299', '3', '69', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2300', '3', '11', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2301', '3', '12', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2302', '3', '13', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2303', '3', '14', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2304', '3', '15', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2305', '3', '83', '2017-02-17 15:34:29', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2306', '4', '1', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2307', '4', '2', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2308', '4', '8', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2309', '4', '9', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2310', '4', '10', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2311', '4', '3', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2312', '4', '4', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2313', '4', '5', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2314', '4', '6', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2315', '4', '7', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2316', '4', '69', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2317', '4', '11', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2318', '4', '12', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2319', '4', '13', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2320', '4', '14', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2321', '4', '15', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2322', '4', '83', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2323', '4', '86', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2324', '4', '87', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2325', '4', '88', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2326', '4', '89', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2327', '4', '91', '2017-02-17 15:43:46', '猫宁');
-INSERT INTO `cms_role_menu` VALUES ('2328', '4', '90', '2017-02-17 15:43:46', '猫宁');
 INSERT INTO `cms_role_menu` VALUES ('2375', '1', '1', '2017-02-28 15:54:18', '猫宁');
 INSERT INTO `cms_role_menu` VALUES ('2376', '1', '2', '2017-02-28 15:54:18', '猫宁');
 INSERT INTO `cms_role_menu` VALUES ('2377', '1', '8', '2017-02-28 15:54:18', '猫宁');
@@ -276,6 +236,52 @@ INSERT INTO `cms_role_menu` VALUES ('2419', '1', '78', '2017-02-28 15:54:18', '�
 INSERT INTO `cms_role_menu` VALUES ('2420', '1', '84', '2017-02-28 15:54:18', '猫宁');
 INSERT INTO `cms_role_menu` VALUES ('2421', '1', '85', '2017-02-28 15:54:18', '猫宁');
 INSERT INTO `cms_role_menu` VALUES ('2422', '1', '71', '2017-02-28 15:54:18', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2423', '4', '1', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2424', '4', '2', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2425', '4', '8', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2426', '4', '9', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2427', '4', '10', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2428', '4', '3', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2429', '4', '4', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2430', '4', '5', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2431', '4', '6', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2432', '4', '7', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2433', '4', '69', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2434', '4', '11', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2435', '4', '12', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2436', '4', '13', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2437', '4', '14', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2438', '4', '15', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2439', '4', '83', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2440', '4', '86', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2441', '4', '87', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2442', '4', '88', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2443', '4', '89', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2444', '4', '91', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2445', '4', '90', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2446', '4', '65', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2447', '4', '84', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2448', '4', '85', '2017-03-01 19:13:31', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2449', '3', '1', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2450', '3', '2', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2451', '3', '8', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2452', '3', '9', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2453', '3', '10', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2454', '3', '3', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2455', '3', '4', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2456', '3', '5', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2457', '3', '6', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2458', '3', '7', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2459', '3', '69', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2460', '3', '11', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2461', '3', '12', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2462', '3', '13', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2463', '3', '14', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2464', '3', '15', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2465', '3', '83', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2466', '3', '65', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2467', '3', '84', '2017-03-01 19:13:44', '猫宁');
+INSERT INTO `cms_role_menu` VALUES ('2468', '3', '85', '2017-03-01 19:13:44', '猫宁');
 
 -- ----------------------------
 -- Table structure for cms_user
@@ -307,8 +313,8 @@ CREATE TABLE `cms_user` (
 -- ----------------------------
 -- Records of cms_user
 -- ----------------------------
-INSERT INTO `cms_user` VALUES ('1', '1', 'admin', 'd81c31b9348c3da513177a781703767e', 'Dts7jk', '猫宁', '陈星星', '0', '22', 'default/avatar/avatar_1.jpg', '1', '810170512@qq.com', '18857105127', '2017-02-28 15:57:52', '172.27.124.95', '2016-10-27 23:11:43', '穿鞋子的猫', '2017-02-28 15:00:36', '猫宁');
-INSERT INTO `cms_user` VALUES ('2', '1', 'system', 'a640aa3da9f5d9975d7cee1141fa51a7', 'JGKbZs', '爬梯子的过路人', '陈星星', '1', null, 'default/avatar/avatar_3.jpg', '1', '810170512@qq.com', '18857105127', '2017-02-20 23:27:10', '172.18.52.1', '2017-02-07 16:21:10', '猫宁', '2017-02-17 16:25:23', '猫宁');
+INSERT INTO `cms_user` VALUES ('1', '1', 'admin', 'd81c31b9348c3da513177a781703767e', 'Dts7jk', '猫宁', '陈星星', '0', '22', 'default/avatar/avatar_1.jpg', '1', '810170512@qq.com', '18857105127', '2017-03-01 20:49:14', '172.27.167.108', '2016-10-27 23:11:43', '穿鞋子的猫', '2017-02-28 15:00:36', '猫宁');
+INSERT INTO `cms_user` VALUES ('2', '1', 'system', 'a640aa3da9f5d9975d7cee1141fa51a7', 'JGKbZs', '爬梯子的过路人', '陈星星', '1', null, 'default/avatar/avatar_3.jpg', '1', '810170512@qq.com', '18857105127', '2017-03-01 19:13:55', '172.27.167.108', '2017-02-07 16:21:10', '猫宁', '2017-02-17 16:25:23', '猫宁');
 INSERT INTO `cms_user` VALUES ('9', '3', 'chen', '48fbc55cb5626809b4ad309f9562bab7', '86GRd6', '陈星星', '陈星星', '1', null, 'default/avatar/avatar_8.jpg', '1', '15632831549@qq.com', '18857105127', null, null, '2017-02-28 16:08:15', '猫宁', '2017-02-28 16:22:01', '猫宁');
 
 -- ----------------------------
@@ -323,7 +329,7 @@ CREATE TABLE `cms_user_login_log` (
   `operating_system` varchar(50) DEFAULT NULL COMMENT '操作系统',
   `browser` varchar(50) DEFAULT NULL COMMENT '浏览器',
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_user_login_log
@@ -460,6 +466,13 @@ INSERT INTO `cms_user_login_log` VALUES ('132', '2017-02-28 15:53:36', '172.27.1
 INSERT INTO `cms_user_login_log` VALUES ('133', '2017-02-28 15:54:07', '172.27.124.95', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `cms_user_login_log` VALUES ('134', '2017-02-28 15:54:43', '172.27.124.95', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `cms_user_login_log` VALUES ('135', '2017-02-28 15:57:52', '172.27.124.95', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `cms_user_login_log` VALUES ('136', '2017-03-01 17:23:54', '172.27.155.29', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `cms_user_login_log` VALUES ('137', '2017-03-01 17:24:12', '172.27.155.29', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `cms_user_login_log` VALUES ('138', '2017-03-01 17:24:34', '172.27.155.29', '2', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `cms_user_login_log` VALUES ('139', '2017-03-01 17:25:09', '172.27.155.29', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `cms_user_login_log` VALUES ('140', '2017-03-01 19:13:55', '172.27.167.108', '2', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `cms_user_login_log` VALUES ('141', '2017-03-01 20:42:14', '172.27.167.108', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `cms_user_login_log` VALUES ('142', '2017-03-01 20:49:14', '172.27.167.108', '1', 'WINDOWS_10', 'CHROME45');
 
 -- ----------------------------
 -- Table structure for cms_user_role
@@ -492,7 +505,7 @@ CREATE TABLE `cms_version_log` (
   `log_title` varchar(255) DEFAULT NULL COMMENT '日志标题',
   `log_content` text COMMENT '日志内容',
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cms_version_log
@@ -607,6 +620,17 @@ INSERT INTO `cms_version_log` VALUES ('107', '2017-02-08 23:00:21', '陈星星',
 INSERT INTO `cms_version_log` VALUES ('108', '2017-02-14 17:12:48', '陈星星', 'shiro登录次数限制', '1.shiro实现登录次数限制');
 INSERT INTO `cms_version_log` VALUES ('109', '2017-02-16 19:13:26', '陈星星', '修复相关BUG', '<div>1.修复Service与Controller数据传递的问题，建立DTO包用于传递二者之间数据</div><div>2.修复dubbo因方法参数实体类序列化问题而不能加载的问题</div>');
 INSERT INTO `cms_version_log` VALUES ('110', '2017-02-17 23:30:59', '陈星星', '新增组织管理', '<div>1.新增组织管理</div><div>2.组织与管理员对接</div><div>3.使用spring3.5注解</div><div>4.使用脚本删除多余文件删除多余文件</div><div>5.验证吗更换</div>');
+INSERT INTO `cms_version_log` VALUES ('111', '2017-02-18 02:10:43', '陈星星', '新增组织详情', '<div>1.验证码验证成功后，删除session中的验证码信息</div><div>2.整理项目中相关依赖</div><div>3.组织管理中组织详情及管理员查看搭建完毕</div>');
+INSERT INTO `cms_version_log` VALUES ('112', '2017-02-20 02:13:12', '陈星星', '电子商城用户登录', '<div>1.修复mysql5.7出现的bug问题</div><div>2.修复登录页css、js被拦截</div><div>3.电子商城用户登录迁移完毕</div><div>4.修复用户状态被禁止还能登录BUG</div><div>5.更新数据库</div>');
+INSERT INTO `cms_version_log` VALUES ('113', '2017-02-21 02:14:30', '陈星星', '邮件发送模块', '<div>1.初步搭建邮件模块</div><div>2.测试邮件发送</div><div>3.将发送邮件的记录记录到数据库</div><div>4.解決xml文化冲突的问题</div><div>5.修复后台管理系统无法创建管理员BUG</div>');
+INSERT INTO `cms_version_log` VALUES ('114', '2017-02-22 02:15:47', '陈星星', '电子商城用户登录、忘记密码功能实现', '<div>1.电子商城用户忘记密码整合完毕</div><div>2.修复验证信息不能为空 null bug</div><div>3.电子商城用户注册整合完毕</div><div>4.电子商城回车提交表单</div><div>5.更新数据库</div>');
+INSERT INTO `cms_version_log` VALUES ('115', '2017-02-23 02:17:09', '陈星星', '电子商城首页实现', '<div>1.电子商城首页连接</div><div>2.SpringMVC拦截器拦截网站配置</div><div>3.网站导航栏管理实现</div><div>4.解决jsp报错的BUG</div><div>5.建立商品模块数据库表及基类service、entity、dao层</div><div>6.将邮件发送类独立出来</div>');
+INSERT INTO `cms_version_log` VALUES ('116', '2017-02-24 02:17:52', '陈星星', '首页广告位实现', '1.电子商城首页广告位实现');
+INSERT INTO `cms_version_log` VALUES ('117', '2017-02-26 02:19:03', '陈星星', '首页导航分类、明星产品实现', '<div>1.电子商城首页导航栏产品分类实现</div><div>2.首页明星产品实现</div>');
+INSERT INTO `cms_version_log` VALUES ('118', '2017-02-28 02:20:27', '陈星星', '修复相关BUG', '<div>1.修复dubbo服务提供者启动报错的BUG</div><div>2.修复web项目启动报错的BUG</div><div>3.使用EL表达式减少jstl标签的使用</div><div>4.后台用户图片显示BUG</div><div>5.电子商城首页产品分类基本实现</div>');
+INSERT INTO `cms_version_log` VALUES ('119', '2017-03-01 02:21:19', '陈星星', '对接产品分类页面', '<div>1.修复数据库DISTINCT去重报错BUG</div><div>2.对后台管理系统的模块进行更精确的分离，方便后期对模块的分布式</div><div>3.对接产品分类页面</div>');
+INSERT INTO `cms_version_log` VALUES ('120', '2017-03-02 02:22:19', '陈星星', '对接产品详情页面', '<div>1.基本实现产品详情页面</div><div>2.更新数据库结构</div>');
+INSERT INTO `cms_version_log` VALUES ('121', '2017-03-04 02:22:45', '陈星星', '完善产品详情页面', '<div>1.完善产品详情页面</div><div>2.对接商品评价、商品提问等功能</div>');
 
 -- ----------------------------
 -- Table structure for os_advert
@@ -622,7 +646,7 @@ CREATE TABLE `os_advert` (
   `template` text COMMENT '模版内容',
   `defult_number` int(11) DEFAULT '0' COMMENT '默认显示个数',
   PRIMARY KEY (`advert_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='广告位表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='广告位表';
 
 -- ----------------------------
 -- Records of os_advert
@@ -699,7 +723,7 @@ CREATE TABLE `os_category` (
 -- ----------------------------
 -- Records of os_category
 -- ----------------------------
-INSERT INTO `os_category` VALUES ('1', '0', '全部商品分类', null, '0', '0', '0', '0', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '全部商品', null, null, null);
+INSERT INTO `os_category` VALUES ('1', '0', '全部商品', null, '0', '1', '0', '0', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '全部商品', null, null, null);
 INSERT INTO `os_category` VALUES ('2', '1', '手机', '100', '1', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '手机', null, null, null);
 INSERT INTO `os_category` VALUES ('3', '1', '智能硬件', '200', '1', '1', '1', '2', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '智能硬件', null, null, null);
 INSERT INTO `os_category` VALUES ('4', '1', '笔记本  平板', '300', '1', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '笔记本/平板', null, null, null);
@@ -739,6 +763,7 @@ CREATE TABLE `os_comment` (
   `product_id` bigint(20) DEFAULT NULL COMMENT '商品ID',
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `user_name` varchar(30) DEFAULT NULL COMMENT '昵称',
+  `pic_img` varchar(255) DEFAULT NULL COMMENT '用户头像',
   `order_id` bigint(20) DEFAULT NULL COMMENT '订单ID',
   `star` tinyint(4) DEFAULT NULL COMMENT '评论星级：1,2,3,4,5',
   `content` varchar(255) DEFAULT NULL COMMENT '评论内容',
@@ -751,17 +776,59 @@ CREATE TABLE `os_comment` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`comment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='评价表';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='评价表';
 
 -- ----------------------------
 -- Records of os_comment
 -- ----------------------------
-INSERT INTO `os_comment` VALUES ('1', '11', '1', '穿鞋子的猫', '1', '5', '价格实惠，外观好看，还有盒子便于保管，不错。', '52', '45', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
-INSERT INTO `os_comment` VALUES ('3', '9', '1', '测试评价人1', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '3', '3', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
-INSERT INTO `os_comment` VALUES ('4', '8', '1', '测试评价人2', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '4', '4', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
-INSERT INTO `os_comment` VALUES ('5', '7', '1', '测试评价人3', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '5', '5', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
-INSERT INTO `os_comment` VALUES ('6', '6', '1', '测试评价人4', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '6', '6', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
-INSERT INTO `os_comment` VALUES ('7', '5', '1', '测试评价人5', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '7', '7', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('1', '11', '1', '穿鞋子的猫', 'default/avatar/avatar_8.jpg', '1', '5', '价格实惠，外观好看，还有盒子便于保管，不错。', '52', '45', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('3', '9', '1', '测试评价人1', 'default/avatar/avatar_4.jpg', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '3', '3', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('4', '8', '1', '测试评价人2', 'default/avatar/avatar_5.jpg', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '4', '4', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('5', '7', '1', '测试评价人3', 'default/avatar/avatar_8.jpg', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '5', '5', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('6', '6', '1', '测试评价人4', 'default/avatar/avatar_4.jpg', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '6', '6', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('7', '5', '1', '测试评价人5', 'default/avatar/avatar_5.jpg', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '7', '7', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('8', '1', '1', '穿鞋子的猫', 'default/avatar/avatar_8.jpg', '1', '5', '价格实惠，外观好看，还有盒子便于保管，不错。', '52', '45', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('9', '1', '1', '穿鞋子的猫', 'default/avatar/avatar_8.jpg', '1', '5', '价格实惠，外观好看，还有盒子便于保管，不错。', '52', '45', '1', '0', '2017-03-04 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('10', '1', '1', '穿鞋子的猫', 'default/avatar/avatar_8.jpg', '1', '5', '价格实惠，外观好看，还有盒子便于保管，不错。', '52', '45', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('11', '1', '1', '穿鞋子的猫', 'default/avatar/avatar_8.jpg', '1', '5', '价格实惠，外观好看，还有盒子便于保管，不错。', '52', '45', '1', '0', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('12', '1', '1', '穿鞋子的猫', 'default/avatar/avatar_8.jpg', '1', '5', '价格实惠，外观好看，还有盒子便于保管，不错。', '52', '45', '1', '0', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('13', '1', '1', '穿鞋子的猫', 'default/avatar/avatar_8.jpg', '1', '5', '价格实惠，外观好看，还有盒子便于保管，不错。', '52', '45', '1', '0', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('14', '1', '1', '穿鞋子的猫', 'default/avatar/avatar_8.jpg', '1', '5', '价格实惠，外观好看，还有盒子便于保管，不错。', '52', '45', '1', '0', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('15', '1', '1', '穿鞋子的猫', 'default/avatar/avatar_8.jpg', '1', '5', '价格实惠，外观好看，还有盒子便于保管，不错。', '52', '45', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('16', '1', '1', '测试评价人3', 'default/avatar/avatar_8.jpg', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '5', '5', '1', '0', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('17', '1', '1', '测试评价人4', 'default/avatar/avatar_4.jpg', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '6', '6', '1', '1', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('18', '1', '1', '测试评价人5', 'default/avatar/avatar_5.jpg', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '7', '7', '1', '0', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('19', '1', '1', '穿鞋子的猫', 'default/avatar/avatar_8.jpg', '1', '5', '价格实惠，外观好看，还有盒子便于保管，不错。', '52', '45', '1', '0', '2017-02-28 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+INSERT INTO `os_comment` VALUES ('20', '1', '1', '测试评价人4', 'default/avatar/avatar_4.jpg', '1', '5', '测试评价内容，测试评价内容，测试评价内容，测试评价内容。', '6', '6', '1', '0', '2017-03-05 02:01:48', '猫宁', '2017-02-28 02:01:55', '猫宁');
+
+-- ----------------------------
+-- Table structure for os_comment_reply
+-- ----------------------------
+DROP TABLE IF EXISTS `os_comment_reply`;
+CREATE TABLE `os_comment_reply` (
+  `comment_reply_id` bigint(20) NOT NULL COMMENT '评论回复ID',
+  `comment_id` bigint(20) DEFAULT NULL COMMENT '评论ID',
+  `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `user_name` varchar(30) DEFAULT NULL COMMENT '昵称',
+  `pic_img` varchar(255) DEFAULT NULL COMMENT '用户头像',
+  `content` varchar(255) DEFAULT NULL COMMENT '评论内容',
+  `good_count` int(11) DEFAULT '0' COMMENT '好评数',
+  `status` tinyint(2) DEFAULT '1' COMMENT '状态：1.显示；0.隐藏',
+  `type` tinyint(2) DEFAULT '0' COMMENT '评论类型：1,官方回复；0,用户回复',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
+  PRIMARY KEY (`comment_reply_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论回复表';
+
+-- ----------------------------
+-- Records of os_comment_reply
+-- ----------------------------
+INSERT INTO `os_comment_reply` VALUES ('1', '8', '1', '猫宁', 'default/avatar/avatar_8.jpg', '很好用啊', '10', '1', '1', '2017-03-04 15:41:37', null, '2017-03-04 15:41:40', null);
+INSERT INTO `os_comment_reply` VALUES ('2', '8', '1', '猫宁', 'default/avatar/avatar_4.jpg', '测试2', '0', '1', '0', '2017-03-04 15:42:00', null, null, null);
+INSERT INTO `os_comment_reply` VALUES ('3', '8', '1', '猫宁', 'default/avatar/avatar_5.jpg', '测试3', '0', '1', '0', '2017-03-04 15:42:00', null, null, null);
+INSERT INTO `os_comment_reply` VALUES ('4', '8', '1', '猫宁', 'default/avatar/avatar_8.jpg', '测试3', '0', '1', '0', '2017-03-04 15:42:00', null, null, null);
 
 -- ----------------------------
 -- Table structure for os_email
@@ -909,7 +976,7 @@ INSERT INTO `os_navigation_bar` VALUES ('25', '智能硬件', '_blank', '3', 'li
 INSERT INTO `os_navigation_bar` VALUES ('27', '生活周边', '_blank', '4', 'list/9', '1', '5', 'indexClassify', '2017-02-23 23:53:32', '猫宁', '2017-02-23 23:53:42', '猫宁', null);
 INSERT INTO `os_navigation_bar` VALUES ('28', '周边配件', '_blank', '5', 'list/6', '1', '5', 'indexClassify', '2017-02-23 23:56:25', '猫宁', '2017-02-23 23:56:29', '猫宁', null);
 INSERT INTO `os_navigation_bar` VALUES ('29', '公益频道', '_blank', '6', 'http://localhost:8080/gongyi.morning/index', '1', '5', 'indexClassify', '2017-02-23 23:52:03', '猫宁', '2017-02-23 23:52:12', '猫宁', null);
-INSERT INTO `os_navigation_bar` VALUES ('30', '猫宁后台管理平台', '_blank', '7', 'http://localhost:8080/system.morning/index', '1', '5', 'indexClassify', '2017-02-23 23:53:32', '猫宁', '2017-02-23 23:53:42', '猫宁', null);
+INSERT INTO `os_navigation_bar` VALUES ('30', '猫宁后台管理平台', '_blank', '7', 'http://localhost:8080/system.morning/index', '0', '5', 'indexClassify', '2017-02-23 23:53:32', '猫宁', '2017-02-23 23:53:42', '猫宁', null);
 
 -- ----------------------------
 -- Table structure for os_product
@@ -929,6 +996,8 @@ CREATE TABLE `os_product` (
   `status` tinyint(2) DEFAULT '0' COMMENT '商品状态：0,新增；1,上架；2,下架',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建者',
+  `shelve_time` datetime DEFAULT NULL COMMENT '上架时间',
+  `shelve_by` varchar(64) DEFAULT NULL COMMENT '上架人',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
   `page_title` varchar(64) DEFAULT NULL COMMENT '页面标题',
@@ -941,40 +1010,40 @@ CREATE TABLE `os_product` (
 -- ----------------------------
 -- Records of os_product
 -- ----------------------------
-INSERT INTO `os_product` VALUES ('1', '1472581220748', '1', '小米手机5', '2299.00', '支持手机分身，能刷公交卡、银行卡', '小米5,小米手机5,小米5手机,小米 5', 'images/goods/20170226/1471798318820.png', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '小米手机5', '小米手机5 十余项黑科技，很轻狠快。骁龙820处理器，最大可选4GB内存+128GB闪存，4轴防抖相机，3D陶瓷/玻璃机身。', '小米5,小米手机5,小米5手机,小米 5,猫宁商城', null);
-INSERT INTO `os_product` VALUES ('2', '1472581245880', null, '小米MIX', '3499.00', '全面屏概念手机', '小米MIX,小米手机,超大屏', 'images/goods/20170226/1471798364441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '小米MIX', '小米MIX 全面屏概念手机，开创性的在6.4寸超大屏幕上，做到了惊人的91.3%。当你点亮屏幕的一瞬间，200多万颗像素的色彩，开满了整个屏幕。', '小米MIX,猫宁商城', null);
-INSERT INTO `os_product` VALUES ('3', '1472581300305', '2', '魅蓝 Note5', '1099.00', '快的更漂亮，薄的更持久', '魅蓝 Note5,魅族', 'images/goods/20170226/1471798388806.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '魅蓝 Note5', '魅蓝 Note5，正品行货，另有魅蓝 Note5详细介绍、图片、价格、参数、售前咨询等，购买魅蓝 Note5上魅族商城，全场包邮，7天无理由退货，15天换货保障。', '魅蓝 Note5,魅族,猫宁商城', null);
-INSERT INTO `os_product` VALUES ('4', '1472583774201', '3', '小米手环 2', '149.00', '看得见的时刻，和你的每一步', '小米手环2,小米手环2代,手环,智能手环', 'images/goods/20170226/1471798568000.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '小米手环2', '全新的小米手环 2，加入了 OLED 显示屏，通过轻触圆形按键，即可显示当前时间、步数、心率，甚至里程、热量等更多数据。当不方便触控操作时，抬起手腕，手环便可自动显示当前时间，轻松便捷。', '小米手环2,小米手环2代,猫宁商城', null);
-INSERT INTO `os_product` VALUES ('5', '1472583831117', null, '魅族手环', '229.00', '腕间流动的心率专家', '魅族手环,魅族,手环,智能手环', 'images/goods/20170226/1471798587971.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '魅族手环', '魅族手环，腕间流动的心率专家，正品行货，另有魅族手环详细介绍、图片、价格、参数、售前咨询等，购买魅族手环上魅族商城，全场包邮，7天无理由退货，15天换货保障。', '魅族手环,魅族,手环,智能手环,猫宁商城', null);
-INSERT INTO `os_product` VALUES ('6', '1472628630086', null, 'LED 智能台灯', '169.00', '照明之上，光的艺术品', '小米台灯,小米LED灯,LED小米灯,小米 LED灯', 'images/goods/20170226/1471798587451.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', 'LED 智能台灯', '米家LED智能台灯的色温与亮度可以无级调节，几乎可以满足用户对光线的所有需求。还针对最常见的四种使用场景单独做了光线优化，专注保护用户的双眼。', '小米台灯,小米LED灯,LED小米灯,小米 LED灯,猫宁商城', null);
-INSERT INTO `os_product` VALUES ('7', '1472736931796', null, 'Yeelight床头灯', '249.00', '触摸式操作 给卧室1600万种颜色', 'Yeelight床头灯,床头灯,智能灯', 'images/goods/20170226/1471799887971.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', 'Yeelight床头灯', '小米手机官网正品智能灯推荐，小米手机Yeelight床头灯最新价格249元，有多种颜色可选，另有Yeelight床头灯详细介绍及图片，还有用户评价，售前咨询等。', 'Yeelight床头灯,床头灯,智能灯,猫宁商城', null);
-INSERT INTO `os_product` VALUES ('8', '1473318741286', null, 'Yeelight LED智能灯泡', '99.00', '亮度自由调节 WIFI远程操作', 'Yeelight LED智能灯泡 白光版,智能灯泡', 'images/goods/20170226/1471798581451.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', 'Yeelight LED智能灯泡', 'Yeelight LED 智能灯泡,亮度自由调节 WIFI远程操作', 'Yeelight LED智能灯泡 白光版,智能灯泡,猫宁商城', null);
-INSERT INTO `os_product` VALUES ('9', '1473685327798', null, '测试商品名称1', '166.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称1', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('10', '1474910562755', null, '测试商品名称2', '223.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称2', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('11', '1475353900453', '4', '测试商品名称3', '166.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称3', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('12', '1475353918562', null, '测试商品名称4', '124.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称4', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('13', '1475354006972', null, '测试商品名称5', '249.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称5', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('14', '1475407186147', null, '测试商品名称6', '219.00', '测试描述，测试商品描述，测试商品描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称6', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('15', '1475947762038', null, '测试商品名称7', '2366.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称7', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('16', '1475996329018', null, '测试商品名称8', '2499.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称8', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('17', '1477472951669', null, '测试商品名称9', '2188.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称9', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('18', '1478099883634', '1', '测试商品名称10', '249.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称10', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('19', '1478522533460', null, '测试商品名称11', '1300.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称11', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('20', '1478527872182', null, '测试商品名称12', '179.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称12', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('21', '1478680540669', null, '测试商品名称13', '6429.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称13', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('22', '1478682438293', null, '测试商品名称14', '2416.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称14', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('23', '1478682709405', null, '测试商品名称15', '219.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称15', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('24', '1478682831935', null, '测试商品名称16', '295.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称16', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('25', '1478682893916', null, '测试商品名称17', '2164.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称17', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('26', '1478683391099', null, '测试商品名称18', '146.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称18', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('27', '1478683407372', null, '测试商品名称19', '26.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称19', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('28', '1478683468241', null, '测试商品名称20', '4974.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称20', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('29', '1478683468246', null, '测试商品名称21', '265.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称21', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('30', '1478683468279', null, '测试商品名称22', '259.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称22', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('31', '1478689468277', null, '测试商品名称23', '789.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称23', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('32', '1478689468979', null, '测试商品名称24', '456.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称24', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('33', '1478689448279', null, '测试商品名称25', '7845.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称25', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
-INSERT INTO `os_product` VALUES ('34', '1478689468679', null, '测试商品名称26', '1548.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', '2017-02-25 21:44:48', '猫宁', '测试商品名称26', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('1', '1472581220748', '1', '小米手机5', '2299.00', '支持手机分身，能刷公交卡、银行卡', '小米5,小米手机5,小米5手机,小米 5', 'images/goods/20170226/1471798318820.png', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '小米手机5', '小米手机5 十余项黑科技，很轻狠快。骁龙820处理器，最大可选4GB内存+128GB闪存，4轴防抖相机，3D陶瓷/玻璃机身。', '小米5,小米手机5,小米5手机,小米 5,猫宁商城', null);
+INSERT INTO `os_product` VALUES ('2', '1472581245880', null, '小米MIX', '3499.00', '全面屏概念手机', '小米MIX,小米手机,超大屏', 'images/goods/20170226/1471798364441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '小米MIX', '小米MIX 全面屏概念手机，开创性的在6.4寸超大屏幕上，做到了惊人的91.3%。当你点亮屏幕的一瞬间，200多万颗像素的色彩，开满了整个屏幕。', '小米MIX,猫宁商城', null);
+INSERT INTO `os_product` VALUES ('3', '1472581300305', '2', '魅蓝 Note5', '1099.00', '快的更漂亮，薄的更持久', '魅蓝 Note5,魅族', 'images/goods/20170226/1471798388806.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '魅蓝 Note5', '魅蓝 Note5，正品行货，另有魅蓝 Note5详细介绍、图片、价格、参数、售前咨询等，购买魅蓝 Note5上魅族商城，全场包邮，7天无理由退货，15天换货保障。', '魅蓝 Note5,魅族,猫宁商城', null);
+INSERT INTO `os_product` VALUES ('4', '1472583774201', '3', '小米手环 2', '149.00', '看得见的时刻，和你的每一步', '小米手环2,小米手环2代,手环,智能手环', 'images/goods/20170226/1471798568000.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '小米手环2', '全新的小米手环 2，加入了 OLED 显示屏，通过轻触圆形按键，即可显示当前时间、步数、心率，甚至里程、热量等更多数据。当不方便触控操作时，抬起手腕，手环便可自动显示当前时间，轻松便捷。', '小米手环2,小米手环2代,猫宁商城', null);
+INSERT INTO `os_product` VALUES ('5', '1472583831117', null, '魅族手环', '229.00', '腕间流动的心率专家', '魅族手环,魅族,手环,智能手环', 'images/goods/20170226/1471798587971.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '魅族手环', '魅族手环，腕间流动的心率专家，正品行货，另有魅族手环详细介绍、图片、价格、参数、售前咨询等，购买魅族手环上魅族商城，全场包邮，7天无理由退货，15天换货保障。', '魅族手环,魅族,手环,智能手环,猫宁商城', null);
+INSERT INTO `os_product` VALUES ('6', '1472628630086', null, 'LED 智能台灯', '169.00', '照明之上，光的艺术品', '小米台灯,小米LED灯,LED小米灯,小米 LED灯', 'images/goods/20170226/1471798587451.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', 'LED 智能台灯', '米家LED智能台灯的色温与亮度可以无级调节，几乎可以满足用户对光线的所有需求。还针对最常见的四种使用场景单独做了光线优化，专注保护用户的双眼。', '小米台灯,小米LED灯,LED小米灯,小米 LED灯,猫宁商城', null);
+INSERT INTO `os_product` VALUES ('7', '1472736931796', null, 'Yeelight床头灯', '249.00', '触摸式操作 给卧室1600万种颜色', 'Yeelight床头灯,床头灯,智能灯', 'images/goods/20170226/1471799887971.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', 'Yeelight床头灯', '小米手机官网正品智能灯推荐，小米手机Yeelight床头灯最新价格249元，有多种颜色可选，另有Yeelight床头灯详细介绍及图片，还有用户评价，售前咨询等。', 'Yeelight床头灯,床头灯,智能灯,猫宁商城', null);
+INSERT INTO `os_product` VALUES ('8', '1473318741286', null, 'Yeelight LED智能灯泡', '99.00', '亮度自由调节 WIFI远程操作', 'Yeelight LED智能灯泡 白光版,智能灯泡', 'images/goods/20170226/1471798581451.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', 'Yeelight LED智能灯泡', 'Yeelight LED 智能灯泡,亮度自由调节 WIFI远程操作', 'Yeelight LED智能灯泡 白光版,智能灯泡,猫宁商城', null);
+INSERT INTO `os_product` VALUES ('9', '1473685327798', null, '测试商品名称1', '166.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称1', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('10', '1474910562755', null, '测试商品名称2', '223.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称2', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('11', '1475353900453', '4', '测试商品名称3', '166.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称3', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('12', '1475353918562', null, '测试商品名称4', '124.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称4', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('13', '1475354006972', null, '测试商品名称5', '249.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称5', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('14', '1475407186147', null, '测试商品名称6', '219.00', '测试描述，测试商品描述，测试商品描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称6', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('15', '1475947762038', null, '测试商品名称7', '2366.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '1', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称7', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('16', '1475996329018', null, '测试商品名称8', '2499.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称8', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('17', '1477472951669', null, '测试商品名称9', '2188.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称9', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('18', '1478099883634', '1', '测试商品名称10', '249.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称10', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('19', '1478522533460', null, '测试商品名称11', '1300.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称11', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('20', '1478527872182', null, '测试商品名称12', '179.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称12', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('21', '1478680540669', null, '测试商品名称13', '6429.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称13', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('22', '1478682438293', null, '测试商品名称14', '2416.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称14', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('23', '1478682709405', null, '测试商品名称15', '219.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称15', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('24', '1478682831935', null, '测试商品名称16', '295.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称16', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('25', '1478682893916', null, '测试商品名称17', '2164.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称17', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('26', '1478683391099', null, '测试商品名称18', '146.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称18', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('27', '1478683407372', null, '测试商品名称19', '26.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称19', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('28', '1478683468241', null, '测试商品名称20', '4974.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称20', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('29', '1478683468246', null, '测试商品名称21', '265.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称21', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('30', '1478683468279', null, '测试商品名称22', '259.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称22', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('31', '1478689468277', null, '测试商品名称23', '789.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称23', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('32', '1478689468979', null, '测试商品名称24', '456.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称24', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('33', '1478689448279', null, '测试商品名称25', '7845.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称25', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
+INSERT INTO `os_product` VALUES ('34', '1478689468679', null, '测试商品名称26', '1548.00', '测试描述，测试商品描述', '测试搜索，测试商品搜索', 'images/goods/20170226/1471797894441.jpg', '1', '0', '1', '2017-02-25 21:44:43', '猫宁', null, null, '2017-02-25 21:44:48', '猫宁', '测试商品名称26', '测试商品页面描述,测试商品页面描述', '测试商品页面关键词', '');
 
 -- ----------------------------
 -- Table structure for os_product_attribute
@@ -990,46 +1059,47 @@ CREATE TABLE `os_product_attribute` (
   `comment_total` int(11) DEFAULT '0' COMMENT '累计评价',
   `comment_average` decimal(10,0) DEFAULT '0' COMMENT '平均评价',
   `favorite_number` int(11) DEFAULT '0' COMMENT '收藏数',
+  `question_number` int(11) DEFAULT NULL COMMENT '提问数',
   PRIMARY KEY (`attribute_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COMMENT='商品属性表';
 
 -- ----------------------------
 -- Records of os_product_attribute
 -- ----------------------------
-INSERT INTO `os_product_attribute` VALUES ('1', '1', '1', '1', '1', '1', '1', '1', '1');
-INSERT INTO `os_product_attribute` VALUES ('2', '2', '2', '2', '2', '2', '2', '1', '2');
-INSERT INTO `os_product_attribute` VALUES ('3', '3', '3', '3', '3', '3', '3', '1', '3');
-INSERT INTO `os_product_attribute` VALUES ('4', '4', '4', '4', '4', '4', '4', '1', '4');
-INSERT INTO `os_product_attribute` VALUES ('5', '5', '5', '5', '5', '5', '5', '1', '5');
-INSERT INTO `os_product_attribute` VALUES ('6', '6', '6', '6', '6', '6', '6', '1', '6');
-INSERT INTO `os_product_attribute` VALUES ('7', '7', '7', '7', '7', '7', '7', '1', '7');
-INSERT INTO `os_product_attribute` VALUES ('8', '8', '8', '8', '8', '8', '8', '1', '8');
-INSERT INTO `os_product_attribute` VALUES ('9', '9', '9', '9', '9', '9', '9', '1', '9');
-INSERT INTO `os_product_attribute` VALUES ('10', '10', '10', '10', '10', '10', '10', '1', '10');
-INSERT INTO `os_product_attribute` VALUES ('11', '11', '11', '11', '11', '11', '11', '1', '11');
-INSERT INTO `os_product_attribute` VALUES ('12', '12', '12', '12', '12', '12', '12', '1', '12');
-INSERT INTO `os_product_attribute` VALUES ('13', '13', '13', '13', '13', '13', '13', '1', '13');
-INSERT INTO `os_product_attribute` VALUES ('14', '14', '14', '14', '14', '14', '14', '1', '14');
-INSERT INTO `os_product_attribute` VALUES ('15', '15', '15', '15', '15', '15', '15', '1', '15');
-INSERT INTO `os_product_attribute` VALUES ('16', '16', '16', '16', '16', '16', '16', '1', '16');
-INSERT INTO `os_product_attribute` VALUES ('17', '17', '17', '17', '17', '17', '17', '1', '17');
-INSERT INTO `os_product_attribute` VALUES ('18', '18', '18', '18', '18', '18', '18', '1', '18');
-INSERT INTO `os_product_attribute` VALUES ('19', '19', '19', '19', '19', '19', '19', '1', '19');
-INSERT INTO `os_product_attribute` VALUES ('20', '20', '20', '20', '20', '20', '20', '1', '20');
-INSERT INTO `os_product_attribute` VALUES ('21', '21', '21', '21', '21', '21', '21', '1', '21');
-INSERT INTO `os_product_attribute` VALUES ('22', '22', '22', '22', '22', '22', '22', '1', '22');
-INSERT INTO `os_product_attribute` VALUES ('23', '23', '23', '23', '23', '23', '23', '1', '23');
-INSERT INTO `os_product_attribute` VALUES ('24', '24', '24', '24', '24', '24', '24', '1', '24');
-INSERT INTO `os_product_attribute` VALUES ('25', '25', '25', '25', '25', '25', '25', '1', '25');
-INSERT INTO `os_product_attribute` VALUES ('26', '26', '26', '26', '26', '26', '26', '1', '26');
-INSERT INTO `os_product_attribute` VALUES ('27', '27', '27', '27', '27', '27', '27', '1', '27');
-INSERT INTO `os_product_attribute` VALUES ('28', '28', '28', '28', '28', '28', '28', '1', '28');
-INSERT INTO `os_product_attribute` VALUES ('29', '29', '29', '29', '29', '29', '29', '1', '29');
-INSERT INTO `os_product_attribute` VALUES ('30', '30', '30', '30', '30', '30', '30', '1', '30');
-INSERT INTO `os_product_attribute` VALUES ('31', '31', '31', '31', '31', '31', '31', '1', '31');
-INSERT INTO `os_product_attribute` VALUES ('32', '32', '32', '32', '32', '32', '32', '32', '32');
-INSERT INTO `os_product_attribute` VALUES ('33', '33', '33', '33', '33', '33', '33', '33', '33');
-INSERT INTO `os_product_attribute` VALUES ('34', '34', '34', '34', '34', '34', '34', '34', '34');
+INSERT INTO `os_product_attribute` VALUES ('1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+INSERT INTO `os_product_attribute` VALUES ('2', '2', '2', '2', '2', '2', '2', '1', '2', '2');
+INSERT INTO `os_product_attribute` VALUES ('3', '3', '3', '3', '3', '3', '3', '1', '3', '3');
+INSERT INTO `os_product_attribute` VALUES ('4', '4', '4', '4', '4', '4', '4', '1', '4', '4');
+INSERT INTO `os_product_attribute` VALUES ('5', '5', '5', '5', '5', '5', '5', '1', '5', '5');
+INSERT INTO `os_product_attribute` VALUES ('6', '6', '6', '6', '6', '6', '6', '1', '6', '6');
+INSERT INTO `os_product_attribute` VALUES ('7', '7', '7', '7', '7', '7', '7', '1', '7', '7');
+INSERT INTO `os_product_attribute` VALUES ('8', '8', '8', '8', '8', '8', '8', '1', '8', '8');
+INSERT INTO `os_product_attribute` VALUES ('9', '9', '9', '9', '9', '9', '9', '1', '9', '9');
+INSERT INTO `os_product_attribute` VALUES ('10', '10', '10', '10', '10', '10', '10', '1', '10', '10');
+INSERT INTO `os_product_attribute` VALUES ('11', '11', '11', '11', '11', '11', '11', '1', '11', '11');
+INSERT INTO `os_product_attribute` VALUES ('12', '12', '12', '12', '12', '12', '12', '1', '12', '12');
+INSERT INTO `os_product_attribute` VALUES ('13', '13', '13', '13', '13', '13', '13', '1', '13', '13');
+INSERT INTO `os_product_attribute` VALUES ('14', '14', '14', '14', '14', '14', '14', '1', '14', '14');
+INSERT INTO `os_product_attribute` VALUES ('15', '15', '15', '15', '15', '15', '15', '1', '15', '15');
+INSERT INTO `os_product_attribute` VALUES ('16', '16', '16', '16', '16', '16', '16', '1', '16', '16');
+INSERT INTO `os_product_attribute` VALUES ('17', '17', '17', '17', '17', '17', '17', '1', '17', '17');
+INSERT INTO `os_product_attribute` VALUES ('18', '18', '18', '18', '18', '18', '18', '1', '18', '18');
+INSERT INTO `os_product_attribute` VALUES ('19', '19', '19', '19', '19', '19', '19', '1', '19', '19');
+INSERT INTO `os_product_attribute` VALUES ('20', '20', '20', '20', '20', '20', '20', '1', '20', '20');
+INSERT INTO `os_product_attribute` VALUES ('21', '21', '21', '21', '21', '21', '21', '1', '21', '21');
+INSERT INTO `os_product_attribute` VALUES ('22', '22', '22', '22', '22', '22', '22', '1', '22', '22');
+INSERT INTO `os_product_attribute` VALUES ('23', '23', '23', '23', '23', '23', '23', '1', '23', '23');
+INSERT INTO `os_product_attribute` VALUES ('24', '24', '24', '24', '24', '24', '24', '1', '24', '24');
+INSERT INTO `os_product_attribute` VALUES ('25', '25', '25', '25', '25', '25', '25', '1', '25', '25');
+INSERT INTO `os_product_attribute` VALUES ('26', '26', '26', '26', '26', '26', '26', '1', '26', '26');
+INSERT INTO `os_product_attribute` VALUES ('27', '27', '27', '27', '27', '27', '27', '1', '27', '27');
+INSERT INTO `os_product_attribute` VALUES ('28', '28', '28', '28', '28', '28', '28', '1', '28', '28');
+INSERT INTO `os_product_attribute` VALUES ('29', '29', '29', '29', '29', '29', '29', '1', '29', '29');
+INSERT INTO `os_product_attribute` VALUES ('30', '30', '30', '30', '30', '30', '30', '1', '30', '30');
+INSERT INTO `os_product_attribute` VALUES ('31', '31', '31', '31', '31', '31', '31', '1', '31', '31');
+INSERT INTO `os_product_attribute` VALUES ('32', '32', '32', '32', '32', '32', '32', '32', '32', '32');
+INSERT INTO `os_product_attribute` VALUES ('33', '33', '33', '33', '33', '33', '33', '33', '33', '33');
+INSERT INTO `os_product_attribute` VALUES ('34', '34', '34', '34', '34', '34', '34', '34', '34', '34');
 
 -- ----------------------------
 -- Table structure for os_product_category
@@ -1042,14 +1112,14 @@ CREATE TABLE `os_product_category` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建者',
   PRIMARY KEY (`product_category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COMMENT='商品表分类表关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COMMENT='商品表分类表关联表';
 
 -- ----------------------------
 -- Records of os_product_category
 -- ----------------------------
 INSERT INTO `os_product_category` VALUES ('1', '1', '2', '2017-02-26 13:52:17', '猫宁');
 INSERT INTO `os_product_category` VALUES ('2', '2', '2', '2017-02-26 13:52:17', '猫宁');
-INSERT INTO `os_product_category` VALUES ('3', '3', '2', '2017-02-26 13:52:17', '猫宁');
+INSERT INTO `os_product_category` VALUES ('3', '3', '12', '2017-02-27 01:51:36', '猫宁');
 INSERT INTO `os_product_category` VALUES ('4', '4', '10', '2017-02-26 13:52:17', '猫宁');
 INSERT INTO `os_product_category` VALUES ('5', '5', '10', '2017-02-26 13:52:17', '猫宁');
 INSERT INTO `os_product_category` VALUES ('6', '6', '11', '2017-02-26 13:52:17', '猫宁');
@@ -1061,7 +1131,7 @@ INSERT INTO `os_product_category` VALUES ('11', '11', '13', '2017-02-26 13:52:17
 INSERT INTO `os_product_category` VALUES ('12', '12', '15', '2017-02-26 13:52:17', '猫宁');
 INSERT INTO `os_product_category` VALUES ('13', '13', '15', '2017-02-26 13:52:17', '猫宁');
 INSERT INTO `os_product_category` VALUES ('14', '14', '16', '2017-02-26 13:52:17', '猫宁');
-INSERT INTO `os_product_category` VALUES ('15', '15', '17', '2017-02-26 13:52:17', '猫宁');
+INSERT INTO `os_product_category` VALUES ('15', '15', '13', '2017-02-26 13:52:17', '猫宁');
 INSERT INTO `os_product_category` VALUES ('16', '16', '18', '2017-02-26 13:52:17', '猫宁');
 INSERT INTO `os_product_category` VALUES ('17', '17', '19', '2017-02-26 13:52:17', '猫宁');
 INSERT INTO `os_product_category` VALUES ('18', '18', '20', '2017-02-26 13:52:17', '猫宁');
@@ -1078,9 +1148,6 @@ INSERT INTO `os_product_category` VALUES ('28', '28', '30', '2017-02-26 13:52:17
 INSERT INTO `os_product_category` VALUES ('29', '29', '30', '2017-02-26 13:52:17', '猫宁');
 INSERT INTO `os_product_category` VALUES ('30', '30', '30', '2017-02-26 13:52:17', '猫宁');
 INSERT INTO `os_product_category` VALUES ('31', '31', '31', '2017-02-26 13:52:17', '猫宁');
-INSERT INTO `os_product_category` VALUES ('33', '1', '12', '2017-02-27 01:51:33', '猫宁');
-INSERT INTO `os_product_category` VALUES ('34', '2', '12', '2017-02-27 01:51:35', '猫宁');
-INSERT INTO `os_product_category` VALUES ('35', '3', '12', '2017-02-27 01:51:36', '猫宁');
 INSERT INTO `os_product_category` VALUES ('36', '4', '12', '2017-02-27 01:51:38', '猫宁');
 
 -- ----------------------------
@@ -1114,14 +1181,82 @@ CREATE TABLE `os_product_image` (
   `status` tinyint(2) DEFAULT '1' COMMENT '状态：1.显示；0.隐藏',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建者',
-  `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
-  `page_title` varchar(64) DEFAULT NULL COMMENT '页面标题',
   PRIMARY KEY (`pic_img_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品图片表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='商品图片表';
 
 -- ----------------------------
 -- Records of os_product_image
 -- ----------------------------
+INSERT INTO `os_product_image` VALUES ('1', '1', 'images/goods/20170304/1471797894441.jpg', '1', '1', '2017-03-04 18:30:12', '猫宁');
+INSERT INTO `os_product_image` VALUES ('2', '1', 'images/goods/20170304/1471798318820.jpg', '2', '1', '2017-03-04 18:30:12', '猫宁');
+INSERT INTO `os_product_image` VALUES ('3', '1', 'images/goods/20170304/1471798364441.jpg', '3', '1', '2017-03-04 18:30:12', '猫宁');
+INSERT INTO `os_product_image` VALUES ('4', '1', 'images/goods/20170304/1471798581451.png', '4', '1', '2017-03-04 18:30:12', '猫宁');
+INSERT INTO `os_product_image` VALUES ('5', '1', 'images/goods/20170304/14717983642141.jpg', '5', '1', '2017-03-04 18:30:12', '猫宁');
+INSERT INTO `os_product_image` VALUES ('6', '1', 'images/goods/20170304/14717983642141.jpg', '6', '1', '2017-03-04 18:30:12', '猫宁');
+
+-- ----------------------------
+-- Table structure for os_product_parameter
+-- ----------------------------
+DROP TABLE IF EXISTS `os_product_parameter`;
+CREATE TABLE `os_product_parameter` (
+  `product_parameter_id` bigint(20) NOT NULL COMMENT '参数ID',
+  `product_id` bigint(20) DEFAULT NULL COMMENT '商品ID',
+  `name` varchar(64) DEFAULT NULL COMMENT '参数名',
+  `value` varchar(64) DEFAULT NULL COMMENT '参数值',
+  `status` tinyint(2) DEFAULT NULL COMMENT '状态：1.显示；0.隐藏',
+  `sort` int(9) DEFAULT NULL COMMENT '排序',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '创建者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
+  PRIMARY KEY (`product_parameter_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品参数表';
+
+-- ----------------------------
+-- Records of os_product_parameter
+-- ----------------------------
+INSERT INTO `os_product_parameter` VALUES ('1', '1', '处理器', '骁龙820', '1', '1', '2017-03-04 18:55:19', '猫宁', '2017-03-04 18:55:29', '猫宁');
+INSERT INTO `os_product_parameter` VALUES ('2', '1', '电池容量', '3000mAh', '1', '2', '2017-03-04 18:55:19', '猫宁', '2017-03-04 18:55:29', '猫宁');
+INSERT INTO `os_product_parameter` VALUES ('3', '1', '主屏尺寸', '5.15英寸', '1', '3', '2017-03-04 18:55:19', '猫宁', '2017-03-04 18:55:29', '猫宁');
+INSERT INTO `os_product_parameter` VALUES ('4', '1', '主屏分辨率', '1920x1080像素', '1', '4', '2017-03-04 18:55:19', '猫宁', '2017-03-04 18:55:29', '猫宁');
+INSERT INTO `os_product_parameter` VALUES ('5', '1', '后置摄像头', '1600万像素', '1', '5', '2017-03-04 18:55:19', '猫宁', '2017-03-04 18:55:29', '猫宁');
+INSERT INTO `os_product_parameter` VALUES ('6', '1', '前置摄像头', '400万像素', '1', '6', '2017-03-04 18:55:19', '猫宁', '2017-03-04 18:55:29', '猫宁');
+INSERT INTO `os_product_parameter` VALUES ('7', '1', '内存', '3GB', '1', '7', '2017-03-04 18:55:19', '猫宁', '2017-03-04 18:55:29', '猫宁');
+
+-- ----------------------------
+-- Table structure for os_question
+-- ----------------------------
+DROP TABLE IF EXISTS `os_question`;
+CREATE TABLE `os_question` (
+  `question_id` bigint(20) NOT NULL COMMENT '提问ID',
+  `product_id` bigint(20) DEFAULT NULL COMMENT '商品ID',
+  `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `user_name` varchar(30) DEFAULT NULL COMMENT '昵称',
+  `pic_img` varchar(255) DEFAULT NULL COMMENT '用户头像',
+  `content` varchar(255) DEFAULT NULL COMMENT '提问内容',
+  `good_count` int(11) DEFAULT '0' COMMENT '好评数',
+  `status` tinyint(2) DEFAULT '0' COMMENT '状态：1.显示；0.隐藏',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建者',
+  `answer_content` varchar(255) DEFAULT NULL COMMENT '回答内容',
+  `answer_by` varchar(255) DEFAULT NULL COMMENT '回复人',
+  `answer_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '回复时间',
+  `type` tinyint(2) DEFAULT '0' COMMENT '状态：1.已处理；0.未处理；2.不予处理',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`question_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='提问表';
+
+-- ----------------------------
+-- Records of os_question
+-- ----------------------------
+INSERT INTO `os_question` VALUES ('1', '1', '1', '猫宁', 'default/avatar/avatar_8.jpg', '商城的所有产品必须超过150免邮配送么', '4', '1', '2017-03-05 01:09:03', '猫宁', '您好，购买手机是免邮的~购买配件等商品在150元以下，需按照10元/单标准支付邮费， “满150元免邮费”需以实际支付金额超过150元为准。小米电视、空气净化器、体重秤因商品特殊性不参与满150元包邮活动。如遇活动期，资费标准以活动公告为准哦，感谢您对小米的支持，祝您购物愉快~', '猫宁', '2017-03-05 01:11:04', '1', '猫宁', '2017-03-05 01:09:38');
+INSERT INTO `os_question` VALUES ('2', '1', '1', '猫宁', 'default/avatar/avatar_4.jpg', '邮费多少', '56', '1', '2017-03-05 01:09:03', '猫宁', '您好，购买手机是免邮的~购买配件等商品在150元以下，需按照10元/单标准支付邮费， “满150元免邮费”需以实际支付金额超过150元为准。小米电视、空气净化器、体重秤因商品特殊性不参与满150元包邮活动。如遇活动期，资费标准以活动公告为准哦，感谢您对小米的支持，祝您购物愉快~', '猫宁', '2017-03-05 01:11:04', '1', '猫宁', '2017-03-05 01:09:38');
+INSERT INTO `os_question` VALUES ('3', '1', '1', '猫宁', 'default/avatar/avatar_5.jpg', '测试提问', '56', '1', '2017-03-05 01:09:03', '猫宁', '测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问。', '猫宁', '2017-03-05 01:11:04', '1', '猫宁', '2017-03-05 01:09:38');
+INSERT INTO `os_question` VALUES ('4', '1', '1', '猫宁', 'default/avatar/avatar_8.jpg', '测试提问', '56', '1', '2017-03-05 01:09:03', '猫宁', '测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问。', '猫宁', '2017-03-05 01:11:05', '1', '猫宁', '2017-03-05 01:09:38');
+INSERT INTO `os_question` VALUES ('5', '1', '1', '猫宁', 'default/avatar/avatar_4.jpg', '测试提问', '56', '1', '2017-03-05 01:09:03', '猫宁', '测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问。', '猫宁', '2017-03-05 01:11:05', '1', '猫宁', '2017-03-05 01:09:38');
+INSERT INTO `os_question` VALUES ('6', '1', '1', '猫宁', 'default/avatar/avatar_5.jpg', '测试提问', '56', '1', '2017-03-05 01:09:03', '猫宁', '测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问。', '猫宁', '2017-03-05 01:11:05', '1', '猫宁', '2017-03-05 01:09:38');
+INSERT INTO `os_question` VALUES ('7', '1', '1', '猫宁', 'default/avatar/avatar_5.jpg', '测试提问', '56', '1', '2017-03-05 01:09:03', '猫宁', '测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问。', '猫宁', '2017-03-05 01:11:08', '1', '猫宁', '2017-03-05 01:09:38');
 
 -- ----------------------------
 -- Table structure for os_user

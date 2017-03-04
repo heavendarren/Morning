@@ -51,18 +51,7 @@ public class ProductImage extends Model<ProductImage> {
      */
 	@TableField("create_by")
 	private String createBy;
-    /**
-     * 更新者
-     */
-	@TableField("update_by")
-	private String updateBy;
-    /**
-     * 页面标题
-     */
-	@TableField("page_title")
-	private String pageTitle;
-
-
+	
 	public Long getPicImgId() {
 		return picImgId;
 	}
@@ -117,22 +106,6 @@ public class ProductImage extends Model<ProductImage> {
 
 	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
-	}
-
-	public String getUpdateBy() {
-		return updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
-
-	public String getPageTitle() {
-		return pageTitle;
-	}
-
-	public void setPageTitle(String pageTitle) {
-		this.pageTitle = pageTitle;
 	}
 
 	@Override

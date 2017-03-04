@@ -42,10 +42,25 @@ public interface ICategoryService extends IService<Category> {
 
 	/**
 	 * 根据类目ID查找父类目列表（如果沒有则返回当前目录列表）
-	 * @param categoryId
-	 * @param status
+	 * @param categoryId 类目ID
+	 * @param status 子类目状态
 	 * @return
 	 */
 	List<Category> selectUpperCategories(Long categoryId, Integer status);
+	
+	/**
+	 * 根据类目ID查找当前类目信息
+	 * @param categoryId  类目ID
+	 * @param status 类目状态
+	 * @return
+	 */
+	Category selectCategoryById(Long categoryId, Integer status);
+	
+	/**
+	 * 根据类目ID查找上级类目信息
+	 * @param categoryId  类目ID
+	 * @return
+	 */
+	Category selectUpperCategoryById(Long categoryId);
 	
 }

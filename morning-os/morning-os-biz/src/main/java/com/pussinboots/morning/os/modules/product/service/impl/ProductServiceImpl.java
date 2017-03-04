@@ -30,5 +30,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 	public List<Product> selectProductsByStar(Integer starProduct, Integer showNumber) {
 		return productMapper.selectProductsByStar(starProduct, showNumber, ProductStatusEnum.SHELVE.getStatus());
 	}
+
+	@Override
+	public Product selectProductByNumber(Long productNumber, Integer status) {
+		Product product = new Product();
+		product.setProductNumber(productNumber);
+		product.setStatus(status);
+		return productMapper.selectOne(product);
+	}
 	
 }

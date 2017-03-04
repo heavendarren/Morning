@@ -3,6 +3,9 @@ package com.pussinboots.morning.os.modules.product.service;
 import java.util.List;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.pussinboots.morning.common.model.PageInfo;
+import com.pussinboots.morning.os.modules.product.dto.ProductPageDTO;
+import com.pussinboots.morning.os.modules.product.entity.Category;
 import com.pussinboots.morning.os.modules.product.entity.ProductCategory;
 import com.pussinboots.morning.os.modules.product.vo.CategoryVO;
 
@@ -25,4 +28,18 @@ public interface IProductCategoryService extends IService<ProductCategory> {
 	 */
 	List<CategoryVO> selectProductArea(Integer showNumber, Integer advertNumber);
 	
+	/**
+	 * 根据类目ID、排序、分页查找商品
+	 * @param categoryId 类目ID
+	 * @param pageInfo 排序、分页方式
+	 * @return ProductPageDTO
+	 */
+	ProductPageDTO selectProductVOs(Long categoryId, PageInfo pageInfo);
+	
+	/**
+	 * 根据商品ID查找上级类目列表
+	 * @param productId
+	 * @return
+	 */
+	List<Category> selectUpperCategories(Long productId);
 }

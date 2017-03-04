@@ -1,5 +1,6 @@
 package com.pussinboots.morning.cms.common.util;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.subject.Subject;
@@ -9,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import com.google.code.kaptcha.Constants;
 import com.pussinboots.morning.cms.common.security.AuthorizingUser;
 import com.pussinboots.morning.common.util.ServletUtils;
-import com.pussinboots.morning.common.util.StringUtils;
 
 /**
  * 

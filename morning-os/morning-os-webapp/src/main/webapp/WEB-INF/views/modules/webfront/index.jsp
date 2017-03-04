@@ -10,15 +10,15 @@
 <!--     轮播top菜单导航 begin       -->
 <div class="site-header">
   <div class="container-fluid">
-    <div class="header-logo"> <a class="logo ir" href="//www.mi.com/index.html" title="小米官网"><img src="${ctxsta}/web/img/logo.png"></a> </div>
+    <div class="header-logo"> <a class="logo ir" href="${ctx }/index" title="猫宁官网"><img src="${ctxsta}/web/img/logo.png"></a> </div>
     <div class="header-nav">
       <ul class="nav-list J_navMainList clearfix">
-        <li class="nav-category"> <a class="link-category" href="${ctx }/list/1"><span class="text">全部商品分类</span></a> 
+        <li class="nav-category"> <a class="link-category" href="${ctx }/list?categoryId=1"><span class="text">全部商品分类</span></a> 
         <!--     轮播top菜单导航begin       -->
         <div class="site-category">
           <ul class="site-category-list clearfix">
             <c:forEach items="${categoryInNavVOs }" var="categoryInNavVO">
-              <li class="category-item"> <a class="title" href="${ctx }/list/${categoryInNavVO.categoryId}">${categoryInNavVO.name }<span class="glyphicon glyphicon-chevron-right"></span></a>
+              <li class="category-item"> <a class="title" href="${ctx }/list?categoryId=${categoryInNavVO.categoryId}">${categoryInNavVO.name }<span class="glyphicon glyphicon-chevron-right"></span></a>
                 <c:choose>
                   <c:when test="${fn:length(categoryInNavVO.products)<=6}">
                     <div class="children clearfix children-col-1">
@@ -204,7 +204,7 @@
           <div class="home-brick-box home-brick-row-2-box xm-plain-box">
             <div class="box-hd">
               <h2 class="title">${categoryVO.name}</h2>
-              <div class="more J_brickNav"> <a class="more-link" target="_blank" href="${ctx }/list/${categoryVO.categoryId}">查看全部</a><span class="glyphicon glyphicon-circle-arrow-rights"></span> </div>
+              <div class="more J_brickNav"> <a class="more-link" target="_blank" href="${ctx }/list?categoryId=${categoryVO.categoryId}">查看全部</a><span class="glyphicon glyphicon-circle-arrow-rights"></span> </div>
             </div>
             <div class="box-bd J_brickBd">
               <div class="row">
@@ -218,7 +218,7 @@
                 <div class="span16">
                   <ul class="brick-list clearfix">
                   <c:forEach items="${categoryVO.productVOs}" var="product">
-                    <li class="brick-item brick-item-m brick-item-m-2 brick-item-active" data-gid="2151100003">
+                    <li class="brick-item brick-item-m brick-item-m-2 brick-item-active">
                       <div class="figure figure-img"> <a target="_blank" title="${product.name}" href="${ctx }/item/${product.productNumber}"> <img src="${ctximg}/${product.picImg}" width="160" height="160" alt="${product.name}"> </a> </div>
                       <h3 class="title"><a target="_blank" title="${product.name}" href="${ctx }/item/${product.productNumber}">${product.name}</a></h3>
                       <p class="desc"> ${product.introduce} </p>
@@ -280,8 +280,8 @@
                         <c:if test="${not empty product.labelName}"><div class="flag"> ${product.labelName } </div></c:if>
                       </li>  
                       <li class="brick-item brick-item-s">
-                        <div class="figure figure-more"> <a target="_blank" href="${ctx }/list/${category.categoryId}"><span class="glyphicon glyphicon-upload"></span></a> </div>
-                        <a class="more" target="_blank" href="${ctx }/list/${category.categoryId}">浏览更多<small>${category.name}</small></a> </li>                            
+                        <div class="figure figure-more"> <a target="_blank" href="${ctx }/list?categoryId=${category.categoryId}"><span class="glyphicon glyphicon-upload"></span></a> </div>
+                        <a class="more" target="_blank" href="${ctx }/list?categoryId=${category.categoryId}">浏览更多<small>${category.name}</small></a> </li>                            
                       </c:if>              
                     </c:forEach>
                     </ul>
@@ -306,8 +306,8 @@
                         <c:if test="${not empty product.labelName}"><div class="flag"> ${product.labelName } </div></c:if>
                       </li>  
                       <li class="brick-item brick-item-s">
-                        <div class="figure figure-more"> <a target="_blank" href="${ctx }/list/${category.categoryId}"><span class="glyphicon glyphicon-upload"></span></a> </div>
-                        <a class="more" target="_blank" href="${ctx }/list/${category.categoryId}">浏览更多<small>${category.name}</small></a> </li>                            
+                        <div class="figure figure-more"> <a target="_blank" href="${ctx }/list?categoryId=${category.categoryId}"><span class="glyphicon glyphicon-upload"></span></a> </div>
+                        <a class="more" target="_blank" href="${ctx }/list?categoryId=${category.categoryId}">浏览更多<small>${category.name}</small></a> </li>                            
                       </c:if>              
                     </c:forEach>
                     </ul>

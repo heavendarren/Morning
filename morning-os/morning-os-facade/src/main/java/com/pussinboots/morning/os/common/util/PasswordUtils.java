@@ -13,6 +13,7 @@ import com.pussinboots.morning.common.util.RandomUtils;
 * 创建时间：2017年2月5日 下午9:09:37
  */
 public class PasswordUtils {
+	
 	/** 迭代次数 */
 	private static final int ITERATIONS = 6;
 	/** 盐值数位 */

@@ -4,6 +4,8 @@ import com.pussinboots.morning.os.modules.product.entity.ProductAttribute;
 import com.pussinboots.morning.os.modules.product.mapper.ProductAttributeMapper;
 import com.pussinboots.morning.os.modules.product.service.IProductAttributeService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,5 +19,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProductAttributeServiceImpl extends ServiceImpl<ProductAttributeMapper, ProductAttribute> implements IProductAttributeService {
+
+	@Autowired
+	private ProductAttributeMapper productAttributeMapper;
+	
+	@Override
+	public ProductAttribute selectByProductId(Long productId) {
+		return productAttributeMapper.selectOne(new ProductAttribute(productId));
+	}
 	
 }

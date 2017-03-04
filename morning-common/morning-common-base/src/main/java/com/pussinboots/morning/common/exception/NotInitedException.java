@@ -1,7 +1,5 @@
 package com.pussinboots.morning.common.exception;
 
-import com.pussinboots.morning.common.util.StringUtils;
-
 /**
  * 
 * 项目名称：morning-common-base 
@@ -23,15 +21,8 @@ public class NotInitedException extends RuntimeException {
 		super(message);
 	}
 
-	public NotInitedException(String messageTemplate, Object... params) {
-		super(StringUtils.format(messageTemplate, params));
-	}
-
 	public NotInitedException(String message, Throwable throwable) {
 		super(message, throwable);
 	}
 
-	public NotInitedException(Throwable throwable, String messageTemplate, Object... params) {
-		super(StringUtils.format(messageTemplate, params), throwable);
-	}
 }

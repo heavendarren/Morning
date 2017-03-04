@@ -14,6 +14,11 @@ body {
 	min-width: 1226px;
 }
 
+a {
+	color: #757575;
+	text-decoration: none
+}
+
 a:hover {
 	text-decoration: none;
 	color: #ff6700;
@@ -58,6 +63,10 @@ h6 {
 	margin: 2.33em 0
 }
 
+dt {
+	font-weight: normal;
+}
+
 .container-fluid {
 	padding-right: 0px;
 	padding-left: 0px;
@@ -66,6 +75,173 @@ h6 {
 	width: 1226px;
 }
 
+.span1, .span2, .span3, .span4, .span5, .span6, .span7, .span8, .span9,
+	.span10, .span11, .span12, .span13, .span14, .span15, .span16, .span17,
+	.span18, .span19, .span20 {
+	float: left;
+	margin-left: 14px;
+	min-height: 1px
+}
+
+.span1 {
+	width: 48px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span2 {
+	width: 110px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span3 {
+	width: 172px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span4 {
+	width: 234px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span5 {
+	width: 296px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span6 {
+	width: 358px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span7 {
+	width: 420px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span8 {
+	width: 482px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span9 {
+	width: 544px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span10 {
+	width: 606px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span11 {
+	width: 668px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span12 {
+	width: 730px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span13 {
+	width: 792px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span14 {
+	width: 854px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span15 {
+	width: 916px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span16 {
+	width: 978px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span17 {
+	width: 1040px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span18 {
+	width: 1102px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span19 {
+	width: 1164px
+}
+
+.span-first {
+	_margin-left: 0
+}
+
+.span20 {
+	width: 1226px
+}
+
+.span-first {
+	_margin-left: 0
+}
 /*-------------顶部导航栏-----------------*/
 .site-topbar {
 	width: 100%;

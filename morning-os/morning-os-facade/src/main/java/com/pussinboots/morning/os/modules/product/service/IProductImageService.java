@@ -1,7 +1,9 @@
 package com.pussinboots.morning.os.modules.product.service;
 
-import com.pussinboots.morning.os.modules.product.entity.ProductImage;
+import java.util.List;
+
 import com.baomidou.mybatisplus.service.IService;
+import com.pussinboots.morning.os.modules.product.entity.ProductImage;
 
 /**
  * 
@@ -13,5 +15,14 @@ import com.baomidou.mybatisplus.service.IService;
 *
  */
 public interface IProductImageService extends IService<ProductImage> {
+	
+	/**
+	 * 根据商品ID查找展示图片
+	 * @param productId 商品ID
+	 * @param showNumber 显示数量
+	 * @param status 图片状态
+	 * @return
+	 */
+	List<ProductImage> selectByProductId(Long productId, Integer showNumber, Integer status);
 	
 }
