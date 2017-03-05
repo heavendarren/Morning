@@ -170,25 +170,17 @@
                   </ul>
                 </dd>
                 <dd class="goods-info-head-price clearfix"> <b class="J_mi_goodsPrice sys_item_mktprice">${product.showPrice }</b> <i>&nbsp;元</i> <del> <span class="J_mi_marketPrice sys_item_price">79元</span> </del> </dd>
-                <dd class="goods-info-head-colors clearfix sys_item_specpara"  data-sid="1"> <span class="style-name">颜色：混米色</span>
-                  <ul class="sys_spec_img">
-                    <li data-aid="3"><a href="javascript:;" title="白色"><img src="img/1.png" alt="白色" /></a><i></i></li>
-                    <li data-aid="4"><a href="javascript:;" title="粉色"><img src="img/2.png" alt="粉色" /></a><i></i></li>
-                    <li data-aid="8"><a href="javascript:;" title="蓝色"><img src="img/3.png" alt="蓝色" /></a><i></i></li>
-                    <li data-aid="9"><a href="javascript:;" title="绿色"><img src="img/4.png" alt="绿色" /></a><i></i></li>
-                    <li data-aid="10"><a href="javascript:;" title="黄色"><img src="img/5.png" alt="黄色" /></a><i></i></li>
-                    <li data-aid="12"><a href="javascript:;" title="灰色"><img src="img/6.png" alt="灰色" /></a><i></i></li>
-                  </ul>
-                </dd>
-                <dd class="goods-info-head-size clearfix sys_item_specpara"  data-sid="2"> <span class="style-label">尺码：</span>
+                <c:forEach items="${kindVOs }" var="kindVO">
+                <dd class="goods-info-head-size clearfix sys_item_specpara"  data-sid="${kindVO.specificationId }"> <span class="style-label">${kindVO.name }：</span>
                   <ul class="clearfix" id="J_goodsSize">
-                    <li data-aid="13"><a href="javascript:;" class="item goodsStyle "title="S">S</a><i></i></li>
-                    <li data-aid="14"><a href="javascript:;" class="item goodsStyle " title="M">M</a><i></i></li>
-                    <li data-aid="16"><a href="javascript:;" class="item goodsStyle " title="L">L</a><i></i></li>
-                    <li data-aid="17"><a href="javascript:;" class="item goodsStyle " title="XL">XL</a><i></i></li>
+                  <c:forEach items="${kindVO.kindAttributes }" var="kindAttribute">
+                     <li data-aid="${kindAttribute.specAttrId }"><a href="javascript:;" class="item goodsStyle" title="${kindAttribute.name }">${kindAttribute.name }</a><i></i></li>                 
+                  </c:forEach>
                   </ul>
-                </dd>
-                <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="" id="goodsDetailAddCartBtn" class="btn goods-add-cart-btn" data-gid="2164700027" data-package="0" data-stat-id="3d749b02d4ba8b20" onclick="_msq.push(['trackEvent', 'b12537a4c2830e51-3d749b02d4ba8b20', '//cart.mi.com/cart/add/2164700027', 'pcpid', '']);"> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f" onclick="_msq.push(['trackEvent', 'b12537a4c2830e51-9d1c11913f946c7f', '', 'pcpid', '']);"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp; </a> </dd>
+                </dd>                
+                </c:forEach>
+                <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="" id="goodsDetailAddCartBtn" class="btn goods-add-cart-btn" data-gid="2164700027" data-package="0" data-stat-id="3d749b02d4ba8b20"> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp; </a> </dd>
+                <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;">  <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143"> <i class="iconfont "></i>到货通知 </a>  <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp; </a> </dd>
                 <dd class="goods-info-head-userfaq">
                   <ul>
                     <li class="J_scrollHref" data-href="#goodsComment" data-index="2"> <i class="glyphicon glyphicon-edit"></i>&nbsp;评价&nbsp;<b>${productAttribute.commentNumber }</b> </li>
@@ -493,12 +485,8 @@
 <script>
 
 //价格json
-var sys_item={
-	"mktprice":"13.00",
-	"price":"6.80",
-	"sys_attrprice":{"13_3":{"price":"99.80","mktprice":"13.00"},"3_14":{"price":"7.80","mktprice":"14.00"},"3_16":{"price":"8.80","mktprice":"15.00"},"3_17":{"price":"9.80","mktprice":"16.00"},"4_13":{"price":"6.80","mktprice":"13.00"},"4_14":{"price":"7.80","mktprice":"14.00"},"4_16":{"price":"8.80","mktprice":"15.00"},"4_17":{"price":"9.80","mktprice":"16.00"},"8_13":{"price":"6.80","mktprice":"13.00"},"8_14":{"price":"7.80","mktprice":"1400"},"8_16":{"price":"8.80","mktprice":"15.00"},"8_17":{"price":"9.80","mktprice":"16.00"},"9_13":{"price":"6.80","mktprice":"13.00"},"9_14":{"price":"7.80","mktprice":"14.00"},"9_16":{"price":"8.80","mktprice":"15.00"},"9_17":{"price":"9.80","mktprice":"16.00"},"10_13":{"price":"6.80","mktprice":"13.00"},"10_14":{"price":"7.80","mktprice":"14.00"},"10_16":{"price":"8.80","mktprice":"15.00"},"10_17":{"price":"9.80","mktprice":"16.00"},"12_13":{"price":"6.80","mktprice":"13.00"},"12_14":{"price":"7.80","mktprice":"14.00"},"12_16":{"price":"8.80","mktprice":"15.00"},"12_17":{"price":"9.80","mktprice":"16.00"}}};
-
-
+var sys_item=${productSpecifications};
+var default_price=${product.showPrice};
 //商品规格选择
 $(function(){
 	$(".goods-info-head .sys_item_specpara").each(function(){
@@ -529,14 +517,24 @@ $(function(){
 			var v=i.attr("data-attrval");
 			if(!v){
 				defaultstats=false;
+				$('#goodsDetailBtnBox').css('display', 'block');
+				$('#goodsDetailBtnBoxForInform').css('display', 'none');
 			}else{
-				_val+=_val!=""?"_":"";
+				_val+=_val!=""?",":"";
 				_val+=v;
 			}
 		})
 		if(!!defaultstats){
-			_mktprice=sys_item['sys_attrprice'][_val]['mktprice'];
-			_price=sys_item['sys_attrprice'][_val]['price'];
+			if(typeof(sys_item[_val]) == "undefined"){
+				$('#goodsDetailBtnBox').css('display', 'none');
+				$('#goodsDetailBtnBoxForInform').css('display', 'block');
+			}else {
+				_mktprice=sys_item[_val]['price'];
+				_price=sys_item[_val]['price'];
+				$('#goodsDetailBtnBox').css('display', 'block');
+				$('#goodsDetailBtnBoxForInform').css('display', 'none');
+			}
+
 		}else{
 			_mktprice=sys_item['mktprice'];
 			_price=sys_item['price'];

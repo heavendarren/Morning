@@ -22,7 +22,6 @@ public class ProductCategoryServiceImplTest extends BaseTest {
 			pageInfo.setOrder(ProductSortEnum.SALES_ASC.getOrder());
 			productCategoryService.selectProductVOs(9L, pageInfo);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

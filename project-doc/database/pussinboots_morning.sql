@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2017-03-05 02:24:50
+Date: 2017-03-06 01:54:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,7 +36,7 @@ CREATE TABLE `cms_menu` (
   `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
   `remarks` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '备注信息',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8 COMMENT='目录表';
 
 -- ----------------------------
 -- Records of cms_menu
@@ -139,7 +139,7 @@ CREATE TABLE `cms_organization` (
   `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
   `remarks` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '备注信息',
   PRIMARY KEY (`organization_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='组织表';
 
 -- ----------------------------
 -- Records of cms_organization
@@ -163,7 +163,7 @@ CREATE TABLE `cms_role` (
   `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
   `remarks` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '备注信息',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 -- ----------------------------
 -- Records of cms_role
@@ -183,7 +183,7 @@ CREATE TABLE `cms_role_menu` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建者',
   PRIMARY KEY (`role_menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2469 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2469 DEFAULT CHARSET=utf8 COMMENT='角色目录关联表';
 
 -- ----------------------------
 -- Records of cms_role_menu
@@ -308,7 +308,7 @@ CREATE TABLE `cms_user` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='管理员表';
 
 -- ----------------------------
 -- Records of cms_user
@@ -329,7 +329,7 @@ CREATE TABLE `cms_user_login_log` (
   `operating_system` varchar(50) DEFAULT NULL COMMENT '操作系统',
   `browser` varchar(50) DEFAULT NULL COMMENT '浏览器',
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8 COMMENT='管理员登陆表';
 
 -- ----------------------------
 -- Records of cms_user_login_log
@@ -485,7 +485,7 @@ CREATE TABLE `cms_user_role` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建者',
   PRIMARY KEY (`user_role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=240 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=240 DEFAULT CHARSET=utf8 COMMENT='管理员角色关联表';
 
 -- ----------------------------
 -- Records of cms_user_role
@@ -505,7 +505,7 @@ CREATE TABLE `cms_version_log` (
   `log_title` varchar(255) DEFAULT NULL COMMENT '日志标题',
   `log_content` text COMMENT '日志内容',
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8 COMMENT='系统日志表';
 
 -- ----------------------------
 -- Records of cms_version_log
@@ -718,7 +718,7 @@ CREATE TABLE `os_category` (
   `page_keyword` varchar(64) DEFAULT NULL COMMENT '页面关键词',
   `remarks` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '备注信息',
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='商品分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='分类表';
 
 -- ----------------------------
 -- Records of os_category
@@ -898,6 +898,55 @@ INSERT INTO `os_email` VALUES ('41', '1487871021985261', '810170512@qq.com', '1'
 INSERT INTO `os_email` VALUES ('42', '1487871651886848', '810170512@qq.com', '1', '2017-02-24 01:40:51', '2017-02-24 01:40:51', '2017-02-24 01:43:51', null, '1', '0', 'xAgV07', '『但行好事·莫问前程』很高兴遇见您!', '{\"createTime\":1487871651448,\"captcha\":\"xAgV07\",\"userNumber\":14875975007231277,\"email\":\"810170512@qq.com\"}');
 INSERT INTO `os_email` VALUES ('43', '1487872361649136', '810170512@qq.com', '1', '2017-02-24 01:52:40', '2017-02-24 01:52:40', '2017-02-24 01:55:40', null, '0', '1', 'oGK86A', '『但行好事·莫问前程』很高兴遇见您!', '{\"createTime\":1487872359991,\"captcha\":\"oGK86A\",\"userNumber\":14875975007231277,\"email\":\"810170512@qq.com\"}');
 INSERT INTO `os_email` VALUES ('44', '1487872717291930', '810170512@qq.com', '1', '2017-02-24 01:58:36', '2017-02-24 01:58:36', '2017-02-24 02:01:36', null, '1', '1', 'd5NfKw', '『但行好事·莫问前程』很高兴遇见您!', '{\"createTime\":1487872715960,\"captcha\":\"d5NfKw\",\"userNumber\":14875975007231277,\"email\":\"810170512@qq.com\"}');
+
+-- ----------------------------
+-- Table structure for os_kind
+-- ----------------------------
+DROP TABLE IF EXISTS `os_kind`;
+CREATE TABLE `os_kind` (
+  `kind_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '类型ID',
+  `product_id` bigint(20) DEFAULT NULL COMMENT '商品ID',
+  `specification_id` bigint(20) DEFAULT NULL COMMENT '规格ID',
+  `name` varchar(64) DEFAULT NULL COMMENT '类型名称',
+  `status` tinyint(2) DEFAULT '1' COMMENT '状态：1.显示；0.隐藏',
+  `sort` int(9) DEFAULT NULL COMMENT '排序',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '创建者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
+  PRIMARY KEY (`kind_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='产品类型表';
+
+-- ----------------------------
+-- Records of os_kind
+-- ----------------------------
+INSERT INTO `os_kind` VALUES ('1', '1', '1', '颜色', '1', '2', '2017-03-05 17:04:45', '猫宁', '2017-03-05 17:04:50', '猫宁');
+INSERT INTO `os_kind` VALUES ('2', '1', '2', '内存容量', '1', '1', '2017-03-05 17:07:17', '猫宁', '2017-03-05 17:07:22', '猫宁');
+
+-- ----------------------------
+-- Table structure for os_kind_attribute
+-- ----------------------------
+DROP TABLE IF EXISTS `os_kind_attribute`;
+CREATE TABLE `os_kind_attribute` (
+  `kind_attr_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '规格属性ID',
+  `kind_id` bigint(20) DEFAULT NULL COMMENT '规格ID',
+  `spec_attr_id` bigint(20) DEFAULT NULL COMMENT '规格属性ID',
+  `name` varchar(64) DEFAULT NULL,
+  `status` tinyint(2) DEFAULT '1' COMMENT '状态：1.显示；0.隐藏',
+  `sort` int(9) DEFAULT NULL COMMENT '排序',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`kind_attr_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='类型属性表';
+
+-- ----------------------------
+-- Records of os_kind_attribute
+-- ----------------------------
+INSERT INTO `os_kind_attribute` VALUES ('1', '1', '1', '白色', '1', '1', '猫宁', '2017-03-05 17:29:13');
+INSERT INTO `os_kind_attribute` VALUES ('2', '1', '2', '金色', '1', '2', '猫宁', '2017-03-05 17:29:15');
+INSERT INTO `os_kind_attribute` VALUES ('3', '2', '3', '16G', '1', '1', '猫宁', '2017-03-05 17:29:17');
+INSERT INTO `os_kind_attribute` VALUES ('4', '2', '4', '32G', '1', '2', '猫宁', '2017-03-05 17:29:21');
+INSERT INTO `os_kind_attribute` VALUES ('5', '2', '5', '64G', '1', '3', '猫宁', '2017-02-25 21:44:43');
 
 -- ----------------------------
 -- Table structure for os_label
@@ -1112,7 +1161,7 @@ CREATE TABLE `os_product_category` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建者',
   PRIMARY KEY (`product_category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COMMENT='商品表分类表关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COMMENT='商品分类关联表';
 
 -- ----------------------------
 -- Records of os_product_category
@@ -1224,6 +1273,37 @@ INSERT INTO `os_product_parameter` VALUES ('6', '1', '前置摄像头', '400万�
 INSERT INTO `os_product_parameter` VALUES ('7', '1', '内存', '3GB', '1', '7', '2017-03-04 18:55:19', '猫宁', '2017-03-04 18:55:29', '猫宁');
 
 -- ----------------------------
+-- Table structure for os_product_specification
+-- ----------------------------
+DROP TABLE IF EXISTS `os_product_specification`;
+CREATE TABLE `os_product_specification` (
+  `product_spec_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品规格ID',
+  `product_id` bigint(20) DEFAULT NULL COMMENT '商品ID',
+  `spec` varchar(64) DEFAULT NULL COMMENT '规格：规格ID，以“,”相隔',
+  `stock` int(11) DEFAULT '0' COMMENT '库存',
+  `sales_volume` int(11) DEFAULT '0' COMMENT '销售量',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '价格',
+  `score` int(11) DEFAULT NULL COMMENT '积分',
+  `default_status` tinyint(2) DEFAULT '0' COMMENT '是否默认状态：0,不默认；1,默认',
+  `status` tinyint(2) DEFAULT '0' COMMENT '商品状态：0,新增；1,上架；2,下架',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
+  PRIMARY KEY (`product_spec_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='商品规格表';
+
+-- ----------------------------
+-- Records of os_product_specification
+-- ----------------------------
+INSERT INTO `os_product_specification` VALUES ('1', '1', '1,3', '30', '10', '1599.00', '1599', '1', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
+INSERT INTO `os_product_specification` VALUES ('2', '1', '1,4', '80', '20', '1699.00', '1699', '0', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
+INSERT INTO `os_product_specification` VALUES ('3', '1', '1,5', '100', '30', '1799.00', '1799', '0', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
+INSERT INTO `os_product_specification` VALUES ('4', '1', '2,3', '45', '45', '1599.00', '1599', '0', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
+INSERT INTO `os_product_specification` VALUES ('5', '1', '2,4', '12', '45', '1699.00', '1699', '0', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
+INSERT INTO `os_product_specification` VALUES ('6', '1', '2,5', '72', '75', '1799.00', '1799', '0', '0', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
+
+-- ----------------------------
 -- Table structure for os_question
 -- ----------------------------
 DROP TABLE IF EXISTS `os_question`;
@@ -1257,6 +1337,51 @@ INSERT INTO `os_question` VALUES ('4', '1', '1', '猫宁', 'default/avatar/avata
 INSERT INTO `os_question` VALUES ('5', '1', '1', '猫宁', 'default/avatar/avatar_4.jpg', '测试提问', '56', '1', '2017-03-05 01:09:03', '猫宁', '测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问。', '猫宁', '2017-03-05 01:11:05', '1', '猫宁', '2017-03-05 01:09:38');
 INSERT INTO `os_question` VALUES ('6', '1', '1', '猫宁', 'default/avatar/avatar_5.jpg', '测试提问', '56', '1', '2017-03-05 01:09:03', '猫宁', '测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问。', '猫宁', '2017-03-05 01:11:05', '1', '猫宁', '2017-03-05 01:09:38');
 INSERT INTO `os_question` VALUES ('7', '1', '1', '猫宁', 'default/avatar/avatar_5.jpg', '测试提问', '56', '1', '2017-03-05 01:09:03', '猫宁', '测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问。', '猫宁', '2017-03-05 01:11:08', '1', '猫宁', '2017-03-05 01:09:38');
+
+-- ----------------------------
+-- Table structure for os_specification
+-- ----------------------------
+DROP TABLE IF EXISTS `os_specification`;
+CREATE TABLE `os_specification` (
+  `specification_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '规格ID',
+  `category_id` bigint(20) DEFAULT NULL COMMENT '分类ID',
+  `name` varchar(64) DEFAULT NULL COMMENT '规格名称',
+  `status` tinyint(2) DEFAULT '1' COMMENT '状态：1.显示；0.隐藏',
+  `sort` int(9) DEFAULT NULL COMMENT '排序',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '创建者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
+  PRIMARY KEY (`specification_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='规格表\r\n';
+
+-- ----------------------------
+-- Records of os_specification
+-- ----------------------------
+INSERT INTO `os_specification` VALUES ('1', '2', '颜色', '1', '1', '2017-03-05 17:04:45', '猫宁', '2017-03-05 17:04:50', '猫宁');
+INSERT INTO `os_specification` VALUES ('2', '2', '内存容量', '1', '2', '2017-03-05 17:07:17', '猫宁', '2017-03-05 17:07:22', '猫宁');
+
+-- ----------------------------
+-- Table structure for os_specification_attribute
+-- ----------------------------
+DROP TABLE IF EXISTS `os_specification_attribute`;
+CREATE TABLE `os_specification_attribute` (
+  `spec_attr_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '规格属性ID',
+  `specification_id` bigint(20) DEFAULT NULL COMMENT '规格ID',
+  `name` varchar(64) DEFAULT NULL COMMENT '规格属性名称',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '创建者',
+  PRIMARY KEY (`spec_attr_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='规格属性表';
+
+-- ----------------------------
+-- Records of os_specification_attribute
+-- ----------------------------
+INSERT INTO `os_specification_attribute` VALUES ('1', '1', '白色', '2017-03-05 17:07:56', '猫宁');
+INSERT INTO `os_specification_attribute` VALUES ('2', '1', '金色', '2017-03-05 17:08:09', '猫宁');
+INSERT INTO `os_specification_attribute` VALUES ('3', '2', '16G', '2017-03-05 17:07:56', '猫宁');
+INSERT INTO `os_specification_attribute` VALUES ('4', '2', '32G', '2017-03-05 17:08:09', '猫宁');
+INSERT INTO `os_specification_attribute` VALUES ('5', '2', '64G', '2017-03-05 17:09:50', '猫宁');
 
 -- ----------------------------
 -- Table structure for os_user

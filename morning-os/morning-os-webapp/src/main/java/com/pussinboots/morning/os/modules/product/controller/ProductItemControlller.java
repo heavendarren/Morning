@@ -1,6 +1,7 @@
 package com.pussinboots.morning.os.modules.product.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.alibaba.fastjson.JSON;
 import com.pussinboots.morning.common.controller.BaseController;
 import com.pussinboots.morning.common.enums.StatusEnum;
 import com.pussinboots.morning.common.model.PageInfo;
@@ -26,12 +28,15 @@ import com.pussinboots.morning.os.modules.product.entity.ProductImage;
 import com.pussinboots.morning.os.modules.product.entity.ProductParameter;
 import com.pussinboots.morning.os.modules.product.enums.CommentTypeEnum;
 import com.pussinboots.morning.os.modules.product.enums.ProductStatusEnum;
+import com.pussinboots.morning.os.modules.product.service.IKindService;
 import com.pussinboots.morning.os.modules.product.service.ILabelService;
 import com.pussinboots.morning.os.modules.product.service.IProductAttributeService;
 import com.pussinboots.morning.os.modules.product.service.IProductCategoryService;
 import com.pussinboots.morning.os.modules.product.service.IProductImageService;
 import com.pussinboots.morning.os.modules.product.service.IProductParameterService;
 import com.pussinboots.morning.os.modules.product.service.IProductService;
+import com.pussinboots.morning.os.modules.product.service.IProductSpecificationService;
+import com.pussinboots.morning.os.modules.product.vo.KindVO;
 
 /**
  * 
@@ -68,6 +73,10 @@ public class ProductItemControlller extends BaseController{
 	private IProductImageService productImageService;
 	@Autowired
 	private IQuestionService questionService;
+	@Autowired
+	private IKindService kindService;
+	@Autowired
+	private IProductSpecificationService productSpecificationService;
 	
 	@GetMapping(value="/{productNumber}")
 	public String item(Model model, @PathVariable("productNumber") Long productNumber) {
@@ -98,6 +107,15 @@ public class ProductItemControlller extends BaseController{
 				model.addAttribute("label", label);
 			}
 			
+			// 根据商品ID从查找产品规格
+			List<KindVO> kindVOs = kindService.selectByProductId(product.getProductId(), StatusEnum.SHOW.getStatus());
+			model.addAttribute("kindVOs", kindVOs);
+			
+			// 根据商品ID和产品规格查找规格属性
+			Map<String, Object> productSpecifications = productSpecificationService
+					.selectByProductId(product.getProductId(), StatusEnum.SHOW.getStatus(), kindVOs);
+			model.addAttribute("productSpecifications", JSON.toJSON(productSpecifications));
+			
 			// 根据商品ID查找商品参数
 			List<ProductParameter> productParameters = productParameterService
 					.selectParametersByProductId(product.getProductId(), StatusEnum.SHOW.getStatus());
@@ -126,15 +144,16 @@ public class ProductItemControlller extends BaseController{
 			List<Question> highQuestions = questionService.selectHighQuestions(product.getProductId(),
 					StatusEnum.SHOW.getStatus(), highQuestionPage);			
 			model.addAttribute("highQuestions", highQuestions);
-
-			// 根据商品ID查找最有用帮助
+			
+			// 根据商品ID查找最有用帮助    
+			// TODO 最有用帮助提问
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
-		//产品规格
+
 		
 		return PRODUCT_ITEM;
 	}
