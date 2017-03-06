@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pussinboots.morning.cms.common.security.AuthorizingUser;
@@ -44,6 +45,8 @@ public class AdministratorInfoController extends BaseController {
 	
 	/** 个人信息 */
 	private static final String ADMIN_USER_INFO = getViewPath("modules/admin/admin_user_info");
+	/** 个人头像 */
+	private static final String ADMIN_USER_AVATAR = getViewPath("modules/admin/admin_user_avatar");
 	
 	@Autowired
 	private IUserService userService;
@@ -126,5 +129,34 @@ public class AdministratorInfoController extends BaseController {
 		} else {
 			return fail(false, "您未登录或者登录已超时,请先登录!");
 		}
+	}
+	
+	/**
+	 * GET 用户头像
+	 * @param model
+	 * @return
+	 */
+	@RequiresPermissions("administrator:info:view")
+	@GetMapping(value = "/view/avatar")
+	public String avatar(Model model) {
+		AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
+		// 用户信息
+		UserVO userVO = userService.selectByUserId(authorizingUser.getUserId());
+		model.addAttribute("user", userVO);
+		return ADMIN_USER_AVATAR;
+	}
+	
+	/**
+	 * POST 用户头像
+	 * @param model
+	 * @return
+	 */
+	@RequiresPermissions("administrator:info:view")
+	@PostMapping(value = "/edit/avatar")
+	@ResponseBody
+	public ResponseResult avatar(@RequestParam("picImg") String picImg) {
+		AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
+		userService.updateUserAvatar(authorizingUser.getUserId(), picImg);
+		return success(true);
 	}
 }

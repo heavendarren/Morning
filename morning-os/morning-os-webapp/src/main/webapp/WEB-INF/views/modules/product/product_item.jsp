@@ -14,88 +14,88 @@
     <div class="header-nav">
       <ul class="nav-list J_navMainList clearfix">
         <li id="J_navCategory" class="nav-category"> <a class="link-category" href="${ctx }/list?categoryId=1"><span class="text">全部商品分类</span></a> 
-        <!--     轮播top菜单导航begin       -->
-        <div class="site-category">
-          <ul id="J_categoryList" class="site-category-list clearfix">
-            <c:forEach items="${categoryInNavVOs }" var="categoryInNavVO">
-              <li class="category-item"> <a class="title" href="${ctx }/list?categoryId=${categoryInNavVO.categoryId}">${categoryInNavVO.name }<span class="glyphicon glyphicon-chevron-right"></span></a>
-                <c:choose>
-                  <c:when test="${fn:length(categoryInNavVO.products)<=6}">
-                    <div class="children clearfix children-col-1">
-                      <ul class="children-list clearfix">
-                        <c:forEach items="${categoryInNavVO.products}" var="product" begin="0" end="5">
-                          <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
-                        </c:forEach>
-                      </ul>
-                    </div>
-                  </c:when>
-                  <c:when test="${fn:length(categoryInNavVO.products)<=12}">
-                    <div class="children clearfix children-col-2">
-                      <ul class="children-list children-list-col children-list-col-1">
-                        <c:forEach items="${categoryInNavVO.products}" var="product" begin="0" end="5">
-                          <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
-                        </c:forEach>
-                      </ul>
-                      <ul class="children-list children-list-col children-list-col-2">
-                        <c:forEach items="${categoryInNavVO.products}" var="product" begin="6" end="11">
-                          <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
-                        </c:forEach>
-                      </ul>
-                    </div>
-                  </c:when>
-                  <c:when test="${fn:length(categoryInNavVO.products)<=18}">
-                    <div class="children clearfix children-col-3">
-                      <ul class="children-list children-list-col children-list-col-1">
-                        <c:forEach items="${categoryInNavVO.products}" var="product" begin="0" end="5">
-                          <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
-                        </c:forEach>
-                      </ul>
-                      <ul class="children-list children-list-col children-list-col-2">
-                        <c:forEach items="${categoryInNavVO.products}" var="product" begin="6" end="11">
-                          <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
-                        </c:forEach>
-                      </ul>
-                      <ul class="children-list children-list-col children-list-col-3">
-                        <c:forEach items="${categoryInNavVO.products}" var="product" begin="12" end="17">
-                          <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
-                        </c:forEach>
-                      </ul>
-                    </div>
-                  </c:when>
-                  <c:otherwise>
-                    <div class="children clearfix children-col-4">
-                      <ul class="children-list children-list-col children-list-col-1">
-                        <c:forEach items="${categoryInNavVO.products}" var="product" begin="0" end="5">
-                          <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
-                        </c:forEach>
-                      </ul>
-                      <ul class="children-list children-list-col children-list-col-2">
-                        <c:forEach items="${categoryInNavVO.products}" var="product" begin="6" end="11">
-                          <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
-                        </c:forEach>
-                      </ul>
-                      <ul class="children-list children-list-col children-list-col-3">
-                        <c:forEach items="${categoryInNavVO.products}" var="product" begin="12" end="17">
-                          <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
-                        </c:forEach>
-                      </ul>
-                      <ul class="children-list children-list-col children-list-col-4">
-                        <c:forEach items="${categoryInNavVO.products}" var="product" begin="17" end="23">
-                          <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
-                        </c:forEach>
-                      </ul>
-                    </div>
-                  </c:otherwise>
-                </c:choose>
-              </li>
-            </c:forEach>
-          </ul>
-        </div>
-        <!--     轮播top菜单导航end       --> 
+          <!--     轮播top菜单导航begin       -->
+          <div class="site-category">
+            <ul id="J_categoryList" class="site-category-list clearfix">
+              <c:forEach items="${categoryInNavVOs }" var="categoryInNavVO">
+                <li class="category-item"> <a class="title" href="${ctx }/list?categoryId=${categoryInNavVO.categoryId}">${categoryInNavVO.name }<span class="glyphicon glyphicon-chevron-right"></span></a>
+                  <c:choose>
+                    <c:when test="${fn:length(categoryInNavVO.products)<=6}">
+                      <div class="children clearfix children-col-1">
+                        <ul class="children-list clearfix">
+                          <c:forEach items="${categoryInNavVO.products}" var="product" begin="0" end="5">
+                            <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
+                          </c:forEach>
+                        </ul>
+                      </div>
+                    </c:when>
+                    <c:when test="${fn:length(categoryInNavVO.products)<=12}">
+                      <div class="children clearfix children-col-2">
+                        <ul class="children-list children-list-col children-list-col-1">
+                          <c:forEach items="${categoryInNavVO.products}" var="product" begin="0" end="5">
+                            <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
+                          </c:forEach>
+                        </ul>
+                        <ul class="children-list children-list-col children-list-col-2">
+                          <c:forEach items="${categoryInNavVO.products}" var="product" begin="6" end="11">
+                            <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
+                          </c:forEach>
+                        </ul>
+                      </div>
+                    </c:when>
+                    <c:when test="${fn:length(categoryInNavVO.products)<=18}">
+                      <div class="children clearfix children-col-3">
+                        <ul class="children-list children-list-col children-list-col-1">
+                          <c:forEach items="${categoryInNavVO.products}" var="product" begin="0" end="5">
+                            <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
+                          </c:forEach>
+                        </ul>
+                        <ul class="children-list children-list-col children-list-col-2">
+                          <c:forEach items="${categoryInNavVO.products}" var="product" begin="6" end="11">
+                            <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
+                          </c:forEach>
+                        </ul>
+                        <ul class="children-list children-list-col children-list-col-3">
+                          <c:forEach items="${categoryInNavVO.products}" var="product" begin="12" end="17">
+                            <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
+                          </c:forEach>
+                        </ul>
+                      </div>
+                    </c:when>
+                    <c:otherwise>
+                      <div class="children clearfix children-col-4">
+                        <ul class="children-list children-list-col children-list-col-1">
+                          <c:forEach items="${categoryInNavVO.products}" var="product" begin="0" end="5">
+                            <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
+                          </c:forEach>
+                        </ul>
+                        <ul class="children-list children-list-col children-list-col-2">
+                          <c:forEach items="${categoryInNavVO.products}" var="product" begin="6" end="11">
+                            <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
+                          </c:forEach>
+                        </ul>
+                        <ul class="children-list children-list-col children-list-col-3">
+                          <c:forEach items="${categoryInNavVO.products}" var="product" begin="12" end="17">
+                            <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
+                          </c:forEach>
+                        </ul>
+                        <ul class="children-list children-list-col children-list-col-4">
+                          <c:forEach items="${categoryInNavVO.products}" var="product" begin="17" end="23">
+                            <li> <a class="link" title="${product.name}" href="${ctx }/item/${product.productNumber}"><img class="thumb" src="${ctximg}/${product.picImg}" width="40" height="40" alt="${product.name}"><span class="text">${product.name}</span></a> </li>
+                          </c:forEach>
+                        </ul>
+                      </div>
+                    </c:otherwise>
+                  </c:choose>
+                </li>
+              </c:forEach>
+            </ul>
+          </div>
+          <!--     轮播top菜单导航end       --> 
         </li>
         <c:forEach items="${indexClassify }" var="indexClassify">
-	      <li class="nav-item"> <a class="link" href="${indexClassify.href }" target="${indexClassify.target }"><span class="text">${indexClassify.name }</span><span class="arrow"></span></a> </li>
-	    </c:forEach>
+          <li class="nav-item"> <a class="link" href="${indexClassify.href }" target="${indexClassify.target }"><span class="text">${indexClassify.name }</span><span class="arrow"></span></a> </li>
+        </c:forEach>
       </ul>
     </div>
     <div class="header-search">
@@ -122,19 +122,18 @@
     </div>
   </div>
 </div>
-<!--     轮播top菜单导航 end         -->
+<!--     轮播top菜单导航 end         --> 
 
 <!--     分类导航栏 begin       -->
 <div class="breadcrumbs">
   <div class="container-fluid"><a href='${ctx }/index'>首页</a>
     <c:forEach items="${upperCategories }" var="upperCategory"><span class="sep">&gt;</span><a href="${ctx}/list?categoryId=${upperCategory.categoryId}">${upperCategory.name }</a></c:forEach>
-    <span class="sep">&gt;</span><a href="${ctx}/item/${product.productNumber}">${product.name }</a>
-  </div>
+    <span class="sep">&gt;</span><a href="${ctx}/item/${product.productNumber}">${product.name }</a> </div>
 </div>
 <!--     分类导航栏 end       --> 
 
 <!-- 商品详情 begin -->
-<div class="goods-detail">
+<div class="goods-detail"> 
   <!-- 商品简介begin-->
   <div class="goods-detail-info  clearfix J_goodsDetail">
     <div class="container-fluid">
@@ -147,9 +146,9 @@
             </div>
             <div class="goods-small-pic clearfix">
               <ul id="goodsPicList">
-              <c:forEach items="${productImages }" var="productImage">
-              	<li > <img src="${ctximg }/${productImage.picImg}" alt="${product.name }" title="${product.name }"> </li>
-              </c:forEach>
+                <c:forEach items="${productImages }" var="productImage">
+                  <li > <img src="${ctximg }/${productImage.picImg}" alt="${product.name }" title="${product.name }"> </li>
+                </c:forEach>
               </ul>
             </div>
           </div>
@@ -166,21 +165,23 @@
                 </dd>
                 <dd class="goods-info-head-tip">
                   <ul>
-                  	<c:if test="${not empty label.labelName }"><li class="others"><i>${label.labelName }</i> </li></c:if>
+                    <c:if test="${not empty label.labelName }">
+                      <li class="others"><i>${label.labelName }</i> </li>
+                    </c:if>
                   </ul>
                 </dd>
-                <dd class="goods-info-head-price clearfix"> <b class="J_mi_goodsPrice sys_item_mktprice">${product.showPrice }</b> <i>&nbsp;元</i> <del> <span class="J_mi_marketPrice sys_item_price">79元</span> </del> </dd>
+                <dd class="goods-info-head-price clearfix"> <b class="J_mi_goodsPrice sys_item_price">${product.showPrice }</b> <i>&nbsp;元</i> <del> 赠送积分:<span class="J_mi_marketPrice sys_item_score">79元</span> </del> </dd>
                 <c:forEach items="${kindVOs }" var="kindVO">
-                <dd class="goods-info-head-size clearfix sys_item_specpara"  data-sid="${kindVO.specificationId }"> <span class="style-label">${kindVO.name }：</span>
-                  <ul class="clearfix" id="J_goodsSize">
-                  <c:forEach items="${kindVO.kindAttributes }" var="kindAttribute">
-                     <li data-aid="${kindAttribute.specAttrId }"><a href="javascript:;" class="item goodsStyle" title="${kindAttribute.name }">${kindAttribute.name }</a><i></i></li>                 
-                  </c:forEach>
-                  </ul>
-                </dd>                
+                  <dd class="goods-info-head-size clearfix sys_item_specpara"  data-sid="${kindVO.specificationId }"> <span class="style-label">${kindVO.name }：</span>
+                    <ul class="clearfix" id="J_goodsSize">
+                      <c:forEach items="${kindVO.kindAttributes }" var="kindAttribute">
+                        <li data-aid="${kindAttribute.specAttrId }"><a href="javascript:;" class="item goodsStyle" title="${kindAttribute.name }">${kindAttribute.name }</a><i></i></li>
+                      </c:forEach>
+                    </ul>
+                  </dd>
                 </c:forEach>
                 <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="" id="goodsDetailAddCartBtn" class="btn goods-add-cart-btn" data-gid="2164700027" data-package="0" data-stat-id="3d749b02d4ba8b20"> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp; </a> </dd>
-                <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;">  <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143"> <i class="iconfont "></i>到货通知 </a>  <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp; </a> </dd>
+                <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;"> <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143"> <i class="iconfont "></i>到货通知 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp; </a> </dd>
                 <dd class="goods-info-head-userfaq">
                   <ul>
                     <li class="J_scrollHref" data-href="#goodsComment" data-index="2"> <i class="glyphicon glyphicon-edit"></i>&nbsp;评价&nbsp;<b>${productAttribute.commentNumber }</b> </li>
@@ -208,7 +209,7 @@
       </ul>
     </div>
   </div>
-  <!-- 商品详情导航栏 begin -->
+  <!-- 商品详情导航栏 begin --> 
   
   <!-- 商品详情介绍 begin -->
   <div class="goods-detail-desc J_itemBox" id="goodsDesc" style="display: block;">
@@ -220,7 +221,7 @@
       </div>
     </div>
   </div>
-  <!-- 商品详情介绍 begin -->
+  <!-- 商品详情介绍 begin --> 
   
   <!-- 商品详情参数 begin -->
   <div class="goods-detail-nav-name-block J_itemBox" id="goodsParam">
@@ -238,9 +239,9 @@
           <dl>
             <dd>
               <ul>
-              	<c:forEach items="${productParameters }" var="productParameter">
-              		<li> ${productParameter.name }：${productParameter.value } </li>
-              	</c:forEach>
+                <c:forEach items="${productParameters }" var="productParameter">
+                  <li> ${productParameter.name }：${productParameter.value } </li>
+                </c:forEach>
               </ul>
             </dd>
           </dl>
@@ -248,7 +249,7 @@
       </ul>
     </div>
   </div>
-  <!-- 商品详情参数 begin -->
+  <!-- 商品详情参数 begin --> 
   
   <!-- 商品详情评价晒单 begin -->
   <div class="goods-detail-nav-name-block J_itemBox" id="goodsComment">
@@ -258,7 +259,7 @@
     </div>
   </div>
   <div class="goods-detail-comment J_itemBox hasContent" id="goodsCommentContent" style="display: block;">
-    <div class="goods-detail-comment-groom" id="J_recommendComment">
+    <div class="goods-detail-comment-groom" id="J_recommendComment" style="display:${productAttribute.commentNumber eq 0?'none':'black'}">
       <div class="container-fluid">
         <ul class="main-block">
           <li class="percent">
@@ -269,7 +270,7 @@
         </ul>
       </div>
     </div>
-    <div class="goods-detail-comment-content" id="J_commentDetailBlock">
+    <div class="goods-detail-comment-content" id="J_commentDetailBlock" style="display:${productAttribute.commentNumber eq 0?'none':'black'}">
       <div class="container-fluid">
         <div class="row">
           <div class="span14 goods-detail-comment-list">
@@ -279,70 +280,67 @@
               </div>
             </div>
             <ul class="comment-box-list" id="J_supComment">
-			<c:forEach items="${highCommentVOs }" var="highCommentVO">
-			  <li class="item-rainbow-5" data-id="${highCommentVO.comment.commentId }">
-                <div class="user-image"> <img src="${ctximg }/${highCommentVO.comment.picImg}" alt="${highCommentVO.comment.userName}"> </div>
-                <div class="user-emoj">&nbsp;超爱&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i> </div>
-                <div class="user-name-info"> <span class="user-name"> ${highCommentVO.comment.userName}</span> <span class="user-time">${highCommentVO.comment.createTime}</span> <span class="pro-info">白色</span> </div>
-                <div class="user-hand-block"> <a href="javascript:void(0);" data-commentid="${highCommentVO.comment.commentId }" class="J_hasHelp "> <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;&nbsp;赞&nbsp;&nbsp;<span class="amount"> ${highCommentVO.comment.goodCount}</span></a> </div>
-                <dl class="user-comment">
-                  <dt class="user-comment-content J_commentContent">
-                    <p class="content-detail"><a href="/comment/commentDetail/comment_id/${highCommentVO.comment.commentId}" target="_blank"> ${highCommentVO.comment.content} </a> </p>
-                  </dt>
-                  <dd class="user-comment-self-input">
-                    <div class="input-block">
-                      <input type="text" placeholder="回复楼主" class="J_commentAnswerInput">
-                      <a href="javascript:void(0);" class="btn  answer-btn J_commentAnswerBtn" data-commentid="${highCommentVO.comment.commentId }">回复</a> </div>
-                  </dd>
-                  <c:forEach items="${highCommentVO.commentReplies}" var="commentReply">
-                  <c:if test="${commentReply.type eq 1 }">
-                  <dd class="user-comment-answer"> <img class="self-image" src="${ctximg }/${commentReply.picImg}" alt="${commentReply.userName}">
-                    <p>${commentReply.content}<span class="official-name">官方回复</span> <a href="javascript:void(0);" class="J_csLike " data-commentid="${commentReply.commentReplyId}"> <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;赞客服&nbsp; <span class="amount">${commentReply.goodCount}</span> </a></p>
-                  </dd> 
-                  </c:if>  
-                  <c:if test="${commentReply.type eq 0 }">
-                  <dd class="user-comment-answer"> <img class="self-image" src="${ctximg }/${commentReply.picImg}" alt="${commentReply.userName}">
-                  	<p>${commentReply.content}- <span class="answer-user-name">${commentReply.userName}</span> </p>
-                  </dd> 
-                  </c:if>                                   
-                  </c:forEach>
-                  <dd class="user-comment-answer-more"> <a href="//order.mi.com/comment/commentDetail/comment_id/11282674" target="_blank"> 查看全部7条回复&gt; </a> </dd>
-                </dl>
-              </li>			
-			</c:forEach>
+              <c:forEach items="${highCommentVOs }" var="highCommentVO">
+                <li class="item-rainbow-5" data-id="${highCommentVO.comment.commentId }">
+                  <div class="user-image"> <img src="${ctximg }/${highCommentVO.comment.picImg}" alt="${highCommentVO.comment.userName}"> </div>
+                  <div class="user-emoj">&nbsp;超爱&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i> </div>
+                  <div class="user-name-info"> <span class="user-name"> ${highCommentVO.comment.userName}</span> <span class="user-time">${highCommentVO.comment.createTime}</span> <span class="pro-info">白色</span> </div>
+                  <div class="user-hand-block"> <a href="javascript:void(0);" data-commentid="${highCommentVO.comment.commentId }" class="J_hasHelp "> <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;&nbsp;赞&nbsp;&nbsp;<span class="amount"> ${highCommentVO.comment.goodCount}</span></a> </div>
+                  <dl class="user-comment">
+                    <dt class="user-comment-content J_commentContent">
+                      <p class="content-detail"><a href="/comment/commentDetail/comment_id/${highCommentVO.comment.commentId}" target="_blank"> ${highCommentVO.comment.content} </a> </p>
+                    </dt>
+                    <dd class="user-comment-self-input">
+                      <div class="input-block">
+                        <input type="text" placeholder="回复楼主" class="J_commentAnswerInput">
+                        <a href="javascript:void(0);" class="btn  answer-btn J_commentAnswerBtn" data-commentid="${highCommentVO.comment.commentId }">回复</a> </div>
+                    </dd>
+                    <c:forEach items="${highCommentVO.commentReplies}" var="commentReply">
+                      <c:if test="${commentReply.type eq 1 }">
+                        <dd class="user-comment-answer"> <img class="self-image" src="${ctximg }/${commentReply.picImg}" alt="${commentReply.userName}">
+                          <p>${commentReply.content}<span class="official-name">官方回复</span> <a href="javascript:void(0);" class="J_csLike " data-commentid="${commentReply.commentReplyId}"> <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;赞客服&nbsp; <span class="amount">${commentReply.goodCount}</span> </a></p>
+                        </dd>
+                      </c:if>
+                      <c:if test="${commentReply.type eq 0 }">
+                        <dd class="user-comment-answer"> <img class="self-image" src="${ctximg }/${commentReply.picImg}" alt="${commentReply.userName}">
+                          <p>${commentReply.content}- <span class="answer-user-name">${commentReply.userName}</span> </p>
+                        </dd>
+                      </c:if>
+                    </c:forEach>
+                    <dd class="user-comment-answer-more"> <a href="//order.mi.com/comment/commentDetail/comment_id/11282674" target="_blank"> 查看全部7条回复&gt; </a> </dd>
+                  </dl>
+                </li>
+              </c:forEach>
             </ul>
           </div>
           <div class="span6 goods-detail-comment-timeline">
             <h3 class="comment-name">最新评价</h3>
             <ul class="comment-timeline-list" id="J_timelineComment">
-            <c:forEach items="${newComments }" var="newComment">
-               <li class="purple timelineunit J_commentContent" data-id="${newComment.commentId }">
-                <h4 class="line-time">3小时前</h4>
-                <p class="line-content"> <a href="/comment/commentDetail/comment_id/${newComment.commentId }" target="_blank"> ${newComment.content } </a> </p>
-                <div class="line-foot">
-                  <div class="line-left">来自于 ${newComment.userName }</div>
-                  <div class="line-right J_hasHelp " data-commentid="${newComment.commentId}"> <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;&nbsp;有帮助&nbsp;&nbsp;<span class="amount">${newComment.goodCount }</span> </div>
-                </div>
-                <div class="line-dot"></div>
-              </li>           
-            </c:forEach>
+              <c:forEach items="${newComments }" var="newComment">
+                <li class="purple timelineunit J_commentContent" data-id="${newComment.commentId }">
+                  <h4 class="line-time">3小时前</h4>
+                  <p class="line-content"> <a href="/comment/commentDetail/comment_id/${newComment.commentId }" target="_blank"> ${newComment.content } </a> </p>
+                  <div class="line-foot">
+                    <div class="line-left">来自于 ${newComment.userName }</div>
+                    <div class="line-right J_hasHelp " data-commentid="${newComment.commentId}"> <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;&nbsp;有帮助&nbsp;&nbsp;<span class="amount">${newComment.goodCount }</span> </div>
+                  </div>
+                  <div class="line-dot"></div>
+                </li>
+              </c:forEach>
             </ul>
           </div>
-          <div class="span20 goods-detail-comment-more" id="J_loadMoreHref"> <a target="_blank" href="//item.mi.com/comment/commentList/gid/1164700049/pid/4943" data-stat-id="92e834619fcd20ef" onclick="_msq.push(['trackEvent', 'b12537a4c2830e51-92e834619fcd20ef', '//item.mi.com/comment/commentList/gid/1164700049/pid/4943', 'pcpid', '']);">查看更多评价</a> </div>
+          <div class="span20 goods-detail-comment-more" style="display:${productAttribute.commentNumber gt 10?'block':'none'}" id="J_loadMoreHref"> <a target="_blank" href="//item.mi.com/comment/commentList/gid/1164700049/pid/4943" data-stat-id="92e834619fcd20ef" >查看更多评价</a> </div>
         </div>
       </div>
     </div>
-    <div class="loader-block">
-      <div class="loader"></div>
-    </div>
-    <div class="goods-detail-null-content" id="J_commentTipInfo">
+    <div class="goods-detail-null-content" style="display:${productAttribute.commentNumber eq 0?'block':'none'}" id="J_commentTipInfo">
       <div class="container">
         <h3>暂时还没有评价</h3>
         <p>期待你分享科技带来的乐趣</p>
       </div>
     </div>
   </div>
-  <!-- 商品详情评价晒单 end -->
+  <!-- 商品详情评价晒单 end --> 
   
   <!-- 商品详情商品提问 begin -->
   <div class="goods-detail-nav-name-block J_itemBox" id="goodsFaq" style="display: block;">
@@ -357,43 +355,40 @@
         <input type="text" placeholder="输入你的提问" class="input-block J_inputQuestion" data-can-search="true" data-pagesize="6">
         <div class="btn question-btn J_btnQuestion">提问</div>
       </div>
-      <div class="question-order J_questionOrderBlock">
+      <div class="question-order J_questionOrderBlock" style="display:${productAttribute.questionNumber eq 0?'none':'block'}">
         <div class="order-block"> <a href="javascript:void(0);" class="J_questionHelp current" data-pagesize="6" data-stat-id="422e5161e39bf28f" onclick="_msq.push(['trackEvent', '9de9578f29e893b5-422e5161e39bf28f', 'javascript:void(0);', 'pcpid', '']);">最有帮助</a> <span class="sep">|</span> <a href="javascript:void(0);" class="J_questionNew" data-pagesize="6" data-stat-id="24e1681246710ec7" onclick="_msq.push(['trackEvent', '9de9578f29e893b5-24e1681246710ec7', 'javascript:void(0);', 'pcpid', '']);">最新</a> </div>
       </div>
       <ul class="question-content" id="J_goodsQuestionBlock">
-      <c:forEach items="${highQuestions }" var="highQuestion">
-        <li data-id="${highQuestion.questionId }">
-          <div class="left-hand float ">
-            <div class="hand-block J_questionLike " data-id="${highQuestion.questionId }"> <i class="glyphicon glyphicon-thumbs-up"></i><br>
-              <span class="hand-number">${highQuestion.goodCount }</span> </div>
-          </div>
-          <div class="mid-detail float ">
-            <h3 class="question-title"><a target="_blank" href="comment/askDetail/gid/1164700048/askid/1486143/pid/4943">${highQuestion.content }</a></h3>
-            <div class="answer-content figcaption">
-              <p> ${highQuestion.answerContent } </p>
+        <c:forEach items="${highQuestions }" var="highQuestion">
+          <li data-id="${highQuestion.questionId }">
+            <div class="left-hand float ">
+              <div class="hand-block J_questionLike " data-id="${highQuestion.questionId }"> <i class="glyphicon glyphicon-thumbs-up"></i><br>
+                <span class="hand-number">${highQuestion.goodCount }</span> </div>
             </div>
-          </div>
-          <div class="right-date float">
-            <div class="question-title-date">${highQuestion.createTime }</div>
-            <div class="answer-content-date">${highQuestion.answerTime }</div>
-          </div>
-        </li>
-       </c:forEach>
+            <div class="mid-detail float ">
+              <h3 class="question-title"><a target="_blank" href="comment/askDetail/gid/1164700048/askid/1486143/pid/4943">${highQuestion.content }</a></h3>
+              <div class="answer-content figcaption">
+                <p> ${highQuestion.answerContent } </p>
+              </div>
+            </div>
+            <div class="right-date float">
+              <div class="question-title-date">${highQuestion.createTime }</div>
+              <div class="answer-content-date">${highQuestion.answerTime }</div>
+            </div>
+          </li>
+        </c:forEach>
       </ul>
       <div class="question-null-content J_nullInfo">抱歉，没有找到答案，您可以点击“提问”提交此条提问给已经购买者、小米官方客服和产品经理，我们会及时回复。</div>
-      <div class="loader-block">
-        <div class="loader"></div>
-      </div>
-      <div class="goods-detail-null-content" id="J_questionTipInfo">
+      <div class="goods-detail-null-content" style="display:${productAttribute.questionNumber eq 0?'block':'none'}" id="J_questionTipInfo">
         <div class="container">
           <h3>暂时还没有提问</h3>
           <p>对商品还不太了解，问问看吧</p>
         </div>
       </div>
-      <div class="more-question"> <a href="//item.mi.com/comment/asklist/gid/1164700048/pid/4943" target="_blank" data-stat-id="a0830d605ae0b43e" onclick="_msq.push(['trackEvent', '9de9578f29e893b5-a0830d605ae0b43e', '//item.mi.com/comment/asklist/gid/1164700048/pid/4943', 'pcpid', '']);" style="display:block;">查看全部 <span id="J_goodsQuestionAmount"></span> ${productAttribute.questionNumber }条已回答的问题 &gt;</a> </div>
+      <div class="more-question"> <a href="/comment/asklist/gid/1164700048/pid/4943" target="_blank" data-stat-id="a0830d605ae0b43e" style="display:${productAttribute.questionNumber gt 6?'block':'none'}">查看全部 <span id="J_goodsQuestionAmount"></span> ${productAttribute.questionNumber }条已回答的问题 &gt;</a> </div>
     </div>
   </div>
-  <!-- 商品详情商品提问 end -->
+  <!-- 商品详情商品提问 end --> 
   
   <!-- 商品详情售后服务 begin -->
   <div class="goods-detail-nav-name-block " id="goodsService">
@@ -445,12 +440,12 @@
       </div>
     </div>
   </div>
-  <!--售后服务与退换货流程-->
+  <!--售后服务与退换货流程--> 
   <!-- 商品详情售后服务 end -->
   <div id="J_alsoBuyWrap"  style='margin-top:100px;'></div>
   <div id="J_recentGoods"   style='margin-top:100px;padding-bottom:130px;'></div>
 </div>
-<!-- 商品详情 end -->
+<!-- 商品详情 end --> 
 
 <!-- 跟随 导航 begin -->
 <div class="goods-sub-bar  goods-sub-bar-play" id="goodsSubBar"  style="top: 0px;display: none;">
@@ -481,12 +476,12 @@
   </div>
 </div>
 <!-- 跟随 导航 end -->
-<myfooter>
-<script>
-
+<myfooter> 
+  <script>
 //价格json
-var sys_item=${productSpecifications};
+var sys_item=${productSpecifications eq null ?"0":productSpecifications};
 var default_price=${product.showPrice};
+var score;
 //商品规格选择
 $(function(){
 	$(".goods-info-head .sys_item_specpara").each(function(){
@@ -509,7 +504,7 @@ $(function(){
 		var defaultstats=true;
 		var _val='';
 		var _resp={
-			mktprice:".sys_item_mktprice",
+			score:".sys_item_score",
 			price:".sys_item_price"
 		}  //输出对应的class
 		$(".goods-info-head .sys_item_specpara").each(function(){
@@ -529,22 +524,22 @@ $(function(){
 				$('#goodsDetailBtnBox').css('display', 'none');
 				$('#goodsDetailBtnBoxForInform').css('display', 'block');
 			}else {
-				_mktprice=sys_item[_val]['price'];
+				_score=sys_item[_val]['score'];
 				_price=sys_item[_val]['price'];
 				$('#goodsDetailBtnBox').css('display', 'block');
 				$('#goodsDetailBtnBoxForInform').css('display', 'none');
 			}
 
 		}else{
-			_mktprice=sys_item['mktprice'];
+			_score=sys_item['score'];
 			_price=sys_item['price'];
 		}
 		//输出价格
-		$(_resp.mktprice).text(_mktprice);  ///其中的math.round为截取小数点位数
+		$(_resp.score).text(_score);  ///其中的math.round为截取小数点位数
 		$(_resp.price).text(_price);
 	}
 })
-</script>
+</script> 
 </myfooter>
 </body>
 </html>

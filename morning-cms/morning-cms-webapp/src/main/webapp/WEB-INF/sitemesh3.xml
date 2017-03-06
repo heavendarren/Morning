@@ -3,6 +3,7 @@
     <!-- 排除，不进行装饰的路径 -->
     <mapping path="/login" exclue="true"/>
     <mapping path="/druid/*" exclue="true"/>
+    <mapping path="/administrator/info/view/avatar" exclue="true"/>
     
     <!-- 后台管理系统布局 -->
     <mapping>

@@ -188,6 +188,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 			userRoleMapper.insertUserRoles(userRoles);
 		}		
 	}
+	
+	@Override
+	public void updateUserAvatar(Long userId, String picImg) {
+		User user = new User();
+		user.setUserId(userId);
+		user.setPicImg(picImg);
+		userMapper.updateById(user);
+	}
 
 	@Override
 	@Transactional

@@ -518,7 +518,8 @@
 	*display: inline;
 	color: #b0b0b0;
 	font-size: 14px;
-	margin-left: 10px
+	margin-left: 10px;
+	text-decoration: blink;
 }
 
 .goods-detail .goods-info-head .goods-info-head-tip {

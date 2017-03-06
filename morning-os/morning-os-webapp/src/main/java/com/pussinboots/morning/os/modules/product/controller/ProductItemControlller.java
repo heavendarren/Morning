@@ -111,10 +111,12 @@ public class ProductItemControlller extends BaseController{
 			List<KindVO> kindVOs = kindService.selectByProductId(product.getProductId(), StatusEnum.SHOW.getStatus());
 			model.addAttribute("kindVOs", kindVOs);
 			
-			// 根据商品ID和产品规格查找规格属性
-			Map<String, Object> productSpecifications = productSpecificationService
-					.selectByProductId(product.getProductId(), StatusEnum.SHOW.getStatus(), kindVOs);
-			model.addAttribute("productSpecifications", JSON.toJSON(productSpecifications));
+			if (!kindVOs.isEmpty()) {
+				// 根据商品ID和产品规格查找规格属性
+				Map<String, Object> productSpecifications = productSpecificationService
+						.selectByProductId(product.getProductId(), StatusEnum.SHOW.getStatus(), kindVOs);
+				model.addAttribute("productSpecifications", JSON.toJSON(productSpecifications));
+			}
 			
 			// 根据商品ID查找商品参数
 			List<ProductParameter> productParameters = productParameterService

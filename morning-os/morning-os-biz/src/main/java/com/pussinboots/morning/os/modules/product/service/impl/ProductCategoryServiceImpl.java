@@ -98,6 +98,11 @@ public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMappe
 		// 查找类目ID的所有父类目
 		List<Category> categories = new ArrayList<>();
 		if (productCategory != null) {
+			// 将该商品的所属类添加到列表中
+			Category category =  categoryMapper.selectById(productCategory.getCategoryId());
+			categories.add(category);
+			
+			// 查找类目ID的所有父类目
 			getUpperCategory(categories, productCategory.getCategoryId());
 			
 			// 对类目列表进行反转

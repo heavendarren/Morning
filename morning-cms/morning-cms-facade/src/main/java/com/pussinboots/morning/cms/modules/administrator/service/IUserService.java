@@ -101,6 +101,13 @@ public interface IUserService extends IService<User> {
 	void updateUserInfo(User user, String[] roleIds, AuthorizingUser authorizingUser);
 	
 	/**
+	 * 更新管理员头像
+	 * @param userId 管理员ID
+	 * @param picImg 头像
+	 */
+	void updateUserAvatar(Long userId, String picImg);
+	
+	/**
 	 * 删除用户，同时删除角色记录、登录日志
 	 * @param userId
 	 */

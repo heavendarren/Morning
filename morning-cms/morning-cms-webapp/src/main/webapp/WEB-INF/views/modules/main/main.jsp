@@ -26,7 +26,7 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
+                                <li><a href="javascript:void(0)" onclick="member_show('修改头像','${ctx}/administrator/info/view/avatar',null,null,'1000','720')">修改头像</a>
                                 </li>
                                 <li><a class="J_menuItem" href="${ctx}/administrator/info">个人资料</a>
                                 </li>
@@ -47,6 +47,7 @@
 			                        <a href="${ctx}${menu.href}">
 			                            <i class="fa fa-${menu.icon}"></i>
 			                            <span class="nav-label">${menu.menuName}</span>
+			                            <span class="fa arrow"></span>
 			                        </a>
 			                        <ul class="nav nav-second-level">
 			                        <c:forEach items="${menu.childMenus}" var="childMenu">

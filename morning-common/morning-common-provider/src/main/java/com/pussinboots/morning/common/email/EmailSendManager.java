@@ -22,6 +22,15 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import com.pussinboots.morning.common.util.DateUtils;
 
+/**
+ * 
+* 项目名称：morning-common-provider   
+* 类名称：EmailSendManager   
+* 类描述：邮件发送支持类   
+* 创建人：陈星星   
+* 创建时间：2017年3月6日 下午10:40:59   
+*
+ */
 @SuppressWarnings("deprecation")
 public class EmailSendManager {
 	

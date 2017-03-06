@@ -4,9 +4,11 @@ import java.util.*;
 
 /**
  * 
- * 项目名称：morning-common-base 类名称：RandomUtil 类描述：工具类：提供一些生成随机数的方法 创建人：陈星星
+ * 项目名称：morning-common-base 
+ * 类名称：RandomUtil 
+ * 类描述：工具类：提供一些生成随机数的方法 
+ * 创建人：陈星星
  * 创建时间：2017年1月18日 下午1:34:07
- * 
  * @version
  */
 public final class RandomUtils {
