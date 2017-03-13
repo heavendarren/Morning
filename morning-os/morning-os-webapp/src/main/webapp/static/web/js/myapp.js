@@ -1,4 +1,19 @@
 /**
+ * 展示用户登陆下拉菜单
+ */
+$(function() {
+	$("#J_userInfo .user").hover(function() {
+		$(this).addClass('user-active');
+		$(this).children(".user-menu").css('display', 'block').animate({
+	        height:"165px"
+	    },165);
+	}, function() {
+		$(this).removeClass('user-active');
+		$(this).children(".user-menu").css('display', 'none');
+	})
+});
+
+/**
  * 购物车
  */
 $(function() {
@@ -167,7 +182,6 @@ $(function() {
 		})
 	}
 })
-
 
 
 /**
@@ -461,7 +475,7 @@ $(function() {
 
 
 /**
- * 随机分配评论颜色
+ * 随机分配评论颜色（最新评论）
  */
 $(function() {
 	var $elements = $('.line-dot');
@@ -473,3 +487,19 @@ $(function() {
 		$this.addClass('item-rainbow-' + num);
 	});
 })
+
+/**
+ * 随机分配评论颜色（最有帮助）
+ */
+$(function() {
+	var $elements = $('#J_supComment').children('li');
+	var len = $elements.length;
+	// alert('有 ' + len + ' 个相同class');
+	$elements.each(function() {
+		var $this = $(this);
+		var num = (Math.floor(Math.random() * 10) + 1); //输出1-10的随机数搜索
+		$this.addClass('item-rainbow-' + num);
+	});
+})
+
+

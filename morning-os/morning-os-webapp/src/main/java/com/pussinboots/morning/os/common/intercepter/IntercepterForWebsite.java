@@ -25,7 +25,7 @@ import com.pussinboots.morning.os.modules.product.vo.CategoryVO;
 * 创建时间：2017年2月23日 下午9:57:12   
 *
  */
-public class LimitIntercepterForWebsite extends HandlerInterceptorAdapter {
+public class IntercepterForWebsite extends HandlerInterceptorAdapter {
 	
 	@Autowired
 	private INavigationBarService navigationBarService;

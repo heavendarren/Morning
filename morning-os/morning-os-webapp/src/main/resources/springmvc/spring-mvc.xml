@@ -80,9 +80,18 @@
 		    <mvc:exclude-mapping path="/static/**"/>
 		    <mvc:exclude-mapping path="/uploads/**"/>		    
 		    <mvc:exclude-mapping path="/common/**"/>
-		    <bean class="com.pussinboots.morning.os.common.intercepter.LimitIntercepterForWebsite">
-		    </bean>
+		    <bean class="com.pussinboots.morning.os.common.intercepter.IntercepterForWebsite"/>
 		</mvc:interceptor> 
+		<!-- 用户登录拦截器配置-->
+		<mvc:interceptor>
+		    <mvc:mapping path="/**"/>
+		    <mvc:exclude-mapping path="/"/>
+		    <mvc:exclude-mapping path="/pass/**"/>
+		    <mvc:exclude-mapping path="/static/**"/>
+		    <mvc:exclude-mapping path="/uploads/**"/>		    
+		    <mvc:exclude-mapping path="/common/**"/>
+		    <bean class="com.pussinboots.morning.os.common.intercepter.IntercepterWebLogin"/>
+		</mvc:interceptor> 		
 	</mvc:interceptors>
     
 	<!-- 9.支持Shiro对Controller的方法级AOP安全控制 begin-->

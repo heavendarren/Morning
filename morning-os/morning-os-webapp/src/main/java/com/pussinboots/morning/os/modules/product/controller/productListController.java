@@ -57,6 +57,7 @@ public class ProductListController extends BaseController {
 		if (category == null) {
 			return PRODUCT_LIST_ERROR;
 		}
+		model.addAttribute("category", category);
 		
 		// 通过类目ID、排序、分页查找商品列表
 		PageInfo pageInfo = new PageInfo(page, CommonConstantEnum.CATEGORY_PRODUCT_NUMBER.getValue(),
@@ -65,6 +66,8 @@ public class ProductListController extends BaseController {
 		if (productPageDTO.getProductVOs() == null || productPageDTO.getProductVOs().isEmpty()) {
 			return PRODUCT_LIST_ERROR;
 		}
+		model.addAttribute("productVOs", productPageDTO.getProductVOs());
+		model.addAttribute("pageInfo", productPageDTO.getPageInfo());
 		
 		// 根据类目ID查找子类目
 		List<Category> lowerCategories = categoryService.selectLowerCategories(categoryId, StatusEnum.SHOW.getStatus());
@@ -78,12 +81,6 @@ public class ProductListController extends BaseController {
 		Category upperCategory = categoryService.selectUpperCategoryById(categoryId);
 		model.addAttribute("upperCategory", upperCategory);
 		
-		// 返回当前类信息
-		model.addAttribute("category", category);
-		// 返回商品列表
-		model.addAttribute("productVOs", productPageDTO.getProductVOs());
-		// 返回分页信息
-		model.addAttribute("pageInfo", productPageDTO.getPageInfo());
 		// 返回排序方式（超过规定的排序方式,则返回默认排序）
 		model.addAttribute("sort", ProductSortEnum.typeOf(sort).getType());
 		return PRODUCT_LIST;

@@ -19,9 +19,13 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/><!-- 过滤其中这四个注解中的一个 -->
 	</context:component-scan>
 
-	
+
 	<!-- 数据库及mybatis配置文件的引入 -->
 	<import resource="classpath:spring/applicationContext-mybatis.xml" />
+	
+	<!-- 系统缓存配置文件的引入 -->
+	<import resource="classpath:spring/applicationContext-ehcache.xml" />
+	<!-- 	<import resource="classpath:spring/applicationContext-redis.xml" /> -->
 	
 	<!-- dubbo-provider dubbo服务提供者相关文件的引入 -->
 	<import resource="classpath:spring/applicationContext-dubbo-provider.xml" />

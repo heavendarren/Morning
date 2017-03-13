@@ -130,7 +130,7 @@ public class AdministratorLoginController extends BaseController{
     }
 
 	/**
-	 * POST 退出登录
+	 * GET 退出登录
 	 * @return
 	 */
     @GetMapping(value = "/logout")

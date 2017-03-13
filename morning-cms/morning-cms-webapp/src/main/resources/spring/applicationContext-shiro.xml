@@ -4,14 +4,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-4.3.xsd "
 	default-lazy-init="true">
-
+	
+	<!-- shiro -Echache -->
 	<description>Shiro Configuration</description>
 
 	<!--安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- 设置自定义Realm -->
 		<property name="realm" ref="shiroDbRealm" />
-		<!-- 将缓存管理器，交给安全管理器 -->
+		<!-- 将缓存管理器，交给安全管理器:ehcahe缓存shiro自带 -->
 		<property name="cacheManager" ref="shiroEhcacheManager" />
         <!-- 记住密码管理 -->
         <property name="rememberMeManager" ref="rememberMeManager"/>

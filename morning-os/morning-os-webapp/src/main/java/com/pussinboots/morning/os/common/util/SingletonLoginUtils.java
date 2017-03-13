@@ -45,7 +45,7 @@ public class SingletonLoginUtils {
 	}
 	
 	/**
-	 * 获取后台登录用户
+	 * 获取登录用户
 	 * @return
 	 */
 	public static AuthorizingUser getUser() {
@@ -62,7 +62,7 @@ public class SingletonLoginUtils {
 	}
 	
 	/**
-	 * 获取后台登录用户ID
+	 * 获取登录用户ID
 	 * @return
 	 */
 	public static Long getUserId(){
@@ -70,10 +70,11 @@ public class SingletonLoginUtils {
 	}
 	
 	/**
-	 * 获取后台登录用户昵称
+	 * 获取登录用户昵称
 	 * @return
 	 */
 	public static String getUserName(){
 		return getUser().getUserName();
 	}
+	
 }

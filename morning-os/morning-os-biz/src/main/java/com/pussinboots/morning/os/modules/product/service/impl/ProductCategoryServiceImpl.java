@@ -79,15 +79,16 @@ public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMappe
 
 	@Override
 	public ProductPageDTO selectProductVOs(Long categoryId, PageInfo pageInfo) {
-		
+
 		// 查询子目录信息ID
 		List<Long> categoryIds = categoryMapper.selectCategoryIds(categoryId, StatusEnum.SHOW.getStatus());
-		
+
 		// 查询该目录ID列表下商品列表
 		Page<ProductVO> page = new Page<>(pageInfo.getNowpage(), pageInfo.getPagesize());
-		List<ProductVO> productVOs = productCategoryMapper.selectProductVOsByPage(categoryIds, StatusEnum.SHOW.getStatus(), page, pageInfo);
+		List<ProductVO> productVOs = productCategoryMapper.selectProductVOsByPage(categoryIds,
+				StatusEnum.SHOW.getStatus(), page, pageInfo);
 		pageInfo.setTotal(page.getTotal());
-		
+
 		return new ProductPageDTO(pageInfo, productVOs);
 	}
 

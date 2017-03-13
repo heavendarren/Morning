@@ -11,6 +11,10 @@
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- 设置自定义Realm -->
 		<property name="realm" ref="shiroDbRealm" />
+		
+		<property name="sessionMode" value="http" />  
+		
+		<!--         <property name="subjectFactory" ref="casSubjectFactory" /> -->
 		<!-- redis缓存 -->  
         <property name="cacheManager" ref="redisCacheManager" />  
         <!-- 记住密码管理 -->
@@ -18,6 +22,8 @@
 		<!-- 配置session管理器 -->
 		<property name="sessionManager" ref="sessionManager" />
 	</bean>
+	
+	<!-- 	<bean id="casSubjectFactory" class="org.apache.shiro.cas.CasSubjectFactory" />   -->
 
 	<!-- 项目自定义的Realm：继承自AuthorizingRealm的自定义Realm,即指定Shiro验证用户登录的类为自定义的SystemAuthorizingRealm.java -->
 	<bean id="shiroDbRealm" class="com.pussinboots.morning.cms.common.security.SystemAuthorizingRealm" >

@@ -15,8 +15,8 @@
 	<description>ehCache Configuration</description>
 	
 	<!-- 缓存配置 -->  
-    <!-- 启用缓存注解功能(请将其配置在Spring主配置文件中) -->  
-	<cache:annotation-driven cache-manager="cacheManager" />
+	<!-- cache注解，和spring-ehcache.xml中的只能使用一个 -->
+	<cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true" />
 	
 	<!-- ehCache 配置管理器 -->
 	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">  

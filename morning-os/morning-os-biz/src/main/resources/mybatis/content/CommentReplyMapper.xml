@@ -24,7 +24,7 @@
         comment_reply_id AS commentReplyId, comment_id AS commentId, user_id AS userId, user_name AS userName, pic_img AS picImg, content, good_count AS goodCount, status, type, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy
     </sql>
     
-    <!--  -->
+    <!-- 根据评论ID和状态查找回复列表 -->
     <select id="selectRepliesByCommentId" resultType="com.pussinboots.morning.os.modules.content.entity.CommentReply">
     	SELECT
     		comment_reply_id AS commentReplyId, 

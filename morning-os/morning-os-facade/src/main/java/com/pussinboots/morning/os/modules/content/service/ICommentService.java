@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.pussinboots.morning.common.model.PageInfo;
+import com.pussinboots.morning.os.modules.content.dto.CommentPageDTO;
 import com.pussinboots.morning.os.modules.content.entity.Comment;
 import com.pussinboots.morning.os.modules.content.vo.CommentVO;
 
@@ -22,7 +23,7 @@ public interface ICommentService extends IService<Comment> {
 	 * 根据商品ID和评论类型查找最新评论列表
 	 * @param productId 商品ID
 	 * @param type 评论类型
-	 * @param type 评论状态
+	 * @param status 评论状态
 	 * @param pageInfo 分页条件
 	 * @return List<Comment> 
 	 */
@@ -37,5 +38,14 @@ public interface ICommentService extends IService<Comment> {
 	 * @return List<Comment> 
 	 */
 	List<CommentVO> selectHighComments(Long productId, Integer type, Integer status, PageInfo pageInfo);
+	
+	/**
+	 * 根据商品ID、排序、分页查找评论列表及回复列表
+	 * @param productId 商品ID
+	 * @param pageInfo 分页
+	 * @param status 评论状态
+	 * @return CommentPageDTO
+	 */
+	CommentPageDTO selectCommentsByPage(Long productId, PageInfo pageInfo, Integer status);
 
 }

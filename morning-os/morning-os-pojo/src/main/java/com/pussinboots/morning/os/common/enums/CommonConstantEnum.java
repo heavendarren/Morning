@@ -33,7 +33,10 @@ public enum CommonConstantEnum {
 	ITEM_PRODUCT_NUMBER(5, "商品详情页显示图片数量"),
 	
 	/** 商品详情页显示提问数量 */
-	QUESTION_NUMBER(6, "商品详情页显示提问数量");
+	QUESTION_NUMBER(6, "商品详情页显示提问数量"),
+	
+	/** 商品详情页显示提问数量 */
+	COMMENT_NUMBER(10, "商品评论页每页显示评论数");
 	
 	private Integer value;
 	

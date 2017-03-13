@@ -81,82 +81,72 @@ public class ProductItemControlller extends BaseController{
 	@GetMapping(value="/{productNumber}")
 	public String item(Model model, @PathVariable("productNumber") Long productNumber) {
 		// 根据编号查找商品信息
-		try {
-			Product product = productService.selectProductByNumber(productNumber, ProductStatusEnum.SHELVE.getStatus());
-			if (product == null) {
-				return PRODUCT_ITEM_ERROR;
-			}
-			model.addAttribute("product", product);
-			
-			// 根据商品ID查找上级类目列表
-			List<Category> upperCategories = productCategoryService.selectUpperCategories(product.getProductId());
-			model.addAttribute("upperCategories", upperCategories);		
-			
-			// 根据商品ID查找商品属性
-			ProductAttribute productAttribute = productAttributeService.selectByProductId(product.getProductId());
-			model.addAttribute("productAttribute", productAttribute);
-			
-			// 根据商品ID查找商品展示图片
-			List<ProductImage> productImages = productImageService.selectByProductId(product.getProductId(),
-					CommonConstantEnum.ITEM_PRODUCT_NUMBER.getValue(), StatusEnum.SHOW.getStatus());
-			model.addAttribute("productImages", productImages);
-			
-			// 根据商品ID查找商品标签
-			if (product.getLabelId() != null) {
-				Label label = labelService.selectById(product.getLabelId());
-				model.addAttribute("label", label);
-			}
-			
-			// 根据商品ID从查找产品规格
-			List<KindVO> kindVOs = kindService.selectByProductId(product.getProductId(), StatusEnum.SHOW.getStatus());
-			model.addAttribute("kindVOs", kindVOs);
-			
-			if (!kindVOs.isEmpty()) {
-				// 根据商品ID和产品规格查找规格属性
-				Map<String, Object> productSpecifications = productSpecificationService
-						.selectByProductId(product.getProductId(), StatusEnum.SHOW.getStatus(), kindVOs);
-				model.addAttribute("productSpecifications", JSON.toJSON(productSpecifications));
-			}
-			
-			// 根据商品ID查找商品参数
-			List<ProductParameter> productParameters = productParameterService
-					.selectParametersByProductId(product.getProductId(), StatusEnum.SHOW.getStatus());
-			model.addAttribute("productParameters", productParameters);
-			
-			// 根据商品ID查找最新评论
-			PageInfo newCommentPage = new PageInfo(CommonConstantEnum.NEW_COMMENT_NUMBER.getValue());
-			List<Comment> newComments = commentService.selectNewComments(product.getProductId(),
-					CommentTypeEnum.COMMON_ADVERT.getType(), StatusEnum.SHOW.getStatus(), newCommentPage);
-			model.addAttribute("newComments", newComments);
-			
-			// 根据商品ID查找有帮助评价
-			PageInfo highCommentPage = new PageInfo(CommonConstantEnum.HIGH_COMMENT_NUMBER.getValue());
-			List<CommentVO> highCommentVOs = commentService.selectHighComments(product.getProductId(),
-					CommentTypeEnum.HIGH_GUALITY.getType(), StatusEnum.SHOW.getStatus(), highCommentPage);
-			model.addAttribute("highCommentVOs", highCommentVOs);
-
-			// 根据商品ID查找最新提问
-			PageInfo newQuestionPage = new PageInfo(CommonConstantEnum.QUESTION_NUMBER.getValue());
-			List<Question> newQuestions = questionService.selectNewQuestions(product.getProductId(),
-					StatusEnum.SHOW.getStatus(), newQuestionPage);
-			model.addAttribute("newQuestions", newQuestions);
-			
-			// 根据商品ID查找最有帮助提问
-			PageInfo highQuestionPage = new PageInfo(CommonConstantEnum.QUESTION_NUMBER.getValue());
-			List<Question> highQuestions = questionService.selectHighQuestions(product.getProductId(),
-					StatusEnum.SHOW.getStatus(), highQuestionPage);			
-			model.addAttribute("highQuestions", highQuestions);
-			
-			// 根据商品ID查找最有用帮助    
-			// TODO 最有用帮助提问
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Product product = productService.selectProductByNumber(productNumber, ProductStatusEnum.SHELVE.getStatus());
+		if (product == null) {
+			return PRODUCT_ITEM_ERROR;
+		}
+		model.addAttribute("product", product);
+		
+		// 根据商品ID查找上级类目列表
+		List<Category> upperCategories = productCategoryService.selectUpperCategories(product.getProductId());
+		model.addAttribute("upperCategories", upperCategories);		
+		
+		// 根据商品ID查找商品属性
+		ProductAttribute productAttribute = productAttributeService.selectByProductId(product.getProductId());
+		model.addAttribute("productAttribute", productAttribute);
+		
+		// 根据商品ID查找商品展示图片
+		List<ProductImage> productImages = productImageService.selectByProductId(product.getProductId(),
+				CommonConstantEnum.ITEM_PRODUCT_NUMBER.getValue(), StatusEnum.SHOW.getStatus());
+		model.addAttribute("productImages", productImages);
+		
+		// 根据商品ID查找商品标签
+		if (product.getLabelId() != null) {
+			Label label = labelService.selectById(product.getLabelId());
+			model.addAttribute("label", label);
 		}
 		
+		// 根据商品ID从查找产品规格
+		List<KindVO> kindVOs = kindService.selectByProductId(product.getProductId(), StatusEnum.SHOW.getStatus());
+		model.addAttribute("kindVOs", kindVOs);
 		
+		if (!kindVOs.isEmpty()) {
+			// 根据商品ID和产品规格查找规格属性
+			Map<String, Object> productSpecifications = productSpecificationService
+					.selectByProductId(product.getProductId(), StatusEnum.SHOW.getStatus(), kindVOs);
+			model.addAttribute("productSpecifications", JSON.toJSON(productSpecifications));
+		}
+		
+		// 根据商品ID查找商品参数
+		List<ProductParameter> productParameters = productParameterService
+				.selectParametersByProductId(product.getProductId(), StatusEnum.SHOW.getStatus());
+		model.addAttribute("productParameters", productParameters);
+		
+		// 根据商品ID查找最新评论
+		PageInfo newCommentPage = new PageInfo(CommonConstantEnum.NEW_COMMENT_NUMBER.getValue());
+		List<Comment> newComments = commentService.selectNewComments(product.getProductId(),
+				CommentTypeEnum.COMMON_ADVERT.getType(), StatusEnum.SHOW.getStatus(), newCommentPage);
+		model.addAttribute("newComments", newComments);
+		
+		// 根据商品ID查找有帮助评价
+		PageInfo highCommentPage = new PageInfo(CommonConstantEnum.HIGH_COMMENT_NUMBER.getValue());
+		List<CommentVO> highCommentVOs = commentService.selectHighComments(product.getProductId(),
+				CommentTypeEnum.HIGH_GUALITY.getType(), StatusEnum.SHOW.getStatus(), highCommentPage);
+		model.addAttribute("highCommentVOs", highCommentVOs);
 
+		// 根据商品ID查找最新提问
+		PageInfo newQuestionPage = new PageInfo(CommonConstantEnum.QUESTION_NUMBER.getValue());
+		List<Question> newQuestions = questionService.selectNewQuestions(product.getProductId(),
+				StatusEnum.SHOW.getStatus(), newQuestionPage);
+		model.addAttribute("newQuestions", newQuestions);
 		
+		// 根据商品ID查找最有帮助提问
+		PageInfo highQuestionPage = new PageInfo(CommonConstantEnum.QUESTION_NUMBER.getValue());
+		List<Question> highQuestions = questionService.selectHighQuestions(product.getProductId(),
+				StatusEnum.SHOW.getStatus(), highQuestionPage);			
+		model.addAttribute("highQuestions", highQuestions);
+		
+		// TODO 最有用帮助提问
 		return PRODUCT_ITEM;
 	}
 	

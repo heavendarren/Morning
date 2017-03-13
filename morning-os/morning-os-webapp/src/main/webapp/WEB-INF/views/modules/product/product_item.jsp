@@ -181,7 +181,7 @@
                   </dd>
                 </c:forEach>
                 <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="" id="goodsDetailAddCartBtn" class="btn goods-add-cart-btn" data-gid="2164700027" data-package="0" data-stat-id="3d749b02d4ba8b20"> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp; </a> </dd>
-                <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;"> <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143"> <i class="iconfont "></i>到货通知 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp; </a> </dd>
+                <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;"> <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143"> <i class="iconfont "></i>到货通知 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp;</a></dd>
                 <dd class="goods-info-head-userfaq">
                   <ul>
                     <li class="J_scrollHref" data-href="#goodsComment" data-index="2"> <i class="glyphicon glyphicon-edit"></i>&nbsp;评价&nbsp;<b>${productAttribute.commentNumber }</b> </li>
@@ -281,7 +281,7 @@
             </div>
             <ul class="comment-box-list" id="J_supComment">
               <c:forEach items="${highCommentVOs }" var="highCommentVO">
-                <li class="item-rainbow-5" data-id="${highCommentVO.comment.commentId }">
+                <li class="" data-id="${highCommentVO.comment.commentId }">
                   <div class="user-image"> <img src="${ctximg }/${highCommentVO.comment.picImg}" alt="${highCommentVO.comment.userName}"> </div>
                   <div class="user-emoj">&nbsp;超爱&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i> </div>
                   <div class="user-name-info"> <span class="user-name"> ${highCommentVO.comment.userName}</span> <span class="user-time">${highCommentVO.comment.createTime}</span> <span class="pro-info">白色</span> </div>
@@ -307,7 +307,7 @@
                         </dd>
                       </c:if>
                     </c:forEach>
-                    <dd class="user-comment-answer-more"> <a href="//order.mi.com/comment/commentDetail/comment_id/11282674" target="_blank"> 查看全部7条回复&gt; </a> </dd>
+                    <dd class="user-comment-answer-more"> <a href="" target="_blank"> 查看全部7条回复&gt; </a> </dd>
                   </dl>
                 </li>
               </c:forEach>
@@ -322,14 +322,14 @@
                   <p class="line-content"> <a href="/comment/commentDetail/comment_id/${newComment.commentId }" target="_blank"> ${newComment.content } </a> </p>
                   <div class="line-foot">
                     <div class="line-left">来自于 ${newComment.userName }</div>
-                    <div class="line-right J_hasHelp " data-commentid="${newComment.commentId}"> <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;&nbsp;有帮助&nbsp;&nbsp;<span class="amount">${newComment.goodCount }</span> </div>
+                    <div class="line-right J_hasHelp" data-commentid="${newComment.commentId}"> <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;&nbsp;有帮助&nbsp;&nbsp;<span class="amount">${newComment.goodCount }</span> </div>
                   </div>
                   <div class="line-dot"></div>
                 </li>
               </c:forEach>
             </ul>
           </div>
-          <div class="span20 goods-detail-comment-more" style="display:${productAttribute.commentNumber gt 10?'block':'none'}" id="J_loadMoreHref"> <a target="_blank" href="//item.mi.com/comment/commentList/gid/1164700049/pid/4943" data-stat-id="92e834619fcd20ef" >查看更多评价</a> </div>
+          <div class="span20 goods-detail-comment-more" style="display:${productAttribute.commentNumber gt 10?'block':'none'}" id="J_loadMoreHref"> <a target="_blank" href="${ctx}/comment/gid/${product.productNumber}">查看更多评价</a> </div>
         </div>
       </div>
     </div>

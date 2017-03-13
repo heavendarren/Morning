@@ -33,7 +33,7 @@
         kind_id AS kindId, product_id AS productId, specification_id AS specificationId, name, status, sort, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy
     </sql>
     
-    <!--  -->
+    <!-- 根据产品ID和类型状态查找类型列表 -->
     <select id="selectByProductId" resultMap="KindVOResultMap">
     	SELECT 
     		k.kind_id, 

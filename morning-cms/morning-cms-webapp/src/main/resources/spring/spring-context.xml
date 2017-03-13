@@ -18,19 +18,17 @@
 	<context:component-scan base-package="com.pussinboots.morning.cms.modules"><!-- base-package 如果多个，用“,”分隔 -->
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/><!-- 过滤其中这四个注解中的一个 -->
 	</context:component-scan>
-	
-	<!-- 系统缓存配置文件的引入 -->
-	<import resource="classpath:spring/applicationContext-ehcache.xml" />
+
 	
 	<!-- kaptcha验证码配置文件引入-->
 	<import resource="classpath:spring/applicationContext-kaptcha.xml" />
 
-	<!-- shiro配置文件的引入：如果不使用redis进行集群缓存,则使用applicationContext-shiro.xml配置文件
-	<import resource="classpath:spring/applicationContext-shiro.xml" /> -->
+	<!-- shiro配置文件的引入：如果不使用redis进行集群缓存,则使用applicationContext-shiro.xml配置文件-->
+	<import resource="classpath:spring/applicationContext-ehcache.xml" />
+	<import resource="classpath:spring/applicationContext-shiro.xml" /> 
 
 	<!-- shiro+redis集群缓存的配置文件引入：如果使用redis进行集群缓存,则使用applicationContext-shiro-redis.xml和applicationContext-redis.xml配置文件 -->
-	<import resource="classpath:spring/applicationContext-shiro-redis.xml" />
-	<import resource="classpath:spring/applicationContext-redis.xml" />
+	<!-- 	<import resource="classpath:spring/applicationContext-shiro-redis.xml" /> -->
 	
 	<!-- dubbo-consumer dubbo消费者配置文件的引入：如果不使用dubbo分布式，则注释该配置文件 -->
 	<import resource="classpath:spring/applicationContext-dubbo-consumer.xml" />

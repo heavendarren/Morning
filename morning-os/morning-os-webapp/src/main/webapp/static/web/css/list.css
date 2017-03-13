@@ -1,4 +1,6 @@
 /** 分类页面导航栏*/
+@charset "UTF-8";
+
 .breadcrumbs {
 	height: 40px;
 	font-size: 12px;
@@ -714,20 +716,24 @@
 /*-------------错误提示-----------------*/
 .shop-global-error {
 	padding: 150px 0 200px 10%;
-	background: url(../img/server_busy.jpg)no-repeat 80% center
+	background: url(../img/server_busy.jpg) no-repeat 80% center
 }
+
 .shop-global-error h2 {
 	width: 50%;
 	line-height: 2.25;
 	padding-bottom: 30px
 }
+
 .shop-global-error-tips {
 	width: 50%;
 	line-height: 1.8
 }
+
 .shop-global-error-btn {
 	margin-top: 20px
 }
+
 .shop-global-error-btn a {
 	margin-right: 10px
 }

@@ -1,22 +1,23 @@
 package com.pussinboots.morning.os.modules.content.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.pussinboots.morning.common.enums.StatusEnum;
 import com.pussinboots.morning.common.model.PageInfo;
+import com.pussinboots.morning.os.modules.content.dto.CommentPageDTO;
 import com.pussinboots.morning.os.modules.content.entity.Comment;
 import com.pussinboots.morning.os.modules.content.entity.CommentReply;
 import com.pussinboots.morning.os.modules.content.mapper.CommentMapper;
 import com.pussinboots.morning.os.modules.content.mapper.CommentReplyMapper;
 import com.pussinboots.morning.os.modules.content.service.ICommentService;
 import com.pussinboots.morning.os.modules.content.vo.CommentVO;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * 
@@ -68,5 +69,20 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 		}
 		return commentVOs;
 	}
-	
+
+	@Override
+	public CommentPageDTO selectCommentsByPage(Long productId, PageInfo pageInfo, Integer status) {
+		// 查找分页评论列表
+		Page<Comment> page = new Page<Comment>(pageInfo.getNowpage(), pageInfo.getPagesize());
+		List<CommentVO> commentVOs = commentMapper.selectCommentsByPage(productId, pageInfo, status, page);
+		pageInfo.setTotal(page.getTotal());
+
+		// 对评论列表进行遍历,查找评论回复列表
+		for (CommentVO forComment : commentVOs) {
+			List<CommentReply> commentReplies = commentReplyMapper
+					.selectRepliesByCommentId(forComment.getComment().getCommentId(), StatusEnum.SHOW.getStatus());
+			forComment.setCommentReplies(commentReplies);
+		}
+		return new CommentPageDTO(pageInfo, commentVOs);
+	}
 }

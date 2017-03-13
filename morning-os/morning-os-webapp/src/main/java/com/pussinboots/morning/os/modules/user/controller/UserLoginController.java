@@ -102,7 +102,7 @@ public class UserLoginController extends BaseController {
 		
 		Subject currentUser = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken((String) ServletUtils.getParameter("loginName"), user.getLoginPassword());
-		token.setRememberMe(true);
+		token.setRememberMe(false);// 默认不记住我
 		try{
 			currentUser.login(token);
 			UserLoginLog userLoginLog = new UserLoginLog(new Date(),
@@ -279,4 +279,16 @@ public class UserLoginController extends BaseController {
 		emailService.updateStatus(emailSign);// 更新链接已失效
 		return success(true, "重置密码成功!", email);
 	}
+	
+	
+	/**
+	 * GET 退出登录
+	 * @return
+	 */
+    @GetMapping(value = "/logout")
+    public String logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return redirectTo("/index");
+    }
 }

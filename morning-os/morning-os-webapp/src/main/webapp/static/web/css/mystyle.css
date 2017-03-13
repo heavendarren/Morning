@@ -240,18 +240,327 @@ dt {
 }
 /*-------------顶部导航栏-----------------*/
 .site-topbar {
-	width: 100%;
+	position: relative;
+	z-index: 30;
 	height: 40px;
-	background: #333;
 	font-size: 12px;
+	color: #b0b0b0;
+	background: #333
 }
 
 .site-topbar a {
-	color: #b0b0b0;
+	color: #b0b0b0
 }
 
 .site-topbar a:hover {
 	color: #fff
+}
+
+.site-topbar .sep {
+	margin: 0 .5em;
+	color: #424242
+}
+
+.site-topbar .topbar-nav {
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	overflow: hidden;
+	_zoom: 1
+}
+
+.site-topbar .topbar-cart, .site-topbar .topbar-info {
+	position: relative;
+	float: right;
+	_display: inline;
+	height: 40px
+}
+
+.site-topbar .topbar-cart {
+	width: 120px;
+	margin-left: 15px
+}
+
+.site-topbar .topbar-cart-filled .cart-mini {
+	color: #fff;
+	background: #ff6700
+}
+
+.site-topbar .topbar-cart-active .cart-mini {
+	color: #ff6700;
+	background: #fff
+}
+
+.site-topbar .topbar-info {
+	line-height: 40px
+}
+
+.site-topbar .topbar-info .link, .site-topbar .topbar-info .user,
+	.site-topbar .topbar-info .message, .site-topbar .topbar-info .sep {
+	float: left
+}
+
+.site-topbar .topbar-info .link {
+	padding: 0 5px;
+	text-align: center
+}
+
+.site-topbar .topbar-info .link-order {
+	width: 70px
+}
+
+.site-topbar .topbar-info .sep {
+	margin: 0
+}
+
+.site-topbar .cart-mini {
+	position: relative;
+	z-index: 32;
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #b0b0b0;
+	background: #424242
+}
+
+.site-topbar .cart-mini i {
+	margin-right: 4px;
+	font-size: 20px;
+	line-height: 20px;
+	vertical-align: -4px
+}
+
+.site-topbar .cart-mini-num {
+	margin-left: -4px
+}
+
+.site-topbar .cart-menu {
+	display: none;
+	position: absolute;
+	right: 0;
+	right: -1px \9;
+	top: 40px;
+	z-index: 31;
+	width: 316px;
+	padding: 15px 0 0;
+	color: #424242;
+	background: #fff;
+	border: 1px solid #e0e0e0 \9;
+	border-top: 0 \9;
+	-webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15)
+}
+
+.site-topbar .cart-menu .loading {
+	margin: 5px 20px 20px;
+	text-align: center
+}
+
+.site-topbar .cart-menu .msg {
+	margin: 5px 20px 20px;
+	text-align: center
+}
+
+.site-topbar .cart-list {
+	*position: relative;
+	margin: 0;
+	padding: 0;
+	list-style-type: none
+}
+
+.site-topbar .cart-list li {
+	position: relative;
+	height: 80px;
+	padding: 0 20px
+}
+
+.site-topbar .cart-list li:first-child .cart-item, .site-topbar .cart-list li.first .cart-item
+	{
+	border-top: 0
+}
+
+.site-topbar .cart-item {
+	position: relative;
+	height: 60px;
+	padding: 10px 0;
+	border-top: 1px solid #e0e0e0;
+	line-height: 20px
+}
+
+.site-topbar .cart-item:hover .btn-del {
+	display: block
+}
+
+.site-topbar .cart-item .thumb {
+	float: left;
+	margin-right: 10px
+}
+
+.site-topbar .cart-item .thumb img {
+	width: 60px;
+	height: 60px
+}
+
+.site-topbar .cart-item .name {
+	float: left;
+	_display: inline;
+	width: 95px;
+	height: 40px;
+	margin: 10px 0;
+	color: #424242
+}
+
+.site-topbar .cart-item a.name:hover {
+	color: #ff6700
+}
+
+.site-topbar .cart-item .price {
+	float: right;
+	_display: inline;
+	margin: 10px 20px 0 5px
+}
+
+.site-topbar .cart-item .btn-del {
+	display: none;
+	_display: block;
+	position: absolute;
+	top: 21px;
+	right: 0
+}
+
+.site-topbar .cart-item .btn-del:hover {
+	color: #424242
+}
+
+.site-topbar .cart-item .btn-del i {
+	font-size: 16px;
+	line-height: 16px
+}
+
+.site-topbar .cart-total {
+	padding: 15px 20px;
+	background: #fafafa
+}
+
+.site-topbar .cart-total em {
+	font-style: normal
+}
+
+.site-topbar .cart-total .total {
+	float: left;
+	width: 135px;
+	color: #757575
+}
+
+.site-topbar .cart-total .price {
+	display: block;
+	font-weight: 400;
+	color: #ff6700
+}
+
+.site-topbar .cart-total .price em {
+	font-size: 24px;
+	line-height: 1
+}
+
+.site-topbar .cart-total .btn-cart {
+	float: right;
+	width: 130px;
+	padding: 0;
+	font-size: 14px;
+	line-height: 40px;
+	text-align: center;
+	color: #f5f5f5;
+	background: #ff6700
+}
+
+.site-topbar .user {
+	position: relative;
+	width: 110px;
+	padding: 0;
+	white-space: nowrap
+}
+
+.site-topbar .user-name {
+	position: relative;
+	z-index: 5;
+	display: block;
+	width: 120px;
+	height: 40px;
+	text-align: center
+}
+
+.site-topbar .user-name .name {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	width: auto;
+	_width: 75px;
+	max-width: 75px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	_zoom: 1;
+	vertical-align: text-bottom
+}
+
+.site-topbar .user-name i {
+	line-height: 24px;
+	vertical-align: 12px
+}
+
+.site-topbar .user-menu {
+	display: none;
+	position: absolute;
+	left: 0;
+	left: -1px \9;
+	top: 40px;
+	z-index: 3;
+	width: 120px;
+	margin: 0;
+	padding: 7px 0;
+	border: 1px solid #e0e0e0 \9;
+	border-top: 0 \9;
+	list-style-type: none;
+	background: #fff;
+	-webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15)
+}
+
+.site-topbar .user-menu a {
+	display: block;
+	padding: 3px 30px;
+	line-height: 2
+}
+
+.site-topbar .user-active a {
+	color: #424242
+}
+
+.site-topbar .user-active a:hover {
+	color: #ff6700
+}
+
+.site-topbar .user-active .user-name {
+	background: #fff
+}
+
+.site-topbar .user-active .user-menu a {
+	-webkit-transition: all .2s;
+	transition: all .2s
+}
+
+.site-topbar .user-active .user-menu a:hover {
+	background-color: #f5f5f5
+}
+
+.site-topbar .message {
+	padding: 0 10px
+}
+
+.site-topbar .message i {
+	font-style: normal
 }
 
 .sep {
@@ -271,7 +580,6 @@ dt {
 .topbar-cart, .topbar-info {
 	float: right;
 	color: #b0b0b0;
-	margin: 0 .5em;
 	color: #424242;
 	line-height: 40px;
 	height: 40px;
@@ -723,7 +1031,7 @@ button, input {
 	display: none;
 	position: absolute;
 	top: 88px;
-	left: -92px;
+	left: -93px;
 	z-index: 21;
 	width: 234px;
 	height: 460px;
