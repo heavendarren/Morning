@@ -23,15 +23,6 @@
 	font-style: normal
 }
 
-.goods-detail .iconimg {
-	display: inline-block;
-	*zoom: 1;
-	*display: inline;
-	width: 20px;
-	height: 20px;
-	background: url("../../i/item/item_logo.png") no-repeat center center
-}
-
 .goods-detail .goods-detail-info {
 	background: #fff;
 	padding-top: 40px;
@@ -885,10 +876,6 @@
 	color: #fff;
 	text-align: center;
 	z-index: 5
-}
-
-.goods-detail .goods-info-head .goods-info-head-cart .stopCursor {
-	cursor: url(//s1.mi.com/images/cur6.cur), pointer
 }
 
 .goods-detail .goods-info-head .goods-info-head-userfaq {

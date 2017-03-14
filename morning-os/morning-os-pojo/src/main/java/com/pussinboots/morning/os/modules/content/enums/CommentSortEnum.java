@@ -4,7 +4,7 @@ package com.pussinboots.morning.os.modules.content.enums;
  * 
 * 项目名称：morning-os-pojo   
 * 类名称：CommentSortEnum   
-* 类描述：CommentSortEnum  平列排序方式枚举表述常量数据字段     
+* 类描述：CommentSortEnum  评论排序方式枚举表述常量数据字段     
 * 创建人：陈星星   
 * 创建时间：2017年3月2日 上午3:02:29   
 *

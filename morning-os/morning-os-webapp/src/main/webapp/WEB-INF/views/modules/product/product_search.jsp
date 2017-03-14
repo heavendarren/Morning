@@ -13,8 +13,8 @@
 
 <!--     分类导航栏 begin       -->
 <div class="breadcrumbs">
-  <div class="container-fluid"><a href='${ctx }/index'>首页</a>
-    <c:forEach items="${upperCategories }" var="upperCategory"><span class="sep">&gt;</span><a href="${ctx}/list?categoryId=${upperCategory.categoryId}">${upperCategory.name }</a></c:forEach>
+  <div class="container-fluid"><a href='${ctx }/index'>首页</a> <span class="sep">&gt;</span><a href="${ctx}/search?search=${search}" title="${search}">全部结果</a>
+    <c:if test="${not empty search}"><span class="sep">&gt;</span><a>${search}</a></c:if>
   </div>
 </div>
 <!--     分类导航栏 end       --> 
@@ -47,12 +47,12 @@
   <div class="container-fluid">
     <div class="order-list-box clearfix">
       <ul class="order-list">
-        <li class="${sort eq 0 ? 'active':''} first"><a href="${ctx}/list?categoryId=${category.categoryId}&sort=0" rel="nofollow">推荐</a></li>
-        <li class="${sort eq 1 ? 'active':''}"><a href="${ctx}/list?categoryId=${category.categoryId}&sort=1" rel="nofollow">新品</a></li>
-        <li class="${sort eq 2 ? 'active':''}"><a href="${ctx}/list?categoryId=${category.categoryId}&sort=2" rel="nofollow">销量</a></li>
-        <li class="${sort eq 6 ? 'active':''}"><a href="${ctx}/list?categoryId=${category.categoryId}&sort=6" rel="nofollow">价格 <i class="glyphicon glyphicon-arrow-up"></i></a></li>
-        <li class="${sort eq 7 ? 'active':''}"><a href="${ctx}/list?categoryId=${category.categoryId}&sort=7" rel="nofollow">价格 <i class="glyphicon glyphicon-arrow-down"></i></a></li>
-        <li class="${sort eq 3 ? 'active':''}"><a href="${ctx}/list?categoryId=${category.categoryId}&sort=3"  rel="nofollow">评论最多</a></li>
+        <li class="${sort eq 0 ? 'active':''} first"><a href="${ctx}/search?search=${search}&sort=0" rel="nofollow">推荐</a></li>
+        <li class="${sort eq 1 ? 'active':''}"><a href="${ctx}/search?search=${search}&sort=1" rel="nofollow">新品</a></li>
+        <li class="${sort eq 2 ? 'active':''}"><a href="${ctx}/search?search=${search}&sort=2" rel="nofollow">销量</a></li>
+        <li class="${sort eq 6 ? 'active':''}"><a href="${ctx}/search?search=${search}&sort=6" rel="nofollow">价格 <i class="glyphicon glyphicon-arrow-up"></i></a></li>
+        <li class="${sort eq 7 ? 'active':''}"><a href="${ctx}/search?search=${search}&sort=7" rel="nofollow">价格 <i class="glyphicon glyphicon-arrow-down"></i></a></li>
+        <li class="${sort eq 3 ? 'active':''}"><a href="${ctx}/search?search=${search}&sort=3"  rel="nofollow">评论最多</a></li>
       </ul>
     </div>
     <div class="goods-list-box">
@@ -81,7 +81,7 @@
       </div>
       <div class="xm-pagenavi">
         <c:if test="${fn:length(productVOs)>=9 || pageInfo.nowpage ne 1 }">
-          <div id="pager" data-pager-href="${ctx }/list?categoryId=${category.categoryId}&sort=${sort}&page=" data-pager-totalPage="${pageInfo.totalPage}" data-pager-nowpage="${pageInfo.nowpage}" data-sort="${sort}"></div>
+          <div id="pager" data-pager-href="${ctx}/search?search=${search}&sort=${sort}&page=" data-pager-totalPage="${pageInfo.totalPage}" data-pager-nowpage="${pageInfo.nowpage}" data-sort="${sort}"></div>
         </c:if>
       </div>
     </div>

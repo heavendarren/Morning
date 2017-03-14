@@ -1,6 +1,7 @@
 package com.pussinboots.morning.os.modules.content.service.impl;
 
 import com.pussinboots.morning.common.model.PageInfo;
+import com.pussinboots.morning.os.modules.content.dto.QuestionPageDTO;
 import com.pussinboots.morning.os.modules.content.entity.Comment;
 import com.pussinboots.morning.os.modules.content.entity.Question;
 import com.pussinboots.morning.os.modules.content.mapper.QuestionMapper;
@@ -34,7 +35,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 		Question question = new Question();
 		question.setProductId(productId);
 		question.setStatus(status);
-		Page<Comment> page = new Page<Comment>(pageInfo.getNowpage(), pageInfo.getPagesize());
+		Page<Question> page = new Page<Question>(pageInfo.getNowpage(), pageInfo.getPagesize());
 		return questionMapper.selectPage(page, new EntityWrapper<Question>(question).orderBy("createTime", false));
 	}
 
@@ -43,8 +44,16 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 		Question question = new Question();
 		question.setProductId(productId);
 		question.setStatus(status);
-		Page<Comment> page = new Page<Comment>(pageInfo.getNowpage(), pageInfo.getPagesize());
+		Page<Question> page = new Page<Question>(pageInfo.getNowpage(), pageInfo.getPagesize());
 		return questionMapper.selectPage(page, new EntityWrapper<Question>(question).orderBy("goodCount", false));
 	}
-	
+
+	@Override
+	public QuestionPageDTO selectQuestionsByPage(Long productId, PageInfo pageInfo, Integer status) {
+		// 查找分页评论列表
+		Page<Comment> page = new Page<Comment>(pageInfo.getNowpage(), pageInfo.getPagesize());
+		List<Question> questions = questionMapper.selectQuestionsByPage(productId, pageInfo, status, page);
+		pageInfo.setTotal(page.getTotal());
+		return new QuestionPageDTO(pageInfo, questions);
+	}
 }

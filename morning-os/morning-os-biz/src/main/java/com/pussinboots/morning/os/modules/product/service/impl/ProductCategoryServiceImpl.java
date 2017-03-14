@@ -91,6 +91,15 @@ public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMappe
 
 		return new ProductPageDTO(pageInfo, productVOs);
 	}
+	
+	@Override
+	public ProductPageDTO selectProductVOsBySearch(String search, PageInfo pageInfo) {
+		Page<ProductVO> page = new Page<>(pageInfo.getNowpage(), pageInfo.getPagesize());
+		List<ProductVO> productVOs = productCategoryMapper.selectProductVOsBySearch(search, StatusEnum.SHOW.getStatus(),
+				page, pageInfo);
+		pageInfo.setTotal(page.getTotal());
+		return new ProductPageDTO(pageInfo, productVOs);
+	}
 
 	@Override
 	public List<Category> selectUpperCategories(Long productId) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.pussinboots.morning.common.model.PageInfo;
+import com.pussinboots.morning.os.modules.content.dto.QuestionPageDTO;
 import com.pussinboots.morning.os.modules.content.entity.Question;
 
 /**
@@ -34,5 +35,14 @@ public interface IQuestionService extends IService<Question> {
 	 * @return
 	 */
 	List<Question> selectHighQuestions(Long productId, Integer status, PageInfo pageInfo);	
+	
+	/**
+	 * 根据商品ID、排序、分页查找提问列表及回复列表
+	 * @param productId 商品ID
+	 * @param pageInfo 分页
+	 * @param status 提问状态
+	 * @return QuestionPageDTO
+	 */
+	QuestionPageDTO selectQuestionsByPage(Long productId, PageInfo pageInfo, Integer status);
 	
 }

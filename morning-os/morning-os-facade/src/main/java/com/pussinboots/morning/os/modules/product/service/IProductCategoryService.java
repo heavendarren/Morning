@@ -37,6 +37,14 @@ public interface IProductCategoryService extends IService<ProductCategory> {
 	ProductPageDTO selectProductVOs(Long categoryId, PageInfo pageInfo);
 	
 	/**
+	 * 根据搜索内容、排序、分页查找商品
+	 * @param search 搜索内容
+	 * @param pageInfo 排序、分页方式
+	 * @return ProductPageDTO
+	 */
+	ProductPageDTO selectProductVOsBySearch(String search, PageInfo pageInfo);
+	
+	/**
 	 * 根据商品ID查找上级类目列表
 	 * @param productId
 	 * @return

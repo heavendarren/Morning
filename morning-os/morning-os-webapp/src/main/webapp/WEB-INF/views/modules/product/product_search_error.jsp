@@ -16,7 +16,7 @@
   <div class="xm-box ">
     <div class="bd">
       <div class="shop-global-error">
-        <h2>你所查找的分类不存在</h2>
+        <h2 class="title">抱歉，没有搜索到与 “<span class="keyword">${search}</span>” 相关的商品</h2>
         <p class="shop-global-error-tips"></p>
         <p class="shop-global-error-btn"> <a href="${ctx }/index" class="btn">去首页</a> <a href="javascript:;" onclick="history.go(-1);" class="btn btn-dake">返回上一页</a> </p>
       </div>

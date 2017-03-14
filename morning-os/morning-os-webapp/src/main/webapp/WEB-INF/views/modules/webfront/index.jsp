@@ -99,26 +99,7 @@
       </ul>
     </div>
     <div class="header-search">
-      <form id="J_searchForm" class="search-form clearfix" action="//search.mi.com/search" method="get">
-        <label for="search" class="hide">站内搜索</label>
-        <input class="search-text" type="search" id="search" name="keyword" autocomplete="off">
-        <input type="submit" class="search-btn iconfont" value="">
-        <div class="search-hot-words" style="display: block;"> <a href="#">手环</a><a href="#">小米手机4</a> </div>
-        <div id="J_keywordList" class="keyword-list" style="display:none;">
-          <ul class="result-list">
-            <li data-key="移动电源"> <a href="#">移动电源<span class="result">约有22件</span></a> </li>
-            <li data-key="空气净化器"> <a href="#">空气净化器<span class="result">约有2件</span></a> </li>
-            <li data-key="小米手环"><a href="#">小米手环<span class="result">约有5件</span></a> </li>
-            <li data-key="WiFi"><a href="//search.mi.com/search_WiFi">WiFi<span class="result">约有7件</span></a> </li>
-            <li data-key="自拍杆"><a href="#">自拍杆<span class="result">约有4件</span></a> </li>
-            <li data-key="小米体重秤"><a href="#">小米体重秤<span class="result">约有1件</span></a> </li>
-            <li data-key="小蚁摄像机"><a href="#">小蚁摄像机<span class="result">约有2件</span></a> </li>
-            <li data-key="运动相机"><a href="#">运动相机<span class="result">约有2件</span></a> </li>
-            <li data-key="智能插座"><a href="#">智能插座<span class="result">约有5件</span></a> </li>
-            <li data-key="配件优惠套装"><a href="#">配件优惠套装<span class="result">约有15件</span></a> </li>
-          </ul>
-        </div>
-      </form>
+		<span class="zySearch" id="zySearch"></span>
     </div>
   </div>
 </div>
@@ -330,7 +311,7 @@
             <div class="box-bd J_brickBd">
               <ul class="review-list clearfix">
                 <li class="review-item review-item-first" data-gid="2144200016">
-                  <div class="figure1 figure-img"> <a href="#"><img src="${ctxsta}/web/img/T1ExYjBmxT1RXrhCrK.jpg" width="296" height="220" alt="小钢炮蓝牙音箱"></a> </div>
+                  <div class="figure1 figure-img"> <a href="#"><img src="" width="296" height="220" alt="小钢炮蓝牙音箱"></a> </div>
                   <p class="review"> <a href="#">不错啊，买回来刚听了一天就被朋友抢走了，害得我还要重新下单再买。音质还可以的，还可以蓝牙免提通话。</a> </p>
                   <p class="author"> 来自于 s海峰 的评价 <span class="date" data-date="1422850560"></span> </p>
                   <div class="info">
@@ -340,7 +321,7 @@
                   </div>
                 </li>
                 <li class="review-item" data-gid="2151400003">
-                  <div class="figure1 figure-img"> <a href="#"><img src="${ctxsta}/web/img/T1VI_vB7Dv1RXrhCrK.jpg" width="296" height="220" alt="米兔手机U盘"></a> </div>
+                  <div class="figure1 figure-img"> <a href="#"><img src="" width="296" height="220" alt="米兔手机U盘"></a> </div>
                   <p class="review"> <a href="#">非常喜欢，萌萌哒，16g大容量！手机电脑两用非常实用！唯一的担心是帽子会不会松动，如果把链子连接在下...</a> </p>
                   <p class="author"> 来自于 宋孟奇 的评价 <span class="date" data-date="1429072560"></span> </p>
                   <div class="info">
@@ -350,7 +331,7 @@
                   </div>
                 </li>
                 <li class="review-item" data-gid="2135200033">
-                  <div class="figure1 figure-img"> <a href="#"><img src="${ctxsta}/web/img/T1UfJjB5bT1RXrhCrK.jpg" width="296" height="220" alt="小米随身WIFI"></a> </div>
+                  <div class="figure1 figure-img"> <a href="#"><img src="" width="296" height="220" alt="小米随身WIFI"></a> </div>
                   <p class="review"> <a href="#">插在我的台式电脑上当网卡使用，网络很稳定，玩CF延迟才15而且极度稳定，就像有线宽带一样，真的很让人...</a> </p>
                   <p class="author"> 来自于 谁抢了我的小侨 的评价 <span class="date" data-date="1417123800"></span> </p>
                   <div class="info">
@@ -360,7 +341,7 @@
                   </div>
                 </li>
                 <li class="review-item" data-gid="2145000006">
-                  <div class="figure1 figure-img"> <a href="#"><img src="${ctxsta}/web/img/T1VgW_BbCT1RXrhCrK.jpg" width="296" height="220" alt="小米空气净化器"></a> </div>
+                  <div class="figure1 figure-img"> <a href="#"><img src="" width="296" height="220" alt="小米空气净化器"></a> </div>
                   <p class="review"> <a href="#">先五星好评。再来说说小米空气净化器，北方的天气雾霾越来越常态，这就迫切需要一台性价比高的空气净化器，...</a> </p>
                   <p class="author"> 来自于 sddyboy 的评价 <span class="date" data-date="1421731260"></span> </p>
                   <div class="info">

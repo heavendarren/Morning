@@ -1,6 +1,12 @@
 /** 分类页面导航栏*/
 @charset "UTF-8";
 
+.xm-box a, .xm-box .keyword {
+	color: #ff6700
+}
+.xm-box .sep {
+	color: #b0b0b0
+}
 .breadcrumbs {
 	height: 40px;
 	font-size: 12px;

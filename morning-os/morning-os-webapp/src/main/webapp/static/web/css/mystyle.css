@@ -530,7 +530,7 @@ dt {
 
 .site-topbar .user-menu a {
 	display: block;
-	padding: 3px 30px;
+	padding: 3px 35px;
 	line-height: 2
 }
 
@@ -663,13 +663,13 @@ dt {
 
 .site-header .header-logo {
 	float: left;
-	width: 62px;
+	width: 57px;
 	margin-top: 22px
 }
 
 .site-header .header-nav {
 	float: left;
-	width: 850px
+	width: 820px
 }
 
 .site-header .nav-list {
@@ -841,20 +841,10 @@ dt {
 /*-------------搜索栏-----------------*/
 .site-header .header-search {
 	float: right;
-	width: 296px;
+	width: 349px;
 	margin-top: 30px;
 }
 
-.site-header .search-form {
-	position: relative;
-	width: 296px;
-	height: 50px;
-}
-
-.site-header .search-form:hover .search-text {
-	border-color: #b0b0b0;
-	height: 50px;
-}
 
 button, input {
 	line-height: normal;
@@ -1010,7 +1000,7 @@ button, input {
 }
 
 .box .left {
-	left: 234px;
+	left: 233px;
 }
 
 .box .right {
@@ -1031,7 +1021,7 @@ button, input {
 	display: none;
 	position: absolute;
 	top: 88px;
-	left: -93px;
+	left: -88px;
 	z-index: 21;
 	width: 234px;
 	height: 460px;
@@ -2061,4 +2051,55 @@ p#back-to-top a span {
 		margin: 0;
 		padding: 0;
 	}
+}
+
+/*搜索框*/
+.zySearch {
+	float: left;
+	top: 0px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.zySearch .search-img {
+	background: url("../img/chicken.gif");
+	display: block;
+	height: 0;
+	left: 39%;
+	margin-left: -12px;
+	position: absolute;
+	top: 10px;
+	width: 24px;
+}
+
+.zySearch .search-input {
+	color: #999;
+	border: 1px solid #D0D0D0;
+	height: 35px;
+	line-height: 33px;
+	margin-right: 5px;
+	padding: 0 10px;
+	width: 268px;
+}
+
+.zySearch .search-btn {
+	background: none repeat scroll 0 0 #ff6709;
+	border: 0 none;
+	border-radius: 0;
+	color: #FFFFFF;
+	cursor: pointer;
+	height: 35px;
+	line-height: 33px;
+	padding: 0;
+	vertical-align: baseline !important;
+	width: 76px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	margin-bottom: 0;
+	font-weight: normal;
+	font-size: 14px;
+	display: inline-block;
+	position: relative;
 }

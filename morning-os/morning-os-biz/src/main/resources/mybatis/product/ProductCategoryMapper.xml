@@ -138,4 +138,34 @@
 		ORDER BY 
 			${pageInfo.sort} ${pageInfo.order}
     </select>
+    
+    <!-- 根据搜索内容、分类、排序查找产品列表及标签 -->
+    <select id="selectProductVOsBySearch" resultType="com.pussinboots.morning.os.modules.product.vo.ProductVO">
+    	SELECT
+    		p.product_id AS productId, 
+    		product_number AS productNumber, 
+    		name, 
+    		show_price AS showPrice, 
+    		pic_img AS picImg,
+    		introduce,	
+    		p.label_id AS labelId,
+    		a.comment_number AS commentNumber,
+    		label_name AS labelName
+    	FROM
+    		os_product p
+    	LEFT JOIN os_product_category c ON c.product_id = p.product_id
+    	LEFT JOIN os_label l ON l.label_id = p.label_id
+    	LEFT JOIN os_product_attribute a ON a.product_id = p.product_id
+    	<where> 1=1
+	      	<if test="status != null" >
+				AND p.status = #{status}
+	      	</if>
+	      	<if test="search != null" >
+	        	AND name LIKE '%' #{search} '%' OR introduce LIKE '%' #{search} '%' OR search_key LIKE '%' #{search} '%' OR page_title LIKE '%' #{search} '%' 
+	        	OR page_description LIKE '%' #{search} '%' OR page_keyword LIKE '%' #{search} '%' 
+	      	</if>
+ 		</where> 	
+		ORDER BY 
+			${pageInfo.sort} ${pageInfo.order}
+    </select>
 </mapper>

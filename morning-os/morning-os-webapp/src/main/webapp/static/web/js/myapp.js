@@ -5,8 +5,8 @@ $(function() {
 	$("#J_userInfo .user").hover(function() {
 		$(this).addClass('user-active');
 		$(this).children(".user-menu").css('display', 'block').animate({
-	        height:"165px"
-	    },165);
+			height : "165px"
+		}, 165);
 	}, function() {
 		$(this).removeClass('user-active');
 		$(this).children(".user-menu").css('display', 'none');
@@ -502,4 +502,16 @@ $(function() {
 	});
 })
 
-
+/**
+ * 搜索栏
+ */
+$(function() {
+	$("#zySearch").zySearch({
+		"width" : "355",
+		"height" : "35",
+		"parentClass" : "pageTitle",
+		"callback" : function(keyword) {
+			window.location.href = baselocation + '/search?search=' + keyword;
+		}
+	});
+})

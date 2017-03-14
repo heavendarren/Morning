@@ -64,7 +64,7 @@ public interface ProductCategoryMapper extends BaseMapper<ProductCategory> {
 	
 	/**
 	 * 根据类目ID列表、分类、排序查找产品列表及标签（分类查找）
-	 * @param categoryIds categoryIds 目录ID列表
+	 * @param categoryIds 目录ID列表
 	 * @param status 产品状态
 	 * @param rowBounds 分页实体类
 	 * @param pageInfo 排序方式
@@ -72,4 +72,15 @@ public interface ProductCategoryMapper extends BaseMapper<ProductCategory> {
 	 */
 	List<ProductVO> selectProductVOsByPage(@Param("categoryIds") List<Long> categoryIds,
 			@Param("status") Integer status, RowBounds rowBounds, @Param("pageInfo") PageInfo pageInfo);
+	
+	/**
+	 * 根据搜索内容、分类、排序查找产品列表及标签
+	 * @param search 搜索内容
+	 * @param status 产品状态
+	 * @param rowBounds 分页实体类
+	 * @param pageInfo 排序方式
+	 * @return
+	 */
+	List<ProductVO> selectProductVOsBySearch(@Param("search") String search,
+			@Param("status") Integer status, RowBounds rowBounds, @Param("pageInfo") PageInfo pageInfo);	
 }

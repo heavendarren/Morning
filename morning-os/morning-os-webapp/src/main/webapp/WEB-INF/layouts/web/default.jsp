@@ -28,6 +28,7 @@
 	<script src="${ctxsta}/common/jquery/jquery-2.2.3.min.js"></script>
 	<script src="${ctxsta}/common/bootstrap/js/bootstrap.min.js"></script>
 	<!-- 自定义js -->
+	<script src="${ctxsta}/web/js/zySearch.js"></script>	
 	<script src="${ctxsta}/web/js/myapp.js"></script>
 	<script src="${ctxsta}/web/js/jump.js"></script>
 	<script src="${ctxsta}/web/js/base.js"></script>

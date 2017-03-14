@@ -26,4 +26,30 @@
     <sql id="Base_Column_List">
         question_id AS questionId, product_id AS productId, user_id AS userId, user_name AS userName, pic_img AS picImg, content, good_count AS goodCount, status, create_time AS createTime, create_by AS createBy, answer_content AS answerContent, answer_by AS answerBy, answer_time AS answerTime, type, update_by AS updateBy, update_time AS updateTime
     </sql>
+    
+    <!-- 根据商品ID、排序、分页查找提问列表 -->
+    <select id="selectQuestionsByPage" resultType="com.pussinboots.morning.os.modules.content.entity.Question">
+		SELECT
+        	question_id AS questionId, 
+        	product_id AS productId, 
+        	user_id AS userId, 
+        	user_name AS userName, 
+        	pic_img AS picImg, 
+        	content, 
+        	good_count AS goodCount, 
+        	status, 
+        	create_time AS createTime, 
+        	create_by AS createBy, 
+        	answer_content AS answerContent, 
+        	answer_by AS answerBy, 
+        	answer_time AS answerTime, 
+        	type
+		FROM
+			os_question
+		WHERE
+			status = #{status}
+		AND product_id = #{productId}
+		ORDER BY 
+			${pageInfo.sort} ${pageInfo.order}
+    </select>
 </mapper>
