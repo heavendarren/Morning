@@ -67,7 +67,7 @@
                     </ul>
                   </dd>
                 </c:forEach>
-                <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="" id="goodsDetailAddCartBtn" class="btn goods-add-cart-btn" data-gid="2164700027" data-package="0" data-stat-id="3d749b02d4ba8b20"> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp; </a> </dd>
+                <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="" id="goodsDetailAddCartBtn" class="btn btn-primary goods-add-cart-btn" data-gid="2164700027" data-package="0" data-stat-id="3d749b02d4ba8b20"> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp; </a> </dd>
                 <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;"> <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143"> <i class="iconfont "></i>到货通知 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp;</a></dd>
                 <dd class="goods-info-head-userfaq">
                   <ul>
@@ -240,7 +240,7 @@
     <div class="container-fluid">
       <div class="question-input">
         <input type="text" placeholder="输入你的提问" class="input-block J_inputQuestion" data-can-search="true" data-pagesize="6">
-        <div class="btn question-btn J_btnQuestion">提问</div>
+        <div class="btn btn-primary question-btn J_btnQuestion">提问</div>
       </div>
       <div class="question-order J_questionOrderBlock" style="display:${productAttribute.questionNumber eq 0?'none':'block'}">
         <div class="order-block"> <a href="javascript:void(0);" class="J_questionHelp current" data-pagesize="6" data-stat-id="422e5161e39bf28f" onclick="_msq.push(['trackEvent', '9de9578f29e893b5-422e5161e39bf28f', 'javascript:void(0);', 'pcpid', '']);">最有帮助</a> <span class="sep">|</span> <a href="javascript:void(0);" class="J_questionNew" data-pagesize="6" data-stat-id="24e1681246710ec7" onclick="_msq.push(['trackEvent', '9de9578f29e893b5-24e1681246710ec7', 'javascript:void(0);', 'pcpid', '']);">最新</a> </div>
@@ -357,7 +357,7 @@
         </div>
       </div>
       <div class="span4">
-        <div class="fr" id="goodsSubBarBtnBox"> <a href="" class="btn goods-add-cart-btn" id="goodsSubBarAddCartBtn" data-disabled="false" data-gid="2164700027" data-package="0" data-stat-id="2123b909ff50987b"> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车</a> </div>
+        <div class="fr" id="goodsSubBarBtnBox"> <a href="" class="btn btn-primary goods-add-cart-btn" id="goodsSubBarAddCartBtn" data-disabled="false" data-gid="2164700027" data-package="0" data-stat-id="2123b909ff50987b"> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车</a> </div>
       </div>
     </div>
   </div>

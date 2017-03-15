@@ -91,8 +91,11 @@ public class AuthorizingUser implements Serializable{
 		this.salt = salt;
 	}
 
-	/** 证书凭证  */
-    public String getCredentialsSalt() {  
-        return userNumber + salt;  
-    }
+	/** 证书凭证 */
+	public String getCredentialsSalt() {
+		if (userNumber != null && salt != null) {
+			return userNumber + salt;
+		}
+		return null;
+	}
 }

@@ -4,7 +4,7 @@
 
 <div class="site-header">
   <div class="container-fluid">
-    <div class="header-logo"> <a class="logo ir" href="//www.mi.com/index.html" title="小米官网"><img src="${ctxsta}/web/img/logo.png"></a> </div>
+    <div class="header-logo"> <a class="logo ir" href="${ctx}/index" title="猫宁官网"><img src="${ctxsta}/web/img/logo.png"></a> </div>
     <div class="header-nav">
       <ul class="nav-list J_navMainList clearfix">
         <li id="J_navCategory" class="nav-category"> <a class="link-category" href="${ctx }/list?categoryId=1"><span class="text">全部商品分类</span></a> 

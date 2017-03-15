@@ -238,7 +238,391 @@ dt {
 .span-first {
 	_margin-left: 0
 }
+
+.btn {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	width: 158px;
+	height: 38px;
+	padding: 0;
+	margin: 0;
+	border: 1px solid #b0b0b0;
+	font-size: 14px;
+	line-height: 38px;
+	text-align: center;
+	color: #b0b0b0;
+	cursor: pointer;
+	-webkit-transition: all .4s;
+	transition: all .4s;
+	border-radius: 0px;
+	vertical-align: top;
+}
+
+.btn:hover {
+	text-decoration: none;
+	color: #b0b0b0
+}
+
+.btn:focus {
+	outline: 0
+}
+
+.btn:active {
+	-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.18);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.18)
+}
+
+.btn[disabled] {
+	border-style: dashed !important;
+	border-color: #e0e0e0;
+	background-color: #fff !important;
+	color: #b0b0b0 !important;
+	cursor: default !important
+}
+
+.btn-disabled {
+	background: #e0e0e0 !important;
+	border-color: #e0e0e0 !important;
+	color: #b0b0b0 !important;
+	cursor: default !important
+}
+
+.btn-small {
+	width: 118px;
+	height: 28px;
+	font-size: 12px;
+	line-height: 28px
+}
+
+.btn-large {
+	width: 178px;
+	height: 48px;
+	line-height: 48px
+}
+
+.btn-block {
+	display: block;
+	width: 100%;
+	padding-left: 0;
+	padding-right: 0
+}
+
+input.btn, button.btn {
+	width: 160px;
+	height: 40px
+}
+
+input.btn-small, button.btn-small {
+	width: 120px;
+	height: 30px
+}
+
+input.btn-large, button.btn-large {
+	width: 180px;
+	height: 50px
+}
+
+.btn-gray {
+	background: #b0b0b0;
+	border-color: #b0b0b0;
+	color: #fff
+}
+
+.btn-gray:hover {
+	background-color: #757575;
+	border-color: #757575;
+	color: #fff
+}
+
+.btn-primary {
+	background: #ff6700;
+	border-color: #ff6700;
+	color: #fff
+}
+
+.btn-primary:hover {
+	background-color: #f25807;
+	border-color: #f25807;
+	color: #fff
+}
+
+.btn-green {
+	background: #83c44e;
+	border-color: #83c44e;
+	color: #fff
+}
+
+.btn-green:hover {
+	background-color: #71b639;
+	border-color: #71b639;
+	color: #fff
+}
+
+.btn-orange {
+	background: #ffac13;
+	border-color: #ffac13;
+	color: #fff
+}
+
+.btn-orange:hover {
+	background-color: #ff920f;
+	border-color: #ff920f;
+	color: #fff
+}
+
+.btn-gold {
+	background: #ffd600;
+	border-color: #ffd600;
+	color: #fff
+}
+
+.btn-gold:hover {
+	background-color: #fec517;
+	border-color: #fec517;
+	color: #fff
+}
+
+.btn-ocean {
+	background: #2196f3;
+	border-color: #2196f3;
+	color: #fff
+}
+
+.btn-ocean:hover {
+	background-color: #0c80dc;
+	border-color: #0c80dc;
+	color: #fff
+}
+
+.btn-blue {
+	background: #545ad0;
+	border-color: #545ad0;
+	color: #fff
+}
+
+.btn-blue:hover {
+	background-color: #494fc5;
+	border-color: #494fc5;
+	color: #fff
+}
+
+.btn-red {
+	background: #e53935;
+	border-color: #e53935;
+	color: #fff
+}
+
+.btn-red:hover {
+	background-color: #e42a27;
+	border-color: #e42a27;
+	color: #fff
+}
+
+.btn-purple {
+	background: #a31daf;
+	border-color: #a31daf;
+	color: #fff
+}
+
+.btn-purple:hover {
+	background-color: #9715a2;
+	border-color: #9715a2;
+	color: #fff
+}
+
+.btn-pink {
+	background: #f93e7a;
+	border-color: #f93e7a;
+	color: #fff
+}
+
+.btn-pink:hover {
+	background-color: #e9306c;
+	border-color: #e9306c;
+	color: #fff
+}
+
+.btn-cyan {
+	background: #00c0a5;
+	border-color: #00c0a5;
+	color: #fff
+}
+
+.btn-cyan:hover {
+	background-color: #03b3ad;
+	border-color: #03b3ad;
+	color: #fff
+}
+
+.btn-line-gray {
+	border-color: #b0b0b0;
+	background: #fff;
+	color: #757575
+}
+
+.btn-line-gray:hover {
+	color: #fff;
+	background-color: #757575;
+	border-color: #757575
+}
+
+.btn-line-primary {
+	border-color: #ff6700;
+	background: #fff;
+	color: #ff6700
+}
+
+.btn-line-primary:hover {
+	color: #fff;
+	background-color: #f25807;
+	border-color: #f25807
+}
+
+.btn-line-green {
+	border-color: #83c44e;
+	background: #fff;
+	color: #83c44e
+}
+
+.btn-line-green:hover {
+	color: #fff;
+	background-color: #71b639;
+	border-color: #71b639
+}
+
+.btn-line-orange {
+	border-color: #ffac13;
+	background: #fff;
+	color: #ffac13
+}
+
+.btn-line-orange:hover {
+	color: #fff;
+	background-color: #ff920f;
+	border-color: #ff920f
+}
+
+.btn-line-gold {
+	border-color: #ffd600;
+	background: #fff;
+	color: #ffd600
+}
+
+.btn-line-gold:hover {
+	color: #fff;
+	background-color: #fec517;
+	border-color: #fec517
+}
+
+.btn-line-ocean {
+	border-color: #2196f3;
+	background: #fff;
+	color: #2196f3
+}
+
+.btn-line-ocean:hover {
+	color: #fff;
+	background-color: #0c80dc;
+	border-color: #0c80dc
+}
+
+.btn-line-blue {
+	border-color: #545ad0;
+	background: #fff;
+	color: #545ad0
+}
+
+.btn-line-blue:hover {
+	color: #fff;
+	background-color: #494fc5;
+	border-color: #494fc5
+}
+
+.btn-line-red {
+	border-color: #e53935;
+	background: #fff;
+	color: #e53935
+}
+
+.btn-line-red:hover {
+	color: #fff;
+	background-color: #e42a27;
+	border-color: #e42a27
+}
+
+.btn-line-purple {
+	border-color: #a31daf;
+	background: #fff;
+	color: #a31daf
+}
+
+.btn-line-purple:hover {
+	color: #fff;
+	background-color: #9715a2;
+	border-color: #9715a2
+}
+
+.btn-line-pink {
+	border-color: #f93e7a;
+	background: #fff;
+	color: #f93e7a
+}
+
+.btn-line-pink:hover {
+	color: #fff;
+	background-color: #e9306c;
+	border-color: #e9306c
+}
+
+.btn-line-cyan {
+	border-color: #00c0a5;
+	background: #fff;
+	color: #00c0a5
+}
+
+.btn-line-cyan:hover {
+	color: #fff;
+	background-color: #03b3ad;
+	border-color: #03b3ad
+}
+
+.input-label {
+	position: absolute;
+	left: 12px;
+	top: 11px;
+	z-index: 2;
+	padding: 0 3px;
+	font-size: 14px;
+	line-height: 18px;
+	color: #b0b0b0;
+	background: transparent;
+	cursor: text;
+	-webkit-transition: all .2s linear;
+	transition: all .2s linear
+}
 /*-------------顶部导航栏-----------------*/
+.breadcrumbs {
+	height: 40px;
+	font-size: 12px;
+	line-height: 40px;
+	background: #f5f5f5;
+	color: #616161
+}
+
+.breadcrumbs a {
+	color: #757575
+}
+
+.breadcrumbs a:hover {
+	color: #424242
+}
+
+.breadcrumbs .sep {
+	margin: 0 0.5em;
+	color: #b0b0b0
+}
+
 .site-topbar {
 	position: relative;
 	z-index: 30;
@@ -845,7 +1229,6 @@ dt {
 	margin-top: 30px;
 }
 
-
 button, input {
 	line-height: normal;
 }
@@ -1156,36 +1539,6 @@ button, input {
 	width: 249px
 }
 
-.btn-small {
-	width: 118px;
-	height: 28px;
-	font-size: 12px;
-	line-height: 28px;
-}
-
-.btn {
-	display: inline-block;
-	border-radius: 0;
-	width: 158px;
-	height: 38px;
-	padding: 0;
-	margin: 0;
-	border: 1px solid #ff6700;
-	font-size: 14px;
-	line-height: 38px;
-	text-align: center;
-	color: #ff6700;
-	cursor: pointer;
-	-webkit-transition: all 0.4s linear;
-	-moz-transition: all 0.4s linear;
-	transition: all 0.4s linear;
-}
-
-.btn:hover {
-	background: #ff6700;
-	color: #fff;
-}
-
 /*-------------轮播链接-----------------*/
 .about {
 	margin-top: 20px;
@@ -1352,7 +1705,7 @@ button, input {
 .span16 {
 	width: 978px;
 	float: right;
-	height: 628px;
+	min-height: 628px;
 }
 
 .span4 {

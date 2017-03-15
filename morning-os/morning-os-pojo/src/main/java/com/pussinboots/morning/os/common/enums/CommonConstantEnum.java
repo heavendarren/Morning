@@ -39,7 +39,10 @@ public enum CommonConstantEnum {
 	COMMENT_PAGE_NUMBER(10, "商品评论页每页显示评论数"),
 	
 	/** 商品提问页每页显示评论数 */
-	QUESTION_PAGE_NUMBER(10, "商品提问页每页显示评论数");
+	QUESTION_PAGE_NUMBER(10, "商品提问页每页显示评论数"),
+	
+	/** 商品提问页每页显示评论数 */
+	FAVORITE_NUMBER(12, "商品提问页每页显示评论数");
 	
 	private Integer value;
 	

@@ -2,14 +2,11 @@ package com.pussinboots.morning.os.common.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.subject.Subject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.code.kaptcha.Constants;
-import com.pussinboots.morning.os.common.security.AuthorizingUser;
 import com.pussinboots.morning.common.util.ServletUtils;
+import com.pussinboots.morning.os.common.security.AuthorizingUser;
 
 /**
  * 
@@ -20,8 +17,6 @@ import com.pussinboots.morning.common.util.ServletUtils;
 * 创建时间：2017年2月3日 下午1:04:53
  */
 public class SingletonLoginUtils {
-	
-	private static final Logger logger = LoggerFactory.getLogger(SingletonLoginUtils.class);
 	
 	private SingletonLoginUtils() { }
 
@@ -49,14 +44,10 @@ public class SingletonLoginUtils {
 	 * @return
 	 */
 	public static AuthorizingUser getUser() {
-		try {
-			Subject subject = SecurityUtils.getSubject();
-			AuthorizingUser user = (AuthorizingUser) subject.getPrincipal();
-			if (user != null) {
-				return user;
-			}
-		} catch (UnavailableSecurityManagerException e) {
-			logger.error("SingletonLoginUtils.getUser:{}", e);
+		Subject subject = SecurityUtils.getSubject();
+		AuthorizingUser user = (AuthorizingUser) subject.getPrincipal();
+		if (user != null) {
+			return user;
 		}
 		return null;
 	}

@@ -43,7 +43,6 @@ import com.pussinboots.morning.os.modules.user.service.IUserService;
 
 /**
  * 
-*    
 * 项目名称：morning-os-webapp   
 * 类名称：UserLoginController   
 * 类描述：用户登录表示层控制器  

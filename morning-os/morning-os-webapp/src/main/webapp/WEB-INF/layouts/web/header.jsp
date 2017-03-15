@@ -18,7 +18,7 @@
         <c:if test="${not empty user.userNumber}">
         <div class="topbar-info" id="J_userInfo"><span class="user"><a rel="nofollow" class="user-name" href="" target="_blank"><span class="name">${user.userName}</span>&nbsp;&nbsp;<i class="glyphicon glyphicon-chevron-down"></i></a>
           <ul class="user-menu" style="display: none;">
-            <li><a rel="nofollow" href="//my.mi.com/portal" target="_blank">个人中心</a></li>
+            <li><a rel="nofollow" href="${ctx}/uc/user/portal" target="_blank">个人中心</a></li>
             <li><a rel="nofollow" href="//order.mi.com/user/comment" target="_blank">评价晒单</a></li>
             <li><a rel="nofollow" href="//order.mi.com/user/favorite" target="_blank">我的喜欢</a></li>
             <li><a rel="nofollow" href="http://account.xiaomi.com/" target="_blank">小米账户</a></li>
