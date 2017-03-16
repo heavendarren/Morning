@@ -43,8 +43,8 @@
               <ul class="uc-nav-list">
                 <li><a href="${ctx}/uc/user/portal">我的个人中心</a></li>
                 <li><a href="http://order.mi.com/message/list?r=98069.1489505349">消息通知<i class="J_miMessageTotal"></i></a></li>
-                <li><a href="http://order.mi.com/user/favorite?r=98069.1489505349">喜欢的商品</a></li>
-                <li><a href="http://order.mi.com/user/address?r=98069.1489505349">收货地址</a></li>
+                <li><a href="${ctx}/uc/user/favorite">喜欢的商品</a></li>
+                <li><a href="${ctx}/uc/user/address">收货地址</a></li>
               </ul>
             </div>
           </div>

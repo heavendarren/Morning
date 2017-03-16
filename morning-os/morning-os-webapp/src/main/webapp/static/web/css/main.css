@@ -1047,8 +1047,8 @@
 	background-position: -60px 0
 }
 .address-item {
-	width: 268px;
-	height: 178px;
+	width: 270px;
+	height: 180px;
 	border: 1px solid #e0e0e0;
 	cursor: pointer;
 	position: relative;
@@ -1105,8 +1105,7 @@
 	width: 30px;
 	height: 30px;
 	margin: 63px auto 8px;
-	font-size: 30px;
-	line-height: 30px;
+	font-size: 20px;
 	background-color: #e0e0e0;
 	border-radius: 17px;
 	text-align: center;

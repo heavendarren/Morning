@@ -3,7 +3,6 @@ package com.pussinboots.morning.cms.modules.administrator.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -28,7 +27,7 @@ public class UserLoginLogServiceImpl extends ServiceImpl<UserLoginLogMapper, Use
 	private UserLoginLogMapper userLoginLogMapper;
 	
 	@Override
-	@Cacheable(value="systemUserCache",key="'userLoginLog'+#userId")
+	//@Cacheable(value="systemUserCache",key="'userLoginLog'+#userId")
 	public List<UserLoginLog> selectUserLoginLog(Long userId) {
 		UserLoginLog userLoginLog = new UserLoginLog();
 		userLoginLog.setUserId(userId);

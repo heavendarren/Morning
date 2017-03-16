@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2017-03-16 01:04:23
+Date: 2017-03-17 00:33:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -280,7 +280,7 @@ CREATE TABLE `cms_user` (
 -- ----------------------------
 -- Records of cms_user
 -- ----------------------------
-INSERT INTO `cms_user` VALUES ('1', '1', 'admin', 'd81c31b9348c3da513177a781703767e', 'Dts7jk', '猫宁', '陈星星', '0', '22', 'images/avatar/20170308/1488982535499.jpg', '1', '810170512@qq.com', '18857105127', '2017-03-09 12:26:35', '172.27.122.119', '2016-10-27 23:11:43', '穿鞋子的猫', '2017-02-28 15:00:36', '猫宁');
+INSERT INTO `cms_user` VALUES ('1', '1', 'admin', 'd81c31b9348c3da513177a781703767e', 'Dts7jk', '猫宁', '陈星星', '0', '22', 'images/avatar/20170308/1488982535499.jpg', '1', '810170512@qq.com', '18857105127', '2017-03-16 18:37:40', '172.27.72.80', '2016-10-27 23:11:43', '穿鞋子的猫', '2017-02-28 15:00:36', '猫宁');
 INSERT INTO `cms_user` VALUES ('2', '1', 'system', 'a640aa3da9f5d9975d7cee1141fa51a7', 'JGKbZs', '爬梯子的过路人', '陈星星', '1', null, 'default/avatar/avatar_3.jpg', '1', '810170512@qq.com', '18857105127', '2017-03-09 12:12:55', '172.27.122.119', '2017-02-07 16:21:10', '猫宁', '2017-02-17 16:25:23', '猫宁');
 INSERT INTO `cms_user` VALUES ('9', '3', 'chen', '48fbc55cb5626809b4ad309f9562bab7', '86GRd6', '陈星星', '陈星星', '1', null, 'default/avatar/avatar_8.jpg', '1', '15632831549@qq.com', '18857105127', '2017-03-09 12:16:31', '172.27.122.119', '2017-02-28 16:08:15', '猫宁', '2017-02-28 16:22:01', '猫宁');
 
@@ -296,7 +296,7 @@ CREATE TABLE `cms_user_login_log` (
   `operating_system` varchar(50) DEFAULT NULL COMMENT '操作系统',
   `browser` varchar(50) DEFAULT NULL COMMENT '浏览器',
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8 COMMENT='管理员登陆表';
+) ENGINE=InnoDB AUTO_INCREMENT=155 DEFAULT CHARSET=utf8 COMMENT='管理员登陆表';
 
 -- ----------------------------
 -- Records of cms_user_login_log
@@ -450,6 +450,8 @@ INSERT INTO `cms_user_login_log` VALUES ('149', '2017-03-09 12:10:37', '172.27.1
 INSERT INTO `cms_user_login_log` VALUES ('150', '2017-03-09 12:12:55', '172.27.122.119', '2', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `cms_user_login_log` VALUES ('151', '2017-03-09 12:16:31', '172.27.122.119', '9', 'WINDOWS_10', 'CHROME');
 INSERT INTO `cms_user_login_log` VALUES ('152', '2017-03-09 12:26:35', '172.27.122.119', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `cms_user_login_log` VALUES ('153', '2017-03-16 18:30:56', '172.27.72.80', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `cms_user_login_log` VALUES ('154', '2017-03-16 18:37:40', '172.27.72.80', '1', 'WINDOWS_10', 'CHROME45');
 
 -- ----------------------------
 -- Table structure for cms_user_role
@@ -482,7 +484,7 @@ CREATE TABLE `cms_version_log` (
   `log_title` varchar(255) DEFAULT NULL COMMENT '日志标题',
   `log_content` text COMMENT '日志内容',
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8 COMMENT='系统日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8 COMMENT='系统日志表';
 
 -- ----------------------------
 -- Records of cms_version_log
@@ -608,6 +610,43 @@ INSERT INTO `cms_version_log` VALUES ('118', '2017-02-28 02:20:27', '陈星星',
 INSERT INTO `cms_version_log` VALUES ('119', '2017-03-01 02:21:19', '陈星星', '对接产品分类页面', '<div>1.修复数据库DISTINCT去重报错BUG</div><div>2.对后台管理系统的模块进行更精确的分离，方便后期对模块的分布式</div><div>3.对接产品分类页面</div>');
 INSERT INTO `cms_version_log` VALUES ('120', '2017-03-02 02:22:19', '陈星星', '对接产品详情页面', '<div>1.基本实现产品详情页面</div><div>2.更新数据库结构</div>');
 INSERT INTO `cms_version_log` VALUES ('121', '2017-03-04 02:22:45', '陈星星', '完善产品详情页面', '<div>1.完善产品详情页面</div><div>2.对接商品评价、商品提问等功能</div>');
+INSERT INTO `cms_version_log` VALUES ('122', '2017-03-05 00:27:06', '陈星星', '基本实现商品规格', '<div>1.商品规格选择基本完成</div><div>2.添加商品规格表</div><div>3.更新数据库结构</div>');
+INSERT INTO `cms_version_log` VALUES ('123', '2017-03-06 00:28:11', '陈星星', '完善商品详情页', '<div>1.完善商品详情页面</div><div>2.后台管理用户头像修改</div>');
+INSERT INTO `cms_version_log` VALUES ('124', '2017-03-13 00:29:31', '陈星星', '电子商品评论页面', '<div>1.电子商城用户登录显示功能</div><div>2.电子商城评论列表</div>');
+INSERT INTO `cms_version_log` VALUES ('125', '2017-03-14 00:30:08', '陈星星', '商品搜索功能实现', '<div>1.商品提问列表</div><div>2.商品搜索功能实现</div>');
+INSERT INTO `cms_version_log` VALUES ('126', '2017-03-15 00:30:27', '陈星星', '收藏夹展示实现', '<div>1.个人中心框架搭建完毕</div><div>2.收藏夹展示列表实现</div><div>3.删除喜欢的商品功能实现</div><div>4.更新数据库结构</div>');
+INSERT INTO `cms_version_log` VALUES ('127', '2017-03-16 00:32:03', '陈星星', '我的收货地址展示实现', '<div>1.我的收获地址显示功能实现</div><div>2.删除我的收货地址实现</div><div>3.添加我的收获地址实现</div><div>4.更新数据库结构</div>');
+
+-- ----------------------------
+-- Table structure for os_address
+-- ----------------------------
+DROP TABLE IF EXISTS `os_address`;
+CREATE TABLE `os_address` (
+  `address_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '收获地址ID',
+  `user_id` bigint(20) unsigned DEFAULT NULL COMMENT '用户ID',
+  `user_name` varchar(64) DEFAULT NULL COMMENT '姓名',
+  `user_tag` varchar(64) DEFAULT NULL COMMENT '地址标签',
+  `user_phone` varchar(11) DEFAULT NULL COMMENT '手机号码',
+  `province_id` int(10) unsigned DEFAULT NULL COMMENT '省份ID',
+  `province_name` varchar(64) DEFAULT NULL COMMENT '省份名字',
+  `city_id` int(10) unsigned DEFAULT NULL COMMENT '城市ID',
+  `city_name` varchar(64) DEFAULT NULL COMMENT '城市名字',
+  `district_id` int(10) unsigned DEFAULT NULL COMMENT '区域ID',
+  `district_name` varchar(64) DEFAULT NULL COMMENT '区域名字',
+  `user_adress` varchar(255) DEFAULT NULL COMMENT '详细地址',
+  `user_zipcode` int(6) DEFAULT NULL COMMENT '邮政编码',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`address_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='收获地址';
+
+-- ----------------------------
+-- Records of os_address
+-- ----------------------------
+INSERT INTO `os_address` VALUES ('2', '1', '陈星星', '公司', '18857105127', '1371', '浙江省', '1372', '杭州市', '1379', '余杭区', '海曙路58号', '123456', '2017-03-16 18:48:14', '2017-03-16 18:48:18');
+INSERT INTO `os_address` VALUES ('3', '1', '陈星星', '家', '18857105127', '1371', '浙江省', '1372', '杭州市', '1379', '余杭区', '海曙路58号', '123456', '2017-03-16 18:48:14', '2017-03-16 18:48:18');
+INSERT INTO `os_address` VALUES ('4', '1', '陈星星', '公司', '18857105127', '1371', '浙江省', '1372', '杭州市', '1379', '余杭区', '海曙路58号', '123456', '2017-03-16 18:48:14', '2017-03-16 18:48:18');
+INSERT INTO `os_address` VALUES ('8', '1', '陈晓旭', '家', '18857105127', '44', '上海市', '45', '上海市', '46', '黄浦区', '杭州师范大学仓前校区', '123456', '2017-03-17 00:16:15', null);
 
 -- ----------------------------
 -- Table structure for os_advert
@@ -894,7 +933,7 @@ CREATE TABLE `os_favorite` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建者',
   PRIMARY KEY (`favorite_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='收藏夹';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='收藏夹';
 
 -- ----------------------------
 -- Records of os_favorite
@@ -1424,7 +1463,7 @@ CREATE TABLE `os_user` (
 -- ----------------------------
 -- Records of os_user
 -- ----------------------------
-INSERT INTO `os_user` VALUES ('1', '14875975007231277', '穿鞋子的猫', '289d1f89b1a93395267bac0af18bd916', 'IeA7iu', '陈星星', '0', '0', 'default/avatar/avatar_8.jpg', '1', '1', '810170512@qq.com', '18857105127', '2017-03-16 01:01:39', '192.168.191.1', '23', '2017-02-21 15:19:07', null, '2017-02-24 01:53:02', '穿鞋子的猫', null, null, '0');
+INSERT INTO `os_user` VALUES ('1', '14875975007231277', '穿鞋子的猫', '289d1f89b1a93395267bac0af18bd916', 'IeA7iu', '陈星星', '0', '0', 'default/avatar/avatar_8.jpg', '1', '1', '810170512@qq.com', '18857105127', '2017-03-17 00:20:20', '172.18.62.6', '32', '2017-02-21 15:19:07', null, '2017-02-24 01:53:02', '穿鞋子的猫', null, null, '0');
 INSERT INTO `os_user` VALUES ('8', '148777295260796', '陈星星', '0fb10cf407bc90a8f6c4c2299aeb0b2c', 'jmslV1', '陈星星', '0', '0', 'default/avatar/avatar_4.jpg', '1', '1', '55245511@qq.com', '18857105120', '2017-02-22 22:16:24', '172.27.201.108', '1', '2017-02-22 22:15:53', '陈星星', null, null, '0', null, '0');
 INSERT INTO `os_user` VALUES ('12', '148777481346536', '陈星星', 'e00d4e98d017fcf9a3b41a341c2bcd30', 'uN2Gdw', '陈星星', '0', '0', 'default/avatar/avatar_5.jpg', '1', '1', '55245521@qq.com', '18857105137', null, null, '0', '2017-02-22 22:46:53', '陈星星', null, null, '0', null, '0');
 
@@ -1440,7 +1479,7 @@ CREATE TABLE `os_user_login_log` (
   `operating_system` varchar(50) DEFAULT NULL COMMENT '操作系统',
   `browser` varchar(50) DEFAULT NULL COMMENT '浏览器',
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='用户登录表';
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COMMENT='用户登录表';
 
 -- ----------------------------
 -- Records of os_user_login_log
@@ -1471,3 +1510,12 @@ INSERT INTO `os_user_login_log` VALUES ('23', '2017-03-16 00:02:08', '192.168.19
 INSERT INTO `os_user_login_log` VALUES ('24', '2017-03-16 00:31:45', '192.168.191.1', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `os_user_login_log` VALUES ('25', '2017-03-16 00:59:11', '192.168.191.1', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `os_user_login_log` VALUES ('26', '2017-03-16 01:01:39', '192.168.191.1', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('27', '2017-03-16 17:56:34', '172.27.72.80', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('28', '2017-03-16 19:19:56', '172.27.72.80', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('29', '2017-03-16 19:56:41', '172.27.72.80', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('30', '2017-03-16 20:00:50', '172.27.72.80', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('31', '2017-03-16 20:10:16', '172.27.72.80', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('32', '2017-03-16 20:37:58', '172.27.72.80', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('33', '2017-03-16 22:56:44', '172.29.138.207', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('34', '2017-03-17 00:00:27', '172.18.62.6', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('35', '2017-03-17 00:20:20', '172.18.62.6', '1', 'WINDOWS_10', 'CHROME45');

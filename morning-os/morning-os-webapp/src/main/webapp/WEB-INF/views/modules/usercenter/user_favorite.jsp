@@ -43,7 +43,7 @@
                 <li><a href="${ctx}/uc/user/portal">我的个人中心</a></li>
                 <li><a href="http://order.mi.com/message/list?r=98069.1489505349">消息通知<i class="J_miMessageTotal"></i></a></li>
                 <li><a href="${ctx}/uc/user/favorite">喜欢的商品</a></li>
-                <li><a href="http://order.mi.com/user/address?r=98069.1489505349">收货地址</a></li>
+                <li><a href="${ctx}/uc/user/address">收货地址</a></li>
               </ul>
             </div>
           </div>
@@ -65,7 +65,7 @@
         <div class="uc-box uc-main-box">
           <div class="uc-content-box">
             <div class="box-hd">
-              <h1 class="title">喜欢的商品</h1>
+              <h1 class="title">喜欢的商品<small>已收藏了${pageInfo.total} 个喜欢的商品!</small></h1>
               <div class="more clearfix hide">
                 <ul class="filter-list J_addrType">
                   <li class="first active"><a href="">喜欢的商品</a></li>
