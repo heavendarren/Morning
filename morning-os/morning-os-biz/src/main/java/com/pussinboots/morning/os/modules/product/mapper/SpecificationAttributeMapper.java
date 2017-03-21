@@ -1,6 +1,9 @@
 package com.pussinboots.morning.os.modules.product.mapper;
 
 import com.pussinboots.morning.os.modules.product.entity.SpecificationAttribute;
+
+import java.util.List;
+
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
@@ -13,5 +16,12 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 *
  */
 public interface SpecificationAttributeMapper extends BaseMapper<SpecificationAttribute> {
+	
+	/**
+	 * 根据规格属性ID列表查找规格属性名称列表
+	 * @param spec 规格属性ID列表
+	 * @return List<String> 
+	 */
+	List<String> selectBySpec(String spec);
 
 }

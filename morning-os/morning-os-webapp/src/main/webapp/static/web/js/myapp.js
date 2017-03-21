@@ -1,3 +1,7 @@
+$(function() {
+	show_cart_umber();// 购物车商品数量
+});
+
 /**
  * 展示用户登陆下拉菜单
  */
@@ -14,27 +18,117 @@ $(function() {
 });
 
 /**
- * 购物车
+ * 导航栏购物车
+ */
+var lodingHtml = '<div style="text-align: center" class="tac"><img src="' + baselocation + '/static/web/img/loading.gif"></div>';
+$(function() {
+	$('.topbar-cart').hover(function() {
+		$('.site-topbar .cart-menu').css('display', 'block');
+		$.ajax({
+			url : baselocation + "/cart/ajax/topbar",
+			type : 'get',
+			dataType : 'text',
+			beforeSend : function() {
+				$(".site-topbar .cart-menu").children(".loading").html(lodingHtml);
+			},
+			success : function(result) {
+				$(".site-topbar .cart-menu").html(result);
+				$('.site-topbar .cart-mini').css({
+					display : 'block',
+					background : '#fff',
+					color : '#ff6700'
+				});
+			}
+		});
+	}, function() {
+		$('.site-topbar .cart-menu').css('display', 'none');
+		var len = $('.site-topbar .cart-menu .cart-list').children('li').length;
+		if (len > 0) {
+			$('.site-topbar .cart-mini').css({
+				background : '#ff6700',
+				color : '#fff'
+			});
+		} else {
+			$('.site-topbar .cart-mini').css({
+				background : '#424242',
+				color : '#b0b0b0'
+			});
+		}
+	});
+})
+
+/**
+ * 购物车商品数量
  */
 $(function() {
-	$('.topbar-cart').mouseover(function() {
+	$.ajax({
+		url : baselocation + "/cart/ajax/cartNumber",
+		type : 'get',
+		dataType : 'json',
+		success : function(result) {
+			if (result.success == true) {
+				$('.site-topbar .cart-mini').css({
+					background : '#ff6700',
+					color : '#fff'
+				});
+				$('.site-topbar .cart-mini').children('span').text("  （" + result.data + "）  ");
+			} else {
+				$('.site-topbar .cart-mini').css({
+					background : '#424242',
+					color : '#b0b0b0'
+				});
+				$('.site-topbar .cart-mini').children('span').text("  （0）  ");
+			}
+		}
+	});
+})
 
-		$('.site-topbar .cart-menu').css('display', 'block');
-		$('.site-topbar .cart-mini').css({
-			display : 'block',
-			background : '#fff',
-			color : '#ff6700'
-		});
-	})
-	$('.topbar-cart').mouseout(function() {
-		$('.site-topbar .cart-menu').css('display', 'none');
-		$('.site-topbar .cart-mini').css({
-			background : '#424242',
-			color : '#b0b0b0'
-		});
-	})
-});
+/**
+ * 购物车商品数量
+ */
+function show_cart_umber() {
+	$.ajax({
+		url : baselocation + "/cart/ajax/cartNumber",
+		type : 'get',
+		dataType : 'json',
+		success : function(result) {
+			if (result.success == true) {
+				$('.site-topbar .cart-mini').css({
+					background : '#ff6700',
+					color : '#fff'
+				});
+				$('.site-topbar .cart-mini').children('span').text("  （" + result.data + "）  ");
+			} else {
+				$('.site-topbar .cart-mini').css({
+					background : '#424242',
+					color : '#b0b0b0'
+				});
+				$('.site-topbar .cart-mini').children('span').text("  （0）  ");
+			}
+		}
+	});
+}
 
+/**
+ * 购物车删除商品
+ */
+function cart_delete(obj, data) {
+	$.ajax({
+		type : 'delete',
+		dataType : 'json',
+		url : baselocation + '/cart/' + data,
+		success : function(result) {
+			if (result.success == true) {
+				$(obj).parent().parent().parent("li").remove();
+				show_cart_umber();
+			} else {
+				layer.alert(result.message, {
+					icon : 2
+				});
+			}
+		}
+	})
+}
 
 /**
  * 轮播top菜单导航

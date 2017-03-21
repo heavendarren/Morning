@@ -15,6 +15,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class DubboProviders {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DubboProviders.class);
+	
+    private DubboProviders() { }
 
 	public static void main(String[] args) {
 		try {

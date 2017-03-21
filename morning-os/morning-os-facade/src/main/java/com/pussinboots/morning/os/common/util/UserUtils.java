@@ -38,8 +38,6 @@ public class UserUtils {
 		picImgUrl.append(picImg);
 
 		// 将绝对路径"\"替换成"/"
-		String savaFilePath = picImgUrl.toString().replaceAll("\\\\", "/");
-
-		return savaFilePath;
+		return picImgUrl.toString().replaceAll("\\\\", "/");
 	}
 }

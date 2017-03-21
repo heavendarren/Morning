@@ -77,6 +77,7 @@
 		    <mvc:mapping path="/**"/>
 		    <mvc:exclude-mapping path="/"/>
 		    <mvc:exclude-mapping path="/pass/**"/>
+		    <mvc:exclude-mapping path="/*/ajax/**"/>
 		    <mvc:exclude-mapping path="/static/**"/>
 		    <mvc:exclude-mapping path="/uploads/**"/>		    
 		    <mvc:exclude-mapping path="/common/**"/>

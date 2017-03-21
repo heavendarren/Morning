@@ -48,9 +48,8 @@ import com.pussinboots.morning.os.modules.product.vo.KindVO;
 *
  */
 @Controller
-@RequestMapping(value="/item")
+@RequestMapping(value = "/item")
 public class ProductItemControlller extends BaseController{
-	
 	
 	/** 商品详情页  */
 	private static final String PRODUCT_ITEM = getViewPath("modules/product/product_item");

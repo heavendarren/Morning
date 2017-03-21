@@ -15,4 +15,14 @@
     <sql id="Base_Column_List">
         spec_attr_id AS specAttrId, specification_id AS specificationId, name, create_time AS createTime, create_by AS createBy
     </sql>
+    
+    <!-- 根据规格属性ID列表查找规格属性名称列表 -->
+    <select id="selectBySpec" parameterType="java.lang.String" resultType="java.lang.String">
+    	SELECT
+    		name
+    	FROM
+			os_specification_attribute
+		WHERE
+			spec_attr_id IN (${_parameter})
+    </select>
 </mapper>

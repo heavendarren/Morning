@@ -15,7 +15,7 @@ public enum ProductSortEnum {
 	RECOMMEND(0, "推荐", "商品平均评价分", "comment_average", "DESC"),
 
 	/** 新品 */
-	New(1, "新品", "商品上架时间", "shelve_time" , "DESC"),
+	NEW(1, "新品", "商品上架时间", "shelve_time" , "DESC"),
 	
 	/** 销量 */
 	SALES(2, "新品", "商品销售数量", "sales_volume", "DESC"),

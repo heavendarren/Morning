@@ -602,7 +602,8 @@ input.btn-large, button.btn-large {
 	color: #b0b0b0;
 	background: transparent;
 	cursor: text;
-	font-weight: normal; -webkit-transition : all .2s linear;
+	font-weight: normal;
+	-webkit-transition: all .2s linear;
 	transition: all .2s linear;
 	-webkit-transition: all .2s linear;
 }
@@ -910,9 +911,9 @@ textarea.input-text {
 
 .site-topbar .cart-mini i {
 	margin-right: 4px;
-	font-size: 20px;
-	line-height: 20px;
-	vertical-align: -4px
+	font-size: 16px;
+	line-height: 16px;
+	vertical-align: -2px
 }
 
 .site-topbar .cart-mini-num {
@@ -1017,11 +1018,6 @@ textarea.input-text {
 	color: #424242
 }
 
-.site-topbar .cart-item .btn-del i {
-	font-size: 16px;
-	line-height: 16px
-}
-
 .site-topbar .cart-total {
 	padding: 15px 20px;
 	background: #fafafa
@@ -1090,7 +1086,8 @@ textarea.input-text {
 }
 
 .site-topbar .user-name i {
-	line-height: 24px;
+	font-size: 12px;
+	line-height: 12px;
 	vertical-align: 12px
 }
 
@@ -1114,7 +1111,7 @@ textarea.input-text {
 
 .site-topbar .user-menu a {
 	display: block;
-	padding: 3px 35px;
+	padding: 3px 30px;
 	line-height: 2
 }
 
@@ -1146,92 +1143,8 @@ textarea.input-text {
 .site-topbar .message i {
 	font-style: normal
 }
-
-.sep {
-	margin: 0 .5em;
-	color: #424242
-}
-
-.topbar-nav {
-	float: left;
-	height: 40px;
-	line-height: 40px;
-	overflow: hidden;
-	_zoom: 1;
-	background: #333;
-}
-
-.topbar-cart, .topbar-info {
-	float: right;
-	color: #b0b0b0;
-	color: #424242;
-	line-height: 40px;
-	height: 40px;
-}
-
-.site-header .nav-item .link:hover {
-	color: #ff6700;
-	text-decoration: none;
-}
-
-.indexTop:last-child {
-	color: #333;
-}
-
-.indexBottom:last-child {
-	color: #ffffff;
-}
-
-/*-------------购物车-----------------*/
-.site-topbar .topbar-cart {
-	width: 120px;
-	margin-left: 15px;
-}
-
-.site-topbar .topbar-cart, .site-topbar .topbar-info {
-	position: relative;
-	float: right;
-	_display: inline;
-	height: 40px;
-}
-
-.site-topbar .cart-mini {
-	position: relative;
-	z-index: 32;
-	display: block;
-	height: 40px;
-	line-height: 40px;
-	text-align: center;
-	color: #b0b0b0;
-	background: #424242;
-}
-
-.site-topbar .cart-mini img {
-	margin-right: 4px;
-	line-height: 20px;
-	vertical-align: -4px;
-}
-
-.site-topbar .cart-mini-num {
-	margin-left: -4px;
-}
-
-.site-topbar .cart-menu {
-	display: none;
-	position: absolute;
-	right: 0;
-	right: -1px \9;
-	top: 40px;
-	z-index: 31;
-	width: 316px;
-	padding: 25px 0;
-	color: #424242;
-	background: #fff;
-	text-align: center;
-	border: 1px solid #e0e0e0 \9;
-	border-top: 0 \9;
-	-webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+.loading {
+	padding: 20px 0
 }
 
 /*-------------类目导航栏-----------------*/
@@ -1882,6 +1795,10 @@ button, input {
 
 .page-main {
 	background: #f5f5f5;
+}
+
+.page-mini-main {
+	border-top: 2px solid #ff6700;
 }
 
 .xm-plain-box .box-hd .more {

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2017-03-17 00:33:23
+Date: 2017-03-22 02:44:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1319,6 +1319,7 @@ INSERT INTO `os_product_parameter` VALUES ('7', '1', '内存', '3GB', '1', '7', 
 DROP TABLE IF EXISTS `os_product_specification`;
 CREATE TABLE `os_product_specification` (
   `product_spec_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品规格ID',
+  `product_spec_number` bigint(20) unsigned DEFAULT NULL COMMENT '商品规格编号',
   `product_id` bigint(20) DEFAULT NULL COMMENT '商品ID',
   `spec` varchar(64) DEFAULT NULL COMMENT '规格：规格ID，以“,”相隔',
   `stock` int(11) DEFAULT '0' COMMENT '库存',
@@ -1337,12 +1338,12 @@ CREATE TABLE `os_product_specification` (
 -- ----------------------------
 -- Records of os_product_specification
 -- ----------------------------
-INSERT INTO `os_product_specification` VALUES ('1', '1', '1,3', '30', '10', '1599.00', '1600', '1', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
-INSERT INTO `os_product_specification` VALUES ('2', '1', '1,4', '80', '20', '1699.00', '1700', '0', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
-INSERT INTO `os_product_specification` VALUES ('3', '1', '1,5', '100', '30', '1799.00', '1800', '0', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
-INSERT INTO `os_product_specification` VALUES ('4', '1', '2,3', '45', '45', '1599.00', '1600', '0', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
-INSERT INTO `os_product_specification` VALUES ('5', '1', '2,4', '12', '45', '1699.00', '1700', '0', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
-INSERT INTO `os_product_specification` VALUES ('6', '1', '2,5', '72', '75', '1799.00', '1800', '0', '0', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
+INSERT INTO `os_product_specification` VALUES ('1', '14725812207481', '1', '1,3', '30', '10', '1599.00', '1600', '1', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
+INSERT INTO `os_product_specification` VALUES ('2', '14725812207482', '1', '1,4', '80', '20', '1699.00', '1700', '0', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
+INSERT INTO `os_product_specification` VALUES ('3', '14725812207483', '1', '1,5', '100', '30', '1799.00', '1800', '0', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
+INSERT INTO `os_product_specification` VALUES ('4', '14725812207484', '1', '2,3', '45', '45', '1599.00', '1600', '0', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
+INSERT INTO `os_product_specification` VALUES ('5', '14725812207485', '1', '2,4', '12', '45', '1699.00', '1700', '0', '1', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
+INSERT INTO `os_product_specification` VALUES ('6', '14725812207486', '1', '2,5', '72', '75', '1799.00', '1800', '0', '0', '2017-03-05 21:51:01', '猫宁', '2017-03-05 21:51:25', '猫宁');
 
 -- ----------------------------
 -- Table structure for os_question
@@ -1383,6 +1384,25 @@ INSERT INTO `os_question` VALUES ('9', '1', '1', '猫宁', 'default/avatar/avata
 INSERT INTO `os_question` VALUES ('10', '1', '1', '猫宁', 'default/avatar/avatar_5.jpg', '测试提问', '56', '1', '2017-03-05 01:09:03', '猫宁', '测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问。', '猫宁', '2017-03-05 01:11:08', '1', '猫宁', '2017-03-05 01:09:38');
 INSERT INTO `os_question` VALUES ('11', '1', '1', '猫宁', 'default/avatar/avatar_5.jpg', '测试提问', '56', '1', '2017-03-05 01:09:03', '猫宁', '测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问。', '猫宁', '2017-03-05 01:11:08', '1', '猫宁', '2017-03-05 01:09:38');
 INSERT INTO `os_question` VALUES ('12', '1', '1', '猫宁', 'default/avatar/avatar_5.jpg', '测试提问', '56', '1', '2017-03-05 01:09:03', '猫宁', '测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问，测试提问。', '猫宁', '2017-03-05 01:11:08', '1', '猫宁', '2017-03-05 01:09:38');
+
+-- ----------------------------
+-- Table structure for os_shopping_cart
+-- ----------------------------
+DROP TABLE IF EXISTS `os_shopping_cart`;
+CREATE TABLE `os_shopping_cart` (
+  `cart_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '购物车ID',
+  `product_spec_number` bigint(20) unsigned DEFAULT NULL COMMENT '商品规格编号',
+  `user_id` bigint(20) unsigned DEFAULT NULL COMMENT '用户ID',
+  `buy_number` int(11) DEFAULT '1' COMMENT '购买数量',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`cart_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COMMENT='购物车表';
+
+-- ----------------------------
+-- Records of os_shopping_cart
+-- ----------------------------
+INSERT INTO `os_shopping_cart` VALUES ('35', '14725812207484', '1', '1', '2017-03-22 02:41:11', null);
 
 -- ----------------------------
 -- Table structure for os_specification
@@ -1463,7 +1483,7 @@ CREATE TABLE `os_user` (
 -- ----------------------------
 -- Records of os_user
 -- ----------------------------
-INSERT INTO `os_user` VALUES ('1', '14875975007231277', '穿鞋子的猫', '289d1f89b1a93395267bac0af18bd916', 'IeA7iu', '陈星星', '0', '0', 'default/avatar/avatar_8.jpg', '1', '1', '810170512@qq.com', '18857105127', '2017-03-17 00:20:20', '172.18.62.6', '32', '2017-02-21 15:19:07', null, '2017-02-24 01:53:02', '穿鞋子的猫', null, null, '0');
+INSERT INTO `os_user` VALUES ('1', '14875975007231277', '穿鞋子的猫', '289d1f89b1a93395267bac0af18bd916', 'IeA7iu', '陈星星', '0', '0', 'default/avatar/avatar_8.jpg', '1', '1', '810170512@qq.com', '18857105127', '2017-03-22 02:39:32', '192.168.191.1', '52', '2017-02-21 15:19:07', null, '2017-02-24 01:53:02', '穿鞋子的猫', null, null, '0');
 INSERT INTO `os_user` VALUES ('8', '148777295260796', '陈星星', '0fb10cf407bc90a8f6c4c2299aeb0b2c', 'jmslV1', '陈星星', '0', '0', 'default/avatar/avatar_4.jpg', '1', '1', '55245511@qq.com', '18857105120', '2017-02-22 22:16:24', '172.27.201.108', '1', '2017-02-22 22:15:53', '陈星星', null, null, '0', null, '0');
 INSERT INTO `os_user` VALUES ('12', '148777481346536', '陈星星', 'e00d4e98d017fcf9a3b41a341c2bcd30', 'uN2Gdw', '陈星星', '0', '0', 'default/avatar/avatar_5.jpg', '1', '1', '55245521@qq.com', '18857105137', null, null, '0', '2017-02-22 22:46:53', '陈星星', null, null, '0', null, '0');
 
@@ -1479,7 +1499,7 @@ CREATE TABLE `os_user_login_log` (
   `operating_system` varchar(50) DEFAULT NULL COMMENT '操作系统',
   `browser` varchar(50) DEFAULT NULL COMMENT '浏览器',
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COMMENT='用户登录表';
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 COMMENT='用户登录表';
 
 -- ----------------------------
 -- Records of os_user_login_log
@@ -1519,3 +1539,23 @@ INSERT INTO `os_user_login_log` VALUES ('32', '2017-03-16 20:37:58', '172.27.72.
 INSERT INTO `os_user_login_log` VALUES ('33', '2017-03-16 22:56:44', '172.29.138.207', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `os_user_login_log` VALUES ('34', '2017-03-17 00:00:27', '172.18.62.6', '1', 'WINDOWS_10', 'CHROME45');
 INSERT INTO `os_user_login_log` VALUES ('35', '2017-03-17 00:20:20', '172.18.62.6', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('36', '2017-03-19 22:16:19', '172.27.165.109', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('37', '2017-03-19 22:16:21', '172.27.165.109', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('38', '2017-03-20 01:03:58', '172.18.56.31', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('39', '2017-03-20 22:09:14', '172.27.191.127', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('40', '2017-03-20 22:41:54', '172.27.191.127', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('41', '2017-03-21 14:58:45', '172.27.208.212', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('42', '2017-03-21 15:40:42', '172.27.208.212', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('43', '2017-03-21 16:07:02', '172.27.208.212', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('44', '2017-03-21 16:07:03', '172.27.208.212', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('45', '2017-03-21 17:00:55', '172.27.208.212', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('46', '2017-03-21 17:04:07', '172.27.208.212', '1', 'WINDOWS_10', 'CHROME');
+INSERT INTO `os_user_login_log` VALUES ('47', '2017-03-21 17:49:46', '172.27.208.212', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('48', '2017-03-21 17:54:10', '172.27.208.212', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('49', '2017-03-21 17:58:02', '172.27.208.212', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('50', '2017-03-21 18:00:03', '172.27.208.212', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('51', '2017-03-21 18:02:32', '172.27.208.212', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('52', '2017-03-21 18:04:40', '172.27.208.212', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('53', '2017-03-22 01:13:58', '192.168.191.1', '1', 'WINDOWS_10', 'CHROME45');
+INSERT INTO `os_user_login_log` VALUES ('54', '2017-03-22 01:18:08', '192.168.191.1', '1', 'WINDOWS_10', 'CHROME');
+INSERT INTO `os_user_login_log` VALUES ('55', '2017-03-22 02:39:32', '192.168.191.1', '1', 'WINDOWS_10', 'CHROME45');

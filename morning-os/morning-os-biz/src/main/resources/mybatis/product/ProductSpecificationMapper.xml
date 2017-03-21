@@ -5,6 +5,7 @@
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="com.pussinboots.morning.os.modules.product.entity.ProductSpecification">
 		<id column="product_spec_id" property="productSpecId" />
+		<result column="product_spec_number" property="productSpecNumber" />
 		<result column="product_id" property="productId" />
 		<result column="spec" property="spec" />
 		<result column="stock" property="stock" />
@@ -21,6 +22,6 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        product_spec_id AS productSpecId, product_id AS productId, spec, stock, sales_volume AS salesVolume, price, score, default_status AS defaultStatus, status, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy
+        product_spec_id AS productSpecId, product_spec_number AS productSpecNumber, product_id AS productId, spec, stock, sales_volume AS salesVolume, price, score, default_status AS defaultStatus, status, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy
     </sql>
 </mapper>

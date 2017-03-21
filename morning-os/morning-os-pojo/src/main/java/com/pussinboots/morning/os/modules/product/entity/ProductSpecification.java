@@ -28,6 +28,11 @@ public class ProductSpecification extends Model<ProductSpecification> {
 	@TableId("product_spec_id")
 	private Long productSpecId;
     /**
+     * 商品编号
+     */
+	@TableField("product_spec_number")
+	private Long productSpecNumber;
+    /**
      * 商品ID
      */
 	@TableField("product_id")
@@ -90,6 +95,14 @@ public class ProductSpecification extends Model<ProductSpecification> {
 
 	public void setProductSpecId(Long productSpecId) {
 		this.productSpecId = productSpecId;
+	}
+
+	public Long getProductSpecNumber() {
+		return productSpecNumber;
+	}
+
+	public void setProductSpecNumber(Long productSpecNumber) {
+		this.productSpecNumber = productSpecNumber;
 	}
 
 	public Long getProductId() {

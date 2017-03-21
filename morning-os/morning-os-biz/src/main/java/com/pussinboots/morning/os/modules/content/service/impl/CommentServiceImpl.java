@@ -42,7 +42,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 		comment.setProductId(productId);
 		comment.setType(type);
 		comment.setStatus(status);
-		Page<Comment> page = new Page<Comment>(pageInfo.getNowpage(), pageInfo.getPagesize());
+		Page<Comment> page = new Page<>(pageInfo.getNowpage(), pageInfo.getPagesize());
 		return commentMapper.selectPage(page, new EntityWrapper<Comment>(comment).orderBy("createTime", false));
 	}
 
@@ -54,7 +54,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 		comment.setProductId(productId);
 		comment.setType(type);
 		comment.setStatus(status);
-		Page<Comment> page = new Page<Comment>(pageInfo.getNowpage(), pageInfo.getPagesize());
+		Page<Comment> page = new Page<>(pageInfo.getNowpage(), pageInfo.getPagesize());
 		List<Comment> comments = commentMapper.selectPage(page,
 				new EntityWrapper<Comment>(comment).orderBy("goodCount", false));
 
@@ -73,7 +73,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 	@Override
 	public CommentPageDTO selectCommentsByPage(Long productId, PageInfo pageInfo, Integer status) {
 		// 查找分页评论列表
-		Page<Comment> page = new Page<Comment>(pageInfo.getNowpage(), pageInfo.getPagesize());
+		Page<Comment> page = new Page<>(pageInfo.getNowpage(), pageInfo.getPagesize());
 		List<CommentVO> commentVOs = commentMapper.selectCommentsByPage(productId, pageInfo, status, page);
 		pageInfo.setTotal(page.getTotal());
 

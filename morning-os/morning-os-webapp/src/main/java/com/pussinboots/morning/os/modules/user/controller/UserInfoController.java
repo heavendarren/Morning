@@ -82,7 +82,7 @@ public class UserInfoController extends BaseController {
 		model.addAttribute("favorites", favoritePageDTO.getFavorites());
 		model.addAttribute("pageInfo", favoritePageDTO.getPageInfo());
 		
-		return USER_FAVORITE;
+		return "modules/usercenter/user_favorite";
 	}
 	
 	/**

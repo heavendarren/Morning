@@ -35,7 +35,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 		Question question = new Question();
 		question.setProductId(productId);
 		question.setStatus(status);
-		Page<Question> page = new Page<Question>(pageInfo.getNowpage(), pageInfo.getPagesize());
+		Page<Question> page = new Page<>(pageInfo.getNowpage(), pageInfo.getPagesize());
 		return questionMapper.selectPage(page, new EntityWrapper<Question>(question).orderBy("createTime", false));
 	}
 
@@ -44,14 +44,14 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 		Question question = new Question();
 		question.setProductId(productId);
 		question.setStatus(status);
-		Page<Question> page = new Page<Question>(pageInfo.getNowpage(), pageInfo.getPagesize());
+		Page<Question> page = new Page<>(pageInfo.getNowpage(), pageInfo.getPagesize());
 		return questionMapper.selectPage(page, new EntityWrapper<Question>(question).orderBy("goodCount", false));
 	}
 
 	@Override
 	public QuestionPageDTO selectQuestionsByPage(Long productId, PageInfo pageInfo, Integer status) {
 		// 查找分页评论列表
-		Page<Comment> page = new Page<Comment>(pageInfo.getNowpage(), pageInfo.getPagesize());
+		Page<Comment> page = new Page<>(pageInfo.getNowpage(), pageInfo.getPagesize());
 		List<Question> questions = questionMapper.selectQuestionsByPage(productId, pageInfo, status, page);
 		pageInfo.setTotal(page.getTotal());
 		return new QuestionPageDTO(pageInfo, questions);

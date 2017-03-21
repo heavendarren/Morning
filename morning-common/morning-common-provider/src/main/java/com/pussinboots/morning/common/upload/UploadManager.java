@@ -83,10 +83,8 @@ public class UploadManager {
 		savePath.append(File.separator);
 		savePath.append(newFileName);// 文件名称
 
-		// 将绝对路径"\"替换成"/"
-		String savaFilePath = savePath.toString().replaceAll("\\\\", "/");
-		// 文件保存路径
-		return savaFilePath;
+		// 将绝对路径"\"替换成"/",文件保存路径
+		return savePath.toString().replaceAll("\\\\", "/");
 	}
 	
 	/**

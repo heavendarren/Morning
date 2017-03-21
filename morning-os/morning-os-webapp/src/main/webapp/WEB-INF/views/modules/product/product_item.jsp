@@ -57,7 +57,7 @@
                     </c:if>
                   </ul>
                 </dd>
-                <dd class="goods-info-head-price clearfix"> <b class="J_mi_goodsPrice sys_item_price">${product.showPrice }</b> <i>&nbsp;元</i> <del> 赠送积分:<span class="J_mi_marketPrice sys_item_score">79元</span> </del> </dd>
+                <dd class="goods-info-head-price clearfix"> <b class="J_mi_goodsPrice sys_item_price">${product.showPrice }</b> <i>&nbsp;元</i> <del> 赠送积分:<span class="J_mi_marketPrice sys_item_score">79</span> </del> </dd>
                 <c:forEach items="${kindVOs }" var="kindVO">
                   <dd class="goods-info-head-size clearfix sys_item_specpara"  data-sid="${kindVO.specificationId }"> <span class="style-label">${kindVO.name }：</span>
                     <ul class="clearfix" id="J_goodsSize">
@@ -67,7 +67,7 @@
                     </ul>
                   </dd>
                 </c:forEach>
-                <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="" id="goodsDetailAddCartBtn" class="btn btn-primary goods-add-cart-btn" data-gid="2164700027" data-package="0" data-stat-id="3d749b02d4ba8b20"> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp; </a> </dd>
+                <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="javascript:void(0)" onclick="add_cart(this)" id="goodsDetailAddCartBtn" class="btn btn-primary goods-add-cart-btn" data-product-spec-number=""> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp; </a> </dd>
                 <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;"> <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143"> <i class="iconfont "></i>到货通知 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp;</a></dd>
                 <dd class="goods-info-head-userfaq">
                   <ul>
@@ -357,14 +357,14 @@
         </div>
       </div>
       <div class="span4">
-        <div class="fr" id="goodsSubBarBtnBox"> <a href="" class="btn btn-primary goods-add-cart-btn" id="goodsSubBarAddCartBtn" data-disabled="false" data-gid="2164700027" data-package="0" data-stat-id="2123b909ff50987b"> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车</a> </div>
+        <div class="fr" id="goodsSubBarBtnBox"> <a href="" class="btn btn-primary goods-add-cart-btn" id="goodsSubBarAddCartBtn" data-disabled="false" data-product-spec-number=""> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车</a> </div>
       </div>
     </div>
   </div>
 </div>
 <!-- 跟随 导航 end -->
 <myfooter> 
-  <script>
+<script>
 //价格json
 var sys_item=${productSpecifications eq null ?"0":productSpecifications};
 var default_price=${product.showPrice};
@@ -392,7 +392,7 @@ $(function(){
 		var _val='';
 		var _resp={
 			score:".sys_item_score",
-			price:".sys_item_price"
+			price:".sys_item_price",
 		}  //输出对应的class
 		$(".goods-info-head .sys_item_specpara").each(function(){
 			var i=$(this);
@@ -413,6 +413,7 @@ $(function(){
 			}else {
 				_score=sys_item[_val]['score'];
 				_price=sys_item[_val]['price'];
+				_productSpecNumber=sys_item[_val]['productSpecNumber'];
 				$('#goodsDetailBtnBox').css('display', 'block');
 				$('#goodsDetailBtnBoxForInform').css('display', 'none');
 			}
@@ -420,12 +421,37 @@ $(function(){
 		}else{
 			_score=sys_item['score'];
 			_price=sys_item['price'];
+			_productSpecNumber=sys_item['productSpecNumber'];
 		}
 		//输出价格
 		$(_resp.score).text(_score);  ///其中的math.round为截取小数点位数
 		$(_resp.price).text(_price);
+		$("#goodsDetailAddCartBtn").attr("data-product-spec-number",_productSpecNumber);
+		$("#goodsSubBarAddCartBtn").attr("data-product-spec-number",_productSpecNumber);
 	}
 })
+
+//加入购物车
+function add_cart(obj) {
+	var productSpecNumber = $(obj).attr("data-product-spec-number");
+	console.info(productSpecNumber);
+	$.ajax({
+		type : 'post',
+		dataType : 'json',
+		data : {'productSpecNumber' : productSpecNumber},
+		url : baselocation + '/cart/',
+		success : function(result) {
+			if (result.success == true) {
+				window.location.href = baselocation + '/cart/' + result.data;
+			} else {
+				layer.alert(result.message, {
+					icon : 2
+				});
+			}
+		}
+	})
+}
+
 </script> 
 </myfooter>
 </body>
