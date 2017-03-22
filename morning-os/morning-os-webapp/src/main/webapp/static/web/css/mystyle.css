@@ -269,7 +269,7 @@ dt {
 }
 
 .btn:focus {
-	outline: 0
+	outline: 0;
 }
 
 .btn:active {

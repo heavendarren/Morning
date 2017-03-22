@@ -42,6 +42,11 @@ public class ShoppingCart extends Model<ShoppingCart> {
 	@TableField("buy_number")
 	private Integer buyNumber;
     /**
+     * 购物车状态：0,未选中；1,选中
+     */
+	@TableField("check_status")
+	private Integer checkStatus;	
+    /**
      * 创建时间
      */
 	@TableField("create_time")
@@ -83,6 +88,14 @@ public class ShoppingCart extends Model<ShoppingCart> {
 
 	public void setBuyNumber(Integer buyNumber) {
 		this.buyNumber = buyNumber;
+	}
+
+	public Integer getCheckStatus() {
+		return checkStatus;
+	}
+
+	public void setCheckStatus(Integer checkStatus) {
+		this.checkStatus = checkStatus;
 	}
 
 	public Date getCreateTime() {

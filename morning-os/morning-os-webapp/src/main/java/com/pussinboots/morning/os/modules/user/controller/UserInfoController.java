@@ -82,7 +82,7 @@ public class UserInfoController extends BaseController {
 		model.addAttribute("favorites", favoritePageDTO.getFavorites());
 		model.addAttribute("pageInfo", favoritePageDTO.getPageInfo());
 		
-		return "modules/usercenter/user_favorite";
+		return USER_FAVORITE;
 	}
 	
 	/**
@@ -118,6 +118,11 @@ public class UserInfoController extends BaseController {
 		return USER_ADDRESS;
 	}
 	
+	/**
+	 * POST 创建收获地址
+	 * @param address
+	 * @return
+	 */
 	@PostMapping(value = "/address")
 	@ResponseBody
 	public ResponseResult addressCreate(Address address) {
@@ -131,6 +136,24 @@ public class UserInfoController extends BaseController {
 
 		return fail(false, "您未登录或者登录已超时,请先登录!");
 		
+	}
+	
+	/**
+	 * POST 更新收货地址
+	 * @param productNumber
+	 * @return
+	 */
+	@PostMapping(value = "/address/{addressId}")
+	@ResponseBody
+	public ResponseResult addressUpdate(@PathVariable("addressId") Long addressId, Address address) {
+		AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
+
+		if (authorizingUser != null) {
+			addressService.updateByAddressId(authorizingUser.getUserId(), addressId , address);
+			return success(true);
+		}
+
+		return fail(false, "您未登录或者登录已超时,请先登录!");
 	}
 	
 	/**

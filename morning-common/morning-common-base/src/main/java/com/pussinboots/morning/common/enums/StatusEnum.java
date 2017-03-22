@@ -29,7 +29,15 @@ public enum StatusEnum {
 	/** 有效 */
 	VALID(1, "有效"), 
 	/** 无效 */
-	INVALID(0, "无效");
+	INVALID(0, "无效"),
+	
+	/** 选中 */
+	CHECKED(1, "选中"),
+	/** 未选中 */
+	UNCHECKED(0, "未选中"),
+	
+	/** 全部*/
+	ALL(null, "全部");
 	
 	private Integer status;
 

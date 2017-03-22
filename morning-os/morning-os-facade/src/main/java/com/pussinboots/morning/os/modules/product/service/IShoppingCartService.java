@@ -17,6 +17,13 @@ import com.pussinboots.morning.os.modules.product.vo.ShoppingCartVO;
 public interface IShoppingCartService extends IService<ShoppingCart> {
 	
 	/**
+	 * 创建购物车商品信息
+	 * @param productSpecNumber 商品规格编号
+	 * @param userId 用户ID
+	 */
+	void insertByProductSpecNumber(Long productSpecNumber, Long userId);
+	
+	/**
 	 * 根据用户ID、产品规格编号查找购物车商品信息
 	 * @param userId 用户ID
 	 * @param productSpecNumber 产品规格编号
@@ -25,18 +32,28 @@ public interface IShoppingCartService extends IService<ShoppingCart> {
 	ShoppingCartVO selectCartVO(Long userId, Long productSpecNumber);
 	
 	/**
-	 * 根据用户ID查找购物车列表
+	 * 根据用户ID、购物车商品状态查找购物车列表
 	 * @param userId 用户ID
-	 * @return CartVO
-	 */	
-	CartVO selectCartVOs(Long userId);
+	 * @param status 购物车商品状态
+	 * @return
+	 */
+	CartVO selectCartVOs(Long userId, Integer status);
 	
 	/**
-	 * 创建购物车商品信息
-	 * @param productSpecNumber 商品规格编号
+	 * 根据产品规格编号、用户ID、购买数量更新购物车商品
+	 * @param productSpecNumber  产品规格编号
 	 * @param userId 用户ID
+	 * @param buyNumber 购买数量
 	 */
-	void insertByProductSpecNumber(Long productSpecNumber, Long userId);
+	void updateByProductSpecNumber(Long productSpecNumber, Long userId, Integer buyNumber);
+	
+	/**
+	 * 根据产品规格编号、用户ID、选中状态更新购物车商品
+	 * @param productSpecNumber 产品规格编号
+	 * @param userId 用户ID
+	 * @param checkStatus 选中状态
+	 */
+	void updateStatusByProductSpecNumber(Long productSpecNumber, Long userId, Integer checkStatus);
 	
 	/**
 	 * 删除购物车商品

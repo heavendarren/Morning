@@ -158,13 +158,13 @@
 }
 
 .cart-bar {
-	height: 80px;
+	height: 100px;
 	text-align: right;
 	background-color: #fff;
 	-webkit-transition: background .3s ease, top .3s ease;
 	transition: background .3s ease, top .3s ease;
 	position: relative;
-	padding-top: 20px;
+	padding-top: 50px;
 }
 
 .cart-bar a {
@@ -235,7 +235,7 @@
 	height: 48px;
 	line-height: 48px;
 	position: absolute;
-	top: -58px;
+	top: -8px;
 	right: 0;
 	background-color: #fff;
 	border: 1px solid #ff6700;

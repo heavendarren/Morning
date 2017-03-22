@@ -33,6 +33,6 @@ public interface ShoppingCartMapper extends BaseMapper<ShoppingCart> {
 	 * @param userId 用户ID
 	 * @return List<ShoppingCartVO>
 	 */
-	List<ShoppingCartVO> selectCartVOs(@Param("userId") Long userId);
+	List<ShoppingCartVO> selectCartVOs(@Param("userId") Long userId, @Param("checkStatus") Integer checkStatus);
 	
 }

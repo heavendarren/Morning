@@ -32,40 +32,7 @@ public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartMapper, Sho
 	private ShoppingCartMapper shoppingCartMapper;
 	@Autowired
 	private SpecificationAttributeMapper specificationAttributeMapper;
-
-	@Override
-	public ShoppingCartVO selectCartVO(Long userId, Long productSpecNumber) {
-		ShoppingCartVO shoppingCartVO = shoppingCartMapper.selectCartVO(userId, productSpecNumber);
-		if (shoppingCartVO != null && StringUtils.isNotBlank(shoppingCartVO.getSpec())) {
-			List<String> specificationName = specificationAttributeMapper.selectBySpec(shoppingCartVO.getSpec());
-			shoppingCartVO.setSpecificationName(specificationName);
-		}
-		return shoppingCartVO;
-	}
 	
-	@Override
-	public CartVO selectCartVOs(Long userId) {
-		// 根据用户ID查找购物车商品列表
-		List<ShoppingCartVO> shoppingCartVOs = shoppingCartMapper.selectCartVOs(userId);
-
-		if (!shoppingCartVOs.isEmpty()) {
-			for (ShoppingCartVO shoppingCartVO : shoppingCartVOs) {
-				// 根据用户ID查找购物车商品列表
-				if (StringUtils.isNotBlank(shoppingCartVO.getSpec())) {
-					List<String> specificationName = specificationAttributeMapper
-							.selectBySpec(shoppingCartVO.getSpec());
-					shoppingCartVO.setSpecificationName(specificationName);
-				}
-			}
-
-			CartVO cartVO = new CartVO();
-			cartVO.setShoppingCartVOs(shoppingCartVOs);
-			return cartVO;
-		}
-
-		return null;
-	}
-
 	@Override
 	public void insertByProductSpecNumber(Long productSpecNumber, Long userId) {
 
@@ -87,6 +54,74 @@ public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartMapper, Sho
 			shoppingCart.setCreateTime(new Date());
 			shoppingCart.setProductSpecNumber(productSpecNumber);
 			shoppingCartMapper.insert(shoppingCart);
+		}
+	}
+
+	@Override
+	public ShoppingCartVO selectCartVO(Long userId, Long productSpecNumber) {
+		ShoppingCartVO shoppingCartVO = shoppingCartMapper.selectCartVO(userId, productSpecNumber);
+		if (shoppingCartVO != null && StringUtils.isNotBlank(shoppingCartVO.getSpec())) {
+			List<String> specificationName = specificationAttributeMapper.selectBySpec(shoppingCartVO.getSpec());
+			shoppingCartVO.setSpecificationName(specificationName);
+		}
+		return shoppingCartVO;
+	}
+	
+	@Override
+	public CartVO selectCartVOs(Long userId, Integer status) {
+		// 根据用户ID查找购物车商品列表
+		List<ShoppingCartVO> shoppingCartVOs = shoppingCartMapper.selectCartVOs(userId, status);
+
+		if (!shoppingCartVOs.isEmpty()) {
+			for (ShoppingCartVO shoppingCartVO : shoppingCartVOs) {
+				// 根据用户ID查找购物车商品列表
+				if (StringUtils.isNotBlank(shoppingCartVO.getSpec())) {
+					List<String> specificationName = specificationAttributeMapper
+							.selectBySpec(shoppingCartVO.getSpec());
+					shoppingCartVO.setSpecificationName(specificationName);
+				}
+			}
+
+			CartVO cartVO = new CartVO();
+			cartVO.setShoppingCartVOs(shoppingCartVOs);
+			return cartVO;
+		}
+
+		return null;
+	}
+
+	@Override
+	public void updateByProductSpecNumber(Long productSpecNumber, Long userId, Integer buyNumber) {
+		// 查找用户购物车,该商品是否存在
+		ShoppingCart queryShoppingCart = new ShoppingCart();
+		queryShoppingCart.setProductSpecNumber(productSpecNumber);
+		queryShoppingCart.setUserId(userId);
+		ShoppingCart shoppingCart = shoppingCartMapper.selectOne(queryShoppingCart);
+
+		if (shoppingCart != null) {
+			shoppingCart.setBuyNumber(buyNumber);
+			shoppingCart.setUpdateTime(new Date());
+			shoppingCartMapper.updateById(shoppingCart);
+		} else {
+			// TODO 抛出一个异常,声明商品不存在
+		}
+	}
+	
+	@Override
+	public void updateStatusByProductSpecNumber(Long productSpecNumber, Long userId, Integer checkStatus) {
+		// 查找用户购物车,该商品是否存在
+		ShoppingCart queryShoppingCart = new ShoppingCart();
+		queryShoppingCart.setProductSpecNumber(productSpecNumber);
+		queryShoppingCart.setUserId(userId);
+		ShoppingCart shoppingCart = shoppingCartMapper.selectOne(queryShoppingCart);
+
+		if (shoppingCart != null) {
+			// 若数据库中购物车存在该商品,则增加该商品购买数量(在原基础上+1)
+			shoppingCart.setCheckStatus(checkStatus);
+			shoppingCart.setUpdateTime(new Date());
+			shoppingCartMapper.updateById(shoppingCart);
+		} else {
+			// TODO 抛出一个异常,声明商品不存在
 		}
 	}
 

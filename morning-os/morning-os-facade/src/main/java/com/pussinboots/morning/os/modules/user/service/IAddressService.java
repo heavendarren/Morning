@@ -32,6 +32,14 @@ public interface IAddressService extends IService<Address> {
 	List<Address> selectAddress(Long userId);
 	
 	/**
+	 * 根据用户ID、收货地址ID更新收货地址
+	 * @param userId 用户ID
+	 * @param addressId 收货地址ID
+	 * @param address 收货地址
+	 */
+	void updateByAddressId(Long userId, Long addressId , Address address);
+	
+	/**
 	 * 根据用户ID、收货地址ID删除收获地址
 	 * @param userId
 	 * @param addressId

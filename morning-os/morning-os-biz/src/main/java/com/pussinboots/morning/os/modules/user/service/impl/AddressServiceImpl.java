@@ -40,6 +40,20 @@ public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address> impl
 		address.setUserId(userId);
 		return addressMapper.selectList(new EntityWrapper<Address>(address).orderBy("createTime", false));
 	}
+	
+	@Override
+	public void updateByAddressId(Long userId, Long addressId, Address address) {
+		Address queryAddress = new Address();
+		queryAddress.setUserId(userId);
+		queryAddress.setAddressId(addressId);
+		Address resultAddress = addressMapper.selectOne(queryAddress);
+		if (resultAddress != null) {
+			address.setAddressId(resultAddress.getAddressId());
+			address.setUserId(queryAddress.getUserId());
+			address.setUpdateTime(new Date());
+			addressMapper.updateById(address);
+		}
+	}
 
 	@Override
 	public void deleteByAddressId(Long userId, Long addressId) {
@@ -48,5 +62,4 @@ public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address> impl
 		address.setAddressId(addressId);
 		addressMapper.delete(new EntityWrapper<Address>(address));
 	}
-
 }

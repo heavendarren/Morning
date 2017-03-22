@@ -58,6 +58,7 @@
 				/login = anon
 				/captcha-image.jpg = anon
 				/uc/** = authc
+				/buy/** = authc
 				/** = anon
 			</value>
 		</property>

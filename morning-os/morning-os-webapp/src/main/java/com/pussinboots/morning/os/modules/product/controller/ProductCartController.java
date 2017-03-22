@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pussinboots.morning.common.controller.BaseController;
+import com.pussinboots.morning.common.enums.StatusEnum;
 import com.pussinboots.morning.common.result.ResponseResult;
 import com.pussinboots.morning.os.common.security.AuthorizingUser;
 import com.pussinboots.morning.os.common.util.SingletonLoginUtils;
@@ -52,7 +53,7 @@ public class ProductCartController extends BaseController {
 		AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
 
 		if (authorizingUser != null) {
-			CartVO cartVO = shoppingCartService.selectCartVOs(authorizingUser.getUserId());
+			CartVO cartVO = shoppingCartService.selectCartVOs(authorizingUser.getUserId(), StatusEnum.ALL.getStatus());
 			// 用户已登录,则从数据库查找购物车商品列表
 			model.addAttribute("cartVO", cartVO);
 			return PRODUCT_CART_LIST;
@@ -72,7 +73,7 @@ public class ProductCartController extends BaseController {
 		AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
 
 		if (authorizingUser != null) {
-			CartVO cartVO = shoppingCartService.selectCartVOs(authorizingUser.getUserId());
+			CartVO cartVO = shoppingCartService.selectCartVOs(authorizingUser.getUserId(), StatusEnum.ALL.getStatus());
 			// 用户已登录,则从数据库查找购物车商品列表
 			model.addAttribute("cartVO", cartVO);
 			return AJAX_TOPBAR_CART;
@@ -94,7 +95,7 @@ public class ProductCartController extends BaseController {
 
 		if (authorizingUser != null) {
 			// 用户已登录,则从数据库查找购物车商品列表
-			CartVO cartVO = shoppingCartService.selectCartVOs(authorizingUser.getUserId());
+			CartVO cartVO = shoppingCartService.selectCartVOs(authorizingUser.getUserId(), StatusEnum.ALL.getStatus());
 			if (cartVO != null) {
 				return success(true, "购物车商品数量", cartVO.getTotalNumber());
 			} else {
@@ -138,14 +139,66 @@ public class ProductCartController extends BaseController {
 	@ResponseBody
 	public ResponseResult delete(Model model, @PathVariable("productSpecNumber") Long productSpecNumber) {
 		AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
-		
+
 		if (authorizingUser != null) {
 			shoppingCartService.deleteByProductSpecNumber(productSpecNumber, authorizingUser.getUserId());
 			// 用户已登录,则将该商品添加数据库中
-			return success(true, "加入购物车成功!", productSpecNumber);
+			return success(true);
 		} else {
 			// TODO 用户未登录,则将该商品添加cookie中
-			return success(true, "加入购物车成功!", productSpecNumber);
+			return success(true);
+		}
+	}
+	
+	/**
+	 * POST 修改购物车商品数量
+	 * @param model
+	 * @param productSpecNumber
+	 * @param buyNumber
+	 * @return
+	 */
+	@PostMapping(value = "/{productSpecNumber}/number")
+	@ResponseBody
+	public ResponseResult updateNumber(Model model, @PathVariable("productSpecNumber") Long productSpecNumber,
+			@RequestParam(value = "buyNumber", required = true) Integer buyNumber) {
+		AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
+
+		if (authorizingUser != null) {
+			shoppingCartService.updateByProductSpecNumber(productSpecNumber, authorizingUser.getUserId(), buyNumber);
+			// 用户已登录,则将该商品添加数据库中
+			return success(true);
+		} else {
+			// TODO 用户未登录,则将该商品添加cookie中
+			return success(true);
+		}
+	}
+	
+	/**
+	 * POST 修改购物车商品选中状态
+	 * @param model
+	 * @param productSpecNumber
+	 * @param checkStatus
+	 * @return
+	 */
+	@PostMapping(value = "/{productSpecNumber}/status")
+	@ResponseBody
+	public ResponseResult updateStatus(Model model, @PathVariable("productSpecNumber") Long productSpecNumber,
+			@RequestParam(value = "checkStatus", required = true) Integer checkStatus) {
+		AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
+		System.out.println(checkStatus);
+		if (authorizingUser != null) {
+			if (StatusEnum.CHECKED.getStatus().equals(checkStatus)) {
+				shoppingCartService.updateStatusByProductSpecNumber(productSpecNumber, authorizingUser.getUserId(),
+						StatusEnum.UNCHECKED.getStatus());
+			} else if (StatusEnum.UNCHECKED.getStatus().equals(checkStatus)) {
+				shoppingCartService.updateStatusByProductSpecNumber(productSpecNumber, authorizingUser.getUserId(),
+						StatusEnum.CHECKED.getStatus());
+			}
+			// 用户已登录,则将该商品添加数据库中
+			return success(true);
+		} else {
+			// TODO 用户未登录,则将该商品添加cookie中
+			return success(true);
 		}
 	}
 	

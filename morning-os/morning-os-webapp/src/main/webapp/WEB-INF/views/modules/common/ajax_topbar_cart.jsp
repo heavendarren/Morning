@@ -12,7 +12,7 @@
       </li>
     </c:forEach>
   </ul>
-  <div class="cart-total clearfix"><span class="total">共 <em>${cartVO.totalNumber }</em> 件商品<span class="price"><em>${cartVO.totalPrice }</em>元</span></span><a href="//static.mi.com/cart/" class="btn btn-primary btn-cart">去购物车结算</a></div>
+  <div class="cart-total clearfix"><span class="total">共 <em>${cartVO.totalNumber }</em> 件商品<span class="price"><em>${cartVO.totalPrice }</em>元</span></span><a href="${ctx}/cart/" class="btn btn-primary btn-cart">去购物车结算</a></div>
 </c:if>
 <c:if test="${empty cartVO}">
   <div class="loading"> 购物车中还没有商品，赶紧选购吧！ </div>

@@ -51,6 +51,13 @@ window.onload = function() {
 		selectedTotal.innerHTML = seleted;
 		priceTotal.innerHTML = price.toFixed(2);
 		numberTotal.innerHTML = number;
+		if (seleted == 0) {
+			$('#J_noSelectTip').removeClass('hide');
+			$('#J_goCheckout').removeClass('btn-primary').addClass('btn-disabled');
+		} else {
+			$('#J_noSelectTip').addClass('hide');
+			$('#J_goCheckout').addClass('btn-primary').removeClass('btn-disabled');
+		}
 	}
 	// 计算单行价格
 	function getSubtotal(tr) {
@@ -58,7 +65,7 @@ window.onload = function() {
 		var price = cells[2]; //单价
 		var subtotal = cells[4]; //小计td
 		var countInput = tr.getElementsByTagName('input')[1]; //数目input
-		var a = tr.getElementsByTagName('a')[0]; //-号
+		var a = tr.getElementsByTagName('a')[2]; //-号
 		//写入HTML
 		subtotal.innerHTML = (parseInt(countInput.value) * parseFloat(price.innerHTML)).toFixed(2);
 		//如果数目只有一个，把-号去掉
@@ -72,10 +79,29 @@ window.onload = function() {
 	// 点击选择框
 	for (var i = 0; i < selectInputs.length; i++) {
 		selectInputs[i].onclick = function() {
-			if (this.previousSibling.className.indexOf('check-all') >= 0) { //如果是全选，则吧所有的选择框选中
-				for (var j = 0; j < selectInputs.length; j++) {
-					selectInputs[j].click();
-				}
+			var productSpecNumber = this.previousSibling.getAttribute('data-sid');
+			if (this.previousSibling.getAttribute('data-check-status') == 1 && this.previousSibling.getAttribute('data-initial') == 'false') {
+				// 选中状态
+				this.previousSibling.setAttribute('data-check-status', 0) ;
+				$.ajax({
+					type : 'post',
+					datatype : 'json',
+					url : baselocation + '/cart/' + productSpecNumber + '/status',
+					data : {
+						'checkStatus' : 1
+					}
+				});
+			} else if (this.previousSibling.getAttribute('data-check-status') == 0) {
+				// 未选中状态
+				this.previousSibling.setAttribute('data-check-status', 1) ;
+				$.ajax({
+					type : 'post',
+					datatype : 'json',
+					url : baselocation + '/cart/' + productSpecNumber + '/status',
+					data : {
+						'checkStatus' : 0
+					}
+				});
 			}
 			getTotal(); //选完更新总计
 		}
@@ -99,34 +125,49 @@ window.onload = function() {
 			switch (cls) {
 			case 'add': //点击了加号
 				countInout.value = value + 1;
+				var productSpecNumber = this.getAttribute('data-sid');
+				var buyNumber = countInout.value;
 				getSubtotal(this);
+				$.ajax({
+					type : 'post',
+					datatype : 'json',
+					url : baselocation + '/cart/' + productSpecNumber + '/number',
+					data : {
+						'buyNumber' : buyNumber
+					}
+				});
 				break;
 			case 'reduce': //点击了减号
 				if (value > 1) {
 					countInout.value = value - 1;
+					var productSpecNumber = this.getAttribute('data-sid');
+					var buyNumber = countInout.value;
 					getSubtotal(this);
+					$.ajax({
+						type : 'post',
+						datatype : 'json',
+						url : baselocation + '/cart/' + productSpecNumber + '/number',
+						data : {
+							'buyNumber' : buyNumber
+						}
+					});
 				}
 				break;
 			}
 			getTotal();
 		}
-		// 给数目输入框绑定keyup事件
-		tr[i].getElementsByTagName('input')[1].onkeyup = function() {
-			var val = parseInt(this.value);
-			if (isNaN(val) || val <= 0) {
-				val = 1;
-			}
-			if (this.value != val) {
-				this.value = val;
-			}
-			getSubtotal(this.parentNode.parentNode); //更新小计
-			getTotal(); //更新总数
-		}
 	}
 	// 默认全选
 	for (var j = 0; j < selectInputs.length; j++) {
-		selectInputs[j].click();
+		if (selectInputs[j].previousSibling.getAttribute('data-check-status') == 1) {
+			selectInputs[j].click();
+			selectInputs[j].previousSibling.setAttribute('data-initial', false);
+		} else {
+			selectInputs[j].previousSibling.setAttribute('data-initial', false);
+		}
 	}
+	// 更新总数
+	getTotal();
 }
 
 /**
@@ -156,4 +197,13 @@ function cart_list_delete(obj, data) {
 			}
 		})
 	});
+}
+
+/**
+ * 跳转确认订单页面
+ */
+function J_goCheckout() {
+	if ($('#J_goCheckout').hasClass('btn-primary')) {
+		window.location.href = baselocation + '/buy/checkout'
+	}
 }

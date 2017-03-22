@@ -1,8 +1,5 @@
 $(function() {
-	toEdit();
 	showLocation();
-	chooseInvoice();
-	toPay();
 })
 
 /**
@@ -10,6 +7,7 @@ $(function() {
  */
 $(function() {
 	$("#J_newAddress").on("click", function() {
+		resetData();
 		if ("object" != typeof $(this)) return !1;
 		var b = $(this).offset().left - 15,
 			c = $(this).offset().top,
@@ -51,6 +49,7 @@ $(function() {
 			h = $("#user_zipcode"),
 			i = $("#user_phone"),
 			j = $("#user_tag"),
+			s = $("#address_id"),
 			k = /^[1-9]+\d*$/,
 			l = /^\d{6}$/,
 			m = /^1[0-9]{10}$/,
@@ -92,6 +91,8 @@ $(function() {
 			J = !1;
 		if (H === I && (H = ""), H.length > 5) return j.focus(), setMsg(j, "地址标签最长5个字"), !1;
 		setMsg(j, ""), r.userTag = H, J = !0;
+		var S = $.trim(s.val());
+		r.addressId = S;
 		if (J = !0, v && B && E && G && x && J)
 			saveAddr(r), Close(), resetData()
 	})
@@ -123,21 +124,39 @@ function Close() {
  * 保存收货地址
  */
 function saveAddr(a) {
-	$.ajax({
-		type : "POST",
-		url : baselocation + '/uc/user/address',
-		data : a,
-		dataType : "json",
-		success : function(result) {
-			if (result.success == true) {
-				window.location.reload();
-			} else {
-				layer.alert(result.message, {
-					icon : 2
-				});
+	if (a.addressId == null && a.addressId == "") {
+		$.ajax({
+			type : "POST",
+			url : baselocation + '/uc/user/address',
+			data : a,
+			dataType : "json",
+			success : function(result) {
+				if (result.success == true) {
+					window.location.reload();
+				} else {
+					layer.alert(result.message, {
+						icon : 2
+					});
+				}
 			}
-		}
-	})
+		})
+	} else {
+		$.ajax({
+			type : "POST",
+			url : baselocation + '/uc/user/address/' + a.addressId,
+			data : a,
+			dataType : "json",
+			success : function(result) {
+				if (result.success == true) {
+					window.location.reload();
+				} else {
+					layer.alert(result.message, {
+						icon : 2
+					});
+				}
+			}
+		})
+	}
 }
 
 /**
@@ -169,29 +188,6 @@ function address_delete(obj, data) {
 }
 
 /**
-*地址选择
-*/
-function selectAddr() {
-	$("#checkoutAddrList").find("dl").on("click", function() {
-		$(this).addClass("selected").siblings().removeClass("selected"),
-		$(this).find(".addressId").prop("checked", !0), //!0 ==true
-		$(this).siblings().find(".addressId").prop("checked", !1)
-	})
-}
-
-/**
-*地址状态
-*/
-function setAddrState(a) {
-	if ("1" === a) $("#addrState").val(a);else {
-		var b = $("#checkoutAddrList").find(".selected"),
-			c = b.attr("data-isnew");
-		$("#addrState").val("true" === c ? "1" : "0")
-	}
-}
-
-
-/**
 *打开地址栏
 */
 function Show(a) {
@@ -199,7 +195,7 @@ function Show(a) {
 	var b = a.offset().left - 15,
 		c = a.offset().top,
 		d = a.outerWidth() + 70;
-	$("#J_editAddrBox").css({
+	$(".address-edit-box").css({
 		width : d,
 		top : c,
 		left : b
@@ -213,30 +209,14 @@ function Show(a) {
 }
 
 /**
-*重置收货地址
-*/
-function resetData() {
-	var loc = new Location();
-	loc.fillOption('loc_province', '0');
-	loc.fillOption('loc_city', '');
-	loc.fillOption('loc_town', '');
-	$("#Consignee").val(""),
-	$("#Street").val(""),
-	$("#Telephone").val("").attr("placeholder", "11位手机号"),
-	$("#Zipcode").val(""),
-	$("#Tag").val(""),
-	$("#zipcodeTip").html(""),
-	$(".tipMsg").html("").hide()
-}
-/**
 *修改收货地址
 */
-function toEdit() {
-	$(".J_editAddr").on("click", function() {
-		setAddrState();
+$(function() {
+	$(".J_addressModify").on("click", function() {
+		resetData();
 		var loc = new Location();
 		var b = $(this).parent().parent(),
-			c = (b.attr("data-editable"), b.attr("data-consignee")),
+			c = b.attr("data-consignee"),
 			d = b.attr("data-province_id"),
 			e = b.attr("data-province_name"),
 			f = b.attr("data-city_id"),
@@ -244,14 +224,16 @@ function toEdit() {
 			h = b.attr("data-district_id"),
 			i = b.attr("data-district_name"),
 			j = b.attr("data-address"),
-			k = b.attr("data-area"),
+			k = b.attr("data-zipcode"),
 			l = b.attr("data-tel"),
-			m = b.attr("data-tag_name");
-		return $("#Consignee").val(c),
-			$("#Street").val(j),
-			m && $("#Tag").val(m),
-			$("#Zipcode").val(k),
-			$("#Telephone").val(l),
+			m = b.attr("data-tag_name"),
+			n = b.attr("data-address_id");
+		return $("#user_name").val(c),
+			$("#user_adress").val(j),
+			$("#user_tag").val(m),
+			$("#user_zipcode").val(k),
+			$("#user_phone").val(l),
+			$("#address_id").val(n),
 			$("#loc_province").find("option[value='" + d + "']").prop("selected", !0),
 			$("#select2-chosen-1").html(e),
 			loc.fillOption('loc_city', '0,' + d),
@@ -262,72 +244,125 @@ function toEdit() {
 			$("#select2-chosen-3").html(i),
 			Show(b), !1
 	})
-}
-
-
-
-/**
-*选择送货时间
-*/
-$(document).on("click", ".J_optionList > .item", function() {
-	$(this).addClass("selected").children("input").prop("checked", !0),
-	$(this).siblings().removeClass("selected")
 })
 
-
 /**
-*选择发票抬头
-*/
-function chooseInvoice() {
-	$(".J_optionInvoice").children(".item").on("click", function() {
-		var a = $(this).children("input").val();
-		$("#eInvoiceTip").hide(),
-		a === "1" ? ($("#checkoutInvoiceDetail").fadeIn(),
-		$("#checkoutInvoiceElectronic").hide(),
-		$(".invoiceType").prop("checked", !1),
-		$(".J_invoiceType").children("li").eq(1).trigger("click"))
-			: a === "4" ? ($("#checkoutInvoiceDetail").hide(),
-			$("#checkoutInvoiceElectronic").fadeIn(),
-			$(".invoiceType").prop("checked", !1),
-			$("#electronicPersonal").prop("checked", !0))
-				: ($("#checkoutInvoiceDetail").hide(),
-				$("#checkoutInvoiceElectronic").hide(),
-				$(".invoiceType").prop("checked", !1),
-				$("#noNeedInvoice").prop("checked", !0))
-	}),
-	$(".J_invoiceType").children("li").on("click", function() {
-		var a = $(this).children("input").prop("checked", !0).val();
-		a === "2" ? $("#CheckoutInvoiceTitle").show() : $("#CheckoutInvoiceTitle").hide().children("input").val(""),
-		$(this).addClass("selected").siblings().removeClass("selected")
-	})
+ * 重置收货地址
+ */
+function resetData() {
+	var loc = new Location();
+	loc.fillOption('loc_province', '0');
+	loc.fillOption('loc_city', '');
+	loc.fillOption('loc_town', '');
+	$("#user_name").val(""),
+	$("#user_adress").val(""),
+	$("#user_phone").val("").attr("placeholder", "11位手机号"),
+	$("#user_tag").val(""),
+	$("#user_zipcode").val(""),
+	$("#address_id").html(""),
+	$(".tipMsg").html("").hide();
 }
 
 /**
-*
-*/
-function toPay() {
-	$("#checkoutToPay").on("click", function() {
-		var t = $.trim($("input[name='order.invoicelTitle']").val());
-		var b = $("#checkoutAddrList").find(".selected").length;
-		if (0 >= b) return sweetAlert({
-					title : "提示信息",
-					text : "请选择地址!",
-					type : "error",
-					confirmButtonText : "确定"
-				}), !1;
-		if ($("input[name='order.invoicelType']:checked").val() === "2" && (strLen(t) >= 1)) {
-			return sweetAlert({
-					title : "提示信息",
-					text : "单位名称不能为空!",
-					type : "error",
-					confirmButtonText : "确定"
-				}), !1
+ * 地址选择
+ */
+$(function() {
+	$(".J_addressItem").on("click", function() {
+		$(this).addClass("selected").siblings().removeClass("selected");
+		var b = $(this),
+			c = b.attr("data-consignee"),
+			e = b.attr("data-province_name"),
+			g = b.attr("data-city_name"),
+			i = b.attr("data-district_name"),
+			j = b.attr("data-address"),
+			k = b.attr("data-zipcode"),
+			l = b.attr("data-tel"),
+			m = b.attr("data-tag_name"),
+			n = b.attr("data-address_id");
+		console.info(b);
+		var html = '<div class="seleced-address" id="J_confirmAddress">' + c + '&nbsp;&nbsp;' + l + '<br>'
+			+ e + '&nbsp;&nbsp;' + g + '&nbsp;&nbsp;' + i + '&nbsp;&nbsp;' + j + '&nbsp;&nbsp;';
+		$(".section-bar").find(".fl:first-child").html(html);
+	})
+})
+
+/**
+ * 选择送货时间
+ */
+$(function() {
+	$(".section-time .J_option").on("click", function() {
+		$(this).addClass("selected").siblings().removeClass("selected");
+	})
+})
+
+/**
+ * 选择发票抬头
+ */
+$(function() {
+	$(".section-invoice .J_option").on("click", function() {
+		$(this).addClass("selected").siblings().removeClass("selected");
+		var a = $(this).attr('data-value');
+		if (a === "0") {
+			$('.paper-invoice-company').addClass('hide')
+			$('.tab-container .tab-content').addClass('hide')
+		} else if (a === "1") {
+			$('.paper-invoice-company').removeClass('hide')
+			$('.tab-container .tab-content').addClass('hide')
+		} else {
+			$('.tab-container .tab-content').removeClass('hide')
 		}
-		;
-		var params = '';
-		$("#creatOrder input,#creatOrder textarea").each(function() {
-			params += $(this).serialize() + "&";
-		});
+	})
+
+	// 隐藏弹出框
+	function e(obj) {
+		return document.getElementById(obj)
+	}
+	e('J_showEinvoiceDetail').onclick = function(event) {
+		$("#J_einvoiceDetail").removeClass('hide');
+		stopBubble(event);
+		document.onclick = function() {
+			$("#J_einvoiceDetail").addClass('hide');
+			document.onclick = null;
+		}
+	}
+
+	e('J_einvoiceDetail').onclick = function(event) {
+		//只阻止了向上冒泡，而没有阻止向下捕获，所以点击con的内部对象时，仍然可以执行这个函数
+		stopBubble(event);
+	}
+	//阻止冒泡函数
+	function stopBubble(e) {
+		if (e && e.stopPropagation) {
+			e.stopPropagation(); //w3c
+		} else {
+			window.event.cancelBubble = true; //IE
+		}
+	}
+})
+
+/**
+ * 去结算
+ */
+$(function() {
+	$("#J_checkoutToPay").on("click", function() {
+		var b = $("#J_addressList").find(".selected").length;
+		if (0 >= b) {
+			layer.alert("请选择地址！", {
+				icon : 2
+			});
+			return !1;
+		}
+		var a = $(".section-invoice").find(".selected").attr('data-value');
+		var t = $("#invoice_title").val();
+		console.info(strLen(t));
+		if (a !== "0" && (strLen(t) < 1)) {
+			layer.alert("发票抬头名称不能为空!", {
+				icon : 2
+			});
+			return !1;
+		}
+		var params = {};
+		params.addressId = $("#J_addressList").find(".selected").attr('data-address_id');
 		$.ajax({
 			url : baselocation + '/oder/creatOrder',
 			type : 'post',
@@ -350,4 +385,4 @@ function toPay() {
 			}
 		});
 	})
-}
+})

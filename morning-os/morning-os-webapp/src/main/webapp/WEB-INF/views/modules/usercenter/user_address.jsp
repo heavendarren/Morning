@@ -77,7 +77,7 @@
             </div>
             <div class="box-bd">
               <div class="user-address-list J_addressList clearfix">
-                <div class="address-item address-item-new" data-type="" id="J_newAddress"> <i class="iconfont"><i class="glyphicon glyphicon-plus"></i></i> 添加新地址 </div>
+                <div class="address-item address-item-new" id="J_newAddress"> <i class="iconfont"><i class="glyphicon glyphicon-plus"></i></i> 添加新地址 </div>
                 <c:forEach items="${addresses}" var="address">
                   <div class="address-item J_addressItem" data-address_id="${address.addressId }" data-consignee="${address.userName }" data-tel="${address.userPhone }" data-province_id="${address.provinceId}" data-province_name="${address.provinceName}" data-city_id="${address.cityId}" data-city_name="${address.cityName}" data-district_id="${address.districtId}" data-district_name="${address.districtName}" data-zipcode="${address.userZipcode }" data-address="${address.userAdress }" data-tag_name="${address.userTag }">
                     <dl>
@@ -86,7 +86,7 @@
                       <dd class="uaddress">${address.provinceName}&nbsp;&nbsp;${address.cityName}&nbsp;&nbsp;${address.districtName} <br />
                         ${address.userAdress } (${address.userZipcode })</dd>
                     </dl>
-                    <div class="actions"> <a class="modify J_addressModify" data-id="10150620520000079" href="javascript:void(0);">修改</a> <a class="modify J_addressDel" href="javascript:void(0);" onclick="address_delete(this,${address.addressId})" data-id="${address.addressId}">删除</a> </div>
+                    <div class="actions"> <a class="modify J_addressModify" data-id="${address.addressId}" href="javascript:void(0);">修改</a> <a class="modify J_addressDel" href="javascript:void(0);" onclick="address_delete(this,${address.addressId})" data-id="${address.addressId}">删除</a> </div>
                   </div>
                 </c:forEach>
               </div>
@@ -120,7 +120,10 @@
                     <p class="tip-msg tipMsg"></p>
                   </div>
                 </div>
-                <div class="form-confirm clearfix"> <a href="javascript:void(0);" class="btn btn-primary" id="J_save" >保存</a> <a href="javascript:void(0);" class="btn btn-gray" id="J_cancel">取消</a> </div>
+                <div class="form-confirm clearfix"> 
+                	<input class="input-text J_addressInput" type="hidden" id="address_id" name="address_id">
+                	<a href="javascript:void(0);" class="btn btn-primary" id="J_save" >保存</a> <a href="javascript:void(0);" class="btn btn-gray" id="J_cancel">取消</a> 
+                </div>
               </div>
               <!--点击弹出新增/收货地址界面end-->
               <div class="xm-edit-addr-backdrop" id="J_editAddrBackdrop"> </div>
@@ -136,40 +139,12 @@
 <myfooter> 
   <!-- layer javascript --> 
   <script src="${ctxsta}/common/layer/layer.js"></script> 
-  <!-- 分页js --> 
-  <script src="${ctxsta}/common/pager/jquery.pager.js"></script> 
+  <!-- 地址选择 --> 
   <script src="${ctxsta}/web/area/js/area.js"></script> 
   <script src="${ctxsta}/web/area/js/location.js"></script> 
   <script src="${ctxsta}/web/area/js/select2.js"></script> 
   <script src="${ctxsta}/web/area/js/select2_locale_zh-CN.js"></script> 
   <script src="${ctxsta}/web/js/address.js"></script> 
-  <script type="text/javascript">
-  	//删除收获地址
-  	function address_delete(obj, data) {
-  		layer.confirm('确认要删除吗？', {
-  			btn : [ '确定', '取消' ] //按钮
-  		}, function() {
-  			$.ajax({
-  				type : 'delete',
-  				dataType : 'json',
-  				url : baselocation + '/uc/user/address/' + data,
-  				success : function(result) {
-  					if (result.success == true) {
-  						$(obj).parent().parent("div").remove();
-  						layer.msg('已删除!', {
-  							icon : 1,
-  							time : 1000
-  						});
-  					} else {
-  						layer.alert(result.message, {
-  							icon : 2
-  						});
-  					}
-  				}
-  			})
-  		});
-  	}
-  </script> 
 </myfooter>
 </body>
 </html>

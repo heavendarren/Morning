@@ -44,7 +44,7 @@ public class CartVO implements Serializable{
 	
 	public void getTotal() {
 		Integer totalNumberTemp = 0;
-		BigDecimal totalPriceTemp = new BigDecimal(0.0);
+		BigDecimal totalPriceTemp = BigDecimal.valueOf(0.0);
 		for (ShoppingCartVO shoppingCartVO : shoppingCartVOs) {
 			totalNumberTemp += shoppingCartVO.getBuyNumber();
 			totalPriceTemp = totalPriceTemp.add(shoppingCartVO.getPrice());
