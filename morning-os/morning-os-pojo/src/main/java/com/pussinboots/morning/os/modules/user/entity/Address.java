@@ -96,8 +96,7 @@ public class Address extends Model<Address> {
      */
 	@TableField("update_time")
 	private Date updateTime;
-
-
+	
 	public Long getAddressId() {
 		return addressId;
 	}

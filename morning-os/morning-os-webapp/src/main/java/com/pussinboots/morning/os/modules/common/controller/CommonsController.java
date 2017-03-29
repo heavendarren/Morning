@@ -34,7 +34,7 @@ public class CommonsController extends BaseController {
 	private Producer captchaProducer;
 	
 	/**
-	 * GET 后台管理员登录验证码
+	 * GET 电子商城登录验证码
 	 */
 	@GetMapping(value = "/captcha-image")
 	public ModelAndView getKaptchaImage(HttpServletRequest request, HttpServletResponse response) throws Exception {

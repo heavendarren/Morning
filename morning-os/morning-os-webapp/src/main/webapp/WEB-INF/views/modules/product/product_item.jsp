@@ -67,8 +67,8 @@
                     </ul>
                   </dd>
                 </c:forEach>
-                <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="javascript:void(0)" onclick="add_cart(this)" id="goodsDetailAddCartBtn" class="btn btn-primary goods-add-cart-btn" data-product-spec-number=""> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp; </a> </dd>
-                <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;"> <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143"> <i class="iconfont "></i>到货通知 </a> <a id="goodsDetailCollectBtn" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " data-stat-id="9d1c11913f946c7f"> <i class="glyphicon glyphicon-heart-empty"></i><i class="iconfont red J_redCopy"></i>&nbsp;喜欢&nbsp;</a></dd>
+                <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="javascript:void(0)" onclick="add_cart(this)" id="goodsDetailAddCartBtn" class="btn btn-primary goods-add-cart-btn" data-product-spec-number=""> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-pid="${product.productNumber}" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn" href="javascript:void(0)" onclick="add_favorite(this);"> <i class="glyphicon glyphicon-heart-empty"></i>&nbsp;喜欢&nbsp; </a> </dd>
+                <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;"> <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143"> <i class="iconfont "></i>到货通知 </a> <a id="goodsDetailCollectBtn" data-pid="${product.productNumber}" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " href="javascript:void(0)" onclick="add_favorite(this);"> <i class="glyphicon glyphicon-heart-empty"></i>&nbsp;喜欢&nbsp;</a></dd>
                 <dd class="goods-info-head-userfaq">
                   <ul>
                     <li class="J_scrollHref" data-href="#goodsComment" data-index="2"> <i class="glyphicon glyphicon-edit"></i>&nbsp;评价&nbsp;<b>${productAttribute.commentNumber }</b> </li>
@@ -240,7 +240,7 @@
     <div class="container-fluid">
       <div class="question-input">
         <input type="text" placeholder="输入你的提问" class="input-block J_inputQuestion" data-can-search="true" data-pagesize="6">
-        <div class="btn btn-primary question-btn J_btnQuestion">提问</div>
+        <div class="btn btn-primary question-btn J_btnQuestion" onclick="add_question(this);">提问</div>
       </div>
       <div class="question-order J_questionOrderBlock" style="display:${productAttribute.questionNumber eq 0?'none':'block'}">
         <div class="order-block"> <a href="javascript:void(0);" class="J_questionHelp current" data-pagesize="6" data-stat-id="422e5161e39bf28f" onclick="_msq.push(['trackEvent', '9de9578f29e893b5-422e5161e39bf28f', 'javascript:void(0);', 'pcpid', '']);">最有帮助</a> <span class="sep">|</span> <a href="javascript:void(0);" class="J_questionNew" data-pagesize="6" data-stat-id="24e1681246710ec7" onclick="_msq.push(['trackEvent', '9de9578f29e893b5-24e1681246710ec7', 'javascript:void(0);', 'pcpid', '']);">最新</a> </div>
@@ -364,11 +364,15 @@
 </div>
 <!-- 跟随 导航 end -->
 <myfooter> 
+  <!-- layer javascript --> 
+  <script src="${ctxsta}/common/layer/layer.js"></script> 
 <script>
 //价格json
 var sys_item=${productSpecifications eq null ?"0":productSpecifications};
 var default_price=${product.showPrice};
 var score;
+var productNumber = ${product.productNumber};
+var productId = ${product.productId};
 //商品规格选择
 $(function(){
 	$(".goods-info-head .sys_item_specpara").each(function(){
@@ -434,7 +438,6 @@ $(function(){
 //加入购物车
 function add_cart(obj) {
 	var productSpecNumber = $(obj).attr("data-product-spec-number");
-	console.info(productSpecNumber);
 	$.ajax({
 		type : 'post',
 		dataType : 'json',
@@ -451,7 +454,93 @@ function add_cart(obj) {
 		}
 	})
 }
+// 判断是否收藏商品
+$(function(){
+	$.ajax({
+		type : 'get',
+		dataType : 'json',
+		url : baselocation + '/favorite/' + productNumber,
+		success : function(result) {
+			if (result.success == true) {
+				if(result.data != null) {
+					$('#goodsDetailCollectBtn').attr('data-isfavorite',true);
+					$('#goodsDetailCollectBtn i').addClass("red");
+				}else {
+					$('#goodsDetailCollectBtn').attr('data-isfavorite',false);
+					$('#goodsDetailCollectBtn i').removeClass("red");
+				}
+			} else {
+				$('#goodsDetailCollectBtn').attr('data-isfavorite',false);
+				$('#goodsDetailCollectBtn i').removeClass("red");
+			}
+		}
+	})	
+})
+// 收藏商品
+function add_favorite(obj) {
+	var productNumber = $(obj).attr("data-pid");
+	var result = Boolean($(obj).attr('data-isfavorite'));
+	if(result) {
+		$.ajax({
+			type : 'delete',
+			dataType : 'json',
+			url : baselocation + '/favorite/' + productNumber,
+			success : function(result) {
+				if (result.success == true) {
+					$('#goodsDetailCollectBtn i').toggleClass("red");
+				} else {
+					layer.alert(result.message, {
+						icon : 2
+					});
+				}
+			}
+		})			
+	}else {
+		$.ajax({
+			type : 'post',
+			dataType : 'json',
+			url : baselocation + '/favorite/' + productNumber,
+			success : function(result) {
+				if (result.success == true) {
+					$('#goodsDetailCollectBtn i').toggleClass("red");
+				} else {
+					layer.alert(result.message, {
+						icon : 2
+					});
+				}
+			}
+		})			
+	}
+}
 
+// 商品提问
+function add_question(obj) {
+	var data = {};
+	data.productId = productId;
+	data.content = $(obj).prev().val()  ;
+	layer.confirm('您确认提交此问题吗？', {
+		btn : [ '确定', '取消' ] //按钮
+	}, function() {
+		$.ajax({
+			type : 'post',
+			dataType : 'json',
+			data: data,
+			url : baselocation + '/question/' + productNumber,
+			success : function(result) {
+				if (result.success == true) {
+					layer.msg('发表问题成功!', {
+						icon : 1,
+						time : 1000
+					});
+				} else {
+					layer.alert(result.message, {
+						icon : 2
+					});
+				}
+			}
+		})
+	});
+}
 </script> 
 </myfooter>
 </body>

@@ -116,9 +116,9 @@
         </div>
         <div class="section-body clearfix">
           <ul class="J_optionList options options-list  J_tabSwitch clearfix">
-            <li data-type="invoice" data-value="0" class="J_option selected"> 不开发票 </li>
-            <li data-type="invoice" data-value="1" class="J_option"> 电子发票（非纸质） </li>
-            <li data-type="invoice" data-value="2" class="J_option" id="J_paperInvoice"> 普通发票（纸质） </li>
+            <li data-type="invoice" data-value="1" class="J_option selected"> 不开发票 </li>
+            <li data-type="invoice" data-value="2" class="J_option"> 电子发票（非纸质） </li>
+            <li data-type="invoice" data-value="3" class="J_option" id="J_paperInvoice"> 普通发票（纸质） </li>
           </ul>
           <div class="paper-invoice-company hide" id="J_invoiceTitleBox">
             <div class="form-section">

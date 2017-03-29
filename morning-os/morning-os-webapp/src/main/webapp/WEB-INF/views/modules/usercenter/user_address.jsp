@@ -31,8 +31,8 @@
             </div>
             <div class="box-bd">
               <ul class="uc-nav-list">
-                <li><a href="">我的订单</a></li>
-                <li><a href="" data-count="comment" data-count-style="bracket">评价晒单</a></li>
+                <li><a href="${ctx}/uc/order/list">我的订单</a></li>
+                <li><a href="${ctx}/uc/order/comment" data-count="comment" data-count-style="bracket">评价晒单</a></li>
               </ul>
             </div>
           </div>
@@ -43,7 +43,7 @@
             <div class="box-bd">
               <ul class="uc-nav-list">
                 <li><a href="${ctx}/uc/user/portal">我的个人中心</a></li>
-                <li><a href="http://order.mi.com/message/list?r=98069.1489505349">消息通知<i class="J_miMessageTotal"></i></a></li>
+                <li><a href="">消息通知<i class="J_miMessageTotal"></i></a></li>
                 <li><a href="${ctx}/uc/user/favorite">喜欢的商品</a></li>
                 <li><a href="${ctx}/uc/user/address">收货地址</a></li>
               </ul>
@@ -55,9 +55,9 @@
             </div>
             <div class="box-bd">
               <ul class="uc-nav-list">
-                <li><a href="https://account.xiaomi.com/" target="_blank">个人信息</a></li>
-                <li><a href="https://account.xiaomi.com/pass/auth/security/home#service=setPassword" target="_blank">修改密码</a></li>
-                <li><a href="http://uvip.xiaomi.cn" target="_blank">社区VIP认证</a></li>
+                <li><a href="" target="_blank">个人信息</a></li>
+                <li><a href="" target="_blank">修改密码</a></li>
+                <li><a href="" target="_blank">社区VIP认证</a></li>
               </ul>
             </div>
           </div>
@@ -67,7 +67,7 @@
         <div class="uc-box uc-main-box">
           <div class="uc-content-box">
             <div class="box-hd">
-              <h1 class="title">收货地址<small>已保存了${fn:length(addresses)} 条收货地址!</small></h1>
+              <h1 class="title">收货地址</h1>
               <div class="more clearfix hide">
                 <ul class="filter-list J_addrType">
                   <li class="first active"><a href="">普通收货地址</a></li>

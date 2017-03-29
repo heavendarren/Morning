@@ -43,22 +43,3 @@ window.onload = function() {
 }
 
 
-/**
- * 获取登录学员
- * @returns User
- */
-function getLoginUser() {
-	var user = null;
-	$.ajax({
-		url : baselocation + '/user/getloginUser',
-		type : 'post',
-		async : false,
-		dataType : 'json',
-		success : function(result) {
-			user = result.entity;
-		}
-	});
-	return user;
-}
-
-

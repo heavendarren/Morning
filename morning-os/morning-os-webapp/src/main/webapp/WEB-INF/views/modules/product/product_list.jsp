@@ -65,11 +65,11 @@
             <p class="price">${product.showPrice}元</p>
             <div class="thumbs">
               <ul class="thumb-list clearfix">
-                <li data-config='{"cid":"1161200063","gid":"2161200069","discount":"0","price":"99\u5143","new":0,"is-cos":0,"package":0,"hasgift":0,"postfree":0,"postfreenum":1,"cfrom":"list"}'><img src="${ctximg}/${product.picImg}" width="34" height="34" title="${product.introduce}" alt="${product.name}" /></li>
+                <li><img src="${ctximg}/${product.picImg}" width="34" height="34" title="${product.introduce}" alt="${product.name}" /></li>
               </ul>
               <p class="desc"> ${product.introduce} </p>
             </div>
-            <div class="actions clearfix"> <a class="btn-like J_likeGoods" data-cid="1161200061" href="javascript: void(0);"><i class="glyphicon glyphicon-heart-empty"></i> <span>喜欢</span></a> <a class="btn-buy J_buyGoods" data-gid="2161200067" href=""><span>加入购物车</span> <i class="glyphicon glyphicon-shopping-cart"></i></a> </div>
+            <div class="actions clearfix"> <a class="btn-like J_likeGoods" data-pid="${product.productNumber}" onclick="add_favorite(this);" href="javascript: void(0);"><i class="glyphicon glyphicon-heart-empty"></i> <span>喜欢</span></a> <a class="btn-buy J_buyGoods" data-gid="${product.productNumber}" href="${ctx }/item/${product.productNumber}"><span>加入购物车</span> <i class="glyphicon glyphicon-shopping-cart"></i></a> </div>
             <div class="flags">
               <c:if test="${not empty product.labelName}">
                 <div class="flag">${product.labelName}</div>
@@ -155,6 +155,8 @@
 </div>
 <!--     产品分类内容begin       -->
 <myfooter> 
+  <!-- layer javascript --> 
+  <script src="${ctxsta}/common/layer/layer.js"></script> 
   <!-- 分页js --> 
   <script src="${ctxsta}/common/pager/jquery.pager.js"></script> 
   <script type="text/javascript">
@@ -175,6 +177,44 @@
 				buttonClickCallback : PageClick
 			});
 			window.location.href = href + number;
+		}
+		
+		// 收藏商品
+		function add_favorite(obj) {
+			var productNumber = $(obj).attr("data-pid");
+			var result = $(obj).hasClass("btn-liked");
+			console.info(productNumber);
+			if (result) {
+				$.ajax({
+					type : 'delete',
+					dataType : 'json',
+					url : baselocation + '/favorite/' + productNumber,
+					success : function(result) {
+						if (result.success == true) {
+							$(obj).toggleClass("btn-liked");
+						} else {
+							layer.alert(result.message, {
+								icon : 2
+							});
+						}
+					}
+				})			
+			}else {
+				$.ajax({
+					type : 'post',
+					dataType : 'json',
+					url : baselocation + '/favorite/' + productNumber,
+					success : function(result) {
+						if (result.success == true) {
+							$(obj).toggleClass("btn-liked");
+						} else {
+							layer.alert(result.message, {
+								icon : 2
+							});
+						}
+					}
+				})			
+			}
 		}
 	</script> 
 </myfooter>

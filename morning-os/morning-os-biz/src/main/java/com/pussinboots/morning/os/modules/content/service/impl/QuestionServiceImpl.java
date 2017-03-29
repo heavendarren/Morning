@@ -6,10 +6,13 @@ import com.pussinboots.morning.os.modules.content.entity.Comment;
 import com.pussinboots.morning.os.modules.content.entity.Question;
 import com.pussinboots.morning.os.modules.content.mapper.QuestionMapper;
 import com.pussinboots.morning.os.modules.content.service.IQuestionService;
+import com.pussinboots.morning.os.modules.user.entity.User;
+import com.pussinboots.morning.os.modules.user.mapper.UserMapper;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,21 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 	
 	@Autowired
 	private QuestionMapper questionMapper;
+	@Autowired
+	private UserMapper userMapper;
+	
+	@Override
+	public void insertQuestion(Long userId, Question question) {
+		// 根据ID查找用户信息
+		User user = userMapper.selectById(userId);
+		
+		question.setUserId(user.getUserId());
+		question.setUserName(user.getUserName());
+		question.setCreateBy(user.getUserId().toString());
+		question.setCreateTime(new Date());
+		question.setPicImg(user.getPicImg());
+		questionMapper.insert(question);
+	}
 
 	@Override
 	public List<Question> selectNewQuestions(Long productId, Integer status, PageInfo pageInfo) {
@@ -56,4 +74,5 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 		pageInfo.setTotal(page.getTotal());
 		return new QuestionPageDTO(pageInfo, questions);
 	}
+
 }

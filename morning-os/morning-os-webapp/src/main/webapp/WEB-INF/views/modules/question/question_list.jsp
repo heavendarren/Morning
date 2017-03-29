@@ -27,7 +27,7 @@
         <div class="goods-question-order-block"> <a href="${ctx}/question/gid/${product.productNumber}?sort=1" class="${sort eq 1 ? 'current':''} J_questionHelp">最有帮助</a> <span class="sep">|</span> <a href="${ctx}/question/gid/${product.productNumber}?sort=0" class="${sort eq 0 ? 'current':''} J_questionNew">最新</a> </div>
         <div class="goods-question-ask-block">
           <input type="text" placeholder="输入你的提问" class="input-block J_inputQuestion" data-pagesize="10">
-          <div class="btn question-btn J_btnQuestion">提问</div>
+          <div class="btn question-btn J_btnQuestion" onclick="add_question(this);">提问</div>
         </div>
         <ul class="goods-question-list-detail" id="J_goodsQuestionBlock">
           <c:forEach items="${questions}" var="question">
@@ -78,7 +78,11 @@
 <myfooter> 
   <!-- 分页js --> 
   <script src="${ctxsta}/common/pager/jquery.pager.js"></script> 
+  <!-- layer javascript --> 
+  <script src="${ctxsta}/common/layer/layer.js"></script> 
   <script type="text/javascript">
+	var productNumber = ${product.productNumber};
+	var productId = ${product.productId};
   	var pagecount = $('#pager').attr('data-pager-totalPage'); // 总页面数
   	var nowpage = $('#pager').attr('data-pager-nowpage'); // 当前页数
   	var href = $('#pager').attr('data-pager-href'); // 链接地址
@@ -97,6 +101,34 @@
   		});
   		window.location.href = href + number;
   	}
+  	// 商品提问
+	function add_question(obj) {
+		var data = {};
+		data.productId = productId;
+		data.content = $(obj).prev().val()  ;
+		layer.confirm('您确认提交此问题吗？', {
+			btn : [ '确定', '取消' ] //按钮
+		}, function() {
+			$.ajax({
+				type : 'post',
+				dataType : 'json',
+				data: data,
+				url : baselocation + '/question/' + productNumber,
+				success : function(result) {
+					if (result.success == true) {
+						layer.msg('发表问题成功!', {
+							icon : 1,
+							time : 1000
+						});
+					} else {
+						layer.alert(result.message, {
+							icon : 2
+						});
+					}
+				}
+			})
+		});
+	}
   </script> 
 </myfooter>
 </body>

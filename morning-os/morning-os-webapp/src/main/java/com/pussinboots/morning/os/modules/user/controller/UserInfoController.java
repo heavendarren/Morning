@@ -135,7 +135,6 @@ public class UserInfoController extends BaseController {
 		}
 
 		return fail(false, "您未登录或者登录已超时,请先登录!");
-		
 	}
 	
 	/**

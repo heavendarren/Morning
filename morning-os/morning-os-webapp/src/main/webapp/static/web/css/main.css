@@ -151,12 +151,12 @@
 	top: 0;
 	right: 41px;
 	z-index: 1;
-	width: 189px;
-	height: 40px;
+	width: 221px;
+	height: 42px;
 	padding: 0 15px;
 	border: 1px solid #e0e0e0;
 	font-size: 12px;
-	line-height: 40px;
+	line-height: 42px;
 	outline: 0;
 	color: #757575;
 	-webkit-transition: all .2s;
@@ -170,7 +170,7 @@
 	width: 42px;
 	height: 42px;
 	border: 1px solid #e0e0e0;
-	font-size: 24px;
+	font-size: 14px;
 	line-height: 24px;
 	background: #fff;
 	color: #616161;
@@ -533,7 +533,7 @@
 }
 .order-list-box .goods-list li {
 	position: relative;
-	height: 44px;
+	height: 80px;
 	margin: 10px 0;
 	padding: 18px 18px 18px 100px;
 	line-height: 22px;

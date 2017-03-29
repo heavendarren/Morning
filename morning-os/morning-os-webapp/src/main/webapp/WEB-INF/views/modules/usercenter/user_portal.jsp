@@ -14,7 +14,8 @@
 <!--     导航栏 begin       -->
 <div class="breadcrumbs">
     <div class="container-fluid">
-        <a href="" >首页</a><span class="sep">&gt;</span><span>个人中心</span>    </div>
+        <a href="" >首页</a><span class="sep">&gt;</span><span>个人中心</span>
+    </div>
 </div>
 <!--     导航栏 begin       -->
 
@@ -30,8 +31,8 @@
             </div>
             <div class="box-bd">
               <ul class="uc-nav-list">
-                <li><a href="">我的订单</a></li>
-                <li><a href="" data-count="comment" data-count-style="bracket">评价晒单</a></li>
+                <li><a href="${ctx}/uc/order/list/">我的订单</a></li>
+                <li><a href="${ctx}/uc/order/comment" data-count="comment" data-count-style="bracket">评价晒单</a></li>
               </ul>
             </div>
           </div>

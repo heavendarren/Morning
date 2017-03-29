@@ -1,7 +1,3 @@
-$(function() {
-	showLocation();
-})
-
 /**
  * 添加地址
  */
@@ -279,7 +275,6 @@ $(function() {
 			l = b.attr("data-tel"),
 			m = b.attr("data-tag_name"),
 			n = b.attr("data-address_id");
-		console.info(b);
 		var html = '<div class="seleced-address" id="J_confirmAddress">' + c + '&nbsp;&nbsp;' + l + '<br>'
 			+ e + '&nbsp;&nbsp;' + g + '&nbsp;&nbsp;' + i + '&nbsp;&nbsp;' + j + '&nbsp;&nbsp;';
 		$(".section-bar").find(".fl:first-child").html(html);
@@ -302,13 +297,14 @@ $(function() {
 	$(".section-invoice .J_option").on("click", function() {
 		$(this).addClass("selected").siblings().removeClass("selected");
 		var a = $(this).attr('data-value');
-		if (a === "0") {
+		if (a === "1") {
 			$('.paper-invoice-company').addClass('hide')
 			$('.tab-container .tab-content').addClass('hide')
-		} else if (a === "1") {
+		} else if (a === "2") {
 			$('.paper-invoice-company').removeClass('hide')
 			$('.tab-container .tab-content').addClass('hide')
 		} else {
+			$('.paper-invoice-company').removeClass('hide')
 			$('.tab-container .tab-content').removeClass('hide')
 		}
 	})
@@ -354,8 +350,7 @@ $(function() {
 		}
 		var a = $(".section-invoice").find(".selected").attr('data-value');
 		var t = $("#invoice_title").val();
-		console.info(strLen(t));
-		if (a !== "0" && (strLen(t) < 1)) {
+		if (a !== "1" && (strLen(t) < 1)) {
 			layer.alert("发票抬头名称不能为空!", {
 				icon : 2
 			});
@@ -363,24 +358,25 @@ $(function() {
 		}
 		var params = {};
 		params.addressId = $("#J_addressList").find(".selected").attr('data-address_id');
+		params.payType = $(".section-payment").find(".selected").attr('data-value');
+		params.shipmentType = $(".section-shipment").find(".selected").attr('data-value');
+		params.shipmentAmount = $(".section-shipment").find(".selected").attr('data-amount');
+		params.shipmentTime = $(".section-time").find(".selected").attr('data-value');
+		params.shipmentTime = $(".section-time").find(".selected").attr('data-value');
+		params.invoiceType = $(".section-invoice").find(".selected").attr('data-value');
+		params.invoiceTitle = $("#invoice_title").val();
 		$.ajax({
-			url : baselocation + '/oder/creatOrder',
+			url : baselocation + '/buy/confirm',
 			type : 'post',
 			dataType : 'json',
 			data : params,
 			success : function(result) {
 				if (result.success == true) {
-					swal({
-						title : "提示信息",
-						text : result.message,
-						type : "success",
-						confirmButtonText : "确定"
-					},
-						function() {
-							window.location.reload();
-						});
+					window.location.href = baselocation + '/buy/confirm/' + result.data;
 				} else {
-					dialog('提示信息', result.message, 1);
+					layer.alert(result.message, {
+						icon : 2
+					});
 				}
 			}
 		});

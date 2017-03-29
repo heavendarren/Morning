@@ -8,13 +8,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pussinboots.morning.common.controller.BaseController;
 import com.pussinboots.morning.common.enums.StatusEnum;
 import com.pussinboots.morning.common.model.PageInfo;
+import com.pussinboots.morning.common.result.ResponseResult;
 import com.pussinboots.morning.os.common.enums.CommonConstantEnum;
+import com.pussinboots.morning.os.common.security.AuthorizingUser;
+import com.pussinboots.morning.os.common.util.SingletonLoginUtils;
 import com.pussinboots.morning.os.modules.content.dto.QuestionPageDTO;
+import com.pussinboots.morning.os.modules.content.entity.Question;
 import com.pussinboots.morning.os.modules.content.enums.CommentSortEnum;
 import com.pussinboots.morning.os.modules.content.service.IQuestionService;
 import com.pussinboots.morning.os.modules.product.entity.Category;
@@ -80,5 +86,22 @@ public class QuestionController extends BaseController {
 		model.addAttribute("sort", ProductSortEnum.typeOf(sort).getType());
 
 		return QUESTION_LIST;
+	}
+	
+	@PostMapping(value = "/{productNumber}")
+	@ResponseBody
+	public ResponseResult create(@PathVariable("productNumber") Long productNumber, Question question) {
+		AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
+
+		if (authorizingUser != null) {
+			try {
+				questionService.insertQuestion(authorizingUser.getUserId(), question);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return success(true);
+		}
+		return fail(false, "您未登录或者登录已超时,请先登录!");
 	}
 }

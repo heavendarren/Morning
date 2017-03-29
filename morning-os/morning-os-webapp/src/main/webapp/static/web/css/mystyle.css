@@ -351,6 +351,28 @@ input.btn-large, button.btn-large {
 	color: #fff
 }
 
+.btn-primary:focus, .btn-primary.focus {
+	background-color: #f25807;
+	border-color: #f25807;
+	color: #fff
+}
+
+.btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary
+	{
+	background-color: #f25807;
+	border-color: #f25807;
+	color: #fff
+}
+
+.btn-primary:active:hover, .btn-primary.active:hover, .open>.dropdown-toggle.btn-primary:hover,
+	.btn-primary:active:focus, .btn-primary.active:focus, .open>.dropdown-toggle.btn-primary:focus,
+	.btn-primary:active.focus, .btn-primary.active.focus, .open>.dropdown-toggle.btn-primary.focus
+	{
+	background-color: #f25807;
+	border-color: #f25807;
+	color: #fff
+}
+
 .btn-green {
 	background: #83c44e;
 	border-color: #83c44e;
@@ -1143,6 +1165,7 @@ textarea.input-text {
 .site-topbar .message i {
 	font-style: normal
 }
+
 .loading {
 	padding: 20px 0
 }

@@ -37,6 +37,7 @@ import com.pussinboots.morning.os.modules.product.service.IProductParameterServi
 import com.pussinboots.morning.os.modules.product.service.IProductService;
 import com.pussinboots.morning.os.modules.product.service.IProductSpecificationService;
 import com.pussinboots.morning.os.modules.product.vo.KindVO;
+import com.pussinboots.morning.os.modules.user.service.IFavoriteService;
 
 /**
  * 

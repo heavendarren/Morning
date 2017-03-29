@@ -804,20 +804,8 @@
 	vertical-align: -4px
 }
 
-.goods-detail .goods-info-head .goods-info-head-cart .goods-collect-btn .red
-	{
+.goods-detail .goods-info-head .goods-info-head-cart .goods-collect-btn .red{
 	color: #e53935;
-	position: absolute;
-	top: 13px;
-	left: 40px;
-	display: none;
-	font-size: 24px
-}
-
-.goods-detail .goods-info-head .goods-info-head-cart .goods-collect-btn .redsd
-	{
-	-webkit-animation: heartGrow1 ease-out 1s;
-	animation: heartGrow1 ease-out 1s
 }
 
 .goods-detail .goods-info-head .goods-info-head-cart .goods-collect-btn.current .red

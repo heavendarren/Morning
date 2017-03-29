@@ -16,7 +16,24 @@ public class CartVO implements Serializable{
 	
 	/** 订单总价格 */
 	private BigDecimal totalPrice;
+	
+	/** 订单总积分*/
+	private Integer totalScore;
 
+	public void getTotal() {
+		Integer totalNumberTemp = 0;
+		Integer totalScoreTemp = 0;
+		BigDecimal totalPriceTemp = BigDecimal.valueOf(0.0);
+		for (ShoppingCartVO shoppingCartVO : shoppingCartVOs) {
+			totalNumberTemp += shoppingCartVO.getBuyNumber();
+			totalScoreTemp += shoppingCartVO.getProductScore();
+			totalPriceTemp = totalPriceTemp.add(shoppingCartVO.getProductAmount());
+		}
+		this.totalNumber = totalNumberTemp;
+		this.totalPrice = totalPriceTemp;
+		this.totalScore = totalScoreTemp;
+	}
+	
 	public List<ShoppingCartVO> getShoppingCartVOs() {
 		return shoppingCartVOs;
 	}
@@ -25,7 +42,7 @@ public class CartVO implements Serializable{
 		this.shoppingCartVOs = shoppingCartVOs;
 		this.getTotal();
 	}
-
+	
 	public Integer getTotalNumber() {
 		return totalNumber;
 	}
@@ -42,14 +59,12 @@ public class CartVO implements Serializable{
 		this.totalPrice = totalPrice;
 	}
 	
-	public void getTotal() {
-		Integer totalNumberTemp = 0;
-		BigDecimal totalPriceTemp = BigDecimal.valueOf(0.0);
-		for (ShoppingCartVO shoppingCartVO : shoppingCartVOs) {
-			totalNumberTemp += shoppingCartVO.getBuyNumber();
-			totalPriceTemp = totalPriceTemp.add(shoppingCartVO.getPrice());
-		}
-		this.totalNumber = totalNumberTemp;
-		this.totalPrice = totalPriceTemp;
+	public Integer getTotalScore() {
+		return totalScore;
 	}
+
+	public void setTotalScore(Integer totalScore) {
+		this.totalScore = totalScore;
+	}
+
 }

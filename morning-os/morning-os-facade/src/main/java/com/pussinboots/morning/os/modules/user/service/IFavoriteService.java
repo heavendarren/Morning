@@ -17,6 +17,13 @@ import com.pussinboots.morning.os.modules.user.entity.Favorite;
 public interface IFavoriteService extends IService<Favorite> {
 	
 	/**
+	 * 添加收藏夹商品信息
+	 * @param userId 用户ID
+	 * @param productNumber  商品编号
+	 */
+	void insertByProductNumber(Long userId, Long productNumber);
+	
+	/**
 	 * 根据用户ID、分页信息、商品状态查找用户收藏夹商品列表
 	 * @param userId 用户ID
 	 * @param pageInfo 分页信息
@@ -26,10 +33,17 @@ public interface IFavoriteService extends IService<Favorite> {
 	FavoritePageDTO selectFavorites(Long userId, PageInfo pageInfo, Integer status);
 	
 	/**
+	 * 根据用户ID、产品编号查找收藏商品
+	 * @param userId 用户ID
+	 * @param productNumber 商品编号
+	 * @return
+	 */
+	Favorite selectByProductNumber(Long userId, Long productNumber);
+	
+	/**
 	 * 根据用户ID和商品编号删除收藏夹商品
 	 * @param userId 用户ID
 	 * @param productNumber 收藏夹商品编号
 	 */
 	void deleteByProductNumber(Long userId, Long productNumber);
-	
 }

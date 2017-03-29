@@ -19,6 +19,13 @@ import com.pussinboots.morning.os.modules.content.entity.Question;
 public interface IQuestionService extends IService<Question> {
 	
 	/**
+	 * 创建用户提问
+	 * @param userId 用户ID
+	 * @param question 提问信息
+	 */
+	void insertQuestion(Long userId, Question question);
+	
+	/**
 	 * 根据商品ID和提问状态查找最新提问（根据提问时间排序）
 	 * @param productId 商品ID
 	 * @param status 提问状态
@@ -44,5 +51,4 @@ public interface IQuestionService extends IService<Question> {
 	 * @return QuestionPageDTO
 	 */
 	QuestionPageDTO selectQuestionsByPage(Long productId, PageInfo pageInfo, Integer status);
-	
 }
