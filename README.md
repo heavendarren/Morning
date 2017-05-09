@@ -1,8 +1,7 @@
 ## 猫宁Morning公益商城系统
 
 > 但行好事，莫问前程。（基于SSM框架的公益B2C网上商城的设计与实现）<br>
-QQ群：558243903 <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=454hcs1"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="猫宁Morning技术讨论" title="猫宁Morning技术讨论"></a>
-![猫宁Morning技术讨论群二维码](http://git.oschina.net/uploads/images/2017/0217/213032_75339153_755773.png "猫宁Morning技术讨论群二维码")
+
 
 
 ## 项目背景
