@@ -34,6 +34,6 @@
 	<import resource="classpath:spring/applicationContext-dubbo-consumer.xml" />
 	
 	<!-- 数据库及mybatis配置文件的引入:如果不使用dubbo分布式，则引入该配置文件 -->
-	<import resource="classpath:spring/applicationContext-mybatis.xml" />
+<!-- 	<import resource="classpath:spring/applicationContext-mybatis.xml" /> -->
 
 </beans>
