@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.product.mapper.KindMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.product.entity.Kind">
+		<id column="kind_id" property="kindId" />
+		<result column="product_id" property="productId" />
+		<result column="specification_id" property="specificationId" />
+		<result column="name" property="name" />
+		<result column="status" property="status" />
+		<result column="sort" property="sort" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+	</resultMap>
+	
+  	<resultMap type="org.pussinboots.morning.product.pojo.vo.KindVO" id="KindResultMap">
+  		<id column="kind_id" property="kindId" />
+		<result column="product_id" property="productId" />
+		<result column="specification_id" property="specificationId" />	
+		<result column="name" property="name" />
+    	<collection property="kindAttributes" ofType="org.pussinboots.morning.product.entity.KindAttribute">
+			<id column="kind_attr_id" property="kindAttrId" />
+			<result column="attributeName" property="name" />
+			<result column="spec_attr_id" property="specAttrId" />
+  		</collection>
+  	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        kind_id AS kindId, product_id AS productId, specification_id AS specificationId, name, status, sort, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy
+    </sql>
+
+    <!-- 根据产品ID和类型状态查找类型列表 -->
+    <select id="listByProductId" resultMap="KindResultMap">
+    	SELECT 
+    		k.kind_id, 
+    		product_id, 
+    		specification_id,
+    		k.name, 
+    		kind_attr_id, 
+    		spec_attr_id,
+    		a.name as attributeName
+		FROM
+			os_kind k
+		LEFT JOIN os_kind_attribute a ON k.kind_id = a.kind_id
+		WHERE
+			k.product_id = #{productId}
+		AND k.status = #{status}
+		AND a.status = #{status}
+		ORDER BY
+			k.sort ASC,
+			a.sort ASC
+    </select>
+
+</mapper>

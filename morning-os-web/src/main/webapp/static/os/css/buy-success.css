@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+.page-main {
+	padding: 38px 0
+}
+
+.buy-succ-box {
+	margin-bottom: 60px;
+	padding: 0 62px;
+	height: 180px;
+	background-color: #fff
+}
+
+.buy-succ-box .goods-content {
+	float: left;
+	margin-top: 30px
+}
+
+.buy-succ-box .goods-img {
+	float: left;
+	width: 110px;
+	height: 110px
+}
+
+.buy-succ-box .goods-info {
+	float: left;
+	margin-top: 16px;
+	margin-left: 20px
+}
+
+.buy-succ-box .goods-info h3 {
+	margin: 0;
+	color: #83c44e;
+	font-size: 28px;
+	font-weight: normal
+}
+
+.buy-succ-box .goods-info .name, .buy-succ-box .goods-info .price {
+	margin-right: 15px;
+	font-size: 18px;
+	color: #333
+}
+
+.buy-succ-box .actions {
+	float: right;
+	margin-top: 70px
+}
+
+.buy-succ-box .actions .btn {
+	width: 180px;
+	margin-left: 12px
+}
+
+.buy-succ-recommend {
+	margin-bottom: 26px
+}

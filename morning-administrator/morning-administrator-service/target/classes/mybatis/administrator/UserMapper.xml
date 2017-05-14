@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.administrator.mapper.UserMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.administrator.entity.User">
+		<id column="user_id" property="userId" />
+		<result column="organization_id" property="organizationId" />
+		<result column="login_name" property="loginName" />
+		<result column="login_password" property="loginPassword" />
+		<result column="salt" property="salt" />
+		<result column="user_name" property="userName" />
+		<result column="real_name" property="realName" />
+		<result column="sex" property="sex" />
+		<result column="age" property="age" />
+		<result column="pic_img" property="picImg" />
+		<result column="status" property="status" />
+		<result column="email" property="email" />
+		<result column="telephone" property="telephone" />
+		<result column="last_login_time" property="lastLoginTime" />
+		<result column="last_login_ip" property="lastLoginIp" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_id AS userId, organization_id AS organizationId, login_name AS loginName, login_password AS loginPassword, salt, user_name AS userName, real_name AS realName, sex, age, pic_img AS picImg, status, email, telephone, last_login_time AS lastLoginTime, last_login_ip AS lastLoginIp, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy
+    </sql>
+    
+    <!-- 根据管理员ID查找管理员信息 -->
+    <select id="getById" resultType="org.pussinboots.morning.administrator.pojo.vo.UserVO">
+    	SELECT
+	    	user_id AS userId, 
+	    	u.organization_id AS organizationId, 
+	    	o.organization_name AS organizationName, 
+	    	login_name AS loginName, 
+	    	user_name AS userName, 
+	    	real_name AS realName, 
+	    	sex, 
+	    	age, 
+	    	pic_img AS picImg, 
+	    	u.status,
+	    	email, 
+	    	telephone, 
+	    	last_login_time AS lastLoginTime, 
+	    	last_login_ip AS lastLoginIp, 
+	    	u.create_time AS createTime, 
+	    	u.create_by AS createBy, 
+	    	u.update_time AS updateTime, 
+	    	u.update_by AS updateBy
+	    FROM
+	    	cms_user u
+	    LEFT JOIN cms_organization o ON u.organization_id = o.organization_id
+	    WHERE
+	    	user_id = #{userId}
+    </select>
+    
+    <!-- 根据管理员信息查找管理员列表 -->
+    <select id="listByUser" resultType="org.pussinboots.morning.administrator.pojo.vo.UserVO">
+    	SELECT
+	    	user_id AS userId, 
+	    	u.organization_id AS organizationId, 
+	    	o.organization_name AS organizationName, 
+	    	login_name AS loginName, 
+	    	user_name AS userName, 
+	    	real_name AS realName, 
+	    	sex, 
+	    	age, 
+	    	pic_img AS picImg, 
+	    	u.status,
+	    	email, 
+	    	telephone, 
+	    	last_login_time AS lastLoginTime, 
+	    	last_login_ip AS lastLoginIp, 
+	    	u.create_time AS createTime, 
+	    	u.create_by AS createBy, 
+	    	u.update_time AS updateTime, 
+	    	u.update_by AS updateBy
+	    FROM
+	    	cms_user u
+	    LEFT JOIN cms_organization o ON u.organization_id = o.organization_id
+    	<where>
+    		1=1
+    		<if test="telephone != null and telephone != ''">
+    			AND telephone = #{telephone}
+    		</if>
+    		<if test="email != null and email != ''">
+    			AND email = #{email}
+    		</if>
+    		<if test="organizationId != null">
+    			AND u.organization_id = #{organizationId}
+    		</if>      		   		 		
+    	</where>
+    </select>
+    
+    <!-- 根据分页信息/搜索内容查找管理员列表 -->
+    <select id="listByPage" resultType="org.pussinboots.morning.administrator.pojo.vo.UserVO">
+     	SELECT
+	    	user_id AS userId, 
+	    	u.organization_id AS organizationId, 
+	    	o.organization_name AS organizationName, 
+	    	login_name AS loginName, 
+	    	user_name AS userName, 
+	    	real_name AS realName, 
+	    	sex, 
+	    	age, 
+	    	pic_img AS picImg, 
+	    	u.status,
+	    	email, 
+	    	telephone, 
+	    	last_login_time AS lastLoginTime, 
+	    	last_login_ip AS lastLoginIp, 
+	    	u.create_time AS createTime, 
+	    	u.create_by AS createBy, 
+	    	u.update_time AS updateTime, 
+	    	u.update_by AS updateBy
+	    FROM
+	    	cms_user u
+	    LEFT JOIN cms_organization o ON u.organization_id = o.organization_id
+    	<where>
+    		1=1
+    		<if test="search != null">
+				AND (
+					user_name LIKE '%' #{search} '%' 
+					OR real_name LIKE '%' #{search} '%' 
+					OR telephone LIKE '%' #{search} '%'
+					OR email LIKE '%' #{search} '%'
+					OR o.organization_name LIKE '%' #{search} '%'
+				)
+			</if>
+			<if test="pageInfo.sort != null">
+				ORDER BY ${pageInfo.sort} ${pageInfo.order}
+			</if>   		   		 		
+    	</where>   
+    </select>
+    
+    <!-- 根据分页信息/搜索内容查找管理员列表 -->
+    <select id="listByOrganizationId" resultType="org.pussinboots.morning.administrator.pojo.vo.UserVO">
+     	SELECT
+	    	user_id AS userId, 
+	    	u.organization_id AS organizationId, 
+	    	o.organization_name AS organizationName, 
+	    	login_name AS loginName, 
+	    	user_name AS userName, 
+	    	real_name AS realName, 
+	    	sex, 
+	    	age, 
+	    	pic_img AS picImg, 
+	    	u.status,
+	    	email, 
+	    	telephone, 
+	    	last_login_time AS lastLoginTime, 
+	    	last_login_ip AS lastLoginIp, 
+	    	u.create_time AS createTime, 
+	    	u.create_by AS createBy, 
+	    	u.update_time AS updateTime, 
+	    	u.update_by AS updateBy
+	    FROM
+	    	cms_user u
+	    LEFT JOIN cms_organization o ON u.organization_id = o.organization_id
+    	<where>
+    		u.organization_id = #{organizationId}
+    		<if test="search != null">
+				AND (
+					user_name LIKE '%' #{search} '%' 
+					OR real_name LIKE '%' #{search} '%' 
+					OR telephone LIKE '%' #{search} '%'
+					OR email LIKE '%' #{search} '%'
+					OR o.organization_name LIKE '%' #{search} '%'
+				)
+			</if>
+			<if test="pageInfo.sort != null">
+				ORDER BY ${pageInfo.sort} ${pageInfo.order}
+			</if>   		   		 		
+    	</where>   
+    </select>    
+    
+    <!-- 根据组织ID重置组织ID -->
+    <update id="updateOrganization">
+    	UPDATE cms_user
+    	SET
+    		organization_id = null
+    	WHERE
+    		organization_id = #{organizationId}
+    </update>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.product.mapper.LabelMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.product.entity.Label">
+		<id column="label_id" property="labelId" />
+		<result column="label_name" property="labelName" />
+		<result column="status" property="status" />
+		<result column="sort" property="sort" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+		<result column="remarks" property="remarks" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        label_id AS labelId, label_name AS labelName, status, sort, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, remarks
+    </sql>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.product.mapper.ProductImageMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.product.entity.ProductImage">
+		<id column="pic_img_id" property="picImgId" />
+		<result column="product_id" property="productId" />
+		<result column="pic_img" property="picImg" />
+		<result column="sort" property="sort" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        pic_img_id AS picImgId, product_id AS productId, pic_img AS picImg, sort, status, create_time AS createTime, create_by AS createBy
+    </sql>
+    
+    <!-- 根据商品ID查找展示图片 -->
+    <select id="listByProductId" resultType="org.pussinboots.morning.product.entity.ProductImage">
+    	SELECT
+    		pic_img_id AS picImgId,
+    		product_id AS productId, 
+    		pic_img AS picImg
+    	FROM
+    		os_product_image
+    	WHERE
+    		product_id = #{productId}
+    	AND status = #{status}
+    	ORDER BY 
+    		sort
+    	LIMIT #{showNumber}
+    </select>    
+</mapper>

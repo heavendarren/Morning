@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.order.mapper.OrderStatusMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.order.entity.OrderStatus">
+		<id column="order_status_id" property="orderStatusId" />
+		<result column="order_id" property="orderId" />
+		<result column="order_status" property="orderStatus" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="create_status" property="createStatus" />
+		<result column="remarks" property="remarks" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        order_status_id AS orderStatusId, order_id AS orderId, order_status AS orderStatus, create_time AS createTime, create_by AS createBy, create_status AS createStatus, remarks
+    </sql>
+
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+    <!-- 排除，不进行装饰的路径 -->
+    <mapping path="/login" exclue="true"/>
+    <mapping path="/swagger-ui.html" exclue="true"/>
+    <mapping path="/swagger-ui" exclue="true"/>
+    <mapping path="/druid/*" exclue="true"/>
+    <mapping path="/administrator/info/avatar" exclue="true"/>
+    
+    <!-- 后台管理系统布局 -->
+    <mapping>
+      <path>/*</path>
+      <path>/**/*</path>
+      <decorator>/WEB-INF/layouts/cms/default.jsp</decorator>
+    </mapping>
+    
+    <!-- 自定义 tag 规则 -->
+    <content-processor>
+      <tag-rule-bundle class="org.pussinboots.morning.cms.common.tag.ExtHtmlTagRuleBundle" />
+    </content-processor>
+    
+</sitemesh>

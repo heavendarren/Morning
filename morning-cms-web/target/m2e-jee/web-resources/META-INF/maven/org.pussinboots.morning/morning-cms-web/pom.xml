@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>morning-cms-web</artifactId>
+	<packaging>war</packaging>
+	<parent>
+		<groupId>org.pussinboots.morning</groupId>
+		<artifactId>morning-parent</artifactId>
+		<version>3.0.0-SNAPSHOT</version>
+	</parent>
+	<name>morning-cms-web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<description>morning  --  公益商城系统:morning-cms  --  后台管理子系统</description>
+
+	<dependencies>
+		<!-- 0.Morning相关依赖 begin -->
+		<dependency>
+			<groupId>org.pussinboots.morning</groupId>
+			<artifactId>morning-administrator-facade</artifactId>
+			<version>${morning.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.pussinboots.morning</groupId>
+			<artifactId>morning-system-facade</artifactId>
+			<version>${morning.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.pussinboots.morning</groupId>
+			<artifactId>morning-administrator-service</artifactId>
+			<version>${morning.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.pussinboots.morning</groupId>
+			<artifactId>morning-system-service</artifactId>
+			<version>${morning.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.pussinboots.morning</groupId>
+			<artifactId>morning-online-facade</artifactId>
+			<version>${morning.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.pussinboots.morning</groupId>
+			<artifactId>morning-online-service</artifactId>
+			<version>${morning.version}</version>
+		</dependency>					
+		<!-- Morning相关依赖 end -->
+
+		<!-- 7.安全框架SECURITY:shiro begin -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- 安全框架SECURITY:shiro end -->
+
+		<!-- 8.缓存框架EHCACHE:ehcache begin -->
+		<dependency>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
+		<!-- 缓存框架EHCACHE:ehcache end -->
+
+		<!-- 缓存框架REDIS:redis begin -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId> 					<!-- Java 客户端开发包 -->
+		</dependency>
+		<!-- 缓存框架REDIS:redis end -->
+
+		<!-- 9.分布式服务框架DUBBO:dubbo begin -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.101tec</groupId>
+			<artifactId>zkclient</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- 分布式服务框架DUBBO:dubbo ebd -->
+
+		<!-- RESTful风格的Web服务框架SWAGGER2:swagger2 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId> <!--jackson json:高性能的JSON处理 -->
+		</dependency>
+		
+		<!-- 验证码工具KAPTCHA:kaptcha -->
+		<dependency>
+			<groupId>com.github.penggle</groupId>
+			<artifactId>kaptcha</artifactId>
+		</dependency>
+
+		<!-- 获取User Agent用户代理:解析客户端操作系统、浏览器等 -->
+		<dependency>
+			<groupId>eu.bitwalker</groupId>
+			<artifactId>UserAgentUtils</artifactId>
+		</dependency>
+
+		<!-- 网页布局和修饰的框架包 -->
+		<dependency>
+			<groupId>org.sitemesh</groupId>
+			<artifactId>sitemesh</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>morning-cms-web</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${maven-war-plugin.version}</version>
+					<configuration>
+						<packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+						<!-- 重点是这个配置 -->
+						<warName>system.morning</warName>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

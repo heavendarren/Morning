@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.administrator.mapper.RoleMenuMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.administrator.entity.RoleMenu">
+		<id column="role_menu_id" property="roleMenuId" />
+		<result column="role_id" property="roleId" />
+		<result column="menu_id" property="menuId" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        role_menu_id AS roleMenuId, role_id AS roleId, menu_id AS menuId, create_time AS createTime, create_by AS createBy
+    </sql>
+    
+    <!-- 插入角色目录表记录 -->
+    <insert id="insertRoleMenus" parameterType="java.util.List">
+    	INSERT INTO cms_role_menu(
+        	role_id, 
+        	menu_id, 
+        	create_time,
+        	create_by
+    	)VALUES
+    	<foreach collection="roleMenus" item="roleMenu" separator=",">
+    	(
+    		#{roleMenu.roleId},
+    		#{roleMenu.menuId},
+    		#{roleMenu.createTime},
+    		#{roleMenu.createBy}
+    	)
+    	</foreach>
+    </insert>
+    
+    <!-- 根据角色ID列表查找权限列表 -->
+    <select id="listByRoleIds" resultType="org.pussinboots.morning.administrator.pojo.dto.RoleMenuDTO">
+    	SELECT
+        	r.menu_id AS menuId,
+        	m.permission
+        FROM 
+        	cms_role_menu r
+        LEFT JOIN 
+        	cms_menu m 
+        ON 
+        	r.menu_id = m.menu_id 
+        WHERE
+            r.role_id IN
+	        <foreach collection="roleIds" item="roleId" open="(" close=")" separator=",">
+	    		#{roleId}
+	    	</foreach>
+	    	<if test="status != null">
+	    		AND status = #{status}
+	    	</if>        	
+    </select>
+    
+    <!-- 根据角色ID/目录类型查找权限列表 -->
+    <select id="listByRoleIdsAndType" resultType="org.pussinboots.morning.administrator.pojo.dto.RoleMenuDTO">
+     	SELECT 
+    		m.menu_id AS menuId, 
+    		parent_id AS parentId, 
+    		menu_name AS menuName, 
+    		href, 
+    		icon
+    	FROM
+    		cms_menu m
+		LEFT JOIN cms_role_menu r ON r.menu_id = m.menu_id
+        WHERE
+        	status = #{status} 
+        AND menu_type = #{menuType}
+        AND r.role_id IN
+	        <foreach collection="roleIds" item="roleId" open="(" close=")" separator=",">
+	    		#{roleId}
+	    	</foreach>    
+	    ORDER BY 
+	    	sort ASC   		
+    </select> 
+    
+    <!-- 根据目录状态查询目录列表 -->
+    <select id="listRoleMenus" resultType="org.pussinboots.morning.administrator.pojo.dto.RoleMenuDTO">
+		SELECT
+			menu_id AS menuId,
+			parent_id AS parentId,
+			menu_type AS menuType,
+			menu_name AS menuName,
+			permission
+		FROM
+			cms_menu
+		WHERE
+			status = #{status}
+		ORDER BY
+			sort ASC
+    </select>   
+</mapper>

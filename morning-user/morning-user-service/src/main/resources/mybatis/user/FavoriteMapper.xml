@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.user.mapper.FavoriteMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.user.entity.Favorite">
+		<id column="favorite_id" property="favoriteId" />
+		<result column="user_id" property="userId" />
+		<result column="product_id" property="productId" />
+		<result column="product_number" property="productNumber" />
+		<result column="name" property="name" />
+		<result column="pic_img" property="picImg" />
+		<result column="show_price" property="showPrice" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        favorite_id AS favoriteId, user_id AS userId, product_id AS productId, product_number AS productNumber, name, pic_img AS picImg, show_price AS showPrice, status, create_time AS createTime, create_by AS createBy
+    </sql>
+
+</mapper>

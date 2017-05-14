@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.online.mapper.AdvertMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.online.entity.Advert">
+		<id column="advert_id" property="advertId" />
+		<result column="name" property="name" />
+		<result column="width" property="width" />
+		<result column="height" property="height" />
+		<result column="description" property="description" />
+		<result column="code" property="code" />
+		<result column="template" property="template" />
+		<result column="defult_number" property="defultNumber" />
+		<result column="number" property="number" />
+		<result column="status" property="status" />
+		<result column="type" property="type" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        advert_id AS advertId, name, width, height, description, code, template, defult_number AS defultNumber, number, status, type, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy
+    </sql>
+    
+    <!-- 根据分页信息/搜索内容查找广告列表 -->
+    <select id="listByPage" resultType="org.pussinboots.morning.online.entity.Advert">
+    	SELECT 
+       		advert_id AS advertId, 
+       		name, 
+       		width, 
+       		height, 
+       		description, 
+       		code, 
+       		template, 
+       		defult_number AS defultNumber, 
+       		number, 
+       		status, 
+       		type, 
+       		create_time AS createTime, 
+       		create_by AS createBy, 
+       		update_time AS updateTime, 
+       		update_by AS updateBy
+        FROM
+        	os_advert
+	    <where>
+    		1=1
+    		<if test="search != null">
+				AND (
+					name LIKE '%' #{search} '%' 
+					OR description LIKE '%' #{search} '%' 
+					OR code LIKE '%' #{search} '%'
+					OR create_by LIKE '%' #{search} '%'
+					OR update_by LIKE '%' #{search} '%'
+				)
+			</if>
+			<if test="pageInfo.sort != null">
+				ORDER BY ${pageInfo.sort} ${pageInfo.order}
+			</if>   		   		 		
+    	</where> 
+    </select>
+    
+    <!-- 根据导航ID更新导航中导航栏数量 -->
+    <update id="updateNumber">
+		UPDATE os_advert
+		SET number = (
+			SELECT
+				COUNT(1)
+			FROM
+				os_advert_detail
+			WHERE
+				advert_id = #{advertId}
+		)
+		WHERE
+			advert_id = #{advertId}
+    </update>
+</mapper>

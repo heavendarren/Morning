@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.product.mapper.KindAttributeMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.product.entity.KindAttribute">
+		<id column="kind_attr_id" property="kindAttrId" />
+		<result column="kind_id" property="kindId" />
+		<result column="spec_attr_id" property="specAttrId" />
+		<result column="name" property="name" />
+		<result column="status" property="status" />
+		<result column="sort" property="sort" />
+		<result column="create_by" property="createBy" />
+		<result column="create_time" property="createTime" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        kind_attr_id AS kindAttrId, kind_id AS kindId, spec_attr_id AS specAttrId, name, status, sort, create_by AS createBy, create_time AS createTime
+    </sql>
+
+</mapper>

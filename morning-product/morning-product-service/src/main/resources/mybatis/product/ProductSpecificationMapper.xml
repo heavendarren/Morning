@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.product.mapper.ProductSpecificationMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.product.entity.ProductSpecification">
+		<id column="product_spec_id" property="productSpecId" />
+		<result column="product_spec_number" property="productSpecNumber" />
+		<result column="product_id" property="productId" />
+		<result column="spec" property="spec" />
+		<result column="stock" property="stock" />
+		<result column="sales_volume" property="salesVolume" />
+		<result column="price" property="price" />
+		<result column="score" property="score" />
+		<result column="default_status" property="defaultStatus" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        product_spec_id AS productSpecId, product_spec_number AS productSpecNumber, product_id AS productId, spec, stock, sales_volume AS salesVolume, price, score, default_status AS defaultStatus, status, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy
+    </sql>
+    
+    <!-- 根据商品ID、规格状态、是否默认查找商品规格 -->
+    <select id="getByStatus" resultType="org.pussinboots.morning.product.entity.ProductSpecification">
+    	SELECT
+	    	product_spec_number AS productSpecNumber, 
+	    	product_id AS productId, 
+	    	spec, 
+	    	price, 
+	    	score
+    	FROM
+    		os_product_specification
+    	WHERE
+    		product_id = #{productId}
+    	AND status = #{status}
+    	AND default_status = #{defaultStatus}
+    </select>
+
+</mapper>

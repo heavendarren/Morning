@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.product.mapper.CategoryAdvertMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.product.entity.CategoryAdvert">
+		<id column="category_advert_id" property="categoryAdvertId" />
+		<result column="category_id" property="categoryId" />
+		<result column="title" property="title" />
+		<result column="sort" property="sort" />
+		<result column="href" property="href" />
+		<result column="status" property="status" />
+		<result column="pic_img" property="picImg" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+		<result column="begin_time" property="beginTime" />
+		<result column="end_time" property="endTime" />
+		<result column="remarks" property="remarks" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        category_advert_id AS categoryAdvertId, category_id AS categoryId, title, sort, href, status, pic_img AS picImg, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, begin_time AS beginTime, end_time AS endTime, remarks
+    </sql>
+
+</mapper>

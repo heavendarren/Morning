@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.online.mapper.AdvertDetailMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.online.entity.AdvertDetail">
+		<id column="advert_detail_id" property="advertDetailId" />
+		<result column="advert_id" property="advertId" />
+		<result column="title" property="title" />
+		<result column="sort" property="sort" />
+		<result column="href" property="href" />
+		<result column="status" property="status" />
+		<result column="pic_img" property="picImg" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+		<result column="remarks" property="remarks" />
+		<result column="content" property="content" />
+		<result column="begin_time" property="beginTime" />
+		<result column="end_time" property="endTime" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        advert_detail_id AS advertDetailId, advert_id AS advertId, title, sort, href, status, pic_img AS picImg, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, remarks, content, begin_time AS beginTime, end_time AS endTime
+    </sql>
+    
+    <!-- 根据广告位ID/状态/显示数量/时间查找显示广告列表 -->
+	<select id="listByAdvertId" resultType="org.pussinboots.morning.online.entity.AdvertDetail">
+		SELECT
+	        title, 
+	        href, 
+	        pic_img AS picImg, 
+	        content
+		FROM
+			os_advert_detail
+		WHERE
+			advert_id = #{advertId}	
+		AND status = #{status}
+		AND begin_time &lt;= #{date}
+		AND end_time &gt;= #{date}
+		ORDER BY 
+			sort
+		LIMIT ${defultNumber}	
+	</select>
+	
+    <!-- 根据广告ID/分页信息/搜索内容查找导航列表 -->
+    <select id="listByPage" resultType="org.pussinboots.morning.online.entity.AdvertDetail">
+    	SELECT 
+        	advert_detail_id AS advertDetailId, 
+        	advert_id AS advertId, 
+        	title, 
+        	sort, 
+        	href, 
+        	status, 
+        	pic_img AS picImg, 
+        	create_time AS createTime, 
+        	create_by AS createBy, 
+        	update_time AS updateTime, 
+        	update_by AS updateBy, 
+        	remarks, 
+        	content, 
+        	begin_time AS beginTime, 
+        	end_time AS endTime
+        FROM
+        	os_advert_detail
+	    <where>
+    		advert_id = #{advertId}
+    		<if test="search != null">
+				AND (
+					title LIKE '%' #{search} '%' 
+					OR href LIKE '%' #{search} '%' 
+					OR name LIKE '%' #{search} '%' 
+					OR remarks LIKE '%' #{search} '%'
+					OR create_by LIKE '%' #{search} '%'
+					OR update_by LIKE '%' #{search} '%'
+					OR content LIKE '%' #{search} '%'
+				)
+			</if>
+			<if test="pageInfo.sort != null">
+				ORDER BY ${pageInfo.sort} ${pageInfo.order}
+			</if>   		   		 		
+    	</where> 
+    </select>	
+</mapper>

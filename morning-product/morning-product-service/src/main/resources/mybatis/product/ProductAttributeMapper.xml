@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.product.mapper.ProductAttributeMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.product.entity.ProductAttribute">
+		<id column="attribute_id" property="attributeId" />
+		<result column="product_id" property="productId" />
+		<result column="stock" property="stock" />
+		<result column="sales_volume" property="salesVolume" />
+		<result column="page_views" property="pageViews" />
+		<result column="comment_number" property="commentNumber" />
+		<result column="comment_total" property="commentTotal" />
+		<result column="comment_average" property="commentAverage" />
+		<result column="favorite_number" property="favoriteNumber" />
+		<result column="question_number" property="questionNumber" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        attribute_id AS attributeId, product_id AS productId, stock, sales_volume AS salesVolume, page_views AS pageViews, comment_number AS commentNumber, comment_total AS commentTotal, comment_average AS commentAverage, favorite_number AS favoriteNumber, question_number AS questionNumber
+    </sql>
+
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+    <!-- 排除，不进行装饰的路径 -->
+    <mapping path="/pass/**" exclue="true"/>
+    <mapping path="/druid/*" exclue="true"/>
+    <mapping path="/recommend/**" exclue="true"/>
+    <mapping path="/question/askList" exclue="true"/>
+    <mapping path="/comment/supList" exclue="true"/>
+    <mapping path="/cart/topbar" exclue="true"/>
+    <mapping path="/comment/tileLineList" exclue="true"/>
+    <mapping path="/swagger-ui.html" exclue="true"/>
+    
+  	<!-- 前端商城布局 -->
+    <mapping>
+      <path>/*/*</path>
+      <path>/*</path>
+      <path>/index</path>
+      <path>/</path>
+      <decorator>/WEB-INF/layouts/web/default.jsp</decorator>
+    </mapping>
+    
+   	<!-- 个人中心布局 -->
+    <mapping>
+      <path>/uc/*</path>
+      <decorator>/WEB-INF/layouts/web/default_uc.jsp</decorator>
+    </mapping>
+    
+    <!-- 自定义 tag 规则 -->
+    <content-processor>
+      <tag-rule-bundle class="org.pussinboots.morning.os.common.tag.ExtHtmlTagRuleBundle" />
+    </content-processor>
+    
+</sitemesh>

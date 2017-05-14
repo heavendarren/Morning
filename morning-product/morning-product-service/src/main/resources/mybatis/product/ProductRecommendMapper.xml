@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.product.mapper.ProductRecommendMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.product.entity.ProductRecommend">
+		<id column="recommend_product_id" property="recommendProductId" />
+		<result column="recommend_id" property="recommendId" />
+		<result column="product_id" property="productId" />
+		<result column="sort" property="sort" />
+		<result column="status" property="status" />
+		<result column="begin_time" property="beginTime" />
+		<result column="end_time" property="endTime" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        recommend_product_id AS recommendProductId, recommend_id AS recommendId, product_id AS productId, sort, status, begin_time AS beginTime, end_time AS endTime, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy
+    </sql>
+    
+    <!-- 根据推荐位ID查找显示推荐商品 -->
+    <select id="listByRecommendId" resultType="org.pussinboots.morning.product.pojo.vo.ProductVO">
+    	SELECT
+    	 	recommend_product_id AS recommendProductId,
+	        p.product_id AS productId, 
+	        product_number AS productNumber, 
+	        name, 
+	        show_price AS showPrice, 
+	        introduce, 
+	        pic_img AS picImg,
+	        comment_number AS commentNumber
+	    FROM
+	    	os_product_recommend r
+	    LEFT JOIN os_product p ON r.product_id = p.product_id
+	    LEFT JOIN os_product_attribute a ON a.product_id = p.product_id
+	    WHERE
+	    	recommend_id = #{recommendId}
+	    AND r.status = #{status}
+	    AND	p.show_in_shelve = #{status}
+   		AND begin_time &lt;= #{date}
+		AND end_time &gt;= #{date}
+   		ORDER BY 
+			sort
+		LIMIT ${showNumber}		
+    </select>
+    
+    <!-- 根据商品ID查找热门评论 -->
+	<select id="getComment" resultType="org.pussinboots.morning.product.pojo.vo.ProductVO">
+		SELECT
+			comment_id AS commentId,
+			user_name AS userName,
+			content
+		FROM 
+			os_product_recommend r
+		LEFT JOIN os_comment c ON c.product_id = r.product_id
+		WHERE
+			r.product_id = #{productId}
+		AND c.status = #{status}
+		AND type = #{type}
+		ORDER BY
+			RAND()
+		LIMIT 1
+	</select>
+</mapper>

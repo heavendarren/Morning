@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>morning-system-facade</artifactId>
+	<packaging>jar</packaging>
+	<parent>
+		<groupId>org.pussinboots.morning</groupId>
+		<artifactId>morning-system</artifactId>
+		<version>3.0.0-SNAPSHOT</version>
+	</parent>
+	<name>morning-system-facade</name>
+	<url>http://maven.apache.org</url>
+	<description>morning  --  公益商城系统系统模块业务逻辑层接口</description>
+
+	<dependencies>
+		<!-- 0.Morning相关依赖 begin -->
+		<dependency>
+			<groupId>org.pussinboots.morning</groupId>
+			<artifactId>morning-common</artifactId>
+			<version>${morning.version}</version>
+		</dependency>
+		<!-- Morning相关依赖 end -->
+
+		<!-- 4.MYBATIS 持久层框架 begin -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus</artifactId>	  <!-- mybatis-plus Mybatis增强辅助工具 -->
+		</dependency>
+		<!-- MYBATIS 持久层框架 end -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+</project>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.product.mapper.ProductCategoryMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.product.entity.ProductCategory">
+		<id column="product_category_id" property="productCategoryId" />
+		<result column="product_id" property="productId" />
+		<result column="category_id" property="categoryId" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        product_category_id AS productCategoryId, product_id AS productId, category_id AS categoryId, create_time AS createTime, create_by AS createBy
+    </sql>
+
+	<!-- 根据类目ID列表查找显示置顶商品列表 -->
+	<select id="listTopByCategoryIds" resultType="org.pussinboots.morning.product.pojo.vo.ProductVO">
+    	SELECT
+	        p.product_id AS productId, 
+	        product_number AS productNumber, 
+	        name, 
+	        show_price AS showPrice, 
+	        introduce, 
+	        pic_img AS picImg,
+	        comment_number AS commentNumber,
+	        label_name AS labelName
+	    FROM
+	    	os_product_category c
+	    LEFT JOIN os_product p ON c.product_id = p.product_id
+	    LEFT JOIN os_product_attribute a ON a.product_id = p.product_id
+	    LEFT JOIN (
+	    	SELECT
+	    		label_id,
+	    		label_name
+	    	FROM
+	    		os_label
+	    	WHERE
+	    		status = #{status}
+	    ) l ON p.label_id = l.label_id
+	    WHERE
+        	c.category_id IN
+	    	<foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+				#{categoryId}
+			</foreach>
+	    AND p.show_in_shelve = #{status}
+	    AND p.show_in_top = #{showInTop}
+   		ORDER BY 
+			rand()
+		LIMIT ${showNumber}	
+	</select>
+	
+	<!-- 根据类目ID列表查找显示热门商品列表 -->
+	<select id="listHotByCategoryIds" resultType="org.pussinboots.morning.product.pojo.vo.ProductVO">
+    	SELECT
+	        p.product_id AS productId, 
+	        product_number AS productNumber, 
+	        name, 
+	        show_price AS showPrice, 
+	        introduce, 
+	        pic_img AS picImg,
+	        comment_number AS commentNumber,
+	        label_name AS labelName
+	    FROM
+	    	os_product_category c
+	    LEFT JOIN os_product p ON c.product_id = p.product_id
+	    LEFT JOIN os_product_attribute a ON a.product_id = p.product_id
+	    LEFT JOIN (
+	    	SELECT
+	    		label_id,
+	    		label_name
+	    	FROM
+	    		os_label
+	    	WHERE
+	    		status = #{status}
+	    ) l ON p.label_id = l.label_id
+	    WHERE
+        	c.category_id IN
+	    	<foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+				#{categoryId}
+			</foreach>
+	    AND p.show_in_shelve = #{status}
+        AND p.show_in_hot = #{showInHot}
+   		ORDER BY 
+			rand()
+		LIMIT ${showNumber}	
+	</select>	
+	
+	<!-- 根据类目ID列表查找显示热门商品列表 -->
+	<select id="listHotByCategoryId" resultType="org.pussinboots.morning.product.pojo.vo.ProductVO">
+    	SELECT
+	        p.product_id AS productId, 
+	        product_number AS productNumber, 
+	        name, 
+	        show_price AS showPrice, 
+	        introduce, 
+	        pic_img AS picImg,
+	        comment_number AS commentNumber,
+	        label_name AS labelName
+	    FROM
+	    	os_product_category c
+	    LEFT JOIN os_product p ON c.product_id = p.product_id
+	    LEFT JOIN os_product_attribute a ON a.product_id = p.product_id
+	    LEFT JOIN (
+	    	SELECT
+	    		label_id,
+	    		label_name
+	    	FROM
+	    		os_label
+	    	WHERE
+	    		status = #{status}
+	    ) l ON p.label_id = l.label_id
+	    WHERE
+        	c.category_id = #{categoryId}
+	    AND p.show_in_shelve = #{status}
+        AND p.show_in_hot = #{showInHot}
+   		ORDER BY 
+			rand()
+		LIMIT ${showNumber}	
+	</select>	
+	
+	<!-- 根据商品ID查找热门评论 -->
+	<select id="getComment" resultType="org.pussinboots.morning.product.pojo.vo.ProductVO">
+		SELECT
+			comment_id AS commentId,
+			user_name AS userName,
+			content
+		FROM 
+			os_product_category p
+		LEFT JOIN os_comment c ON c.product_id = p.product_id
+		WHERE
+			p.product_id = #{productId}
+		AND c.status = #{status}
+		AND type = #{type}
+		ORDER BY
+			RAND()
+		LIMIT 1
+	</select>
+	
+	<!-- 根据类目ID列表查找显示热门商品列表 -->
+	<select id="listNavByCategoryIds" resultType="org.pussinboots.morning.product.pojo.vo.ProductVO">
+    	SELECT
+	        p.product_id AS productId, 
+	        product_number AS productNumber, 
+	        name, 
+	        show_price AS showPrice, 
+	        introduce, 
+	        pic_img AS picImg
+	    FROM
+	    	os_product_category c
+	    LEFT JOIN os_product p ON c.product_id = p.product_id
+	    WHERE
+        	c.category_id IN
+	    	<foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+				#{categoryId}
+			</foreach>
+	    AND p.show_in_shelve = #{status}
+        AND p.show_in_Nav = #{showInNav}
+		LIMIT ${showNumber}	
+	</select>	
+	
+	<!-- 根据类目ID列表、分类、排序查找商品列表及标签（分类查找） -->
+	<select id="listByPage" resultType="org.pussinboots.morning.product.pojo.vo.ProductVO">
+    	SELECT
+	        p.product_id AS productId, 
+	        product_number AS productNumber, 
+	        name, 
+	        show_price AS showPrice, 
+	        introduce, 
+	        pic_img AS picImg,
+	        label_name AS labelName
+	    FROM
+	    	os_product_category c
+	    LEFT JOIN os_product p ON c.product_id = p.product_id
+	    LEFT JOIN os_product_attribute a ON a.product_id = p.product_id
+	    LEFT JOIN (
+	    	SELECT
+	    		label_id,
+	    		label_name
+	    	FROM
+	    		os_label
+	    	WHERE
+	    		status = #{status}
+	    ) l ON p.label_id = l.label_id
+	    WHERE
+        	c.category_id IN
+	    	<foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+				#{categoryId}
+			</foreach>
+	    AND p.show_in_shelve = #{status}
+		ORDER BY 
+			${pageInfo.sort} ${pageInfo.order}	
+	</select>
+	
+    <!-- 根据搜索内容、分类、排序查找商品列表及标签 -->
+    <select id="listBySearch" resultType="org.pussinboots.morning.product.pojo.vo.ProductVO">
+    	SELECT
+	        p.product_id AS productId, 
+	        product_number AS productNumber, 
+	        name, 
+	        show_price AS showPrice, 
+	        introduce, 
+	        pic_img AS picImg,
+	        label_name AS labelName
+    	FROM
+    		os_product p
+    	LEFT JOIN os_product_category c ON c.product_id = p.product_id
+    	LEFT JOIN os_label l ON l.label_id = p.label_id
+    	LEFT JOIN os_product_attribute a ON a.product_id = p.product_id
+    	<where> 1=1
+	      	<if test="status != null" >
+				AND p.show_in_shelve = #{status}
+	      	</if>
+	      	<if test="search != null" >
+	        	AND name LIKE '%' #{search} '%' 
+	        	OR introduce LIKE '%' #{search} '%' 
+	        	OR search_key LIKE '%' #{search} '%' 
+	        	OR page_title LIKE '%' #{search} '%' 
+	        	OR page_description LIKE '%' #{search} '%' 
+	        	OR page_keyword LIKE '%' #{search} '%' 
+	      	</if>
+ 		</where> 	
+		ORDER BY 
+			${pageInfo.sort} ${pageInfo.order}
+    </select>	
+</mapper>

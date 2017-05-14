@@ -1,0 +1,106 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>morning-order-service</artifactId>
+	<packaging>jar</packaging>
+	<parent>
+		<groupId>org.pussinboots.morning</groupId>
+		<artifactId>morning-order</artifactId>
+		<version>3.0.0-SNAPSHOT</version>
+	</parent>
+	<name>morning-order-service</name>
+	<url>http://maven.apache.org</url>
+	<description>morning  --  公益商城系统订单模块业务逻辑层接口现实(服务提供者)</description>
+
+	<dependencies>
+		<!-- 0.Morning相关依赖 begin -->
+		<dependency>
+			<groupId>org.pussinboots.morning</groupId>
+			<artifactId>morning-order-facade</artifactId>
+			<version>${morning.version}</version>
+		</dependency>
+		<!-- Morning相关依赖 end -->
+
+		<!-- 1.TEST:单元测试框架 begin -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- TEST end -->
+
+		<!-- 4.MYBATIS 持久层框架 begin -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>		  <!-- mybatis持久层框架 -->
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus</artifactId>	  <!-- mybatis-plus Mybatis增强辅助工具 -->
+		</dependency>
+		<!-- MYBATIS 持久层框架 end -->
+
+		<!-- 5.MYSQL 数据库相关依赖 begin -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId><!-- 导入Mysql数据库驱动包 -->
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>              <!-- connection pool:数据库连接池,用来在spingMVC-mybatis.xml中配置数据库 -->
+		</dependency>
+		<!-- MYSQL 数据库相关依赖 end -->
+
+		<!-- 8.缓存框架EHCACHE:ehcache begin -->
+		<dependency>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
+		<!-- 缓存框架EHCACHE:ehcache end -->
+
+		<!-- 缓存框架REDIS:redis begin -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId> 					<!-- Java 客户端开发包 -->
+		</dependency>
+		<!-- 缓存框架REDIS:redis end -->
+
+		<!-- 9.分布式服务框架DUBBO:dubbo begin -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.101tec</groupId>
+			<artifactId>zkclient</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- 分布式服务框架DUBBO:dubbo ebd -->
+
+		<!-- 使用Velocity 模板引擎快速生成代码 -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+		</dependency>
+	</dependencies>	
+</project>

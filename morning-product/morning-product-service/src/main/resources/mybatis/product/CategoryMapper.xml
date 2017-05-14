@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.product.mapper.CategoryMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.product.entity.Category">
+		<id column="category_id" property="categoryId" />
+		<result column="parent_id" property="parentId" />
+		<result column="name" property="name" />
+		<result column="sort" property="sort" />
+		<result column="type" property="type" />
+		<result column="status" property="status" />
+		<result column="show_in_nav" property="showInNav" />
+		<result column="show_in_top" property="showInTop" />
+		<result column="show_in_hot" property="showInHot" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+		<result column="page_title" property="pageTitle" />
+		<result column="page_description" property="pageDescription" />
+		<result column="page_keyword" property="pageKeyword" />
+		<result column="remarks" property="remarks" />
+	</resultMap>
+	
+	<resultMap id="CategoryVOResultMap" type="org.pussinboots.morning.product.pojo.vo.CategoryVO">
+		<id column="category_id" property="categoryId" />
+		<result column="name" property="name" />
+	      <collection property="categoryAdverts" ofType="org.pussinboots.morning.product.pojo.vo.CategoryAdvertVO">
+			<id column="category_advert_id" property="categoryAdvertId" />
+			<result column="advert_id" property="advertId" />
+			<result column="title" property="title" />
+			<result column="href" property="href" />
+			<result column="pic_img" property="picImg" />
+        </collection>
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        category_id AS categoryId, parent_id AS parentId, name, sort, type, status, show_in_nav AS showInNav, show_in_top AS showInTop, show_in_hot AS showInHot, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, page_title AS pageTitle, page_description AS pageDescription, page_keyword AS pageKeyword, remarks
+    </sql>
+    
+    <!-- 根据状态/类目类型/显示广告数量/是否置顶查找显示置顶分类列表-->
+	<select id="listTopAndAdvert" resultMap="CategoryVOResultMap">
+		SELECT
+			c.category_id,
+			name,
+			category_advert_id,
+			title,
+			href,
+			pic_img
+		FROM
+			os_category c
+		LEFT JOIN (
+			SELECT
+				a1.*
+			FROM
+				os_category_advert a1
+			WHERE
+				(
+					SELECT
+						count(1)
+					FROM
+						os_category_advert
+					WHERE
+						category_id = a1.category_id
+					AND sort &lt; a1.sort
+				) &lt; #{advertNumber}
+			AND STATUS = #{status}
+			AND begin_time &lt;= #{date}
+			AND end_time &gt;= #{date}
+		) a ON c.category_id = a.category_id
+		WHERE
+			type = #{type}
+		AND c. STATUS = #{status}
+		AND c.show_in_top = #{showInTop}
+		ORDER BY
+			c.sort,
+			a.sort
+	</select>
+	
+    <!-- 根据状态/类目类型/显示广告数量/是否热门查找显示热门分类列表 -->
+	<select id="listHotAndAdvert" resultMap="CategoryVOResultMap">
+		SELECT
+			c.category_id,
+			name,
+			category_advert_id,
+			title,
+			href,
+			pic_img
+		FROM
+			os_category c
+		LEFT JOIN (
+			SELECT
+				a1.*
+			FROM
+				os_category_advert a1
+			WHERE
+				(
+					SELECT
+						count(1)
+					FROM
+						os_category_advert
+					WHERE
+						category_id = a1.category_id
+					AND sort &lt; a1.sort
+				) &lt; #{advertNumber}
+			AND STATUS = #{status}
+			AND begin_time &lt;= #{date}
+			AND end_time &gt;= #{date}
+		) a ON c.category_id = a.category_id
+		WHERE
+			type = #{type}
+		AND c. STATUS = #{status}
+		AND c.show_in_hot = #{showInHot}
+		ORDER BY
+			c.sort,
+			a.sort
+	</select>	
+	
+	<!-- 根据类目ID查找子类目ID -->
+    <select id="listIds" resultType="java.lang.Long">
+    	SELECT
+    		category_id AS categoryId
+		FROM
+			os_category
+		WHERE
+			status = #{status}
+		AND parent_id IN (
+			SELECT
+				category_id AS categoryId
+			FROM
+				os_category
+			WHERE
+				STATUS = #{status}
+			AND parent_id = #{categoryId}
+		)
+		OR parent_id = #{categoryId}
+		OR category_id = #{categoryId}
+    </select>
+    
+    <!-- 根据父级类目ID查找显示热门子级类目列表 -->
+    <select id="listHotChildrenAndAdvert" resultType="org.pussinboots.morning.product.pojo.vo.CategoryVO">
+    	SELECT
+    		category_id AS categoryId,
+			name
+		FROM
+			os_category
+		WHERE
+			status = #{status}
+		AND show_in_hot = #{showInHot}
+		AND parent_id = #{categoryId}
+		ORDER BY
+			sort
+    </select>
+    
+    <!-- 根据是否导航/类目类型/导航状态/导航显示数量查找显示导航分类 -->
+    <select id="listNav" resultType="org.pussinboots.morning.product.pojo.vo.CategoryVO">
+    	SELECT
+    		category_id AS categoryId,
+			name
+		FROM
+			os_category
+		WHERE
+			status = #{status}
+		AND show_in_nav = #{showInNav}
+		AND type = #{type}
+		ORDER BY
+			sort
+		LIMIT ${navNumber}	
+    </select>
+    
+    <!-- 根据父类目ID查找子类目列表 -->
+    <select id="listLower" resultType="org.pussinboots.morning.product.entity.Category">
+		SELECT
+			category_id AS categoryId,
+			parent_id AS parentId,
+			name
+		FROM
+			os_category
+		WHERE
+			parent_id = ${categoryId}
+		AND status = ${status}
+		ORDER BY
+			sort ASC
+    </select>
+    
+    <!-- 根据子类目ID查找父目录 -->
+    <select id="getUpper" resultType="org.pussinboots.morning.product.entity.Category">
+		SELECT
+			category_id AS categoryId,
+			parent_id AS parentId,
+			status,
+			NAME
+		FROM
+			os_category
+		WHERE
+			category_id = (
+				SELECT
+					parent_id
+				FROM
+					os_category
+				WHERE
+					category_id = #{categoryId}
+			)
+    </select>
+</mapper>

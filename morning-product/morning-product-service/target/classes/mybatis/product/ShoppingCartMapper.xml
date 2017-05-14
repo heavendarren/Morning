@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.product.mapper.ShoppingCartMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.product.entity.ShoppingCart">
+		<id column="cart_id" property="cartId" />
+		<result column="product_spec_number" property="productSpecNumber" />
+		<result column="user_id" property="userId" />
+		<result column="buy_number" property="buyNumber" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="check_status" property="checkStatus" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        cart_id AS cartId, product_spec_number AS productSpecNumber, user_id AS userId, buy_number AS buyNumber, create_time AS createTime, update_time AS updateTime, check_status AS checkStatus
+    </sql>
+    
+    <!-- 根据用户ID、产品规格编号查找购物车商品信息 -->
+    <select id="getCart" resultType="org.pussinboots.morning.product.pojo.vo.ShoppingCartVO">
+    	SELECT
+			c.cart_id AS cartId, 
+			c.product_spec_number AS productSpecNumber, 
+			c.user_id AS userId, 
+			c.buy_number AS buyNumber,
+			s.spec,
+			s.stock,
+			s.sales_volume AS salesVolume,
+			s.price,
+			s.score,
+			p.name,
+			p.pic_img AS picImg,
+			p.product_number AS productNumber
+    	FROM
+    		os_shopping_cart c
+    	LEFT JOIN os_product_specification s ON c.product_spec_number = s.product_spec_number
+    	LEFT JOIN os_product p ON s.product_id = p.product_id
+    	WHERE
+    		c.user_id = #{userId}
+    	AND c.product_spec_number = #{productSpecNumber}
+    </select>
+    
+    <!-- 根据用户ID查找购物车商品列表 -->
+    <select id="list" resultType="org.pussinboots.morning.product.pojo.vo.ShoppingCartVO">
+    	SELECT
+			c.cart_id AS cartId, 
+			c.product_spec_number AS productSpecNumber, 
+			c.user_id AS userId, 
+			c.buy_number AS buyNumber,
+			c.check_status AS checkStatus,
+			s.spec,
+			s.stock,
+			s.sales_volume AS salesVolume,
+			s.price,
+			s.score,
+			p.name,
+			p.pic_img AS picImg,
+			p.product_number AS productNumber
+    	FROM
+    		os_shopping_cart c
+    	LEFT JOIN os_product_specification s ON c.product_spec_number = s.product_spec_number
+    	LEFT JOIN os_product p ON s.product_id = p.product_id
+    	<where>
+    		1=1
+    		<if test="userId != null">
+    			AND c.user_id = #{userId}
+    		</if>
+    		<if test="checkStatus != null">
+    			AND c.check_status = #{checkStatus}
+    		</if>
+    	</where>
+    </select>        
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.online.mapper.EmailMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.online.entity.Email">
+		<id column="email_id" property="emailId" />
+		<result column="email_sign" property="emailSign" />
+		<result column="user_email" property="userEmail" />
+		<result column="email_type" property="emailType" />
+		<result column="create_time" property="createTime" />
+		<result column="start_time" property="startTime" />
+		<result column="end_time" property="endTime" />
+		<result column="new_email" property="newEmail" />
+		<result column="status" property="status" />
+		<result column="send_status" property="sendStatus" />
+		<result column="captcha" property="captcha" />
+		<result column="email_subject" property="emailSubject" />
+		<result column="email_content" property="emailContent" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        email_id AS emailId, email_sign AS emailSign, user_email AS userEmail, email_type AS emailType, create_time AS createTime, start_time AS startTime, end_time AS endTime, new_email AS newEmail, status, send_status AS sendStatus, captcha, email_subject AS emailSubject, email_content AS emailContent
+    </sql>
+
+</mapper>

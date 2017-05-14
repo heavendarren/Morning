@@ -1,12 +1,14 @@
 ## 猫宁Morning公益商城系统
 
 > 但行好事，莫问前程。（基于SSM框架的公益B2C网上商城的设计与实现）<br>
+QQ群：558243903 <a target="_blank" href="https://jq.qq.com/?_wv=1027&k=454hcs1"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="猫宁Morning技术讨论" title="猫宁Morning技术讨论"></a>
+![猫宁Morning技术讨论群二维码](http://git.oschina.net/uploads/images/2017/0217/213032_75339153_755773.png "猫宁Morning技术讨论群二维码")
 
-
+## 紧急求助
+本人大四马上毕业了，专业电子商务，非科班生，大三自学Java，急需一份工作，哪位大佬可以推荐下！╰(￣▽￣)╮，小的不甚感激，工作地点：杭州，工作方向：Java开发攻城狮。
 
 ## 项目背景
 据相关统计，2015年有2.7亿网友通过阿里系平台（不含支付宝）参与公益30亿次，累计产生捐赠1.9亿元。淘宝公益突破了传统的公益模式，开创了适合企业自身的公益道路，以“授人以渔”的方式将公益与自身商业模式捆绑销售，加速了“人人公益”时代的到来，让公众看到了中国公益事业的巨大改变和影响。
-
 
 ## 平台简介
 猫宁Morning公益商城是中国公益性在线电子商城，以商城B2C模式运营的公益在线商城，是一家致力于将传统公益商城互联网化的创新公益商城。
@@ -17,9 +19,9 @@ Morning是在Spring Framework基础上搭建的一个Java基础开发平台，�
 
 Morning系統目前包括以下三大系统，电子商城系统、公益商城系统、后台管理系统。
 
- **后台管理系统（CMS）** ，包括管理员管理模块、会员管理模块、产品管理模块、交易管理模块、系统管理模块等。（已重构完毕）
+ **后台管理系统（CMS）** ，包括管理员管理模块、会员管理模块、产品管理模块、交易管理模块、系统管理模块等。
 
- **电子商城系统（OS）** ，包括用户登录模块、商品游览模块、商品购买模块、在线评论模块、在线提问模块、个人中心模块、账户管理模块等。（在重构中）
+ **电子商城系统（OS）** ，包括用户登录模块、商品游览模块、商品购买模块、在线评论模块、在线提问模块、个人中心模块、账户管理模块等。
  
  **公益商城系统（DS）** ，包括公益申请模块、积分捐赠模块、进度查看模块、在线评论模块等。（未搭建）
 
@@ -39,6 +41,7 @@ Morning系統目前包括以下三大系统，电子商城系统、公益商城�
 * 布局框架：SiteMesh 3.0.1 
 * 分布式应用程序协调服务：ZooKeeper 3.3.1 
 * 分布式服务框架：Dubbo 2.5.3 
+* 接口测试框架：Swagger2 2.6.1 
 * 工具类：Apache Commons、Jackson 2.2、fastjson 1.2.20
 
 2、前端
@@ -55,67 +58,47 @@ Morning系統目前包括以下三大系统，电子商城系统、公益商城�
 * 电子商城系统模版：小米官网
 
 ## 项目结构
-![输入图片说明](http://git.oschina.net/uploads/images/2017/0218/001739_ad0ca473_755773.png "项目结构")
+![项目结构](https://git.oschina.net/uploads/images/2017/0514/230126_8e38de54_755773.png "项目结构")<br>
+![商城系统架构](https://git.oschina.net/uploads/images/2017/0514/234431_4bcb0826_755773.jpeg "商城系统架构")
 <br>
-
 
 ## 快速体验
 
 > 运行项目配置说明
 
-1.后台管理系统（CMS）项目依赖Redis和ZooKeeper服务。(Dubbo分布式服务框架进行分布式系统开发)
+1.后台管理系统（CMS）项目不依赖ZooKeeper服务。（不使用Dubbo分布式服务框架进行分布式系统开发）
 
 ```
 1、具备运行环境：JDK1.7+、Maven3.0+、MySql5+
 
-2、根据 morning-common-config\src\main\resources\properties\jdbc.properties 配置数据库
+2、根据 morning-common\src\main\resources\properties\jdbc.properties 配置数据库
 
 3、导入数据库 project-doc\database\pussinboots_morning.sql
 
-4、开启Redis、ZooKeeper服务，默认端口号
+4、用Tomcat等服务器运行morning-cms-web
 
-5、运行morning-cms-biz\src\test\java\com\pussinboots\morning\cms\test\service\DubboProvider Main方法，启动Dubbo消费提供者
-
-6、用Tomcat等服务器运行morning-cms-webapp
-
-7、后台管理系统（CMS），账号：admdin 密码：123456    测试地址：http://localhost:8080/system.morning/login
+5、后台管理系统（CMS），账号：admdin 密码：123456    测试地址：http://localhost:8080/system.morning/login
 
 ```
 
-2.后台管理系统（CMS）项目不依赖ZooKeeper服务。（不使用Dubbo分布式服务框架进行分布式系统开发）
+2.电子商城系统（OS）项目不依赖ZooKeeper服务。（不使用Dubbo分布式服务框架进行分布式系统开发）
 
 ```
 1、具备运行环境：JDK1.7+、Maven3.0+、MySql5+
 
-2、根据 morning-common-config\src\main\resources\properties\jdbc.properties 配置数据库
+2、根据 morning-common\src\main\resources\properties\jdbc.properties 配置数据库
 
 3、导入数据库 project-doc\database\pussinboots_morning.sql
 
-4、将morning-cms-biz依赖导入到morning-cms-webapp的pom.xml
-
-5、删除morning-cms-webapp项目\src\main\resources\properties\spring\spring-context.xml applicationContext-dubbo-consumer.xml
-文件的引入，加入applicationContext-mybatis.xml文件的引入
-
-6、用Tomcat等服务器运行morning-cms-webapp
-
-7、后台管理系统（CMS），账号：admdin 密码：123456    测试地址：http://localhost:8080/system.morning/login
-
-```
-
-3.电子商城系统（OS）项目不依赖ZooKeeper服务。（不使用Dubbo分布式服务框架进行分布式系统开发）
-
-```
-1、具备运行环境：JDK1.7+、Maven3.0+、MySql5+
-
-2、根据 morning-common-config\src\main\resources\properties\jdbc.properties 配置数据库
-
-3、导入数据库 project-doc\database\pussinboots_morning.sql
-
-4、用Tomcat等服务器运行morning-os-webapps-webapp
+4、用Tomcat等服务器运行morning-os-web
 
 5、电子商城系统（OS），账号：810170512@qq.com 密码：xh2013212542    测试地址：http://localhost:8080/morning/index
 
 ```
+
+3.对于Dubbo分布式服务框架进行分布式系统开发，目前一直在弄业务逻辑，感兴趣的朋友可以参考2.0.0-SNAPSHOT版本，自己去改下。
+https://git.oschina.net/Morning_/Morning/tree/2.0.0-SNAPSHOT/
+
 
 ## 特别说明
 
@@ -124,6 +107,10 @@ Morning系統目前包括以下三大系统，电子商城系统、公益商城�
 2.QQ：810170512  Email：<chenxingxing1994@foxmail.com>  欢迎各位大佬的指导。
 
 3.如有不足之处，请提出，我会尽快修正。
+
+4.马上毕业了，目前要忙着找工作，(/ □ \)，应该又没什么时间弄了。
+
+5.电子商城只是大概的走了一遍流程，还有很多细节的地方没有仔细去实现，见谅！
 
 
 ## 特别鸣谢
@@ -140,17 +127,30 @@ Morning系統目前包括以下三大系统，电子商城系统、公益商城�
 
 ## 小白求助
 
-1.系统服务中**日志记录**怎么应用到项目中
-<br>
+1.系统服务中**日志记录**怎么应用到项目中，哪位大神可以帮我改下或者给我说下思路，目前没有什么头绪。
+
+
 <br>
 
 ## 开发进度
-![公益B2C网上商城项目结构](http://git.oschina.net/uploads/images/2017/0217/233047_df7e1a51_755773.png "公益B2C网上商城项目结构")
 
 ### 后台管理系统（CMS）开发进度
-![后台管理系统（CMS）开发进度](http://git.oschina.net/uploads/images/2017/0314/220002_dd03f603_755773.jpeg "后台管理系统（CMS）开发进度")
+![后台管理系统（CMS）开发进度](https://git.oschina.net/uploads/images/2017/0514/231801_8f128539_755773.jpeg "后台管理系统（CMS）开发进度")
 ### 电子商城系统（OS）开发进度
-![电子商城系统（OS）开发进度](http://git.oschina.net/uploads/images/2017/0314/220307_410ddbad_755773.jpeg "电子商城系统（OS）开发进度")
+![电子商城系统（OS）开发进度](https://git.oschina.net/uploads/images/2017/0514/232009_83d6e2c4_755773.png "电子商城系统（OS）开发进度")
+
+## 数据模型
+
+### 后台管理模块数据库概念结构设计E-R图
+![后台管理模块数据库概念结构设计E-R图](https://git.oschina.net/uploads/images/2017/0514/235445_ddbf6491_755773.jpeg "后台管理模块数据库概念结构设计E-R图")
+### 商品模块数据库概念结构设计E-R图
+![商品模块数据库概念结构设计E-R图](https://git.oschina.net/uploads/images/2017/0514/234706_cb428bdb_755773.jpeg "商品模块数据库概念结构设计E-R图")
+### 订单模块数据库概念结构设计E-R图
+![订单模块数据库概念结构设计E-R图](https://git.oschina.net/uploads/images/2017/0514/233750_05f46882_755773.jpeg "订单模块数据库概念结构设计E-R图")
+### 用户模块数据库概念结构设计E-R图
+![用户模块数据库概念结构设计E-R图](https://git.oschina.net/uploads/images/2017/0514/233936_4f82bf54_755773.jpeg "用户模块数据库概念结构设计E-R图")
+### 电子商城模块数据库概念结构设计E-R图
+![电子商城模块数据库概念结构设计E-R图](https://git.oschina.net/uploads/images/2017/0514/234213_2f7c7f21_755773.jpeg "电子商城模块数据库概念结构设计E-R图")
 
 ## 演示界面
 

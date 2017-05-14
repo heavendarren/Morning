@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.online.mapper.NavigationBarMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.online.entity.NavigationBar">
+		<id column="navigation_bar_id" property="navigationBarId" />
+		<result column="navigation_id" property="navigationId" />
+		<result column="name" property="name" />
+		<result column="target" property="target" />
+		<result column="sort" property="sort" />
+		<result column="href" property="href" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+		<result column="remarks" property="remarks" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        navigation_bar_id AS navigationBarId, navigation_id AS navigationId, name, target, sort, href, status, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, remarks
+    </sql>
+    
+    <!-- 根据导航ID查找显示导航栏 -->
+    <select id="listByNavigationId" resultType="org.pussinboots.morning.online.entity.NavigationBar">
+    	SELECT
+	        name, 
+	        target, 
+	        href
+	    FROM
+	    	os_navigation_bar
+	    WHERE
+			status = #{status}
+		AND navigation_id = #{navigationId}
+		ORDER BY 
+			sort
+		LIMIT ${showNumber}	
+    </select>
+    
+    <!-- 根据导航ID/分页信息/搜索内容查找导航列表 -->
+    <select id="listByPage" resultType="org.pussinboots.morning.online.entity.NavigationBar">
+    	SELECT 
+        	navigation_bar_id AS navigationBarId, 
+        	navigation_id AS navigationId, 
+        	name, 
+        	target, 
+        	sort, 
+        	href, 
+        	status, 
+        	create_time AS createTime, 
+        	create_by AS createBy, 
+        	update_time AS updateTime, 
+        	update_by AS updateBy, 
+        	remarks
+        FROM
+        	os_navigation_bar
+	    <where>
+    		navigation_id = #{navigationId}
+    		<if test="search != null">
+				AND (
+					target LIKE '%' #{search} '%' 
+					OR href LIKE '%' #{search} '%' 
+					OR name LIKE '%' #{search} '%' 
+					OR remarks LIKE '%' #{search} '%'
+					OR create_by LIKE '%' #{search} '%'
+					OR update_by LIKE '%' #{search} '%'
+				)
+			</if>
+			<if test="pageInfo.sort != null">
+				ORDER BY ${pageInfo.sort} ${pageInfo.order}
+			</if>   		   		 		
+    	</where> 
+    </select>
+</mapper>

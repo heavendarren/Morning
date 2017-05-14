@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.administrator.mapper.RoleMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.administrator.entity.Role">
+		<id column="role_id" property="roleId" />
+		<result column="role_name" property="roleName" />
+		<result column="role_sign" property="roleSign" />
+		<result column="is_system" property="isSystem" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+		<result column="remarks" property="remarks" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        role_id AS roleId, role_name AS roleName, role_sign AS roleSign, is_system AS isSystem, status, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, remarks
+    </sql>
+    
+    <!-- 根据分页信息/搜索内容查找角色列表 -->
+	<select id="listByPage" resultType="org.pussinboots.morning.administrator.entity.Role">
+		SELECT
+	        role_id AS roleId, 
+	        role_name AS roleName, 
+	        role_sign AS roleSign, 
+	        is_system AS isSystem, 
+	        status, 
+	        create_time AS createTime, 
+	        create_by AS createBy, 
+	        update_time AS updateTime, 
+	        update_by AS updateBy, 
+	        remarks
+	    FROM
+	    	cms_role
+	    <where>
+    		1=1
+    		<if test="search != null">
+				AND (
+					role_name LIKE '%' #{search} '%' 
+					OR role_sign LIKE '%' #{search} '%' 
+					OR remarks LIKE '%' #{search} '%'
+					OR create_by LIKE '%' #{search} '%'
+					OR update_by LIKE '%' #{search} '%'
+				)
+			</if>
+			<if test="pageInfo.sort != null">
+				ORDER BY ${pageInfo.sort} ${pageInfo.order}
+			</if>   		   		 		
+    	</where> 
+	</select>
+</mapper>

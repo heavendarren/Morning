@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.system.mapper.MenuMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.system.entity.Menu">
+		<id column="menu_id" property="menuId" />
+		<result column="parent_id" property="parentId" />
+		<result column="menu_type" property="menuType" />
+		<result column="menu_code" property="menuCode" />
+		<result column="menu_name" property="menuName" />
+		<result column="sort" property="sort" />
+		<result column="href" property="href" />
+		<result column="icon" property="icon" />
+		<result column="status" property="status" />
+		<result column="permission" property="permission" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+		<result column="remarks" property="remarks" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        menu_id AS menuId, parent_id AS parentId, menu_type AS menuType, menu_code AS menuCode, menu_name AS menuName, sort, href, icon, status, permission, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, remarks
+    </sql>
+    
+    <!-- 根据目录类型查询目录列表 -->
+    <select id="listByType" resultType="org.pussinboots.morning.system.entity.Menu">
+    	SELECT
+    		<include refid="Base_Column_List" />
+    	FROM
+    		cms_menu
+    	WHERE
+    		menu_type = #{menuType}
+    	ORDER BY
+    		sort ASC
+    </select>  
+    
+    <!-- 更新目录状态，冻结目录及其及目录 -->
+    <update id="updateStatusByIds">
+    	UPDATE
+    		cms_menu
+    	SET status = #{status}
+    	WHERE
+    		menu_id IN
+    		<foreach collection="menuIds" item="menuId" open="(" close=")" separator=",">
+    			#{menuId}
+    		</foreach>
+    </update> 
+    
+    <!-- 通过目录ID删除角色授权记录 -->
+    <delete id="deleteRoleMenus">
+    	DELETE 
+    	FROM
+    		cms_role_menu
+    	WHERE
+    		menu_id IN
+	        <foreach collection="menuIds" item="menuId" open="(" close=")" separator=",">
+	    		#{menuId}
+	    	</foreach>    	    
+    </delete>
+
+</mapper>

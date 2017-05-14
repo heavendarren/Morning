@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.product.mapper.CommentMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.product.entity.Comment">
+		<id column="comment_id" property="commentId" />
+		<result column="product_id" property="productId" />
+		<result column="user_id" property="userId" />
+		<result column="user_name" property="userName" />
+		<result column="pic_img" property="picImg" />
+		<result column="order_id" property="orderId" />
+		<result column="star" property="star" />
+		<result column="content" property="content" />
+		<result column="good_count" property="goodCount" />
+		<result column="status" property="status" />
+		<result column="type" property="type" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        comment_id AS commentId, product_id AS productId, user_id AS userId, user_name AS userName, pic_img AS picImg, order_id AS orderId, star, content, good_count AS goodCount, status, type, create_time AS createTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy
+    </sql>
+	
+	<!-- 根据商品ID、排序、分页查找评论列表 -->
+	<select id="listByProductId" resultType="org.pussinboots.morning.product.pojo.vo.CommentVO">
+		SELECT
+			comment_id AS commentId,
+			user_id AS userId,
+			user_name AS userName,
+			pic_img AS picImg,
+			star,
+			content,
+			good_count AS goodCount,
+			create_time AS createTime
+		FROM
+			os_comment
+		WHERE
+			status = #{status}
+		AND product_id = #{productId}
+		ORDER BY 
+			${pageInfo.sort} ${pageInfo.order}
+	</select>
+</mapper>

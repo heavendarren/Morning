@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.user.mapper.UserLoginLogMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.user.entity.UserLoginLog">
+		<id column="log_id" property="logId" />
+		<result column="login_time" property="loginTime" />
+		<result column="user_ip" property="userIp" />
+		<result column="user_id" property="userId" />
+		<result column="operating_system" property="operatingSystem" />
+		<result column="browser" property="browser" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        log_id AS logId, login_time AS loginTime, user_ip AS userIp, user_id AS userId, operating_system AS operatingSystem, browser
+    </sql>
+
+</mapper>

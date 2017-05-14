@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.product.mapper.ProductMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.product.entity.Product">
+		<id column="product_id" property="productId" />
+		<result column="product_number" property="productNumber" />
+		<result column="label_id" property="labelId" />
+		<result column="name" property="name" />
+		<result column="show_score" property="showScore" />
+		<result column="show_price" property="showPrice" />
+		<result column="introduce" property="introduce" />
+		<result column="pic_img" property="picImg" />
+		<result column="show_in_top" property="showInTop" />
+		<result column="show_in_nav" property="showInNav" />
+		<result column="show_in_hot" property="showInHot" />
+		<result column="show_in_shelve" property="showInShelve" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+		<result column="shelve_time" property="shelveTime" />
+		<result column="shelve_by" property="shelveBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+		<result column="search_key" property="searchKey" />
+		<result column="page_title" property="pageTitle" />
+		<result column="page_description" property="pageDescription" />
+		<result column="page_keyword" property="pageKeyword" />
+		<result column="remarks" property="remarks" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        product_id AS productId, product_number AS productNumber, label_id AS labelId, name, show_price AS showPrice, introduce, pic_img AS picImg, show_in_top AS showInTop, show_in_nav AS showInNav, show_in_hot AS showInHot, show_in_shelve AS showInShelve, create_time AS createTime, create_by AS createBy, shelve_time AS shelveTime, shelve_by AS shelveBy, update_time AS updateTime, update_by AS updateBy, search_key AS searchKey, page_title AS pageTitle, page_description AS pageDescription, page_keyword AS pageKeyword, remarks
+    </sql>
+    
+    <!-- 根据商品编号和状态查找商品 -->
+	<select id="getByNumber" resultType="org.pussinboots.morning.product.pojo.vo.ProductVO">
+		SELECT
+	        p.product_id AS productId, 
+	        product_number AS productNumber, 
+	        name, 
+	        show_score AS showScore, 
+	        show_price AS showPrice, 
+	        introduce, 
+	        pic_img AS picImg, 
+	        page_title AS pageTitle, 
+	        page_description AS pageDescription, 
+	        page_keyword AS pageKeyword, 
+   	        label_name AS labelName,
+   	        description
+   	    FROM
+   	    	os_product p
+   	    LEFT JOIN os_product_detail d ON p.product_id = d.product_id
+   	    LEFT JOIN (
+	    	SELECT
+	    		label_id,
+	    		label_name
+	    	FROM
+	    		os_label
+	    	WHERE
+	    		status = #{status}
+	    ) l ON p.label_id = l.label_id
+		WHERE
+			product_number = #{productNumber}
+		AND	show_in_shelve = #{status}	
+	</select>
+</mapper>

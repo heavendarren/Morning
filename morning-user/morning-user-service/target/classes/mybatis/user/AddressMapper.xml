@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.user.mapper.AddressMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.user.entity.Address">
+		<id column="address_id" property="addressId" />
+		<result column="user_id" property="userId" />
+		<result column="user_name" property="userName" />
+		<result column="user_tag" property="userTag" />
+		<result column="user_phone" property="userPhone" />
+		<result column="province_id" property="provinceId" />
+		<result column="province_name" property="provinceName" />
+		<result column="city_id" property="cityId" />
+		<result column="city_name" property="cityName" />
+		<result column="district_id" property="districtId" />
+		<result column="district_name" property="districtName" />
+		<result column="user_adress" property="userAdress" />
+		<result column="user_zipcode" property="userZipcode" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        address_id AS addressId, user_id AS userId, user_name AS userName, user_tag AS userTag, user_phone AS userPhone, province_id AS provinceId, province_name AS provinceName, city_id AS cityId, city_name AS cityName, district_id AS districtId, district_name AS districtName, user_adress AS userAdress, user_zipcode AS userZipcode, create_time AS createTime, update_time AS updateTime
+    </sql>
+
+</mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.user.mapper.UserMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.user.entity.User">
+		<id column="user_id" property="userId" />
+		<result column="user_number" property="userNumber" />
+		<result column="user_name" property="userName" />
+		<result column="login_password" property="loginPassword" />
+		<result column="salt" property="salt" />
+		<result column="real_name" property="realName" />
+		<result column="sex" property="sex" />
+		<result column="age" property="age" />
+		<result column="pic_img" property="picImg" />
+		<result column="status" property="status" />
+		<result column="email_is_active" property="emailIsActive" />
+		<result column="email" property="email" />
+		<result column="telephone" property="telephone" />
+		<result column="last_login_time" property="lastLoginTime" />
+		<result column="last_login_ip" property="lastLoginIp" />
+		<result column="login_number" property="loginNumber" />
+		<result column="regeist_time" property="regeistTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_time" property="updateTime" />
+		<result column="update_by" property="updateBy" />
+		<result column="amount" property="amount" />
+		<result column="rank_id" property="rankId" />
+		<result column="score" property="score" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_id AS userId, user_number AS userNumber, user_name AS userName, login_password AS loginPassword, salt, real_name AS realName, sex, age, pic_img AS picImg, status, email_is_active AS emailIsActive, email, telephone, last_login_time AS lastLoginTime, last_login_ip AS lastLoginIp, login_number AS loginNumber, regeist_time AS regeistTime, create_by AS createBy, update_time AS updateTime, update_by AS updateBy, amount, rank_id AS rankId, score
+    </sql>
+    
+    <!-- 根据登录名查找用户信息 -->
+    <select id="getByLoginName" resultType="org.pussinboots.morning.user.entity.User">
+    	SELECT
+    		user_id AS userId, 
+    		user_number AS userNumber, 
+    		user_name AS userName, 
+    		login_password AS loginPassword, 
+    		real_name AS realName, 
+    		salt,
+    		status,
+    		email_is_active AS emailIsActive,
+    		email, 
+    		telephone
+    	FROM
+    		os_user
+    	WHERE
+    		email = #{loginName} 
+    	OR telephone = #{loginName}
+    </select>
+    
+    <!-- 根据用户ID查找用户显示信息 -->
+    <select id="getById" resultType="org.pussinboots.morning.user.pojo.vo.UserVO">
+    	SELECT
+	        user_id AS userId, 
+	        user_number AS userNumber, 
+	        user_name AS userName, 
+	        real_name AS realName, 
+	        sex, 
+	        age, 
+	        pic_img AS picImg, 
+	        email, 
+	        telephone
+	     FROM
+	     	os_user
+	     WHERE
+	     	user_id = #{userId}
+    </select>
+
+</mapper>

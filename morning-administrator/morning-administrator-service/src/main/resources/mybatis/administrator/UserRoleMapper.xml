@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pussinboots.morning.administrator.mapper.UserRoleMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="org.pussinboots.morning.administrator.entity.UserRole">
+		<id column="user_role_id" property="userRoleId" />
+		<result column="role_id" property="roleId" />
+		<result column="user_id" property="userId" />
+		<result column="create_time" property="createTime" />
+		<result column="create_by" property="createBy" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_role_id AS userRoleId, role_id AS roleId, user_id AS userId, create_time AS createTime, create_by AS createBy
+    </sql>
+    
+    <!-- 插入用户角色记录 -->
+    <insert id="insertUserRoles" parameterType="java.util.List">
+    	InSERT INTO cms_user_role(
+   			role_id, 
+    		user_id, 
+    		create_time, 
+    		create_by
+    	)VALUES
+    	<foreach collection="userRoles" item="userRole" separator=",">
+    	(
+	     	#{userRole.roleId},
+	     	#{userRole.userId},
+	        #{userRole.createTime}, 
+	        #{userRole.createBy}    		
+    	)
+    	</foreach>
+    </insert>   
+    
+    <!-- 根据管理员ID查找角色ID列表 -->
+    <select id="listByUserId" resultType="org.pussinboots.morning.administrator.entity.Role">
+    	SELECT
+	        r.role_id AS roleId, 
+	        role_name AS roleName, 
+	        role_sign AS roleSign, 
+	        is_system AS isSystem
+    	FROM
+    		cms_user_role u
+    	LEFT JOIN cms_role r ON u.role_id = r.role_id
+    	<where>
+    		1=1
+    		<if test="userId != null">
+    			AND user_id = #{userId}
+    		</if>
+    		<if test="status != null">
+    			AND status = #{status}
+    		</if>
+    	</where>
+    </select>
+    
+    <!-- 根据角色ID查找管理员列表 -->
+    <select id="listByRoleId" resultType="org.pussinboots.morning.administrator.pojo.vo.UserVO">
+     	SELECT
+	    	u.user_id AS userId, 
+	    	u.organization_id AS organizationId, 
+	    	o.organization_name AS organizationName, 
+	    	login_name AS loginName, 
+	    	user_name AS userName, 
+	    	real_name AS realName, 
+	    	sex, 
+	    	age, 
+	    	pic_img AS picImg, 
+	    	u.status,
+	    	email, 
+	    	telephone, 
+	    	last_login_time AS lastLoginTime, 
+	    	last_login_ip AS lastLoginIp, 
+	    	u.create_time AS createTime, 
+	    	u.create_by AS createBy, 
+	    	u.update_time AS updateTime, 
+	    	u.update_by AS updateBy
+	    FROM
+	    	cms_user_role r
+	    LEFT JOIN cms_user u ON r.user_id = u.user_id
+	    LEFT JOIN cms_organization o ON u.organization_id = o.organization_id
+    	<where>
+    		role_id = #{roleId}
+    		<if test="search != null">
+				AND (
+					user_name LIKE '%' #{search} '%' 
+					OR real_name LIKE '%' #{search} '%' 
+					OR telephone LIKE '%' #{search} '%'
+					OR email LIKE '%' #{search} '%'
+					OR o.organization_name LIKE '%' #{search} '%'
+				)
+			</if>
+			<if test="pageInfo.sort != null">
+				ORDER BY ${pageInfo.sort} ${pageInfo.order}
+			</if>   		   		 		
+    	</where>   
+    </select>    	
+</mapper>
