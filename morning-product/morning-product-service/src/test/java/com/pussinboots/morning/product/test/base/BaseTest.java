@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)// 指定测试用例的运行器 这里是指定了Junit4
 @ContextConfiguration(locations = {"classpath:dev/spring-mybatis.xml"})// 指定Spring的配置文件 /为classpath下
-public class BaseTest {
+public abstract class BaseTest {
 	
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 

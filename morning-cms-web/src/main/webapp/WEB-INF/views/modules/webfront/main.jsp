@@ -26,7 +26,7 @@
         </li>
         <c:forEach items="${menus}" var="menu">
           <c:choose>
-            <c:when test="${menu.childMenus != null && menu.childMenus.size()>0}">
+            <c:when test="${fn:length(menu.childMenus)>0}">
               <li> <a href="${ctx}${menu.href}"> <i class="fa fa-${menu.icon}"></i> <span class="nav-label">${menu.menuName}</span> <span class="fa arrow"></span> </a>
                 <ul class="nav nav-second-level">
                   <c:forEach items="${menu.childMenus}" var="childMenu">
